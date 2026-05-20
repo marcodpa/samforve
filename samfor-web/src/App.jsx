@@ -1519,104 +1519,218 @@ function PageContacto() {
 
   return (
     <div className="pt-16">
-      <div className="relative h-36 md:h-48 overflow-hidden">
-        <img src={IMG(28)} alt="" className="w-full h-full object-cover object-top" loading="lazy" />
-        <div className="absolute inset-0 bg-dark/70 flex items-end pb-8 px-8 md:px-16">
-          <div className="max-w-7xl w-full mx-auto"><h1 className="font-display text-5xl md:text-6xl text-white tracking-wide">CONTACTO</h1></div>
-        </div>
-      </div>
 
-      <section className="bg-white py-16 px-4 md:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 rounded overflow-hidden shadow-[0_4px_40px_rgba(0,0,0,0.09)]">
-            <div className="bg-surface p-8 md:p-12">
-              <h2 className="font-display text-[3.5rem] md:text-[4rem] text-samred mb-3 leading-none">HABLEMOS</h2>
-              <p className="text-secondary text-base mb-8 leading-relaxed max-w-sm">Estamos listos para evaluar tu proyecto. Un especialista se pondrá en contacto contigo.</p>
-              <div className="flex flex-col gap-5">
-                {[{icon:<Mail size={16} className="text-samred flex-shrink-0"/>,label:'Email',value:'samfor@samfor.com'},{icon:<Phone size={16} className="text-samred flex-shrink-0"/>,label:'Teléfonos',value:'+58 261 814 4444\n+58 414-615.8000'},{icon:<Globe size={16} className="text-samred flex-shrink-0"/>,label:'Web',value:'www.samfor.com'},{icon:<MapPin size={16} className="text-samred flex-shrink-0"/>,label:'Dirección',value:'Av. 3H entre Calles 68-70 N.69-61\nMaracaibo, Venezuela'}].map(item => (
-                  <div key={item.label} className="flex items-start gap-3">{item.icon}<div><div className="text-xs font-mono text-secondary/55 uppercase tracking-widest mb-0.5">{item.label}</div><div className="text-dark text-sm font-medium whitespace-pre-line">{item.value}</div></div></div>
-                ))}
-              </div>
+      {/* ── HERO ── */}
+      <section className="relative overflow-hidden" style={{ height: '100dvh' }}>
+        <img src="/ct-hero.jpg" alt="SAMFOR operaciones" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
+        <div className="absolute inset-0 bg-gradient-to-r from-dark/90 via-dark/60 to-dark/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-dark/50 via-transparent to-transparent" />
+        <div className="relative h-full flex flex-col justify-end px-8 md:px-16 lg:px-24 pb-20">
+          <div className="max-w-2xl">
+            <div className="flex items-center gap-3 mb-5">
+              <span className="h-[3px] w-10 bg-samred" />
+              <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.25em] text-white/50">Contacto</span>
             </div>
-            <div className="bg-white p-8 md:p-12">
-              {sent ? (
-                <div className="flex flex-col items-center justify-center h-full py-12 text-center">
-                  <CheckCircle size={44} className="text-green-500 mb-4" />
-                  <h3 className="font-display text-3xl text-dark mb-2">Mensaje Enviado</h3>
-                  <p className="text-secondary text-sm">Un especialista se pondrá en contacto a la brevedad.</p>
-                  <button onClick={() => { setSent(false); setForm({name:'',company:'',email:'',phone:'',type:'',message:''}) }} className="btn-secondary mt-6">Nuevo Mensaje</button>
+            <h1 className="font-display text-[clamp(3.5rem,8vw,7rem)] text-white leading-none tracking-wide mb-6">
+              HABLEMOS<br /><span className="text-samred">.</span>
+            </h1>
+            <p className="text-white/60 text-lg max-w-md leading-relaxed mb-10">
+              Cuéntanos tu proyecto. Un especialista de SAMFOR evaluará tu consulta y te responderá a la brevedad.
+            </p>
+            <div className="flex flex-wrap gap-6">
+              {[
+                { icon: <Mail size={14}/>, val: 'samfor@samfor.com' },
+                { icon: <Phone size={14}/>, val: '+58 261 814 4444' },
+                { icon: <MapPin size={14}/>, val: 'Maracaibo, Venezuela' },
+              ].map(c => (
+                <div key={c.val} className="flex items-center gap-2 text-white/55 text-sm">
+                  <span className="text-samred">{c.icon}</span>{c.val}
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit} noValidate>
-                  <h2 className="font-display text-2xl text-dark mb-6">ENVÍA TU CONSULTA</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div className="flex flex-col gap-1.5"><label className="text-[0.6875rem] font-mono text-secondary uppercase tracking-widest">Nombre *</label><input className="form-input" required value={form.name} onChange={e => setForm(f=>({...f,name:e.target.value}))} placeholder="Carlos Rodríguez" /></div>
-                    <div className="flex flex-col gap-1.5"><label className="text-[0.6875rem] font-mono text-secondary uppercase tracking-widest">Empresa</label><input className="form-input" value={form.company} onChange={e => setForm(f=>({...f,company:e.target.value}))} placeholder="PDVSA, Chevron..." /></div>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div className="flex flex-col gap-1.5"><label className="text-[0.6875rem] font-mono text-secondary uppercase tracking-widest">Email *</label><input className="form-input" type="email" required value={form.email} onChange={e => setForm(f=>({...f,email:e.target.value}))} placeholder="correo@empresa.com" /></div>
-                    <div className="flex flex-col gap-1.5"><label className="text-[0.6875rem] font-mono text-secondary uppercase tracking-widest">Teléfono</label><input className="form-input" type="tel" value={form.phone} onChange={e => setForm(f=>({...f,phone:e.target.value}))} placeholder="+58 261 000 0000" /></div>
-                  </div>
-                  <div className="flex flex-col gap-1.5 mb-4">
-                    <label className="text-[0.6875rem] font-mono text-secondary uppercase tracking-widest">Tipo de consulta</label>
-                    <select className="form-input" value={form.type} onChange={e => setForm(f=>({...f,type:e.target.value}))}>
-                      <option value="">Seleccionar...</option>
-                      {['Propuesta de proyecto','Consulta técnica','Alianza comercial','Otro'].map(o=><option key={o}>{o}</option>)}
-                    </select>
-                  </div>
-                  <div className="flex flex-col gap-1.5 mb-6"><label className="text-[0.6875rem] font-mono text-secondary uppercase tracking-widest">Mensaje *</label><textarea className="form-input min-h-[110px] resize-none" required value={form.message} onChange={e => setForm(f=>({...f,message:e.target.value}))} placeholder="Describe tu proyecto..." /></div>
-                  <button type="submit" className="btn-primary w-full flex items-center justify-center gap-2" disabled={sending}>
-                    {sending ? <><svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeDasharray="40 60"/></svg>Enviando...</> : 'Enviar Mensaje'}
-                  </button>
-                </form>
-              )}
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-surface py-16 px-4 md:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="scroll-reveal border-t-[3px] border-samred pt-10 mb-10">
-            <h2 className="font-display text-[2.75rem] md:text-5xl text-dark mb-3">ÚNETE A SAMFOR</h2>
-            <p className="text-secondary max-w-xl leading-relaxed">Forma parte del equipo que construye la infraestructura energética de Venezuela.</p>
-          </div>
-          <div className="bg-white rounded shadow-[0_2px_24px_rgba(0,0,0,0.07)] p-8 md:p-10">
-            {jobSent ? (
-              <div className="flex flex-col items-center py-10 text-center">
-                <CheckCircle size={44} className="text-samblue mb-4" />
-                <h3 className="font-display text-3xl text-dark mb-2">Postulación Recibida</h3>
-                <p className="text-secondary text-sm">Revisaremos tu perfil y nos pondremos en contacto si hay oportunidad.</p>
-                <button onClick={() => { setJobSent(false); setJobForm({name:'',email:'',phone:'',area:'',exp:'',cv:null,letter:''}) }} className="btn-secondary mt-6">Nueva Postulación</button>
-              </div>
-            ) : (
-              <form onSubmit={handleJobSubmit} noValidate>
-                <h3 className="font-display text-2xl text-dark mb-6">FORMULARIO DE POSTULACIÓN</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                  <div className="flex flex-col gap-1.5"><label className="text-[0.6875rem] font-mono text-secondary uppercase tracking-widest">Nombre *</label><input className="form-input" required value={jobForm.name} onChange={e=>setJobForm(f=>({...f,name:e.target.value}))} placeholder="Nombre completo" /></div>
-                  <div className="flex flex-col gap-1.5"><label className="text-[0.6875rem] font-mono text-secondary uppercase tracking-widest">Email *</label><input className="form-input" type="email" required value={jobForm.email} onChange={e=>setJobForm(f=>({...f,email:e.target.value}))} placeholder="tu@email.com" /></div>
-                  <div className="flex flex-col gap-1.5"><label className="text-[0.6875rem] font-mono text-secondary uppercase tracking-widest">Teléfono</label><input className="form-input" value={jobForm.phone} onChange={e=>setJobForm(f=>({...f,phone:e.target.value}))} placeholder="+58 424 000 0000" /></div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                  <div className="flex flex-col gap-1.5"><label className="text-[0.6875rem] font-mono text-secondary uppercase tracking-widest">Área</label><select className="form-input" value={jobForm.area} onChange={e=>setJobForm(f=>({...f,area:e.target.value}))}><option value="">Seleccionar...</option>{['Ing. Eléctrica','Ing. Civil','Ing. Mecánica','Instrumentación','Telecomunicaciones','Ambiental','Transporte','Administración','Otra'].map(a=><option key={a}>{a}</option>)}</select></div>
-                  <div className="flex flex-col gap-1.5"><label className="text-[0.6875rem] font-mono text-secondary uppercase tracking-widest">Experiencia</label><select className="form-input" value={jobForm.exp} onChange={e=>setJobForm(f=>({...f,exp:e.target.value}))}><option value="">Seleccionar...</option>{['0-2 años','3-5 años','6-10 años','10+ años'].map(x=><option key={x}>{x}</option>)}</select></div>
-                </div>
-                <div className="mb-4">
-                  <label className="text-[0.6875rem] font-mono text-secondary uppercase tracking-widest block mb-2">CV / Hoja de Vida</label>
-                  <div className={`upload-zone ${drag?'drag-over':''}`} onDragOver={e=>{e.preventDefault();setDrag(true)}} onDragLeave={()=>setDrag(false)} onDrop={e=>{e.preventDefault();setDrag(false);const f=e.dataTransfer.files[0];if(f)setJobForm(jf=>({...jf,cv:f}))}} onClick={()=>document.getElementById('cv-input').click()}>
-                    <input id="cv-input" type="file" accept=".pdf,.doc,.docx" className="hidden" onChange={e=>{const f=e.target.files[0];if(f)setJobForm(jf=>({...jf,cv:f}))}} />
-                    {jobForm.cv ? <div className="flex items-center gap-2 justify-center text-samblue"><CheckCircle size={15}/><span className="text-sm font-medium">{jobForm.cv.name}</span></div> : <div className="text-secondary text-sm"><Upload size={18} className="mx-auto mb-2 opacity-40"/><span>Arrastra tu CV o <span className="text-samblue font-semibold">haz clic para seleccionar</span></span></div>}
+      {/* ── FORMULARIO PRINCIPAL — split: info izq, form der ── */}
+      <section className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr]">
+
+        {/* Left — info + foto decorativa */}
+        <div className="bg-dark flex flex-col justify-between px-8 md:px-14 py-16">
+          <div>
+            <div className="flex items-center gap-3 mb-8">
+              <span className="h-[3px] w-10 bg-samred" />
+              <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Información de Contacto</span>
+            </div>
+            <h2 className="font-display text-[clamp(2.5rem,4vw,3.5rem)] text-white leading-none mb-10">ESTAMOS<br />LISTOS<br />PARA TI</h2>
+            <div className="flex flex-col gap-6 mb-12">
+              {[
+                { icon: <Mail size={16}/>, label: 'Email', val: 'samfor@samfor.com' },
+                { icon: <Phone size={16}/>, label: 'Teléfonos', val: '+58 261 814 4444\n+58 414-615.8000' },
+                { icon: <Globe size={16}/>, label: 'Web', val: 'www.samfor.com' },
+                { icon: <MapPin size={16}/>, label: 'Dirección', val: 'Av. 3H entre Calles 68-70 N.69-61\nMaracaibo, Venezuela' },
+              ].map(item => (
+                <div key={item.label} className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 rounded border border-white/10 flex items-center justify-center text-samred">{item.icon}</div>
+                  <div>
+                    <div className="font-mono text-[0.6rem] uppercase tracking-widest text-white/30 mb-0.5">{item.label}</div>
+                    <div className="text-white/75 text-sm whitespace-pre-line">{item.val}</div>
                   </div>
                 </div>
-                <div className="flex flex-col gap-1.5 mb-6"><label className="text-[0.6875rem] font-mono text-secondary uppercase tracking-widest">Carta de presentación</label><textarea className="form-input min-h-[90px] resize-none" value={jobForm.letter} onChange={e=>setJobForm(f=>({...f,letter:e.target.value}))} placeholder="Cuéntanos sobre tu experiencia y motivación..." /></div>
-                <button type="submit" className="btn-primary flex items-center gap-2" style={{background:'#1A6FB5'}} disabled={jobSending}>
-                  {jobSending?<><svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeDasharray="40 60"/></svg>Enviando...</>:'Postularme'}
+              ))}
+            </div>
+          </div>
+          {/* Decorative photo — turbina */}
+          <div className="relative rounded overflow-hidden" style={{ height: '220px' }}>
+            <img src="/ct-turbina.jpg" alt="Reemplazo Turbina SAMFOR" className="w-full h-full object-cover object-center" loading="lazy" />
+            <div className="absolute inset-0 bg-gradient-to-t from-dark/60 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-samred" />
+            <div className="absolute bottom-4 left-5">
+              <span className="font-sub font-bold text-[0.6rem] uppercase tracking-widest text-white/50">Proyecto · Reemplazo Turbina BG-2</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Right — form */}
+        <div className="bg-white px-8 md:px-14 py-16">
+          {sent ? (
+            <div className="flex flex-col items-center justify-center h-full py-20 text-center">
+              <div className="w-16 h-16 rounded-full bg-green-50 border border-green-200 flex items-center justify-center mb-5">
+                <CheckCircle size={30} className="text-green-500" />
+              </div>
+              <h3 className="font-display text-4xl text-dark mb-3">MENSAJE ENVIADO</h3>
+              <p className="text-secondary text-sm max-w-xs leading-relaxed mb-8">Un especialista revisará tu consulta y se pondrá en contacto a la brevedad.</p>
+              <button onClick={() => { setSent(false); setForm({ name:'',company:'',email:'',phone:'',type:'',message:'' }) }} className="btn-primary">Enviar otro mensaje</button>
+            </div>
+          ) : (
+            <div>
+              <div className="flex items-center gap-3 mb-8">
+                <span className="h-[3px] w-10 bg-samred" />
+                <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Envía tu consulta</span>
+              </div>
+              <h2 className="font-display text-[clamp(2rem,3vw,2.75rem)] text-dark leading-none mb-10">¿TIENES UN<br />PROYECTO?</h2>
+              <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[0.6rem] font-mono text-secondary uppercase tracking-widest">Nombre *</label>
+                    <input className="form-input" required value={form.name} onChange={e=>setForm(f=>({...f,name:e.target.value}))} placeholder="Carlos Rodríguez" />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[0.6rem] font-mono text-secondary uppercase tracking-widest">Empresa</label>
+                    <input className="form-input" value={form.company} onChange={e=>setForm(f=>({...f,company:e.target.value}))} placeholder="PDVSA, Chevron..." />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[0.6rem] font-mono text-secondary uppercase tracking-widest">Email *</label>
+                    <input className="form-input" type="email" required value={form.email} onChange={e=>setForm(f=>({...f,email:e.target.value}))} placeholder="correo@empresa.com" />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[0.6rem] font-mono text-secondary uppercase tracking-widest">Teléfono</label>
+                    <input className="form-input" type="tel" value={form.phone} onChange={e=>setForm(f=>({...f,phone:e.target.value}))} placeholder="+58 261 000 0000" />
+                  </div>
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-[0.6rem] font-mono text-secondary uppercase tracking-widest">Tipo de consulta</label>
+                  <select className="form-input" value={form.type} onChange={e=>setForm(f=>({...f,type:e.target.value}))}>
+                    <option value="">Seleccionar...</option>
+                    {['Propuesta de proyecto','Consulta técnica','Alianza comercial','Otro'].map(o=><option key={o}>{o}</option>)}
+                  </select>
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-[0.6rem] font-mono text-secondary uppercase tracking-widest">Mensaje *</label>
+                  <textarea className="form-input min-h-[120px] resize-none" required value={form.message} onChange={e=>setForm(f=>({...f,message:e.target.value}))} placeholder="Describe tu proyecto o consulta..." />
+                </div>
+                <button type="submit" className="btn-primary flex items-center justify-center gap-2 mt-2" disabled={sending}>
+                  {sending
+                    ? <><svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeDasharray="40 60"/></svg>Enviando...</>
+                    : <>Enviar Mensaje <ArrowRight size={15}/></>}
+                </button>
+              </form>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* ── ÚNETE A SAMFOR — dark + foto equipo ── */}
+      <section className="relative overflow-hidden" style={{ minHeight: '520px' }}>
+        <img src="/ct-team.jpg" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+        <div className="absolute inset-0 bg-gradient-to-r from-dark/92 via-dark/75 to-dark/30" />
+        <div className="relative px-8 md:px-16 lg:px-24 py-20 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
+
+          {/* Left — text */}
+          <div>
+            <div className="flex items-center gap-3 mb-6">
+              <span className="h-[3px] w-10 bg-samred" />
+              <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Trabaja con Nosotros</span>
+            </div>
+            <h2 className="font-display text-[clamp(2.5rem,5vw,4rem)] text-white leading-none mb-6">ÚNETE<br />A SAMFOR</h2>
+            <p className="text-white/55 text-base leading-relaxed max-w-md mb-0">
+              Forma parte del equipo que construye la infraestructura energética e industrial de Venezuela. Buscamos profesionales comprometidos con la excelencia técnica y la seguridad.
+            </p>
+          </div>
+
+          {/* Right — postulation form */}
+          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded p-8">
+            {jobSent ? (
+              <div className="flex flex-col items-center py-8 text-center">
+                <CheckCircle size={36} className="text-green-400 mb-4" />
+                <h3 className="font-display text-2xl text-white mb-2">POSTULACIÓN RECIBIDA</h3>
+                <p className="text-white/50 text-sm mb-6 max-w-xs">Revisaremos tu perfil y nos pondremos en contacto si hay oportunidad.</p>
+                <button onClick={()=>{ setJobSent(false); setJobForm({name:'',email:'',phone:'',area:'',exp:'',cv:null,letter:''}) }} className="btn-primary">Nueva Postulación</button>
+              </div>
+            ) : (
+              <form onSubmit={handleJobSubmit} noValidate className="flex flex-col gap-4">
+                <h3 className="font-display text-xl text-white mb-2">FORMULARIO DE POSTULACIÓN</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[0.6rem] font-mono text-white/35 uppercase tracking-widest">Nombre *</label>
+                    <input className="form-input bg-white/8 border-white/15 text-white placeholder:text-white/25 focus:border-samred" required value={jobForm.name} onChange={e=>setJobForm(f=>({...f,name:e.target.value}))} placeholder="Nombre completo" />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[0.6rem] font-mono text-white/35 uppercase tracking-widest">Email *</label>
+                    <input className="form-input bg-white/8 border-white/15 text-white placeholder:text-white/25 focus:border-samred" type="email" required value={jobForm.email} onChange={e=>setJobForm(f=>({...f,email:e.target.value}))} placeholder="tu@email.com" />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[0.6rem] font-mono text-white/35 uppercase tracking-widest">Área</label>
+                    <select className="form-input bg-white/8 border-white/15 text-white focus:border-samred" value={jobForm.area} onChange={e=>setJobForm(f=>({...f,area:e.target.value}))}>
+                      <option value="" className="bg-dark">Seleccionar...</option>
+                      {['Ing. Eléctrica','Ing. Civil','Ing. Mecánica','Instrumentación','Telecomunicaciones','Ambiental','Transporte','Administración','Otra'].map(a=><option key={a} className="bg-dark">{a}</option>)}
+                    </select>
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[0.6rem] font-mono text-white/35 uppercase tracking-widest">Experiencia</label>
+                    <select className="form-input bg-white/8 border-white/15 text-white focus:border-samred" value={jobForm.exp} onChange={e=>setJobForm(f=>({...f,exp:e.target.value}))}>
+                      <option value="" className="bg-dark">Seleccionar...</option>
+                      {['0-2 años','3-5 años','6-10 años','10+ años'].map(x=><option key={x} className="bg-dark">{x}</option>)}
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <label className="text-[0.6rem] font-mono text-white/35 uppercase tracking-widest block mb-1.5">CV / Hoja de Vida</label>
+                  <div className={`upload-zone border-white/15 bg-white/5 text-white/40 hover:border-samred/60 ${drag?'border-samred/60':''}`}
+                    onDragOver={e=>{e.preventDefault();setDrag(true)}} onDragLeave={()=>setDrag(false)}
+                    onDrop={e=>{e.preventDefault();setDrag(false);const f=e.dataTransfer.files[0];if(f)setJobForm(jf=>({...jf,cv:f}))}}
+                    onClick={()=>document.getElementById('cv-input').click()}>
+                    <input id="cv-input" type="file" accept=".pdf,.doc,.docx" className="hidden" onChange={e=>{const f=e.target.files[0];if(f)setJobForm(jf=>({...jf,cv:f}))}} />
+                    {jobForm.cv
+                      ? <div className="flex items-center gap-2 justify-center text-samred"><CheckCircle size={14}/><span className="text-sm">{jobForm.cv.name}</span></div>
+                      : <div className="text-sm"><Upload size={16} className="mx-auto mb-1.5 opacity-40"/><span>Arrastra tu CV o <span className="text-white/70 font-semibold">haz clic</span></span></div>}
+                  </div>
+                </div>
+                <button type="submit" className="btn-primary flex items-center justify-center gap-2 mt-1" disabled={jobSending}>
+                  {jobSending
+                    ? <><svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeDasharray="40 60"/></svg>Enviando...</>
+                    : <>Postularme <ArrowRight size={15}/></>}
                 </button>
               </form>
             )}
           </div>
         </div>
       </section>
+
     </div>
   )
 }

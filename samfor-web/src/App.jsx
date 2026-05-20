@@ -482,81 +482,74 @@ function Footer({ setPage }) {
   )
 }
 
-// ─── PROJECT PAGE (full-screen) ───────────────────────────────────────────────
-function ProjectModal({ project, onClose }) {
+// ─── PROJECT DETAIL PAGE ──────────────────────────────────────────────────────
+function ProjectDetailPage({ project, onClose }) {
   useEffect(() => {
     const h = e => { if (e.key === 'Escape') onClose() }
     document.addEventListener('keydown', h)
-    document.body.style.overflow = 'hidden'
-    return () => { document.removeEventListener('keydown', h); document.body.style.overflow = '' }
+    window.scrollTo({ top: 0, behavior: 'instant' })
+    return () => document.removeEventListener('keydown', h)
   }, [onClose])
 
   const m = DIVISION_META[project.division]
+  const related = ALL_PROJECTS.filter(p => p.division === project.division && p.id !== project.id).slice(0, 3)
 
   return (
-    <div className="fixed inset-0 z-[100] bg-dark flex flex-col lg:flex-row" role="dialog" aria-modal="true">
+    <div className="bg-dark min-h-screen pt-16">
 
-      {/* ── LEFT — imagen fija, ocupa mitad pantalla ── */}
-      <div className="relative lg:sticky lg:top-0 w-full lg:w-1/2 flex-shrink-0" style={{ height: '45vh', minHeight: '260px' }} >
-        <div className="lg:fixed lg:top-0 lg:left-0 lg:w-1/2 lg:h-full" style={{ height: 'inherit' }}>
-          <img
-            src={project.img}
-            alt={project.title}
-            className="w-full h-full object-cover"
-            style={{ height: '100%' }}
-            loading="lazy"
-          />
-          {/* Subtle gradient bottom only — no heavy overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-dark/70 via-transparent to-dark/20" />
-          {/* Red accent left */}
-          <div className="absolute top-0 left-0 w-[3px] h-full bg-samred" />
-          {/* Back button top-left */}
-          <button onClick={onClose}
-            className="absolute top-5 left-6 flex items-center gap-2 bg-dark/50 backdrop-blur-sm border border-white/15 text-white/80 hover:text-white hover:border-white/40 transition-all px-3 py-1.5 rounded text-xs font-sub font-semibold uppercase tracking-widest"
-          >
-            <ArrowRight size={12} className="rotate-180" /> Volver
-          </button>
-          {/* Status badge top-right */}
-          {project.status === 'active' && (
-            <div className="absolute top-5 right-5 flex items-center gap-1.5 bg-dark/60 backdrop-blur-sm px-3 py-1.5 rounded-full border border-green-500/30">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-400 dot-pulse" />
-              <span className="text-green-400 text-[0.6875rem] font-mono uppercase tracking-widest">Activo</span>
-            </div>
-          )}
-          {/* Division label bottom-left */}
-          <div className="absolute bottom-6 left-6">
-            <DivisionBadge division={project.division} />
+      {/* ── HERO — full-width landscape image ── */}
+      <div className="relative w-full overflow-hidden" style={{ height: '62vh', minHeight: '340px' }}>
+        <img
+          src={project.img}
+          alt={project.title}
+          className="w-full h-full object-cover object-center"
+          loading="lazy"
+        />
+        {/* Layered gradients: dark bottom + left tint for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/50 to-dark/10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-dark/60 via-transparent to-transparent" />
+        {/* Red accent bar — bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-samred" />
+
+        {/* Back button */}
+        <button onClick={onClose}
+          className="absolute top-6 left-6 md:left-10 flex items-center gap-2 bg-dark/55 backdrop-blur-sm border border-white/15 text-white/80 hover:text-white hover:border-white/40 transition-all px-3.5 py-2 rounded text-xs font-sub font-semibold uppercase tracking-widest"
+        >
+          <ArrowRight size={12} className="rotate-180" /> Proyectos
+        </button>
+
+        {/* Status badge */}
+        {project.status === 'active' && (
+          <div className="absolute top-6 right-6 md:right-10 flex items-center gap-1.5 bg-dark/60 backdrop-blur-sm px-3 py-1.5 rounded-full border border-green-500/30">
+            <span className="w-1.5 h-1.5 rounded-full bg-green-400 dot-pulse" />
+            <span className="text-green-400 text-[0.6875rem] font-mono uppercase tracking-widest">En Ejecución</span>
+          </div>
+        )}
+
+        {/* Title overlay at bottom */}
+        <div className="absolute bottom-0 left-0 right-0 px-6 md:px-14 lg:px-20 pb-8">
+          <div className="max-w-5xl">
+            <div className="mb-3"><DivisionBadge division={project.division} /></div>
+            <h1 className="font-display text-[clamp(2rem,5vw,4rem)] text-white leading-none tracking-wide">{project.title}</h1>
           </div>
         </div>
       </div>
 
-      {/* ── RIGHT — contenido scrolleable ── */}
-      <div className="flex-1 overflow-y-auto bg-dark">
-        {/* Close button */}
-        <div className="flex justify-end px-6 pt-5 lg:px-10">
-          <button onClick={onClose} className="text-white/40 hover:text-white transition-colors" aria-label="Cerrar">
-            <X size={20} />
-          </button>
-        </div>
+      {/* ── CONTENT ── */}
+      <div className="px-6 md:px-14 lg:px-20 py-14">
+        <div className="max-w-5xl mx-auto">
 
-        <div className="px-6 lg:px-10 pb-16 pt-4">
-
-          {/* Title */}
-          <h1 className="font-display text-[clamp(2rem,4vw,3.5rem)] text-white leading-none mb-8 max-w-xl">{project.title}</h1>
-
-          {/* Client */}
-          <div className="mb-8 pb-8 border-b border-white/10">
-            <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-samred mb-2">Cliente</p>
-            <p className="font-sub font-bold text-lg text-white">{project.client}</p>
-          </div>
-
-          {/* Division + Status row */}
-          <div className="grid grid-cols-2 gap-6 mb-8 pb-8 border-b border-white/10">
-            <div>
+          {/* Client + meta row */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 mb-12 border border-white/10 rounded overflow-hidden">
+            <div className="px-7 py-6 border-b md:border-b-0 md:border-r border-white/10">
+              <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-samred mb-2">Cliente</p>
+              <p className="font-sub font-bold text-base text-white leading-snug">{project.client}</p>
+            </div>
+            <div className="px-7 py-6 border-b md:border-b-0 md:border-r border-white/10">
               <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-white/35 mb-2">División</p>
               <p className="font-sub font-bold text-sm uppercase tracking-wide text-white/80">{m?.label}</p>
             </div>
-            <div>
+            <div className="px-7 py-6">
               <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-white/35 mb-2">Estado</p>
               {project.status === 'active' ? (
                 <span className="flex items-center gap-2 text-green-400 text-sm font-sub font-semibold">
@@ -570,33 +563,68 @@ function ProjectModal({ project, onClose }) {
             </div>
           </div>
 
-          {/* Description */}
-          {project.desc && (
-            <div className="mb-8 pb-8 border-b border-white/10">
-              <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-white/35 mb-4">Descripción</p>
-              <p className="text-white/65 text-[0.9375rem] leading-relaxed">{project.desc}</p>
-            </div>
-          )}
+          {/* Description + Scope — two column on large screens */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1px_1fr] gap-0 mb-14">
+            {project.desc && (
+              <div className="lg:pr-12 pb-10 lg:pb-0">
+                <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-white/35 mb-5">Descripción</p>
+                <p className="text-white/70 text-[1rem] leading-relaxed">{project.desc}</p>
+              </div>
+            )}
+            {/* Divider */}
+            {project.desc && project.detail && (
+              <div className="hidden lg:block bg-white/8" />
+            )}
+            {project.detail && (
+              <div className="lg:pl-12 pt-10 lg:pt-0">
+                <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-white/35 mb-5">Alcance del Proyecto</p>
+                <div className="border-l-[3px] border-samred pl-5">
+                  <p className="text-white/60 text-[0.9375rem] leading-relaxed">{project.detail}</p>
+                </div>
+              </div>
+            )}
+          </div>
 
-          {/* Scope */}
-          {project.detail && (
-            <div className="mb-10">
-              <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-white/35 mb-4">Alcance del Proyecto</p>
-              <div className="border-l-[3px] border-samred pl-5">
-                <p className="text-white/55 text-sm leading-relaxed">{project.detail}</p>
+          {/* Back button */}
+          <button onClick={onClose}
+            className="flex items-center gap-2 border border-white/20 text-white/50 hover:border-samred hover:text-samred font-sub font-bold text-xs uppercase tracking-widest px-5 py-3 rounded transition-all duration-200 mb-16"
+          >
+            <ArrowRight size={12} className="rotate-180" /> Volver a la lista
+          </button>
+
+          {/* Related projects */}
+          {related.length > 0 && (
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <span className="h-[3px] w-8 bg-samred" />
+                <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Proyectos relacionados</span>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {related.map(p => (
+                  <div key={p.id}
+                    className="group cursor-pointer rounded overflow-hidden bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300"
+                    onClick={() => onClose(p)}
+                  >
+                    <div className="relative overflow-hidden" style={{ height: '160px' }}>
+                      <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]" loading="lazy" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent" />
+                      <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot || '#C8102E' }} />
+                    </div>
+                    <div className="p-4">
+                      <p className="text-white/35 text-[0.65rem] font-mono uppercase tracking-widest mb-1">{p.client}</p>
+                      <h3 className="font-sub font-bold text-sm uppercase tracking-wide text-white/80 group-hover:text-white transition-colors leading-snug line-clamp-2">{p.title}</h3>
+                      <div className="flex items-center gap-1 text-samred text-xs font-sub font-semibold uppercase tracking-widest mt-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                        Ver detalle <ArrowRight size={11} />
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           )}
 
-          {/* Back */}
-          <button onClick={onClose}
-            className="flex items-center gap-2 border border-white/20 text-white/50 hover:border-samred hover:text-samred font-sub font-bold text-xs uppercase tracking-widest px-5 py-3 rounded transition-all duration-200"
-          >
-            <ArrowRight size={12} className="rotate-180" /> Volver a la lista
-          </button>
         </div>
       </div>
-
     </div>
   )
 }
@@ -928,8 +956,21 @@ function PageProyectos() {
   useScrollReveal()
   const [activeDivision, setActiveDivision] = useState('Todos')
   const [statusFilter, setStatusFilter] = useState('Todos')
-  const [modal, setModal] = useState(null)
+  const [selectedProject, setSelectedProject] = useState(null)
   const [listView, setListView] = useState(false)
+
+  // When a related project is clicked inside the detail page, open that one
+  const openProject = (p) => {
+    setSelectedProject(p)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  if (selectedProject) {
+    return <ProjectDetailPage project={selectedProject} onClose={(next) => {
+      if (next && next.id) { openProject(next) }
+      else { setSelectedProject(null); window.scrollTo({ top: 0, behavior: 'smooth' }) }
+    }} />
+  }
 
   // Division tabs definition — matching the reference image order
   const divisionTabs = [
@@ -1114,7 +1155,7 @@ function PageProyectos() {
               {filtered.map(p => (
                 <div key={p.id}
                   className="group cursor-pointer rounded overflow-hidden bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300 flex flex-col"
-                  onClick={() => setModal(p)}
+                  onClick={() => openProject(p)}
                 >
                   {/* Image */}
                   <div className="relative overflow-hidden" style={{ height: '220px' }}>
@@ -1155,7 +1196,7 @@ function PageProyectos() {
                   <div key={`${p.id}-${i}`}
                     className="group flex-shrink-0 cursor-pointer rounded overflow-hidden bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300 flex flex-col"
                     style={{ width: '320px' }}
-                    onClick={() => setModal(p)}
+                    onClick={() => openProject(p)}
                   >
                     <div className="relative overflow-hidden" style={{ height: '200px' }}>
                       <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
@@ -1186,7 +1227,6 @@ function PageProyectos() {
         </div>
       </div>
 
-      {modal && <ProjectModal project={modal} onClose={() => setModal(null)} />}
     </div>
   )
 }

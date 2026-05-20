@@ -657,11 +657,11 @@ function PageInicio({ setPage }) {
       <section className="relative flex flex-col items-start justify-end px-6 md:px-14 lg:px-20 pb-24"
         style={{ minHeight: '100dvh', background: `linear-gradient(rgba(10,12,15,0.62), rgba(10,12,15,0.62)), url("/hero.jpg") center/cover no-repeat` }}
       >
-        <div className="max-w-[14rem] sm:max-w-[16rem] text-left">
+        <div className="text-left">
           <div className="badge-since inline-flex items-center gap-2 bg-samred text-white text-[0.5625rem] font-mono font-semibold uppercase tracking-[0.15em] px-2 py-1 rounded mb-4">
             <span className="w-1 h-1 rounded-full bg-white" />Desde 1966
           </div>
-          <h1 className="font-display text-[clamp(1.25rem,3vw,2rem)] text-white leading-[0.95] tracking-wide mb-5">
+          <h1 className="font-display text-[clamp(1.25rem,4vw,3.25rem)] text-white leading-[0.95] tracking-wide mb-5">
             CONSTRUIMOS<br />EL FUTURO DE<br />LA ENERGÍA
           </h1>
           <div className="flex flex-wrap gap-2">

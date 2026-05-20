@@ -403,7 +403,7 @@ function DivisionBadge({ division, size = 'sm' }) {
 }
 
 // ─── NAVBAR ───────────────────────────────────────────────────────────────────
-function Navbar({ page, setPage, scrolled }) {
+function Navbar({ page, setPage, scrolled, forceWhite }) {
   const [open, setOpen] = useState(false)
   const links = [
     { id: 'inicio', label: 'Inicio' },
@@ -412,7 +412,7 @@ function Navbar({ page, setPage, scrolled }) {
     { id: 'contacto', label: 'Contacto' },
   ]
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-[0_2px_8px_rgba(0,0,0,0.08)]' : 'bg-transparent'}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${(scrolled || forceWhite) ? 'bg-white shadow-[0_2px_8px_rgba(0,0,0,0.08)]' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
         <button onClick={() => { setPage('inicio'); setOpen(false) }} className="flex items-center gap-2.5">
           <SamforLogo size={36} />
@@ -952,7 +952,7 @@ function PageInicio({ setPage }) {
 }
 
 // ─── PAGE: PROYECTOS ──────────────────────────────────────────────────────────
-function PageProyectos() {
+function PageProyectos({ onProjectOpen }) {
   useScrollReveal()
   const [activeDivision, setActiveDivision] = useState('Todos')
   const [statusFilter, setStatusFilter] = useState('Todos')
@@ -962,14 +962,22 @@ function PageProyectos() {
   // When a related project is clicked inside the detail page, open that one
   const openProject = (p) => {
     setSelectedProject(p)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    onProjectOpen?.(true)
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }
+
+  const closeProject = (next) => {
+    if (next && next.id) {
+      openProject(next)
+    } else {
+      setSelectedProject(null)
+      onProjectOpen?.(false)
+      window.scrollTo({ top: 0, behavior: 'instant' })
+    }
   }
 
   if (selectedProject) {
-    return <ProjectDetailPage project={selectedProject} onClose={(next) => {
-      if (next && next.id) { openProject(next) }
-      else { setSelectedProject(null); window.scrollTo({ top: 0, behavior: 'smooth' }) }
-    }} />
+    return <ProjectDetailPage project={selectedProject} onClose={closeProject} />
   }
 
   // Division tabs definition — matching the reference image order
@@ -1482,6 +1490,7 @@ function PageContacto() {
 export default function App() {
   const [page, setPage] = useState('inicio')
   const [scrolled, setScrolled] = useState(false)
+  const [projectOpen, setProjectOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
@@ -1489,18 +1498,21 @@ export default function App() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  useEffect(() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }, [page])
+  useEffect(() => {
+    setProjectOpen(false)
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }, [page])
 
   const pages = {
     inicio: <PageInicio setPage={setPage} />,
-    proyectos: <PageProyectos />,
+    proyectos: <PageProyectos onProjectOpen={setProjectOpen} />,
     'quienes-somos': <PageQuienesSomos setPage={setPage} />,
     contacto: <PageContacto />,
   }
 
   return (
     <div className="min-h-screen flex flex-col font-body">
-      <Navbar page={page} setPage={setPage} scrolled={scrolled} />
+      <Navbar page={page} setPage={setPage} scrolled={scrolled} forceWhite={projectOpen} />
       <main className="flex-1">{pages[page] || pages['inicio']}</main>
       <Footer setPage={setPage} />
     </div>

@@ -720,69 +720,86 @@ function PageInicio({ setPage }) {
       </section>
 
       {/* FEATURED PROJECTS */}
-      <section className="relative overflow-hidden" style={{ minHeight: '620px' }}>
-        {/* Full-bleed background photo */}
-        <img
-          src="/projects-bg.jpg"
-          alt="SAMFOR en obra"
-          className="absolute inset-0 w-full h-full object-cover object-center"
-          loading="lazy"
-        />
-        {/* Layered overlays */}
-        <div className="absolute inset-0 bg-gradient-to-b from-dark/80 via-dark/65 to-dark/90" />
-        <div className="absolute inset-0 bg-dark/30" />
+      <section className="bg-white py-20 px-6 md:px-14 lg:px-20">
+        <div className="max-w-7xl mx-auto">
 
-        {/* Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-14 lg:px-20 py-20">
-          {/* Header row */}
-          <div className="scroll-reveal flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+          {/* Header */}
+          <div className="scroll-reveal flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
             <div>
               <div className="flex items-center gap-3 mb-3">
                 <span className="h-[3px] w-10 bg-samred" />
                 <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Portafolio</span>
               </div>
-              <h2 className="font-display text-[2.5rem] md:text-[3.25rem] text-white leading-none">PROYECTOS<br />DESTACADOS</h2>
+              <h2 className="font-display text-[2.5rem] md:text-[3rem] text-dark leading-none">PROYECTOS DESTACADOS</h2>
             </div>
-            <button
-              onClick={() => setPage('proyectos')}
-              className="flex-shrink-0 btn-outline-white self-start md:self-auto"
-            >
+            <button onClick={() => setPage('proyectos')} className="flex-shrink-0 btn-secondary self-start md:self-auto">
               Ver todos los proyectos
             </button>
           </div>
 
-          {/* Cards row */}
-          <div className="stagger grid grid-cols-1 md:grid-cols-3 gap-5">
-            {featured.filter(Boolean).map((p) => (
+          {/* Magazine grid: big left + two stacked right */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-4 stagger">
+
+            {/* BIG card — first project */}
+            {featured[0] && (
               <div
-                key={p.id}
-                className="group cursor-pointer flex flex-col bg-white/5 backdrop-blur-[2px] border border-white/10 rounded overflow-hidden hover:border-white/25 transition-all duration-300"
+                className="group relative rounded overflow-hidden cursor-pointer"
+                style={{ minHeight: '480px' }}
                 onClick={() => setPage('proyectos')}
                 role="button" tabIndex={0}
                 onKeyDown={e => e.key === 'Enter' && setPage('proyectos')}
               >
-                {/* Image */}
-                <div className="relative h-44 overflow-hidden">
-                  <img
-                    src={p.img}
-                    alt={p.title}
-                    className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-dark/60 to-transparent" />
-                  {/* Division bar */}
-                  <div className="absolute bottom-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot || '#C8102E' }} />
-                </div>
-                {/* Body */}
-                <div className="p-5 flex flex-col flex-1">
-                  <div className="mb-2"><DivisionBadge division={p.division} /></div>
-                  <h3 className="font-sub font-bold text-[0.9375rem] uppercase tracking-wide text-white leading-snug mb-1 group-hover:text-white/80 transition-colors duration-300">{p.title}</h3>
-                  <p className="text-white/45 text-xs mb-4 flex-1">{p.client}</p>
-                  <div className="flex items-center gap-1.5 text-samred text-xs font-sub font-semibold uppercase tracking-widest opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
-                    Ver proyecto <ArrowRight size={11} />
+                <img
+                  src={featured[0].img}
+                  alt={featured[0].title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                />
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/30 to-transparent" />
+                {/* Division bar top */}
+                <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[featured[0].division]?.dot || '#C8102E' }} />
+                {/* Content */}
+                <div className="absolute inset-0 p-7 flex flex-col justify-end">
+                  <div className="mb-3"><DivisionBadge division={featured[0].division} /></div>
+                  <h3 className="font-display text-[1.75rem] md:text-[2.25rem] text-white leading-tight mb-2">{featured[0].title}</h3>
+                  <p className="text-white/50 text-xs font-sub uppercase tracking-widest mb-5">{featured[0].client}</p>
+                  <div className="flex items-center gap-2 text-white text-xs font-sub font-bold uppercase tracking-widest border-t border-white/15 pt-4 opacity-60 group-hover:opacity-100 transition-opacity duration-300">
+                    Ver proyecto <ArrowRight size={12} className="transition-transform duration-300 group-hover:translate-x-1" />
                   </div>
                 </div>
               </div>
-            ))}
+            )}
+
+            {/* RIGHT — two small cards */}
+            <div className="flex flex-col gap-4">
+              {featured.slice(1).filter(Boolean).map((p) => (
+                <div
+                  key={p.id}
+                  className="group relative rounded overflow-hidden cursor-pointer flex-1"
+                  style={{ minHeight: '228px' }}
+                  onClick={() => setPage('proyectos')}
+                  role="button" tabIndex={0}
+                  onKeyDown={e => e.key === 'Enter' && setPage('proyectos')}
+                >
+                  <img
+                    src={p.img}
+                    alt={p.title}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/30 to-transparent" />
+                  {/* Division bar top */}
+                  <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot || '#C8102E' }} />
+                  <div className="absolute inset-0 p-5 flex flex-col justify-end">
+                    <div className="mb-2"><DivisionBadge division={p.division} /></div>
+                    <h3 className="font-sub font-bold text-[0.9375rem] uppercase tracking-wide text-white leading-snug mb-1">{p.title}</h3>
+                    <p className="text-white/40 text-[0.6875rem] font-sub uppercase tracking-widest">{p.client}</p>
+                  </div>
+                  {/* Hover accent line bottom */}
+                  <div className="absolute bottom-0 left-0 w-0 group-hover:w-full h-[2px] bg-samred transition-all duration-500 ease-out" />
+                </div>
+              ))}
+            </div>
+
           </div>
         </div>
       </section>

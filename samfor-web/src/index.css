@@ -111,8 +111,8 @@ body {
 
 .btn-secondary {
   background: transparent;
-  color: var(--blue);
-  border: 2px solid var(--blue);
+  color: var(--red);
+  border: 2px solid var(--red);
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 600;
   font-size: 0.9375rem;
@@ -126,7 +126,7 @@ body {
   text-transform: uppercase;
 }
 .btn-secondary:active { transform: scale(0.97); }
-.btn-secondary:hover  { background: var(--blue); color: #fff; }
+.btn-secondary:hover  { background: var(--red); color: #fff; }
 
 .btn-outline-white {
   background: transparent;

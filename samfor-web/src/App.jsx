@@ -414,8 +414,8 @@ function Navbar({ page, setPage, scrolled, forceDark }) {
 
   // dark mode: project detail page background
   const dark = forceDark
-  // white mode: scrolled on a normal page
-  const white = !dark && scrolled
+  // white mode: scrolled on a normal page, OR always on proyectos tab
+  const white = !dark && (scrolled || page === 'proyectos')
 
   const navBg = dark ? 'bg-[#0D1117] border-b border-white/10' : white ? 'bg-white shadow-[0_2px_8px_rgba(0,0,0,0.08)]' : 'bg-transparent'
   const textColor = dark ? 'text-white' : 'text-dark'

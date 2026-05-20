@@ -1007,38 +1007,51 @@ function PageProyectos() {
             </div>
           </div>
 
-          {/* Horizontal carousel */}
+          {/* Auto-scrolling carousel */}
           {filtered.length > 0 ? (
-            <div className="flex gap-4 overflow-x-auto pb-4" style={{ scrollbarWidth: 'thin', scrollbarColor: '#C8102E #1a1f26' }}>
-              {filtered.map((p) => (
-                <div key={p.id}
-                  className="group flex-shrink-0 cursor-pointer rounded overflow-hidden bg-white/5 border border-white/10 hover:border-white/25 transition-all duration-300"
-                  style={{ width: '260px' }}
-                  onClick={() => setModal(p)}
-                >
-                  {/* Image */}
-                  <div className="relative h-40 overflow-hidden">
-                    <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.06]" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent" />
-                    <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot||'#C8102E' }} />
-                    {p.status === 'active' && (
-                      <div className="absolute top-3 right-3 flex items-center gap-1 bg-dark/70 px-2 py-0.5 rounded">
-                        <span className="w-1.5 h-1.5 rounded-full bg-green-400 dot-pulse" />
-                        <span className="text-green-400 text-[0.6rem] font-mono uppercase tracking-widest">Activo</span>
+            <div className="overflow-hidden relative"
+              onMouseEnter={e => e.currentTarget.querySelector('.carousel-track').style.animationPlayState='paused'}
+              onMouseLeave={e => e.currentTarget.querySelector('.carousel-track').style.animationPlayState='running'}
+            >
+              <div className="carousel-track flex gap-5"
+                style={{
+                  width: 'max-content',
+                  animation: `marquee ${Math.max(filtered.length * 6, 40)}s linear infinite`,
+                }}
+              >
+                {[...filtered, ...filtered].map((p, i) => (
+                  <div key={`${p.id}-${i}`}
+                    className="group flex-shrink-0 cursor-pointer rounded overflow-hidden bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300 flex flex-col"
+                    style={{ width: '320px' }}
+                    onClick={() => setModal(p)}
+                  >
+                    {/* Image */}
+                    <div className="relative overflow-hidden" style={{ height: '200px' }}>
+                      <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-dark/85 via-dark/20 to-transparent" />
+                      <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot||'#C8102E' }} />
+                      {p.status === 'active' && (
+                        <div className="absolute top-3 right-3 flex items-center gap-1.5 bg-dark/70 backdrop-blur-sm px-2.5 py-1 rounded-full">
+                          <span className="w-1.5 h-1.5 rounded-full bg-green-400 dot-pulse" />
+                          <span className="text-green-400 text-[0.6rem] font-mono uppercase tracking-widest">Activo</span>
+                        </div>
+                      )}
+                    </div>
+                    {/* Body */}
+                    <div className="p-5 flex flex-col flex-1">
+                      <div className="mb-2"><DivisionBadge division={p.division} /></div>
+                      <h3 className="font-sub font-bold text-[1rem] uppercase tracking-wide text-white/80 group-hover:text-white transition-colors leading-snug mb-2 line-clamp-2">{p.title}</h3>
+                      <p className="text-white/35 text-xs flex-1">{p.client}</p>
+                      <div className="flex items-center gap-1.5 text-samred text-xs font-sub font-semibold uppercase tracking-widest mt-4 pt-4 border-t border-white/8 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        Ver detalle <ArrowRight size={12} />
                       </div>
-                    )}
-                  </div>
-                  {/* Body */}
-                  <div className="p-4">
-                    <div className="mb-2"><DivisionBadge division={p.division} /></div>
-                    <h3 className="font-sub font-bold text-[0.875rem] uppercase tracking-wide text-white/80 group-hover:text-white transition-colors leading-snug mb-1 line-clamp-2">{p.title}</h3>
-                    <p className="text-white/35 text-xs truncate">{p.client}</p>
-                    <div className="flex items-center gap-1 text-samred text-[0.6875rem] font-sub font-semibold uppercase tracking-widest mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      Ver detalle <ArrowRight size={11} />
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+              {/* Fade edges */}
+              <div className="absolute top-0 left-0 w-16 h-full bg-gradient-to-r from-dark to-transparent pointer-events-none" />
+              <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-dark to-transparent pointer-events-none" />
             </div>
           ) : (
             <div className="text-center py-20">

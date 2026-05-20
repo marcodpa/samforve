@@ -720,34 +720,84 @@ function PageInicio({ setPage }) {
       </section>
 
       {/* FEATURED PROJECTS */}
-      <section className="bg-white py-20 px-4 md:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="scroll-reveal mb-12">
-            <div className="flex items-center gap-3 mb-3"><span className="h-[3px] w-12 bg-samred" /><span className="font-sub font-semibold text-xs uppercase tracking-widest text-samred">Portafolio</span></div>
-            <h2 className="font-display text-[2.75rem] md:text-5xl text-dark">PROYECTOS DESTACADOS</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {featured.filter(Boolean).map(p => (
-              <div key={p.id} className="project-card group rounded overflow-hidden cursor-pointer" onClick={() => setPage('proyectos')} role="button" tabIndex={0} onKeyDown={e => e.key === 'Enter' && setPage('proyectos')}>
-                <div className="relative h-52 overflow-hidden">
-                  <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.05]" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent" />
-                  <div className="absolute inset-0 p-5 flex flex-col justify-between">
-                    <div className="self-start"><DivisionBadge division={p.division} /></div>
-                    <div>
-                      <h3 className="font-display text-[1.4rem] text-white leading-tight mb-2">{p.title}</h3>
-                      <span className="text-white/75 text-xs font-sub font-semibold uppercase tracking-wide flex items-center gap-1.5 group-hover:gap-2.5 transition-all">Ver más <ArrowRight size={12} /></span>
-                    </div>
-                  </div>
-                  {/* Division color bar */}
-                  <div className="absolute bottom-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot || '#C8102E' }} />
-                </div>
+      <section className="bg-surface overflow-hidden">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1.5fr_1fr]">
+
+          {/* LEFT — project cards stacked */}
+          <div className="py-16 px-6 md:px-14 lg:px-16">
+            {/* Header */}
+            <div className="scroll-reveal mb-10">
+              <div className="flex items-center gap-3 mb-3">
+                <span className="h-[3px] w-10 bg-samred" />
+                <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Portafolio</span>
               </div>
-            ))}
+              <h2 className="font-display text-[2.5rem] md:text-[3rem] text-dark leading-none">PROYECTOS<br />DESTACADOS</h2>
+            </div>
+
+            {/* Project rows */}
+            <div className="stagger divide-y divide-border">
+              {featured.filter(Boolean).map((p, i) => (
+                <div
+                  key={p.id}
+                  className="group flex items-center gap-5 py-5 cursor-pointer"
+                  onClick={() => setPage('proyectos')}
+                  role="button" tabIndex={0}
+                  onKeyDown={e => e.key === 'Enter' && setPage('proyectos')}
+                >
+                  {/* Thumbnail */}
+                  <div className="relative flex-shrink-0 w-20 h-16 rounded overflow-hidden">
+                    <img
+                      src={p.img}
+                      alt={p.title}
+                      className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.08]"
+                    />
+                    <div className="absolute inset-0 bg-dark/20 group-hover:bg-dark/0 transition-colors duration-300" />
+                    {/* Division color bar */}
+                    <div className="absolute bottom-0 left-0 right-0 h-[2px]" style={{ background: DIVISION_META[p.division]?.dot || '#C8102E' }} />
+                  </div>
+                  {/* Info */}
+                  <div className="flex-1 min-w-0">
+                    <div className="mb-1"><DivisionBadge division={p.division} /></div>
+                    <h3 className="font-sub font-bold text-[0.9375rem] uppercase tracking-wide text-dark group-hover:text-samred transition-colors duration-300 leading-snug truncate">{p.title}</h3>
+                    <p className="text-secondary text-xs mt-0.5 truncate">{p.client}</p>
+                  </div>
+                  {/* Arrow */}
+                  <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 translate-x-[-4px] group-hover:translate-x-0 transition-all duration-300">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 3l5 4-5 4" stroke="#C8102E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8">
+              <button onClick={() => setPage('proyectos')} className="btn-secondary">Ver Todos los Proyectos</button>
+            </div>
           </div>
-          <div className="text-center mt-10">
-            <button onClick={() => setPage('proyectos')} className="btn-secondary">Ver Todos los Proyectos</button>
-          </div>
+
+          {/* RIGHT — big featured image (first project) */}
+          {featured[0] && (
+            <div className="relative hidden lg:block min-h-[500px]">
+              <img
+                src={featured[0].img}
+                alt={featured[0].title}
+                className="absolute inset-0 w-full h-full object-cover object-center"
+                loading="lazy"
+              />
+              {/* Dark fade left */}
+              <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/20 to-transparent" />
+              {/* Bottom overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-dark/75 via-transparent to-transparent" />
+              {/* Caption */}
+              <div className="absolute bottom-10 right-8 text-right max-w-[200px]">
+                <div className="mb-2 flex justify-end"><DivisionBadge division={featured[0].division} /></div>
+                <p className="font-display text-lg text-white leading-tight mb-1">{featured[0].title}</p>
+                <p className="text-white/40 text-[0.6875rem] font-sub uppercase tracking-widest">{featured[0].client}</p>
+              </div>
+              {/* Red accent */}
+              <div className="absolute top-0 right-0 w-[3px] h-full bg-samred" />
+            </div>
+          )}
+
         </div>
       </section>
 

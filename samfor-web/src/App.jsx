@@ -652,70 +652,54 @@ function PageInicio({ setPage }) {
       </section>
 
       {/* SERVICES */}
-      <section className="bg-dark overflow-hidden" style={{ height: '100dvh' }}>
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2" style={{ height: '100%' }}>
+      <section className="relative overflow-hidden" style={{ height: '100dvh' }}>
+        {/* Full-bleed background */}
+        <img
+          src="/services-photo.jpg"
+          alt="Equipo SAMFOR en obra"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-dark/70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-dark/95 via-dark/70 to-dark/30" />
 
-          {/* LEFT — list */}
-          <div className="px-6 md:px-14 lg:px-16 flex flex-col justify-center py-10">
-            {/* Header */}
-            <div className="scroll-reveal mb-6">
-              <div className="flex items-center gap-3 mb-3">
-                <span className="h-[3px] w-10 bg-samred" />
-                <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Lo que hacemos</span>
-              </div>
-              <h2 className="font-display text-[2.25rem] md:text-[2.75rem] text-white leading-none">NUESTROS<br />SERVICIOS</h2>
+        {/* Red accent right */}
+        <div className="absolute top-0 right-0 w-[3px] h-full bg-samred z-10" />
+
+        {/* Content */}
+        <div className="relative z-10 h-full max-w-7xl mx-auto px-6 md:px-14 lg:px-16 flex flex-col justify-center py-10">
+          <div className="scroll-reveal mb-6">
+            <div className="flex items-center gap-3 mb-3">
+              <span className="h-[3px] w-10 bg-samred" />
+              <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Lo que hacemos</span>
             </div>
+            <h2 className="font-display text-[2.25rem] md:text-[2.75rem] text-white leading-none">NUESTROS<br />SERVICIOS</h2>
+          </div>
 
-            {/* Service rows */}
-            <div className="stagger divide-y divide-white/10">
-              {SERVICES.map((s, i) => (
-                <div key={s.title}
-                  className="group flex items-start gap-5 py-3 cursor-default transition-all duration-300"
-                  style={{ '--tw-translate-x': '0px' }}
-                >
-                  {/* Number */}
-                  <span className="font-mono text-[0.625rem] text-white/25 group-hover:text-samred pt-1 transition-colors duration-300 flex-shrink-0 w-5">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  {/* Icon */}
-                  <div className="text-white/30 group-hover:text-samred transition-colors duration-300 flex-shrink-0 mt-0.5">
-                    {s.icon}
-                  </div>
-                  {/* Text */}
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-sub font-bold text-[0.9375rem] uppercase tracking-wider text-white/80 group-hover:text-white transition-colors duration-300 mb-0.5">{s.title}</h3>
-                    <p className="text-white/40 text-xs leading-relaxed group-hover:text-white/55 transition-colors duration-300">{s.desc}</p>
-                  </div>
-                  {/* Arrow */}
-                  <div className="flex-shrink-0 mt-1 opacity-0 group-hover:opacity-100 translate-x-[-4px] group-hover:translate-x-0 transition-all duration-300">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 3l5 4-5 4" stroke="#C8102E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                  </div>
+          <div className="stagger divide-y divide-white/10 max-w-xl">
+            {SERVICES.map((s, i) => (
+              <div key={s.title} className="group flex items-start gap-5 py-3 cursor-default transition-all duration-300">
+                <span className="font-mono text-[0.625rem] text-white/25 group-hover:text-samred pt-1 transition-colors duration-300 flex-shrink-0 w-5">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div className="text-white/30 group-hover:text-samred transition-colors duration-300 flex-shrink-0 mt-0.5">
+                  {s.icon}
                 </div>
-              ))}
-            </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-sub font-bold text-[0.9375rem] uppercase tracking-wider text-white/80 group-hover:text-white transition-colors duration-300 mb-0.5">{s.title}</h3>
+                  <p className="text-white/40 text-xs leading-relaxed group-hover:text-white/55 transition-colors duration-300">{s.desc}</p>
+                </div>
+                <div className="flex-shrink-0 mt-1 opacity-0 group-hover:opacity-100 translate-x-[-4px] group-hover:translate-x-0 transition-all duration-300">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 3l5 4-5 4" stroke="#C8102E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </div>
+              </div>
+            ))}
           </div>
 
-          {/* RIGHT — photo */}
-          <div className="relative hidden lg:block">
-            <img
-              src="/services-photo.jpg"
-              alt="Equipo SAMFOR en obra"
-              className="absolute inset-0 w-full h-full object-cover object-center"
-              loading="lazy"
-            />
-            {/* Dark fade left */}
-            <div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/30 to-transparent" />
-            {/* Bottom overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-dark/70 via-transparent to-transparent" />
-            {/* Caption */}
-            <div className="absolute bottom-10 right-10 text-right">
-              <p className="font-display text-xl text-white leading-tight mb-1">PROFESIONALES<br />EN CADA OBRA</p>
-              <p className="text-white/40 text-[0.6875rem] font-sub uppercase tracking-widest">Campo Boscán — Venezuela</p>
-            </div>
-            {/* Red accent top-right */}
-            <div className="absolute top-0 right-0 w-[3px] h-full bg-samred" />
+          <div className="absolute bottom-10 right-14 text-right hidden lg:block">
+            <p className="font-display text-xl text-white leading-tight mb-1">PROFESIONALES<br />EN CADA OBRA</p>
+            <p className="text-white/40 text-[0.6875rem] font-sub uppercase tracking-widest">Campo Boscán — Venezuela</p>
           </div>
-
         </div>
       </section>
 

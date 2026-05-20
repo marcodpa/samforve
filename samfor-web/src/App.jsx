@@ -808,7 +808,7 @@ function PageInicio({ setPage }) {
       <ClientsSection setPage={setPage} />
 
       {/* CTA */}
-      <section className="relative overflow-hidden flex items-center justify-center px-4 md:px-8" style={{ minHeight: '100dvh' }}>
+      <section className="relative overflow-hidden flex items-center justify-center px-4 md:px-8" style={{ minHeight: '60dvh' }}>
         {/* Photo */}
         <img
           src="/cta-bg.jpg"

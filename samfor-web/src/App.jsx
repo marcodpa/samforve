@@ -403,7 +403,7 @@ function DivisionBadge({ division, size = 'sm' }) {
 }
 
 // ─── NAVBAR ───────────────────────────────────────────────────────────────────
-function Navbar({ page, setPage, scrolled, forceWhite }) {
+function Navbar({ page, setPage, scrolled, forceDark }) {
   const [open, setOpen] = useState(false)
   const links = [
     { id: 'inicio', label: 'Inicio' },
@@ -411,31 +411,42 @@ function Navbar({ page, setPage, scrolled, forceWhite }) {
     { id: 'quienes-somos', label: 'Quiénes Somos' },
     { id: 'contacto', label: 'Contacto' },
   ]
+
+  // dark mode: project detail page background
+  const dark = forceDark
+  // white mode: scrolled on a normal page
+  const white = !dark && scrolled
+
+  const navBg = dark ? 'bg-[#0D1117] border-b border-white/10' : white ? 'bg-white shadow-[0_2px_8px_rgba(0,0,0,0.08)]' : 'bg-transparent'
+  const textColor = dark ? 'text-white' : 'text-dark'
+  const linkActive = 'text-samred'
+  const linkIdle = dark ? 'text-white/70 hover:text-white' : 'text-dark hover:text-samred'
+
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${(scrolled || forceWhite) ? 'bg-white shadow-[0_2px_8px_rgba(0,0,0,0.08)]' : 'bg-transparent'}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navBg}`}>
       <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
         <button onClick={() => { setPage('inicio'); setOpen(false) }} className="flex items-center gap-2.5">
-          <SamforLogo size={36} />
-          <span className="text-dark leading-none" style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, fontSize: '1.75rem', letterSpacing: '-0.02em', textTransform: 'uppercase' }}>SAMFOR</span>
+          <SamforLogo size={36} invert={dark} />
+          <span className={`${textColor} leading-none transition-colors duration-300`} style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, fontSize: '1.75rem', letterSpacing: '-0.02em', textTransform: 'uppercase' }}>SAMFOR</span>
         </button>
         <div className="hidden md:flex items-center gap-7">
           {links.map(l => (
             <button key={l.id} onClick={() => setPage(l.id)}
-              className={`nav-link font-sub font-semibold text-[0.8125rem] tracking-wider uppercase transition-colors ${page === l.id ? 'text-samred active' : 'text-dark hover:text-samred'}`}
+              className={`nav-link font-sub font-semibold text-[0.8125rem] tracking-wider uppercase transition-colors ${page === l.id ? linkActive + ' active' : linkIdle}`}
               aria-current={page === l.id ? 'page' : undefined}
             >{l.label}</button>
           ))}
           <button onClick={() => setPage('contacto')} className="btn-outline-red text-[0.75rem] ml-1">Trabaja con Nosotros</button>
         </div>
-        <button className="md:hidden p-2 text-dark" onClick={() => setOpen(!open)} aria-label="Menú">
+        <button className={`md:hidden p-2 ${textColor} transition-colors duration-300`} onClick={() => setOpen(!open)} aria-label="Menú">
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
       {open && (
-        <div className="md:hidden bg-white border-t border-border px-5 pb-6 pt-2 shadow-lg">
+        <div className={`md:hidden border-t px-5 pb-6 pt-2 shadow-lg ${dark ? 'bg-[#0D1117] border-white/10' : 'bg-white border-border'}`}>
           {links.map(l => (
             <button key={l.id} onClick={() => { setPage(l.id); setOpen(false) }}
-              className={`block w-full text-left py-3.5 font-sub font-semibold text-base tracking-wider uppercase border-b border-border last:border-0 ${page === l.id ? 'text-samred' : 'text-dark'}`}
+              className={`block w-full text-left py-3.5 font-sub font-semibold text-base tracking-wider uppercase border-b last:border-0 ${dark ? 'border-white/10' : 'border-border'} ${page === l.id ? 'text-samred' : dark ? 'text-white/70' : 'text-dark'}`}
             >{l.label}</button>
           ))}
           <button onClick={() => { setPage('contacto'); setOpen(false) }} className="btn-outline-red mt-4">Trabaja con Nosotros</button>
@@ -1515,7 +1526,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col font-body">
-      <Navbar page={page} setPage={setPage} scrolled={scrolled} forceWhite={projectOpen} />
+      <Navbar page={page} setPage={setPage} scrolled={scrolled} forceDark={projectOpen} />
       <main className="flex-1">{pages[page] || pages['inicio']}</main>
       <Footer setPage={setPage} />
     </div>

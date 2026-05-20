@@ -879,130 +879,139 @@ function PageProyectos() {
 
   return (
     <div className="pt-16">
-      {/* Hero */}
-      <div className="bg-dark overflow-hidden" style={{ height: 'calc(100dvh - 4rem)' }}>
-        <div className="h-full grid grid-cols-1 lg:grid-cols-2">
 
-          {/* LEFT — title + stats */}
-          <div className="px-6 md:px-14 lg:px-16 flex flex-col justify-center py-10">
-            <div className="mb-8">
-              <div className="flex items-center gap-3 mb-3">
-                <span className="h-[3px] w-10 bg-samred" />
-                <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Portafolio</span>
-              </div>
-              <h1 className="font-display text-[3rem] md:text-[4rem] text-white leading-none mb-4">NUESTROS<br />PROYECTOS</h1>
-              <p className="text-white/45 text-sm max-w-sm leading-relaxed">Décadas de experiencia ejecutando obras de alta complejidad para la industria energética, civil e industrial de Venezuela.</p>
+      {/* ── HERO ── */}
+      <div className="relative overflow-hidden" style={{ height: 'calc(100dvh - 4rem)' }}>
+        <img src="/proyectos-hero.jpg" alt="SAMFOR Proyectos" className="absolute inset-0 w-full h-full object-cover object-center" />
+        <div className="absolute inset-0 bg-gradient-to-r from-dark/95 via-dark/70 to-dark/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-transparent to-transparent" />
+        <div className="absolute top-0 right-0 w-[3px] h-full bg-samred" />
+
+        <div className="relative z-10 h-full flex flex-col justify-between px-6 md:px-14 lg:px-20 py-10">
+          {/* Top label */}
+          <div className="flex items-center gap-3">
+            <span className="h-[3px] w-10 bg-samred" />
+            <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Portafolio</span>
+          </div>
+
+          {/* Center title */}
+          <div>
+            <h1 className="font-display text-[clamp(3rem,7vw,6rem)] text-white leading-none mb-6">NUESTROS<br />PROYECTOS</h1>
+            {/* Division chips row */}
+            <div className="flex flex-wrap gap-2">
+              {Object.entries(DIVISION_META).map(([key, m]) => (
+                <button key={key}
+                  onClick={() => { setActiveDivision(key); document.getElementById('proyectos-lista')?.scrollIntoView({ behavior: 'smooth' }) }}
+                  className="group flex items-center gap-2 bg-white/8 border border-white/15 hover:border-samred/60 hover:bg-white/12 transition-all duration-200 px-3 py-1.5 rounded"
+                >
+                  <span className="text-white/50 group-hover:text-samred transition-colors">{m.icon}</span>
+                  <span className="font-sub font-semibold text-xs uppercase tracking-wide text-white/70 group-hover:text-white transition-colors">{m.label}</span>
+                  <span className="font-mono text-[0.6rem] text-white/30 ml-0.5">{counts[key]||0}</span>
+                </button>
+              ))}
             </div>
+          </div>
 
-            {/* Stats row */}
-            <div className="flex gap-8 flex-wrap border-t border-white/10 pt-6 mb-8">
-              {[['100+', 'Proyectos ejecutados'], ['6', 'Divisiones'], ['59', 'Años de trayectoria']].map(([val, lbl]) => (
-                <div key={lbl}>
-                  <p className="font-display text-3xl text-samred leading-none">{val}</p>
-                  <p className="font-sub text-[0.6875rem] uppercase tracking-widest text-white/40 mt-1">{lbl}</p>
+          {/* Bottom stats */}
+          <div className="flex gap-10 flex-wrap border-t border-white/10 pt-5">
+            {[['100+','Proyectos'], ['6','Divisiones'], ['59','Años']].map(([v,l]) => (
+              <div key={l}>
+                <p className="font-display text-2xl text-samred leading-none">{v}</p>
+                <p className="font-sub text-[0.625rem] uppercase tracking-widest text-white/35 mt-0.5">{l}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── PROYECTOS LISTA — dark editorial ── */}
+      <div id="proyectos-lista" className="bg-dark" style={{ minHeight: '100dvh' }}>
+
+        {/* Filter bar */}
+        <div className="sticky top-16 z-30 bg-dark border-b border-white/10">
+          <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20">
+            <div className="flex gap-0 overflow-x-auto">
+              {divisionTabs.map(t => {
+                const isActive = activeDivision === t.id
+                const dot = t.id === 'Todos' ? '#C8102E' : DIVISION_META[t.id]?.dot
+                return (
+                  <button key={t.id} onClick={() => setActiveDivision(t.id)}
+                    className={`flex items-center gap-2 px-4 py-3.5 text-xs font-sub font-bold uppercase tracking-wide whitespace-nowrap border-b-2 transition-all duration-200 flex-shrink-0 ${
+                      isActive ? 'text-white' : 'text-white/35 border-transparent hover:text-white/70'
+                    }`}
+                    style={isActive ? { borderBottomColor: dot } : {}}
+                  >
+                    <span className={isActive ? 'opacity-100' : 'opacity-40'}>{t.icon}</span>
+                    <span>{t.id === 'Todos' ? 'Todos' : t.label}</span>
+                    {t.id !== 'Todos' && (
+                      <span className={`text-[0.625rem] font-mono px-1.5 py-0.5 rounded ${isActive ? 'bg-white/15 text-white' : 'bg-white/5 text-white/30'}`}>
+                        {counts[t.id]||0}
+                      </span>
+                    )}
+                  </button>
+                )
+              })}
+            </div>
+            <div className="flex items-center gap-2 py-2 border-t border-white/8">
+              {[['Todos','Todos'],['active','En Ejecución'],['completed','Culminados']].map(([val,lab]) => (
+                <button key={val} onClick={() => setStatusFilter(val)}
+                  className={`text-xs font-mono font-semibold px-3 py-1 rounded border transition-all ${statusFilter===val ? 'bg-white text-dark border-white' : 'bg-transparent text-white/40 border-white/15 hover:border-white/40 hover:text-white/70'}`}
+                >
+                  {val==='active' && <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block mr-1.5 dot-pulse" />}
+                  {lab}
+                </button>
+              ))}
+              <span className="ml-auto text-xs font-mono text-white/25">{filtered.length} proyecto{filtered.length!==1?'s':''}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Project rows — table-style */}
+        <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20 py-8">
+          {filtered.length > 0 ? (
+            <div className="divide-y divide-white/8">
+              {filtered.map((p, i) => (
+                <div key={p.id}
+                  className="group flex items-center gap-5 py-4 cursor-pointer hover:bg-white/3 transition-all duration-200 rounded px-2 -mx-2"
+                  onClick={() => setModal(p)}
+                >
+                  {/* Index */}
+                  <span className="font-mono text-[0.625rem] text-white/20 flex-shrink-0 w-6 group-hover:text-white/40 transition-colors">
+                    {String(i+1).padStart(2,'0')}
+                  </span>
+                  {/* Thumb */}
+                  <div className="relative flex-shrink-0 w-16 h-12 rounded overflow-hidden">
+                    <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.08]" />
+                    <div className="absolute inset-0 bg-dark/30 group-hover:bg-transparent transition-colors duration-300" />
+                    <div className="absolute bottom-0 left-0 right-0 h-[2px]" style={{ background: DIVISION_META[p.division]?.dot||'#C8102E' }} />
+                  </div>
+                  {/* Info */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-0.5 flex-wrap">
+                      <DivisionBadge division={p.division} />
+                      {p.status === 'active' && <span className="flex items-center gap-1 text-green-400 text-[0.6rem] font-mono uppercase tracking-widest"><span className="w-1 h-1 rounded-full bg-green-400 dot-pulse" />Activo</span>}
+                    </div>
+                    <h3 className="font-sub font-bold text-sm uppercase tracking-wide text-white/70 group-hover:text-white transition-colors duration-200 truncate">{p.title}</h3>
+                    <p className="text-white/30 text-xs truncate">{p.client}</p>
+                  </div>
+                  {/* Arrow */}
+                  <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 translate-x-[-4px] group-hover:translate-x-0 transition-all duration-300 hidden md:block">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 3l5 4-5 4" stroke="#C8102E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  </div>
                 </div>
               ))}
             </div>
-
-            {/* Filter hint */}
-            <p className="text-white/25 text-xs font-mono uppercase tracking-widest">↓ Filtrar por división</p>
-          </div>
-
-          {/* RIGHT — division cards grid */}
-          <div className="hidden lg:grid grid-cols-2 grid-rows-3 gap-0 border-l border-white/10">
-            {Object.entries(DIVISION_META).map(([key, m], i) => (
-              <button
-                key={key}
-                onClick={() => { setActiveDivision(key); document.getElementById('proyectos-grid')?.scrollIntoView({ behavior: 'smooth' }) }}
-                className="group relative flex flex-col justify-between p-6 border-b border-white/10 odd:border-r odd:border-white/10 hover:bg-white/5 transition-all duration-300 text-left"
-              >
-                <div className="flex items-center justify-between mb-auto">
-                  <div className="text-white/30 group-hover:text-white/70 transition-colors duration-300">{m.icon}</div>
-                  <span className="font-display text-3xl text-white/10 group-hover:text-white/20 transition-colors duration-300">{String(counts[key] || 0).padStart(2,'0')}</span>
-                </div>
-                <div className="mt-6">
-                  <div className="h-[2px] w-8 mb-3 transition-all duration-300 group-hover:w-14" style={{ background: m.dot }} />
-                  <p className="font-sub font-bold text-sm uppercase tracking-wider text-white/60 group-hover:text-white transition-colors duration-300">{m.label}</p>
-                  <p className="text-white/25 text-xs font-mono mt-0.5">{counts[key] || 0} proyectos</p>
-                </div>
-              </button>
-            ))}
-          </div>
-
-        </div>
-      </div>
-
-      {/* Sticky filter bar */}
-      <div className="bg-white border-b border-border sticky top-16 z-30 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
-          {/* Division tabs — horizontal scroll on mobile */}
-          <div className="flex gap-0 overflow-x-auto scrollbar-hide">
-            {divisionTabs.map(t => {
-              const isActive = activeDivision === t.id
-              const dot = t.id === 'Todos' ? '#C8102E' : DIVISION_META[t.id]?.dot
-              return (
-                <button
-                  key={t.id}
-                  onClick={() => setActiveDivision(t.id)}
-                  className={`flex items-center gap-2 px-4 py-3.5 text-xs font-sub font-bold uppercase tracking-wide whitespace-nowrap border-b-2 transition-all duration-200 flex-shrink-0 ${
-                    isActive
-                      ? 'text-dark border-b-2'
-                      : 'text-secondary/70 border-transparent hover:text-dark hover:border-gray-300'
-                  }`}
-                  style={isActive ? { borderBottomColor: dot } : {}}
-                >
-                  <span className={isActive ? 'opacity-100' : 'opacity-50'}>{t.icon}</span>
-                  <span>{t.id === 'Todos' ? 'Todos' : t.label}</span>
-                  {t.id !== 'Todos' && (
-                    <span className={`text-[0.625rem] font-mono px-1.5 py-0.5 rounded ${isActive ? 'bg-dark/10 text-dark' : 'bg-gray-100 text-secondary'}`}>
-                      {counts[t.id] || 0}
-                    </span>
-                  )}
-                </button>
-              )
-            })}
-          </div>
-          {/* Status sub-filter */}
-          <div className="flex items-center gap-2 py-2 border-t border-border/60">
-            {[['Todos', 'Todos'], ['active', 'En Ejecución 2025'], ['completed', 'Culminados']].map(([val, lab]) => (
-              <button key={val} onClick={() => setStatusFilter(val)}
-                className={`text-xs font-mono font-semibold px-3 py-1 rounded border transition-all ${statusFilter === val ? 'bg-dark text-white border-dark' : 'bg-white text-secondary border-border hover:border-dark/40'}`}
-              >
-                {val === 'active' && <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block mr-1.5 dot-pulse" />}
-                {lab}
-              </button>
-            ))}
-            <span className="ml-auto text-xs font-mono text-secondary/60">{filtered.length} proyecto{filtered.length !== 1 ? 's' : ''}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Active division header */}
-      {activeDivision !== 'Todos' && (
-        <div className="bg-surface border-b border-border py-4 px-4 md:px-8">
-          <div className="max-w-7xl mx-auto flex items-center gap-3">
-            <div className="w-1 h-10 rounded-full flex-shrink-0" style={{ background: DIVISION_META[activeDivision]?.dot }} />
-            <div>
-              <p className="font-display text-2xl text-dark leading-none">{DIVISION_META[activeDivision]?.label}</p>
-              <p className="text-secondary text-xs mt-1">{counts[activeDivision] || 0} proyectos en esta división</p>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Project grid */}
-      <div id="proyectos-grid" className="bg-white py-10 px-4 md:px-8">
-        <div className="max-w-7xl mx-auto">
-          {filtered.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {filtered.map(p => <ProjectCard key={p.id} project={p} onClick={setModal} />)}
-            </div>
           ) : (
-            <div className="text-center py-20 text-secondary">
-              <LayoutGrid size={28} className="mx-auto mb-3 opacity-30" />
-              <p className="font-sub font-semibold text-lg">No hay proyectos con estos filtros.</p>
+            <div className="text-center py-20">
+              <LayoutGrid size={28} className="mx-auto mb-3 text-white/20" />
+              <p className="font-sub font-semibold text-lg text-white/30">No hay proyectos con estos filtros.</p>
             </div>
           )}
+        </div>
+
+        {/* Bottom bar */}
+        <div className="border-t border-white/10 px-6 md:px-14 lg:px-20 py-5 flex items-center justify-between flex-wrap gap-4">
+          <p className="font-sub text-xs uppercase tracking-widest text-white/25">{filtered.length} proyectos encontrados</p>
         </div>
       </div>
 

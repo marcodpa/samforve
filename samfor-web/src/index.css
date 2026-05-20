@@ -68,21 +68,25 @@ body {
 /* ── SERVICE CARD ── */
 .service-card {
   border-left: 3px solid transparent;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s var(--ease-out);
 }
-.service-card:hover {
-  border-left-color: var(--red);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-  transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+  .service-card:hover {
+    border-left-color: var(--red);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.11);
+    transform: translateY(-3px);
+  }
 }
 
 /* ── PROJECT CARD ── */
 .project-card {
-  transition: transform 0.25s var(--ease-out), box-shadow 0.25s ease;
+  transition: transform 0.22s var(--ease-out), box-shadow 0.22s ease;
 }
-.project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.18);
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.16);
+  }
 }
 
 /* ── BUTTONS ── */

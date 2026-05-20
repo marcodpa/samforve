@@ -3,7 +3,7 @@ import {
   Zap, Building2, Settings, Truck, Leaf, Ship,
   ChevronRight, Menu, X, ArrowRight, MapPin, Phone, Mail, Globe,
   Upload, CheckCircle, Award, Target, Plus,
-  Shield, Star, ChevronDown, Users, Wrench, LayoutGrid
+  Shield, Star, ChevronDown, Users, Wrench, LayoutGrid, List
 } from 'lucide-react'
 
 // ─── IMAGE MAP ────────────────────────────────────────────────────────────────
@@ -853,8 +853,9 @@ function PageInicio({ setPage }) {
 function PageProyectos() {
   useScrollReveal()
   const [activeDivision, setActiveDivision] = useState('Todos')
-  const [statusFilter, setStatusFilter] = useState('Todos') // 'Todos' | 'active' | 'completed'
+  const [statusFilter, setStatusFilter] = useState('Todos')
   const [modal, setModal] = useState(null)
+  const [listView, setListView] = useState(false)
 
   // Division tabs definition — matching the reference image order
   const divisionTabs = [
@@ -981,43 +982,89 @@ function PageProyectos() {
         </div>
       </div>
 
-      {/* ── CARRUSEL DE PROYECTOS ── */}
+      {/* ── PROYECTOS ── */}
       <div className="bg-dark py-12 px-6 md:px-14 lg:px-20">
         <div className="max-w-7xl mx-auto">
-          {/* Header + status filter + count */}
+
+          {/* Header row */}
           <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
             <div className="flex items-center gap-3">
-              {activeDivision !== 'Todos' && (
-                <div className="h-6 w-[3px] rounded-full flex-shrink-0" style={{ background: DIVISION_META[activeDivision]?.dot }} />
-              )}
+              {activeDivision !== 'Todos' && <div className="h-6 w-[3px] rounded-full flex-shrink-0" style={{ background: DIVISION_META[activeDivision]?.dot }} />}
               <h3 className="font-display text-[1.75rem] text-white leading-none">
                 {activeDivision === 'Todos' ? 'TODOS LOS PROYECTOS' : DIVISION_META[activeDivision]?.label?.toUpperCase()}
               </h3>
               <span className="font-mono text-xs text-white/30 ml-1">{filtered.length}</span>
             </div>
-            <div className="flex items-center gap-2">
-              {[['Todos','Todos'],['active','Activos'],['completed','Culminados']].map(([val,lab]) => (
-                <button key={val} onClick={() => setStatusFilter(val)}
-                  className={`text-xs font-mono font-semibold px-3 py-1.5 rounded border transition-all ${statusFilter===val ? 'bg-white text-dark border-white' : 'bg-transparent text-white/40 border-white/15 hover:border-white/40 hover:text-white/70'}`}
-                >
-                  {val==='active' && <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block mr-1.5" />}
-                  {lab}
-                </button>
-              ))}
+            <div className="flex items-center gap-3 flex-wrap">
+              {/* Status filter */}
+              <div className="flex items-center gap-2">
+                {[['Todos','Todos'],['active','Activos'],['completed','Culminados']].map(([val,lab]) => (
+                  <button key={val} onClick={() => setStatusFilter(val)}
+                    className={`text-xs font-mono font-semibold px-3 py-1.5 rounded border transition-all ${statusFilter===val ? 'bg-white text-dark border-white' : 'bg-transparent text-white/40 border-white/15 hover:border-white/40 hover:text-white/70'}`}
+                  >
+                    {val==='active' && <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block mr-1.5" />}
+                    {lab}
+                  </button>
+                ))}
+              </div>
+              {/* View toggle */}
+              <button
+                onClick={() => setListView(v => !v)}
+                className="flex items-center gap-2 text-xs font-sub font-bold uppercase tracking-widest px-4 py-1.5 rounded border border-samred text-samred hover:bg-samred hover:text-white transition-all duration-200"
+              >
+                {listView ? <><LayoutGrid size={13}/> Carrusel</> : <><List size={13}/> Lista completa</>}
+              </button>
             </div>
           </div>
 
-          {/* Auto-scrolling carousel */}
-          {filtered.length > 0 ? (
+          {filtered.length === 0 ? (
+            <div className="text-center py-20">
+              <LayoutGrid size={28} className="mx-auto mb-3 text-white/20" />
+              <p className="font-sub font-semibold text-lg text-white/30">No hay proyectos con estos filtros.</p>
+            </div>
+
+          ) : listView ? (
+            /* ── LISTA COMPLETA ── */
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+              {filtered.map(p => (
+                <div key={p.id}
+                  className="group cursor-pointer rounded overflow-hidden bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300 flex flex-col"
+                  onClick={() => setModal(p)}
+                >
+                  {/* Image */}
+                  <div className="relative overflow-hidden" style={{ height: '220px' }}>
+                    <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" loading="lazy" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-dark/85 via-dark/10 to-transparent" />
+                    <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot||'#C8102E' }} />
+                    {p.status === 'active' && (
+                      <div className="absolute top-3 right-3 flex items-center gap-1.5 bg-dark/70 backdrop-blur-sm px-2.5 py-1 rounded-full">
+                        <span className="w-1.5 h-1.5 rounded-full bg-green-400 dot-pulse" />
+                        <span className="text-green-400 text-[0.6rem] font-mono uppercase tracking-widest">Activo</span>
+                      </div>
+                    )}
+                  </div>
+                  {/* Body */}
+                  <div className="p-5 flex flex-col flex-1">
+                    <div className="mb-2"><DivisionBadge division={p.division} /></div>
+                    <h3 className="font-sub font-bold text-[1rem] uppercase tracking-wide text-white/85 group-hover:text-white transition-colors leading-snug mb-1 flex-1">{p.title}</h3>
+                    <p className="text-white/35 text-xs mb-1">{p.client}</p>
+                    {p.desc && <p className="text-white/25 text-xs leading-relaxed line-clamp-2 mt-1">{p.desc}</p>}
+                    <div className="flex items-center gap-1.5 text-samred text-xs font-sub font-semibold uppercase tracking-widest mt-4 pt-4 border-t border-white/8 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                      Ver detalle <ArrowRight size={12} />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          ) : (
+            /* ── CARRUSEL ── */
             <div className="overflow-hidden relative"
               onMouseEnter={e => e.currentTarget.querySelector('.carousel-track').style.animationPlayState='paused'}
               onMouseLeave={e => e.currentTarget.querySelector('.carousel-track').style.animationPlayState='running'}
             >
               <div className="carousel-track flex gap-5"
-                style={{
-                  width: 'max-content',
-                  animation: `marquee ${Math.max(filtered.length * 6, 40)}s linear infinite`,
-                }}
+                style={{ width: 'max-content', animation: `marquee ${Math.max(filtered.length * 6, 40)}s linear infinite` }}
               >
                 {[...filtered, ...filtered].map((p, i) => (
                   <div key={`${p.id}-${i}`}
@@ -1025,7 +1072,6 @@ function PageProyectos() {
                     style={{ width: '320px' }}
                     onClick={() => setModal(p)}
                   >
-                    {/* Image */}
                     <div className="relative overflow-hidden" style={{ height: '200px' }}>
                       <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
                       <div className="absolute inset-0 bg-gradient-to-t from-dark/85 via-dark/20 to-transparent" />
@@ -1037,7 +1083,6 @@ function PageProyectos() {
                         </div>
                       )}
                     </div>
-                    {/* Body */}
                     <div className="p-5 flex flex-col flex-1">
                       <div className="mb-2"><DivisionBadge division={p.division} /></div>
                       <h3 className="font-sub font-bold text-[1rem] uppercase tracking-wide text-white/80 group-hover:text-white transition-colors leading-snug mb-2 line-clamp-2">{p.title}</h3>
@@ -1049,14 +1094,8 @@ function PageProyectos() {
                   </div>
                 ))}
               </div>
-              {/* Fade edges */}
               <div className="absolute top-0 left-0 w-16 h-full bg-gradient-to-r from-dark to-transparent pointer-events-none" />
               <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-dark to-transparent pointer-events-none" />
-            </div>
-          ) : (
-            <div className="text-center py-20">
-              <LayoutGrid size={28} className="mx-auto mb-3 text-white/20" />
-              <p className="font-sub font-semibold text-lg text-white/30">No hay proyectos con estos filtros.</p>
             </div>
           )}
         </div>

@@ -880,22 +880,55 @@ function PageProyectos() {
   return (
     <div className="pt-16">
       {/* Hero */}
-      <div className="relative py-20 px-4 md:px-8 overflow-hidden"
-        style={{ background: `linear-gradient(rgba(10,12,15,0.70), rgba(10,12,15,0.70)), url("${IMG(23)}") center/cover no-repeat` }}
-      >
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="flex items-center gap-3 mb-3"><span className="h-[3px] w-12 bg-samred" /><span className="font-sub font-semibold text-xs uppercase tracking-widest text-white/60">Portafolio</span></div>
-          <h1 className="font-display text-5xl md:text-6xl text-white tracking-wide mb-3">PROYECTOS</h1>
-          <p className="text-white/65 text-base max-w-xl leading-relaxed">Décadas de experiencia ejecutando proyectos de alta complejidad en Venezuela y la región.</p>
-          {/* Division overview chips */}
-          <div className="flex flex-wrap gap-2 mt-6">
-            {Object.entries(DIVISION_META).map(([key, m]) => (
-              <span key={key} className="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm text-white text-xs font-sub font-semibold uppercase tracking-wide px-3 py-1.5 rounded border border-white/20">
-                {m.icon}<span className="opacity-80">{m.label}</span>
-                <span className="bg-white/20 text-white text-[0.625rem] font-mono px-1.5 py-0.5 rounded ml-0.5">{counts[key] || 0}</span>
-              </span>
+      <div className="bg-dark overflow-hidden" style={{ height: 'calc(100dvh - 4rem)' }}>
+        <div className="h-full grid grid-cols-1 lg:grid-cols-2">
+
+          {/* LEFT — title + stats */}
+          <div className="px-6 md:px-14 lg:px-16 flex flex-col justify-center py-10">
+            <div className="mb-8">
+              <div className="flex items-center gap-3 mb-3">
+                <span className="h-[3px] w-10 bg-samred" />
+                <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Portafolio</span>
+              </div>
+              <h1 className="font-display text-[3rem] md:text-[4rem] text-white leading-none mb-4">NUESTROS<br />PROYECTOS</h1>
+              <p className="text-white/45 text-sm max-w-sm leading-relaxed">Décadas de experiencia ejecutando obras de alta complejidad para la industria energética, civil e industrial de Venezuela.</p>
+            </div>
+
+            {/* Stats row */}
+            <div className="flex gap-8 flex-wrap border-t border-white/10 pt-6 mb-8">
+              {[['100+', 'Proyectos ejecutados'], ['6', 'Divisiones'], ['59', 'Años de trayectoria']].map(([val, lbl]) => (
+                <div key={lbl}>
+                  <p className="font-display text-3xl text-samred leading-none">{val}</p>
+                  <p className="font-sub text-[0.6875rem] uppercase tracking-widest text-white/40 mt-1">{lbl}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Filter hint */}
+            <p className="text-white/25 text-xs font-mono uppercase tracking-widest">↓ Filtrar por división</p>
+          </div>
+
+          {/* RIGHT — division cards grid */}
+          <div className="hidden lg:grid grid-cols-2 grid-rows-3 gap-0 border-l border-white/10">
+            {Object.entries(DIVISION_META).map(([key, m], i) => (
+              <button
+                key={key}
+                onClick={() => { setActiveDivision(key); document.getElementById('proyectos-grid')?.scrollIntoView({ behavior: 'smooth' }) }}
+                className="group relative flex flex-col justify-between p-6 border-b border-white/10 odd:border-r odd:border-white/10 hover:bg-white/5 transition-all duration-300 text-left"
+              >
+                <div className="flex items-center justify-between mb-auto">
+                  <div className="text-white/30 group-hover:text-white/70 transition-colors duration-300">{m.icon}</div>
+                  <span className="font-display text-3xl text-white/10 group-hover:text-white/20 transition-colors duration-300">{String(counts[key] || 0).padStart(2,'0')}</span>
+                </div>
+                <div className="mt-6">
+                  <div className="h-[2px] w-8 mb-3 transition-all duration-300 group-hover:w-14" style={{ background: m.dot }} />
+                  <p className="font-sub font-bold text-sm uppercase tracking-wider text-white/60 group-hover:text-white transition-colors duration-300">{m.label}</p>
+                  <p className="text-white/25 text-xs font-mono mt-0.5">{counts[key] || 0} proyectos</p>
+                </div>
+              </button>
             ))}
           </div>
+
         </div>
       </div>
 
@@ -958,7 +991,7 @@ function PageProyectos() {
       )}
 
       {/* Project grid */}
-      <div className="bg-white py-10 px-4 md:px-8">
+      <div id="proyectos-grid" className="bg-white py-10 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
           {filtered.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">

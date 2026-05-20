@@ -12,12 +12,12 @@ const IMG = (n) => `/projects/img-${String(n).padStart(3,'0')}.jpg`
 // ─── CLASSIFICATION ───────────────────────────────────────────────────────────
 // Matches the reference: Civiles / Mecánicos / Eléctricos / Transporte / Ambientales / Otras Divisiones
 const DIVISION_META = {
-  'Civiles':         { label: 'Proyectos Civiles',     icon: <Building2 size={16}/>,  color: 'bg-samblue/10 text-samblue border-samblue/30',       dot: '#1A6FB5' },
-  'Mecánicos':       { label: 'Proyectos Mecánicos',   icon: <Wrench size={16}/>,     color: 'bg-orange-50 text-orange-700 border-orange-200',      dot: '#EA580C' },
-  'Eléctricos':      { label: 'Proyectos Eléctricos',  icon: <Zap size={16}/>,        color: 'bg-yellow-50 text-yellow-700 border-yellow-200',      dot: '#CA8A04' },
-  'Transporte':      { label: 'División Transporte',   icon: <Truck size={16}/>,      color: 'bg-purple-50 text-purple-700 border-purple-200',      dot: '#7C3AED' },
-  'Ambientales':     { label: 'Servicios Ambientales', icon: <Leaf size={16}/>,       color: 'bg-green-50 text-green-700 border-green-200',         dot: '#16A34A' },
-  'Otras':           { label: 'Otras Divisiones',      icon: <Ship size={16}/>,       color: 'bg-cyan-50 text-cyan-700 border-cyan-200',            dot: '#0891B2' },
+  'Civiles':         { label: 'Proyectos Civiles',     icon: <Building2 size={16}/>,  color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E' },
+  'Mecánicos':       { label: 'Proyectos Mecánicos',   icon: <Wrench size={16}/>,     color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E' },
+  'Eléctricos':      { label: 'Proyectos Eléctricos',  icon: <Zap size={16}/>,        color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E' },
+  'Transporte':      { label: 'División Transporte',   icon: <Truck size={16}/>,      color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E' },
+  'Ambientales':     { label: 'Servicios Ambientales', icon: <Leaf size={16}/>,       color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E' },
+  'Otras':           { label: 'Otras Divisiones',      icon: <Ship size={16}/>,       color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E' },
 }
 
 // ─── DATA ────────────────────────────────────────────────────────────────────

@@ -652,25 +652,25 @@ function PageInicio({ setPage }) {
       </section>
 
       {/* SERVICES */}
-      <section className="bg-dark overflow-hidden" style={{ minHeight: '100dvh' }}>
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 h-full" style={{ minHeight: '100dvh' }}>
+      <section className="bg-dark overflow-hidden" style={{ height: '100dvh' }}>
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2" style={{ height: '100%' }}>
 
           {/* LEFT — list */}
-          <div className="py-16 px-6 md:px-14 lg:px-16 flex flex-col justify-center">
+          <div className="px-6 md:px-14 lg:px-16 flex flex-col justify-center py-10">
             {/* Header */}
-            <div className="scroll-reveal mb-10">
+            <div className="scroll-reveal mb-6">
               <div className="flex items-center gap-3 mb-3">
                 <span className="h-[3px] w-10 bg-samred" />
                 <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Lo que hacemos</span>
               </div>
-              <h2 className="font-display text-[2.5rem] md:text-[3rem] text-white leading-none">NUESTROS<br />SERVICIOS</h2>
+              <h2 className="font-display text-[2.25rem] md:text-[2.75rem] text-white leading-none">NUESTROS<br />SERVICIOS</h2>
             </div>
 
             {/* Service rows */}
             <div className="stagger divide-y divide-white/10">
               {SERVICES.map((s, i) => (
                 <div key={s.title}
-                  className="group flex items-start gap-5 py-5 cursor-default transition-all duration-300"
+                  className="group flex items-start gap-5 py-3 cursor-default transition-all duration-300"
                   style={{ '--tw-translate-x': '0px' }}
                 >
                   {/* Number */}
@@ -683,7 +683,7 @@ function PageInicio({ setPage }) {
                   </div>
                   {/* Text */}
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-sub font-bold text-[0.9375rem] uppercase tracking-wider text-white/80 group-hover:text-white transition-colors duration-300 mb-1">{s.title}</h3>
+                    <h3 className="font-sub font-bold text-[0.9375rem] uppercase tracking-wider text-white/80 group-hover:text-white transition-colors duration-300 mb-0.5">{s.title}</h3>
                     <p className="text-white/40 text-xs leading-relaxed group-hover:text-white/55 transition-colors duration-300">{s.desc}</p>
                   </div>
                   {/* Arrow */}
@@ -696,7 +696,7 @@ function PageInicio({ setPage }) {
           </div>
 
           {/* RIGHT — photo */}
-          <div className="relative hidden lg:block min-h-[640px] lg:min-h-0">
+          <div className="relative hidden lg:block">
             <img
               src="/services-photo.jpg"
               alt="Equipo SAMFOR en obra"

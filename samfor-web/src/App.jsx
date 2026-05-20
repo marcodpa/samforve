@@ -1003,59 +1003,70 @@ function PageProyectos() {
       </div>
 
       {/* ── CATEGORÍAS FOTO-FILTRO ── */}
-      <div id="proyectos-lista" className="bg-dark py-14 px-6 md:px-14 lg:px-20 border-b border-white/10">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-end justify-between mb-8">
-            <div>
-              <div className="flex items-center gap-3 mb-2">
-                <span className="h-[3px] w-8 bg-samred" />
-                <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Filtrar por categoría</span>
-              </div>
-              <h2 className="font-display text-[2rem] md:text-[2.5rem] text-white leading-none">DIVISIONES</h2>
+      <div id="proyectos-lista" className="bg-dark border-b border-white/10">
+        {/* Header */}
+        <div className="px-6 md:px-14 lg:px-20 pt-12 pb-6 flex items-end justify-between">
+          <div>
+            <div className="flex items-center gap-3 mb-2">
+              <span className="h-[3px] w-8 bg-samred" />
+              <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Filtrar por categoría</span>
             </div>
-            <span className="font-mono text-xs text-white/25 hidden md:block">{activeDivision === 'Todos' ? 'Todas las divisiones' : DIVISION_META[activeDivision]?.label}</span>
+            <h2 className="font-display text-[2rem] md:text-[2.5rem] text-white leading-none">DIVISIONES</h2>
           </div>
+          <span className="font-mono text-xs text-white/25 hidden md:block">
+            {activeDivision === 'Todos' ? `${ALL_PROJECTS.length} proyectos totales` : `${counts[activeDivision]||0} proyectos`}
+          </span>
+        </div>
 
-          {/* Photo-filter cards — horizontal scroll */}
-          <div className="flex gap-3 overflow-x-auto pb-2" style={{ scrollbarWidth: 'none' }}>
-            {/* "Todos" card */}
-            <button
-              onClick={() => setActiveDivision('Todos')}
-              className={`group relative flex-shrink-0 rounded overflow-hidden transition-all duration-300 ${activeDivision==='Todos' ? 'ring-2 ring-samred' : 'ring-1 ring-white/10 hover:ring-white/30'}`}
-              style={{ width: '140px', height: '180px' }}
-            >
-              <img src={IMG(28)} alt="Todos" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]" loading="lazy" />
-              <div className={`absolute inset-0 transition-all duration-300 ${activeDivision==='Todos' ? 'bg-samred/60' : 'bg-dark/65 group-hover:bg-dark/40'}`} />
-              <div className="absolute inset-0 flex flex-col justify-end p-3">
-                <p className="font-display text-base text-white leading-tight">TODOS</p>
-                <p className="font-mono text-[0.6rem] text-white/50">{ALL_PROJECTS.length} proyectos</p>
-              </div>
-              {activeDivision==='Todos' && <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-samred" />}
-            </button>
+        {/* Grid de divisiones — 7 cols en desktop, scroll en mobile */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-0 border-t border-white/10">
 
-            {/* Division cards */}
-            {Object.entries(DIVISION_META).map(([key, m]) => {
-              const sample = ALL_PROJECTS.find(p => p.division === key)
-              const isActive = activeDivision === key
-              return (
-                <button key={key}
-                  onClick={() => setActiveDivision(key)}
-                  className={`group relative flex-shrink-0 rounded overflow-hidden transition-all duration-300 ${isActive ? 'ring-2' : 'ring-1 ring-white/10 hover:ring-white/30'}`}
-                  style={{ width: '140px', height: '180px', '--ring-color': m.dot, ...(isActive ? { outline: `2px solid ${m.dot}`, outlineOffset: '0px' } : {}) }}
-                >
-                  {sample && <img src={sample.img} alt={key} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]" loading="lazy" />}
-                  <div className={`absolute inset-0 transition-all duration-300 ${isActive ? 'bg-dark/50' : 'bg-dark/70 group-hover:bg-dark/45'}`} />
-                  <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: m.dot }} />
-                  <div className="absolute inset-0 flex flex-col justify-end p-3">
-                    <div className="text-white/60 mb-1 group-hover:text-white transition-colors">{m.icon}</div>
-                    <p className="font-display text-sm text-white leading-tight">{m.label.toUpperCase()}</p>
-                    <p className="font-mono text-[0.6rem] text-white/40">{counts[key]||0} proyectos</p>
-                  </div>
-                  {isActive && <div className="absolute bottom-0 left-0 right-0 h-[3px]" style={{ background: m.dot }} />}
-                </button>
-              )
-            })}
-          </div>
+          {/* TODOS */}
+          <button
+            onClick={() => setActiveDivision('Todos')}
+            className={`group relative overflow-hidden transition-all duration-300 ${activeDivision==='Todos' ? 'opacity-100' : 'opacity-60 hover:opacity-90'}`}
+            style={{ height: '260px' }}
+          >
+            <img src={IMG(28)} alt="Todos" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
+            <div className={`absolute inset-0 transition-all duration-300 ${activeDivision==='Todos' ? 'bg-samred/55' : 'bg-dark/75 group-hover:bg-dark/55'}`} />
+            {/* Active indicator */}
+            {activeDivision==='Todos' && <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred" />}
+            <div className="absolute inset-0 flex flex-col items-start justify-end p-4">
+              <div className="text-white/70 mb-2 group-hover:text-white transition-colors"><LayoutGrid size={18}/></div>
+              <p className="font-display text-[1.1rem] text-white leading-none mb-1">TODOS</p>
+              <p className="font-mono text-[0.6rem] text-white/50 uppercase tracking-widest">{ALL_PROJECTS.length} proy.</p>
+            </div>
+            {/* Right border */}
+            <div className="absolute top-0 right-0 w-px h-full bg-white/10" />
+          </button>
+
+          {/* Cada división */}
+          {Object.entries(DIVISION_META).map(([key, m], i) => {
+            const sample = ALL_PROJECTS.find(p => p.division === key)
+            const isActive = activeDivision === key
+            return (
+              <button key={key}
+                onClick={() => setActiveDivision(key)}
+                className={`group relative overflow-hidden transition-all duration-300 ${isActive ? 'opacity-100' : 'opacity-55 hover:opacity-90'}`}
+                style={{ height: '260px' }}
+              >
+                {sample && <img src={sample.img} alt={key} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />}
+                <div className={`absolute inset-0 transition-all duration-300 ${isActive ? 'bg-dark/40' : 'bg-dark/75 group-hover:bg-dark/50'}`} />
+                {/* Top accent when active */}
+                {isActive && <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred" />}
+                {/* Bottom content */}
+                <div className="absolute inset-0 flex flex-col items-start justify-end p-4">
+                  <div className={`mb-2 transition-colors duration-300 ${isActive ? 'text-samred' : 'text-white/50 group-hover:text-white/80'}`}>{m.icon}</div>
+                  <p className={`font-display text-[0.95rem] leading-none mb-1 transition-colors duration-300 ${isActive ? 'text-white' : 'text-white/80 group-hover:text-white'}`}>
+                    {m.label.replace('Proyectos ', '').replace('División ', '').replace('Servicios ', '').toUpperCase()}
+                  </p>
+                  <p className="font-mono text-[0.6rem] text-white/40 uppercase tracking-widest">{counts[key]||0} proy.</p>
+                </div>
+                {/* Right border separator */}
+                {i < 5 && <div className="absolute top-0 right-0 w-px h-full bg-white/10" />}
+              </button>
+            )
+          })}
         </div>
       </div>
 

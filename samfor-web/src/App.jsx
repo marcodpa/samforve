@@ -494,112 +494,109 @@ function ProjectModal({ project, onClose }) {
   const m = DIVISION_META[project.division]
 
   return (
-    <div className="fixed inset-0 z-[100] bg-dark overflow-y-auto" role="dialog" aria-modal="true">
+    <div className="fixed inset-0 z-[100] bg-dark flex flex-col lg:flex-row" role="dialog" aria-modal="true">
 
-      {/* ── HERO BANNER ── */}
-      <div className="relative w-full" style={{ height: '55vh', minHeight: '340px' }}>
-        <img src={project.img} alt={project.title} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-        <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-dark/10" />
-        <div className="absolute inset-0 bg-gradient-to-r from-dark/60 to-transparent" />
-
-        {/* Top bar */}
-        <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-6 md:px-14 py-5">
+      {/* ── LEFT — imagen fija, ocupa mitad pantalla ── */}
+      <div className="relative lg:sticky lg:top-0 w-full lg:w-1/2 flex-shrink-0" style={{ height: '45vh', minHeight: '260px' }} >
+        <div className="lg:fixed lg:top-0 lg:left-0 lg:w-1/2 lg:h-full" style={{ height: 'inherit' }}>
+          <img
+            src={project.img}
+            alt={project.title}
+            className="w-full h-full object-cover"
+            style={{ height: '100%' }}
+            loading="lazy"
+          />
+          {/* Subtle gradient bottom only — no heavy overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-dark/70 via-transparent to-dark/20" />
+          {/* Red accent left */}
+          <div className="absolute top-0 left-0 w-[3px] h-full bg-samred" />
+          {/* Back button top-left */}
           <button onClick={onClose}
-            className="flex items-center gap-2 text-white/60 hover:text-white transition-colors text-xs font-sub font-semibold uppercase tracking-widest"
+            className="absolute top-5 left-6 flex items-center gap-2 bg-dark/50 backdrop-blur-sm border border-white/15 text-white/80 hover:text-white hover:border-white/40 transition-all px-3 py-1.5 rounded text-xs font-sub font-semibold uppercase tracking-widest"
           >
-            <ArrowRight size={13} className="rotate-180" /> Volver a proyectos
+            <ArrowRight size={12} className="rotate-180" /> Volver
           </button>
-          <button onClick={onClose} className="text-white/50 hover:text-white transition-colors p-1" aria-label="Cerrar">
+          {/* Status badge top-right */}
+          {project.status === 'active' && (
+            <div className="absolute top-5 right-5 flex items-center gap-1.5 bg-dark/60 backdrop-blur-sm px-3 py-1.5 rounded-full border border-green-500/30">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400 dot-pulse" />
+              <span className="text-green-400 text-[0.6875rem] font-mono uppercase tracking-widest">Activo</span>
+            </div>
+          )}
+          {/* Division label bottom-left */}
+          <div className="absolute bottom-6 left-6">
+            <DivisionBadge division={project.division} />
+          </div>
+        </div>
+      </div>
+
+      {/* ── RIGHT — contenido scrolleable ── */}
+      <div className="flex-1 overflow-y-auto bg-dark">
+        {/* Close button */}
+        <div className="flex justify-end px-6 pt-5 lg:px-10">
+          <button onClick={onClose} className="text-white/40 hover:text-white transition-colors" aria-label="Cerrar">
             <X size={20} />
           </button>
         </div>
 
-        {/* Division bar top */}
-        <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: m?.dot || '#C8102E' }} />
+        <div className="px-6 lg:px-10 pb-16 pt-4">
 
-        {/* Bottom content */}
-        <div className="absolute bottom-0 left-0 right-0 px-6 md:px-14 pb-8">
-          <div className="flex flex-wrap items-center gap-3 mb-4">
-            <DivisionBadge division={project.division} />
-            {project.status === 'active' && (
-              <span className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-white bg-green-600/80 backdrop-blur-sm px-3 py-1 rounded-full">
-                <span className="w-1.5 h-1.5 rounded-full bg-white dot-pulse" /> En Ejecución 2025
-              </span>
-            )}
-          </div>
-          <h1 className="font-display text-[clamp(2rem,5vw,4rem)] text-white leading-tight max-w-3xl">{project.title}</h1>
-        </div>
-      </div>
+          {/* Title */}
+          <h1 className="font-display text-[clamp(2rem,4vw,3.5rem)] text-white leading-none mb-8 max-w-xl">{project.title}</h1>
 
-      {/* ── CONTENT ── */}
-      <div className="max-w-5xl mx-auto px-6 md:px-14 py-14 grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-12">
-
-        {/* LEFT — main info */}
-        <div>
           {/* Client */}
-          <div className="mb-10">
+          <div className="mb-8 pb-8 border-b border-white/10">
             <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-samred mb-2">Cliente</p>
-            <p className="font-sub font-bold text-xl text-white">{project.client}</p>
+            <p className="font-sub font-bold text-lg text-white">{project.client}</p>
           </div>
 
-          {/* Divider */}
-          <div className="h-px bg-white/10 mb-10" />
+          {/* Division + Status row */}
+          <div className="grid grid-cols-2 gap-6 mb-8 pb-8 border-b border-white/10">
+            <div>
+              <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-white/35 mb-2">División</p>
+              <p className="font-sub font-bold text-sm uppercase tracking-wide text-white/80">{m?.label}</p>
+            </div>
+            <div>
+              <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-white/35 mb-2">Estado</p>
+              {project.status === 'active' ? (
+                <span className="flex items-center gap-2 text-green-400 text-sm font-sub font-semibold">
+                  <span className="w-2 h-2 rounded-full bg-green-400 dot-pulse flex-shrink-0" /> En Ejecución 2025
+                </span>
+              ) : (
+                <span className="flex items-center gap-2 text-white/45 text-sm font-sub font-semibold">
+                  <span className="w-2 h-2 rounded-full bg-white/25 flex-shrink-0" /> Culminado
+                </span>
+              )}
+            </div>
+          </div>
 
           {/* Description */}
           {project.desc && (
-            <div className="mb-10">
-              <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-white/40 mb-3">Descripción</p>
-              <p className="text-white/70 text-base leading-relaxed">{project.desc}</p>
+            <div className="mb-8 pb-8 border-b border-white/10">
+              <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-white/35 mb-4">Descripción</p>
+              <p className="text-white/65 text-[0.9375rem] leading-relaxed">{project.desc}</p>
             </div>
           )}
 
           {/* Scope */}
           {project.detail && (
-            <div>
-              <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-white/40 mb-3">Alcance del Proyecto</p>
-              <div className="border-l-2 border-samred pl-5">
-                <p className="text-white/60 text-sm leading-relaxed">{project.detail}</p>
+            <div className="mb-10">
+              <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-white/35 mb-4">Alcance del Proyecto</p>
+              <div className="border-l-[3px] border-samred pl-5">
+                <p className="text-white/55 text-sm leading-relaxed">{project.detail}</p>
               </div>
             </div>
           )}
-        </div>
 
-        {/* RIGHT — meta sidebar */}
-        <div className="lg:border-l lg:border-white/10 lg:pl-10">
-          <div className="space-y-7">
-            {/* Division */}
-            <div>
-              <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-white/35 mb-2">División</p>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full" style={{ background: m?.dot }} />
-                <p className="font-sub font-bold text-sm uppercase tracking-wide text-white/80">{m?.label}</p>
-              </div>
-            </div>
-            {/* Status */}
-            <div>
-              <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-white/35 mb-2">Estado</p>
-              {project.status === 'active' ? (
-                <span className="flex items-center gap-2 text-green-400 text-sm font-sub font-semibold">
-                  <span className="w-2 h-2 rounded-full bg-green-400 dot-pulse" /> En Ejecución
-                </span>
-              ) : (
-                <span className="flex items-center gap-2 text-white/50 text-sm font-sub font-semibold">
-                  <span className="w-2 h-2 rounded-full bg-white/30" /> Culminado
-                </span>
-              )}
-            </div>
-            {/* Divider */}
-            <div className="h-px bg-white/10" />
-            {/* Back button */}
-            <button onClick={onClose}
-              className="w-full flex items-center justify-center gap-2 border border-samred text-samred font-sub font-bold text-xs uppercase tracking-widest px-4 py-3 rounded hover:bg-samred hover:text-white transition-all duration-200"
-            >
-              <ArrowRight size={12} className="rotate-180" /> Volver a la lista
-            </button>
-          </div>
+          {/* Back */}
+          <button onClick={onClose}
+            className="flex items-center gap-2 border border-white/20 text-white/50 hover:border-samred hover:text-samred font-sub font-bold text-xs uppercase tracking-widest px-5 py-3 rounded transition-all duration-200"
+          >
+            <ArrowRight size={12} className="rotate-180" /> Volver a la lista
+          </button>
         </div>
-
       </div>
+
     </div>
   )
 }

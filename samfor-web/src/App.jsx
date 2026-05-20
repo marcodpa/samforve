@@ -652,8 +652,8 @@ function PageInicio({ setPage }) {
       </section>
 
       {/* SERVICES */}
-      <section className="bg-dark overflow-hidden">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2">
+      <section className="bg-dark overflow-hidden" style={{ minHeight: '100dvh' }}>
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 h-full" style={{ minHeight: '100dvh' }}>
 
           {/* LEFT — list */}
           <div className="py-16 px-6 md:px-14 lg:px-16 flex flex-col justify-center">
@@ -696,7 +696,7 @@ function PageInicio({ setPage }) {
           </div>
 
           {/* RIGHT — photo */}
-          <div className="relative hidden lg:block min-h-[640px]">
+          <div className="relative hidden lg:block min-h-[640px] lg:min-h-0">
             <img
               src="/services-photo.jpg"
               alt="Equipo SAMFOR en obra"
@@ -720,8 +720,8 @@ function PageInicio({ setPage }) {
       </section>
 
       {/* FEATURED PROJECTS */}
-      <section className="bg-white py-20 px-6 md:px-14 lg:px-20">
-        <div className="max-w-7xl mx-auto">
+      <section className="bg-white px-6 md:px-14 lg:px-20 flex flex-col justify-center" style={{ minHeight: '100dvh' }}>
+        <div className="max-w-7xl mx-auto w-full py-16">
 
           {/* Header */}
           <div className="scroll-reveal flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
@@ -808,7 +808,7 @@ function PageInicio({ setPage }) {
       <ClientsSection setPage={setPage} />
 
       {/* CTA */}
-      <section className="relative overflow-hidden py-24 px-4 md:px-8">
+      <section className="relative overflow-hidden flex items-center justify-center px-4 md:px-8" style={{ minHeight: '100dvh' }}>
         {/* Photo */}
         <img
           src="/cta-bg.jpg"

@@ -622,7 +622,7 @@ function PageInicio({ setPage }) {
     <div>
       {/* HERO */}
       <section className="relative flex flex-col items-start justify-center px-6 md:px-14 lg:px-20"
-        style={{ minHeight: '100dvh', background: `linear-gradient(rgba(10,12,15,0.72), rgba(10,12,15,0.72)), url("${IMG(28)}") center/cover no-repeat` }}
+        style={{ minHeight: '100dvh', background: `linear-gradient(rgba(10,12,15,0.62), rgba(10,12,15,0.62)), url("/hero.jpg") center/cover no-repeat` }}
       >
         <div className="max-w-7xl w-full mx-auto">
           <div className="badge-since inline-flex items-center gap-2 bg-samred text-white text-[0.6875rem] font-mono font-semibold uppercase tracking-[0.15em] px-3 py-1.5 rounded mb-7">
@@ -653,20 +653,53 @@ function PageInicio({ setPage }) {
       </section>
 
       {/* SERVICES */}
-      <section className="bg-surface py-20 px-4 md:px-8">
+      <section className="bg-surface py-20 px-4 md:px-8 overflow-hidden">
         <div className="max-w-7xl mx-auto">
+          {/* Header */}
           <div className="scroll-reveal mb-12">
             <div className="flex items-center gap-3 mb-3"><span className="h-[3px] w-12 bg-samred" /><span className="font-sub font-semibold text-xs uppercase tracking-widest text-samred">Lo que hacemos</span></div>
             <h2 className="font-display text-[2.75rem] md:text-5xl text-dark">NUESTROS SERVICIOS</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 stagger">
-            {SERVICES.map(s => (
-              <div key={s.title} className="service-card bg-white rounded shadow-[0_2px_16px_rgba(0,0,0,0.07)] p-6">
-                <div className="text-samred mb-4">{s.icon}</div>
-                <h3 className="font-sub font-bold text-[1.05rem] uppercase tracking-wide text-dark mb-2">{s.title}</h3>
-                <p className="text-secondary text-sm leading-relaxed">{s.desc}</p>
+          {/* Split layout: photo left, cards right on large screens */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-8 items-start">
+            {/* Photo panel */}
+            <div className="scroll-reveal relative rounded overflow-hidden h-[320px] lg:h-auto lg:min-h-[560px] order-2 lg:order-1">
+              <img
+                src="/services-photo.jpg"
+                alt="Equipo SAMFOR en obra"
+                className="absolute inset-0 w-full h-full object-cover object-center"
+                loading="lazy"
+              />
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent" />
+              {/* Bottom badge */}
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="h-[3px] w-8 bg-samred flex-shrink-0" />
+                  <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-white/60">Campo Boscán — Venezuela</span>
+                </div>
+                <p className="font-display text-2xl md:text-3xl text-white leading-tight">
+                  PROFESIONALES<br />EN CADA OBRA
+                </p>
+                <p className="text-white/55 text-xs mt-2 leading-relaxed max-w-xs font-sub">
+                  Nuestro equipo técnico especializado garantiza la más alta calidad en cada proyecto.
+                </p>
               </div>
-            ))}
+              {/* Accent bar */}
+              <div className="absolute top-0 left-0 w-[3px] h-full bg-samred" />
+            </div>
+            {/* Services grid */}
+            <div className="order-1 lg:order-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 stagger">
+                {SERVICES.map(s => (
+                  <div key={s.title} className="service-card bg-white rounded shadow-[0_2px_16px_rgba(0,0,0,0.07)] p-6">
+                    <div className="text-samred mb-4">{s.icon}</div>
+                    <h3 className="font-sub font-bold text-[1.05rem] uppercase tracking-wide text-dark mb-2">{s.title}</h3>
+                    <p className="text-secondary text-sm leading-relaxed">{s.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -808,10 +808,21 @@ function PageInicio({ setPage }) {
       <ClientsSection setPage={setPage} />
 
       {/* CTA */}
-      <section className="bg-samred py-16 px-4 md:px-8">
-        <div className="max-w-4xl mx-auto text-center scroll-reveal">
+      <section className="relative overflow-hidden py-24 px-4 md:px-8">
+        {/* Photo */}
+        <img
+          src="/cta-bg.jpg"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover object-center"
+          loading="lazy"
+        />
+        {/* Gradient: red from left, dark from right, unified overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-samred/95 via-samred/80 to-dark/90" />
+        <div className="absolute inset-0 bg-dark/30" />
+        {/* Content */}
+        <div className="relative z-10 max-w-4xl mx-auto text-center scroll-reveal">
           <h2 className="font-display text-[2.75rem] md:text-5xl lg:text-6xl text-white mb-4 tracking-wide">¿TIENES UN PROYECTO? HABLEMOS.</h2>
-          <p className="text-white/75 text-base md:text-lg mb-8 max-w-lg mx-auto leading-relaxed">Contamos con el equipo, la experiencia y la infraestructura para ejecutar proyectos de cualquier escala.</p>
+          <p className="text-white/70 text-base md:text-lg mb-8 max-w-lg mx-auto leading-relaxed">Contamos con el equipo, la experiencia y la infraestructura para ejecutar proyectos de cualquier escala.</p>
           <button onClick={() => setPage('contacto')} className="bg-white text-samred font-sub font-bold text-sm uppercase tracking-widest px-8 py-4 rounded transition-all hover:bg-white/90 active:scale-[0.97]">Contáctanos Ahora</button>
         </div>
       </section>

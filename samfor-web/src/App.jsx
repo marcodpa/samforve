@@ -484,12 +484,15 @@ function Footer({ setPage }) {
 
 // ─── PROJECT DETAIL PAGE ──────────────────────────────────────────────────────
 function ProjectDetailPage({ project, onClose }) {
+  const onCloseRef = useRef(onClose)
+  useEffect(() => { onCloseRef.current = onClose }, [onClose])
+
   useEffect(() => {
-    const h = e => { if (e.key === 'Escape') onClose() }
+    const h = e => { if (e.key === 'Escape') onCloseRef.current() }
     document.addEventListener('keydown', h)
     window.scrollTo({ top: 0, behavior: 'instant' })
     return () => document.removeEventListener('keydown', h)
-  }, [onClose])
+  }, []) // empty deps — only runs on mount, no scroll loop
 
   const m = DIVISION_META[project.division]
   const related = ALL_PROJECTS.filter(p => p.division === project.division && p.id !== project.id).slice(0, 3)

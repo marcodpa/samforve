@@ -621,18 +621,17 @@ function PageInicio({ setPage }) {
   return (
     <div>
       {/* HERO */}
-      <section className="relative flex flex-col items-end justify-center px-6 md:px-14 lg:px-20"
+      <section className="relative flex flex-col items-start justify-center px-6 md:px-14 lg:px-20"
         style={{ minHeight: '100dvh', background: `linear-gradient(rgba(10,12,15,0.62), rgba(10,12,15,0.62)), url("/hero.jpg") center/cover no-repeat` }}
       >
-        <div className="max-w-xs sm:max-w-sm text-right">
+        <div className="max-w-xs sm:max-w-sm text-left">
           <div className="badge-since inline-flex items-center gap-2 bg-samred text-white text-[0.625rem] font-mono font-semibold uppercase tracking-[0.15em] px-2.5 py-1 rounded mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-white" />Desde 1966
           </div>
-          <h1 className="font-display text-[clamp(1.75rem,4vw,3rem)] text-white leading-[0.95] tracking-wide mb-4">
+          <h1 className="font-display text-[clamp(1.75rem,4vw,3rem)] text-white leading-[0.95] tracking-wide mb-6">
             CONSTRUIMOS<br />EL FUTURO DE<br />LA ENERGÍA
           </h1>
-          <p className="text-white/70 text-xs md:text-sm mb-6 leading-relaxed">59 años de experiencia en proyectos de alta complejidad para la industria petrolera, petroquímica y civil en Venezuela.</p>
-          <div className="flex flex-wrap gap-2 justify-end">
+          <div className="flex flex-wrap gap-2">
             <button onClick={() => setPage('proyectos')} className="btn-primary">Ver Proyectos</button>
             <button onClick={() => setPage('quienes-somos')} className="btn-outline-white">Conócenos</button>
           </div>

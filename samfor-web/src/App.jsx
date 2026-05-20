@@ -653,54 +653,70 @@ function PageInicio({ setPage }) {
       </section>
 
       {/* SERVICES */}
-      <section className="bg-surface py-20 px-4 md:px-8 overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          {/* Header */}
-          <div className="scroll-reveal mb-12">
-            <div className="flex items-center gap-3 mb-3"><span className="h-[3px] w-12 bg-samred" /><span className="font-sub font-semibold text-xs uppercase tracking-widest text-samred">Lo que hacemos</span></div>
-            <h2 className="font-display text-[2.75rem] md:text-5xl text-dark">NUESTROS SERVICIOS</h2>
-          </div>
-          {/* Split layout: photo left, cards right on large screens */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-8 items-start">
-            {/* Photo panel */}
-            <div className="scroll-reveal relative rounded overflow-hidden h-[320px] lg:h-auto lg:min-h-[560px] order-2 lg:order-1">
-              <img
-                src="/services-photo.jpg"
-                alt="Equipo SAMFOR en obra"
-                className="absolute inset-0 w-full h-full object-cover object-center"
-                loading="lazy"
-              />
-              {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent" />
-              {/* Bottom badge */}
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="h-[3px] w-8 bg-samred flex-shrink-0" />
-                  <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-white/60">Campo Boscán — Venezuela</span>
-                </div>
-                <p className="font-display text-2xl md:text-3xl text-white leading-tight">
-                  PROFESIONALES<br />EN CADA OBRA
-                </p>
-                <p className="text-white/55 text-xs mt-2 leading-relaxed max-w-xs font-sub">
-                  Nuestro equipo técnico especializado garantiza la más alta calidad en cada proyecto.
-                </p>
+      <section className="bg-dark overflow-hidden">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2">
+
+          {/* LEFT — list */}
+          <div className="py-16 px-6 md:px-14 lg:px-16 flex flex-col justify-center">
+            {/* Header */}
+            <div className="scroll-reveal mb-10">
+              <div className="flex items-center gap-3 mb-3">
+                <span className="h-[3px] w-10 bg-samred" />
+                <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Lo que hacemos</span>
               </div>
-              {/* Accent bar */}
-              <div className="absolute top-0 left-0 w-[3px] h-full bg-samred" />
+              <h2 className="font-display text-[2.5rem] md:text-[3rem] text-white leading-none">NUESTROS<br />SERVICIOS</h2>
             </div>
-            {/* Services grid */}
-            <div className="order-1 lg:order-2">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 stagger">
-                {SERVICES.map(s => (
-                  <div key={s.title} className="service-card bg-white rounded shadow-[0_2px_16px_rgba(0,0,0,0.07)] p-6">
-                    <div className="text-samred mb-4">{s.icon}</div>
-                    <h3 className="font-sub font-bold text-[1.05rem] uppercase tracking-wide text-dark mb-2">{s.title}</h3>
-                    <p className="text-secondary text-sm leading-relaxed">{s.desc}</p>
+
+            {/* Service rows */}
+            <div className="stagger divide-y divide-white/10">
+              {SERVICES.map((s, i) => (
+                <div key={s.title}
+                  className="group flex items-start gap-5 py-5 cursor-default transition-all duration-300"
+                  style={{ '--tw-translate-x': '0px' }}
+                >
+                  {/* Number */}
+                  <span className="font-mono text-[0.625rem] text-white/25 group-hover:text-samred pt-1 transition-colors duration-300 flex-shrink-0 w-5">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  {/* Icon */}
+                  <div className="text-white/30 group-hover:text-samred transition-colors duration-300 flex-shrink-0 mt-0.5">
+                    {s.icon}
                   </div>
-                ))}
-              </div>
+                  {/* Text */}
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-sub font-bold text-[0.9375rem] uppercase tracking-wider text-white/80 group-hover:text-white transition-colors duration-300 mb-1">{s.title}</h3>
+                    <p className="text-white/40 text-xs leading-relaxed group-hover:text-white/55 transition-colors duration-300">{s.desc}</p>
+                  </div>
+                  {/* Arrow */}
+                  <div className="flex-shrink-0 mt-1 opacity-0 group-hover:opacity-100 translate-x-[-4px] group-hover:translate-x-0 transition-all duration-300">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 3l5 4-5 4" stroke="#C8102E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
+
+          {/* RIGHT — photo */}
+          <div className="relative hidden lg:block min-h-[640px]">
+            <img
+              src="/services-photo.jpg"
+              alt="Equipo SAMFOR en obra"
+              className="absolute inset-0 w-full h-full object-cover object-center"
+              loading="lazy"
+            />
+            {/* Dark fade left */}
+            <div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/30 to-transparent" />
+            {/* Bottom overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-dark/70 via-transparent to-transparent" />
+            {/* Caption */}
+            <div className="absolute bottom-10 right-10 text-right">
+              <p className="font-display text-xl text-white leading-tight mb-1">PROFESIONALES<br />EN CADA OBRA</p>
+              <p className="text-white/40 text-[0.6875rem] font-sub uppercase tracking-widest">Campo Boscán — Venezuela</p>
+            </div>
+            {/* Red accent top-right */}
+            <div className="absolute top-0 right-0 w-[3px] h-full bg-samred" />
+          </div>
+
         </div>
       </section>
 

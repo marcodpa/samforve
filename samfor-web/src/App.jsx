@@ -924,79 +924,118 @@ function PageProyectos() {
         </div>
       </div>
 
-      {/* ── PROYECTOS LISTA — dark editorial ── */}
-      <div id="proyectos-lista" className="bg-dark" style={{ minHeight: '100dvh' }}>
-
-        {/* Filter bar */}
-        <div className="sticky top-16 z-30 bg-dark border-b border-white/10">
-          <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20">
-            <div className="flex gap-0 overflow-x-auto">
-              {divisionTabs.map(t => {
-                const isActive = activeDivision === t.id
-                const dot = t.id === 'Todos' ? '#C8102E' : DIVISION_META[t.id]?.dot
-                return (
-                  <button key={t.id} onClick={() => setActiveDivision(t.id)}
-                    className={`flex items-center gap-2 px-4 py-3.5 text-xs font-sub font-bold uppercase tracking-wide whitespace-nowrap border-b-2 transition-all duration-200 flex-shrink-0 ${
-                      isActive ? 'text-white' : 'text-white/35 border-transparent hover:text-white/70'
-                    }`}
-                    style={isActive ? { borderBottomColor: dot } : {}}
-                  >
-                    <span className={isActive ? 'opacity-100' : 'opacity-40'}>{t.icon}</span>
-                    <span>{t.id === 'Todos' ? 'Todos' : t.label}</span>
-                    {t.id !== 'Todos' && (
-                      <span className={`text-[0.625rem] font-mono px-1.5 py-0.5 rounded ${isActive ? 'bg-white/15 text-white' : 'bg-white/5 text-white/30'}`}>
-                        {counts[t.id]||0}
-                      </span>
-                    )}
-                  </button>
-                )
-              })}
+      {/* ── CATEGORÍAS FOTO-FILTRO ── */}
+      <div id="proyectos-lista" className="bg-dark py-14 px-6 md:px-14 lg:px-20 border-b border-white/10">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-end justify-between mb-8">
+            <div>
+              <div className="flex items-center gap-3 mb-2">
+                <span className="h-[3px] w-8 bg-samred" />
+                <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Filtrar por categoría</span>
+              </div>
+              <h2 className="font-display text-[2rem] md:text-[2.5rem] text-white leading-none">DIVISIONES</h2>
             </div>
-            <div className="flex items-center gap-2 py-2 border-t border-white/8">
-              {[['Todos','Todos'],['active','En Ejecución'],['completed','Culminados']].map(([val,lab]) => (
-                <button key={val} onClick={() => setStatusFilter(val)}
-                  className={`text-xs font-mono font-semibold px-3 py-1 rounded border transition-all ${statusFilter===val ? 'bg-white text-dark border-white' : 'bg-transparent text-white/40 border-white/15 hover:border-white/40 hover:text-white/70'}`}
+            <span className="font-mono text-xs text-white/25 hidden md:block">{activeDivision === 'Todos' ? 'Todas las divisiones' : DIVISION_META[activeDivision]?.label}</span>
+          </div>
+
+          {/* Photo-filter cards — horizontal scroll */}
+          <div className="flex gap-3 overflow-x-auto pb-2" style={{ scrollbarWidth: 'none' }}>
+            {/* "Todos" card */}
+            <button
+              onClick={() => setActiveDivision('Todos')}
+              className={`group relative flex-shrink-0 rounded overflow-hidden transition-all duration-300 ${activeDivision==='Todos' ? 'ring-2 ring-samred' : 'ring-1 ring-white/10 hover:ring-white/30'}`}
+              style={{ width: '140px', height: '180px' }}
+            >
+              <img src={IMG(28)} alt="Todos" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]" />
+              <div className={`absolute inset-0 transition-all duration-300 ${activeDivision==='Todos' ? 'bg-samred/60' : 'bg-dark/65 group-hover:bg-dark/40'}`} />
+              <div className="absolute inset-0 flex flex-col justify-end p-3">
+                <p className="font-display text-base text-white leading-tight">TODOS</p>
+                <p className="font-mono text-[0.6rem] text-white/50">{ALL_PROJECTS.length} proyectos</p>
+              </div>
+              {activeDivision==='Todos' && <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-samred" />}
+            </button>
+
+            {/* Division cards */}
+            {Object.entries(DIVISION_META).map(([key, m]) => {
+              const sample = ALL_PROJECTS.find(p => p.division === key)
+              const isActive = activeDivision === key
+              return (
+                <button key={key}
+                  onClick={() => setActiveDivision(key)}
+                  className={`group relative flex-shrink-0 rounded overflow-hidden transition-all duration-300 ${isActive ? 'ring-2' : 'ring-1 ring-white/10 hover:ring-white/30'}`}
+                  style={{ width: '140px', height: '180px', '--ring-color': m.dot, ...(isActive ? { outline: `2px solid ${m.dot}`, outlineOffset: '0px' } : {}) }}
                 >
-                  {val==='active' && <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block mr-1.5 dot-pulse" />}
+                  {sample && <img src={sample.img} alt={key} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]" />}
+                  <div className={`absolute inset-0 transition-all duration-300 ${isActive ? 'bg-dark/50' : 'bg-dark/70 group-hover:bg-dark/45'}`} />
+                  <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: m.dot }} />
+                  <div className="absolute inset-0 flex flex-col justify-end p-3">
+                    <div className="text-white/60 mb-1 group-hover:text-white transition-colors">{m.icon}</div>
+                    <p className="font-display text-sm text-white leading-tight">{m.label.toUpperCase()}</p>
+                    <p className="font-mono text-[0.6rem] text-white/40">{counts[key]||0} proyectos</p>
+                  </div>
+                  {isActive && <div className="absolute bottom-0 left-0 right-0 h-[3px]" style={{ background: m.dot }} />}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* ── CARRUSEL DE PROYECTOS ── */}
+      <div className="bg-dark py-12 px-6 md:px-14 lg:px-20">
+        <div className="max-w-7xl mx-auto">
+          {/* Header + status filter + count */}
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+            <div className="flex items-center gap-3">
+              {activeDivision !== 'Todos' && (
+                <div className="h-6 w-[3px] rounded-full flex-shrink-0" style={{ background: DIVISION_META[activeDivision]?.dot }} />
+              )}
+              <h3 className="font-display text-[1.75rem] text-white leading-none">
+                {activeDivision === 'Todos' ? 'TODOS LOS PROYECTOS' : DIVISION_META[activeDivision]?.label?.toUpperCase()}
+              </h3>
+              <span className="font-mono text-xs text-white/30 ml-1">{filtered.length}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              {[['Todos','Todos'],['active','Activos'],['completed','Culminados']].map(([val,lab]) => (
+                <button key={val} onClick={() => setStatusFilter(val)}
+                  className={`text-xs font-mono font-semibold px-3 py-1.5 rounded border transition-all ${statusFilter===val ? 'bg-white text-dark border-white' : 'bg-transparent text-white/40 border-white/15 hover:border-white/40 hover:text-white/70'}`}
+                >
+                  {val==='active' && <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block mr-1.5" />}
                   {lab}
                 </button>
               ))}
-              <span className="ml-auto text-xs font-mono text-white/25">{filtered.length} proyecto{filtered.length!==1?'s':''}</span>
             </div>
           </div>
-        </div>
 
-        {/* Project rows — table-style */}
-        <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20 py-8">
+          {/* Horizontal carousel */}
           {filtered.length > 0 ? (
-            <div className="divide-y divide-white/8">
-              {filtered.map((p, i) => (
+            <div className="flex gap-4 overflow-x-auto pb-4" style={{ scrollbarWidth: 'thin', scrollbarColor: '#C8102E #1a1f26' }}>
+              {filtered.map((p) => (
                 <div key={p.id}
-                  className="group flex items-center gap-5 py-4 cursor-pointer hover:bg-white/3 transition-all duration-200 rounded px-2 -mx-2"
+                  className="group flex-shrink-0 cursor-pointer rounded overflow-hidden bg-white/5 border border-white/10 hover:border-white/25 transition-all duration-300"
+                  style={{ width: '260px' }}
                   onClick={() => setModal(p)}
                 >
-                  {/* Index */}
-                  <span className="font-mono text-[0.625rem] text-white/20 flex-shrink-0 w-6 group-hover:text-white/40 transition-colors">
-                    {String(i+1).padStart(2,'0')}
-                  </span>
-                  {/* Thumb */}
-                  <div className="relative flex-shrink-0 w-16 h-12 rounded overflow-hidden">
-                    <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.08]" />
-                    <div className="absolute inset-0 bg-dark/30 group-hover:bg-transparent transition-colors duration-300" />
-                    <div className="absolute bottom-0 left-0 right-0 h-[2px]" style={{ background: DIVISION_META[p.division]?.dot||'#C8102E' }} />
+                  {/* Image */}
+                  <div className="relative h-40 overflow-hidden">
+                    <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.06]" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent" />
+                    <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot||'#C8102E' }} />
+                    {p.status === 'active' && (
+                      <div className="absolute top-3 right-3 flex items-center gap-1 bg-dark/70 px-2 py-0.5 rounded">
+                        <span className="w-1.5 h-1.5 rounded-full bg-green-400 dot-pulse" />
+                        <span className="text-green-400 text-[0.6rem] font-mono uppercase tracking-widest">Activo</span>
+                      </div>
+                    )}
                   </div>
-                  {/* Info */}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-0.5 flex-wrap">
-                      <DivisionBadge division={p.division} />
-                      {p.status === 'active' && <span className="flex items-center gap-1 text-green-400 text-[0.6rem] font-mono uppercase tracking-widest"><span className="w-1 h-1 rounded-full bg-green-400 dot-pulse" />Activo</span>}
+                  {/* Body */}
+                  <div className="p-4">
+                    <div className="mb-2"><DivisionBadge division={p.division} /></div>
+                    <h3 className="font-sub font-bold text-[0.875rem] uppercase tracking-wide text-white/80 group-hover:text-white transition-colors leading-snug mb-1 line-clamp-2">{p.title}</h3>
+                    <p className="text-white/35 text-xs truncate">{p.client}</p>
+                    <div className="flex items-center gap-1 text-samred text-[0.6875rem] font-sub font-semibold uppercase tracking-widest mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      Ver detalle <ArrowRight size={11} />
                     </div>
-                    <h3 className="font-sub font-bold text-sm uppercase tracking-wide text-white/70 group-hover:text-white transition-colors duration-200 truncate">{p.title}</h3>
-                    <p className="text-white/30 text-xs truncate">{p.client}</p>
-                  </div>
-                  {/* Arrow */}
-                  <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 translate-x-[-4px] group-hover:translate-x-0 transition-all duration-300 hidden md:block">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 3l5 4-5 4" stroke="#C8102E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
                   </div>
                 </div>
               ))}
@@ -1007,11 +1046,6 @@ function PageProyectos() {
               <p className="font-sub font-semibold text-lg text-white/30">No hay proyectos con estos filtros.</p>
             </div>
           )}
-        </div>
-
-        {/* Bottom bar */}
-        <div className="border-t border-white/10 px-6 md:px-14 lg:px-20 py-5 flex items-center justify-between flex-wrap gap-4">
-          <p className="font-sub text-xs uppercase tracking-widest text-white/25">{filtered.length} proyectos encontrados</p>
         </div>
       </div>
 

@@ -896,7 +896,7 @@ function PageProyectos() {
 
           {/* Center title */}
           <div>
-            <h1 className="font-display text-[clamp(3rem,7vw,6rem)] text-white leading-none mb-6">NUESTROS<br />PROYECTOS</h1>
+            <h1 className="font-display text-[clamp(3rem,10vw,9rem)] text-white leading-none mb-6 w-full">NUESTROS<br />PROYECTOS</h1>
             {/* Division chips row */}
             <div className="flex flex-wrap gap-2">
               {Object.entries(DIVISION_META).map(([key, m]) => (

@@ -482,7 +482,7 @@ function Footer({ setPage }) {
   )
 }
 
-// ─── PROJECT MODAL ────────────────────────────────────────────────────────────
+// ─── PROJECT PAGE (full-screen) ───────────────────────────────────────────────
 function ProjectModal({ project, onClose }) {
   useEffect(() => {
     const h = e => { if (e.key === 'Escape') onClose() }
@@ -491,37 +491,114 @@ function ProjectModal({ project, onClose }) {
     return () => { document.removeEventListener('keydown', h); document.body.style.overflow = '' }
   }, [onClose])
 
+  const m = DIVISION_META[project.division]
+
   return (
-    <div className="modal-overlay fixed inset-0 z-[100] bg-dark/65 flex items-end md:items-center justify-center p-0 md:p-4" onClick={onClose} role="dialog" aria-modal="true">
-      <div className="modal-content bg-white w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-t-2xl md:rounded-lg" onClick={e => e.stopPropagation()}>
-        <div className="relative h-48 md:h-56 overflow-hidden rounded-t-2xl md:rounded-t-lg">
-          <img src={project.img} alt={project.title} className="w-full h-full object-cover" loading="lazy" />
-          <div className="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent" />
-          <button onClick={onClose} className="absolute top-4 right-4 bg-white/15 backdrop-blur-sm text-white p-1.5 rounded-full hover:bg-white/25 transition-colors" aria-label="Cerrar">
-            <X size={16} />
+    <div className="fixed inset-0 z-[100] bg-dark overflow-y-auto" role="dialog" aria-modal="true">
+
+      {/* ── HERO BANNER ── */}
+      <div className="relative w-full" style={{ height: '55vh', minHeight: '340px' }}>
+        <img src={project.img} alt={project.title} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+        <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-dark/10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-dark/60 to-transparent" />
+
+        {/* Top bar */}
+        <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-6 md:px-14 py-5">
+          <button onClick={onClose}
+            className="flex items-center gap-2 text-white/60 hover:text-white transition-colors text-xs font-sub font-semibold uppercase tracking-widest"
+          >
+            <ArrowRight size={13} className="rotate-180" /> Volver a proyectos
           </button>
-          <div className="absolute bottom-4 left-5 right-5">
-            <div className="flex flex-wrap items-center gap-2 mb-2">
-              <DivisionBadge division={project.division} />
-              {project.status === 'active' && (
-                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-white bg-green-600/90 px-2 py-0.5 rounded">
-                  <span className="w-1.5 h-1.5 rounded-full bg-white dot-pulse" /> En Ejecución 2025
+          <button onClick={onClose} className="text-white/50 hover:text-white transition-colors p-1" aria-label="Cerrar">
+            <X size={20} />
+          </button>
+        </div>
+
+        {/* Division bar top */}
+        <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: m?.dot || '#C8102E' }} />
+
+        {/* Bottom content */}
+        <div className="absolute bottom-0 left-0 right-0 px-6 md:px-14 pb-8">
+          <div className="flex flex-wrap items-center gap-3 mb-4">
+            <DivisionBadge division={project.division} />
+            {project.status === 'active' && (
+              <span className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-white bg-green-600/80 backdrop-blur-sm px-3 py-1 rounded-full">
+                <span className="w-1.5 h-1.5 rounded-full bg-white dot-pulse" /> En Ejecución 2025
+              </span>
+            )}
+          </div>
+          <h1 className="font-display text-[clamp(2rem,5vw,4rem)] text-white leading-tight max-w-3xl">{project.title}</h1>
+        </div>
+      </div>
+
+      {/* ── CONTENT ── */}
+      <div className="max-w-5xl mx-auto px-6 md:px-14 py-14 grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-12">
+
+        {/* LEFT — main info */}
+        <div>
+          {/* Client */}
+          <div className="mb-10">
+            <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-samred mb-2">Cliente</p>
+            <p className="font-sub font-bold text-xl text-white">{project.client}</p>
+          </div>
+
+          {/* Divider */}
+          <div className="h-px bg-white/10 mb-10" />
+
+          {/* Description */}
+          {project.desc && (
+            <div className="mb-10">
+              <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-white/40 mb-3">Descripción</p>
+              <p className="text-white/70 text-base leading-relaxed">{project.desc}</p>
+            </div>
+          )}
+
+          {/* Scope */}
+          {project.detail && (
+            <div>
+              <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-white/40 mb-3">Alcance del Proyecto</p>
+              <div className="border-l-2 border-samred pl-5">
+                <p className="text-white/60 text-sm leading-relaxed">{project.detail}</p>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* RIGHT — meta sidebar */}
+        <div className="lg:border-l lg:border-white/10 lg:pl-10">
+          <div className="space-y-7">
+            {/* Division */}
+            <div>
+              <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-white/35 mb-2">División</p>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full" style={{ background: m?.dot }} />
+                <p className="font-sub font-bold text-sm uppercase tracking-wide text-white/80">{m?.label}</p>
+              </div>
+            </div>
+            {/* Status */}
+            <div>
+              <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-white/35 mb-2">Estado</p>
+              {project.status === 'active' ? (
+                <span className="flex items-center gap-2 text-green-400 text-sm font-sub font-semibold">
+                  <span className="w-2 h-2 rounded-full bg-green-400 dot-pulse" /> En Ejecución
+                </span>
+              ) : (
+                <span className="flex items-center gap-2 text-white/50 text-sm font-sub font-semibold">
+                  <span className="w-2 h-2 rounded-full bg-white/30" /> Culminado
                 </span>
               )}
             </div>
-            <h3 className="font-display text-xl md:text-2xl text-white leading-tight">{project.title}</h3>
+            {/* Divider */}
+            <div className="h-px bg-white/10" />
+            {/* Back button */}
+            <button onClick={onClose}
+              className="w-full flex items-center justify-center gap-2 border border-samred text-samred font-sub font-bold text-xs uppercase tracking-widest px-4 py-3 rounded hover:bg-samred hover:text-white transition-all duration-200"
+            >
+              <ArrowRight size={12} className="rotate-180" /> Volver a la lista
+            </button>
           </div>
         </div>
-        <div className="p-6 md:p-8">
-          <div className="mb-1 text-xs font-sub font-semibold uppercase tracking-widest text-samred">Cliente</div>
-          <p className="font-semibold text-dark mb-5 text-sm">{project.client}</p>
-          <div className="mb-2 text-xs font-sub font-semibold uppercase tracking-widest text-secondary">Descripción</div>
-          <p className="text-secondary leading-relaxed mb-5 text-sm">{project.desc}</p>
-          <div className="bg-surface rounded p-5">
-            <div className="mb-2 text-xs font-sub font-semibold uppercase tracking-widest text-secondary">Alcance del Proyecto</div>
-            <p className="text-secondary text-sm leading-relaxed">{project.detail}</p>
-          </div>
-        </div>
+
       </div>
     </div>
   )

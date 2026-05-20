@@ -606,39 +606,41 @@ function ProjectDetailPage({ project, onClose }) {
             <ArrowRight size={12} className="rotate-180" /> Volver a la lista
           </button>
 
-          {/* Related projects */}
-          {related.length > 0 && (
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <span className="h-[3px] w-8 bg-samred" />
-                <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Proyectos relacionados</span>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {related.map(p => (
-                  <div key={p.id}
-                    className="group cursor-pointer rounded overflow-hidden bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300"
-                    onClick={() => onClose(p)}
-                  >
-                    <div className="relative overflow-hidden" style={{ height: '160px' }}>
-                      <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]" loading="lazy" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent" />
-                      <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot || '#C8102E' }} />
-                    </div>
-                    <div className="p-4">
-                      <p className="text-white/35 text-[0.65rem] font-mono uppercase tracking-widest mb-1">{p.client}</p>
-                      <h3 className="font-sub font-bold text-sm uppercase tracking-wide text-white/80 group-hover:text-white transition-colors leading-snug line-clamp-2">{p.title}</h3>
-                      <div className="flex items-center gap-1 text-samred text-xs font-sub font-semibold uppercase tracking-widest mt-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                        Ver detalle <ArrowRight size={11} />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
         </div>
       </div>
+
+      {/* Related projects — white section */}
+      {related.length > 0 && (
+        <div className="bg-white px-6 md:px-14 lg:px-20 py-14">
+          <div className="max-w-5xl mx-auto">
+            <div className="flex items-center gap-3 mb-8">
+              <span className="h-[3px] w-8 bg-samred" />
+              <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Proyectos relacionados</span>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {related.map(p => (
+                <div key={p.id}
+                  className="group cursor-pointer rounded overflow-hidden bg-white border border-gray-200 hover:border-samred hover:shadow-lg transition-all duration-300"
+                  onClick={() => onClose(p)}
+                >
+                  <div className="relative overflow-hidden" style={{ height: '180px' }}>
+                    <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                    <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred" />
+                  </div>
+                  <div className="p-4">
+                    <p className="text-gray-400 text-[0.65rem] font-mono uppercase tracking-widest mb-1">{p.client}</p>
+                    <h3 className="font-sub font-bold text-sm uppercase tracking-wide text-dark group-hover:text-samred transition-colors leading-snug line-clamp-2">{p.title}</h3>
+                    <div className="flex items-center gap-1 text-samred text-xs font-sub font-semibold uppercase tracking-widest mt-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                      Ver detalle <ArrowRight size={11} />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

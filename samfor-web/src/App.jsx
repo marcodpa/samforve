@@ -495,7 +495,7 @@ function ProjectModal({ project, onClose }) {
     <div className="modal-overlay fixed inset-0 z-[100] bg-dark/65 flex items-end md:items-center justify-center p-0 md:p-4" onClick={onClose} role="dialog" aria-modal="true">
       <div className="modal-content bg-white w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-t-2xl md:rounded-lg" onClick={e => e.stopPropagation()}>
         <div className="relative h-48 md:h-56 overflow-hidden rounded-t-2xl md:rounded-t-lg">
-          <img src={project.img} alt={project.title} className="w-full h-full object-cover" />
+          <img src={project.img} alt={project.title} className="w-full h-full object-cover" loading="lazy" />
           <div className="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent" />
           <button onClick={onClose} className="absolute top-4 right-4 bg-white/15 backdrop-blur-sm text-white p-1.5 rounded-full hover:bg-white/25 transition-colors" aria-label="Cerrar">
             <X size={16} />
@@ -882,7 +882,7 @@ function PageProyectos() {
 
       {/* ── HERO ── */}
       <div className="relative overflow-hidden" style={{ height: 'calc(100dvh - 4rem)' }}>
-        <img src="/proyectos-hero.jpg" alt="SAMFOR Proyectos" className="absolute inset-0 w-full h-full object-cover object-center" />
+        <img src="/proyectos-hero.jpg" alt="SAMFOR Proyectos" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
         <div className="absolute inset-0 bg-gradient-to-r from-dark/95 via-dark/70 to-dark/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-transparent to-transparent" />
         <div className="absolute top-0 right-0 w-[3px] h-full bg-samred" />
@@ -946,7 +946,7 @@ function PageProyectos() {
               className={`group relative flex-shrink-0 rounded overflow-hidden transition-all duration-300 ${activeDivision==='Todos' ? 'ring-2 ring-samred' : 'ring-1 ring-white/10 hover:ring-white/30'}`}
               style={{ width: '140px', height: '180px' }}
             >
-              <img src={IMG(28)} alt="Todos" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]" />
+              <img src={IMG(28)} alt="Todos" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]" loading="lazy" />
               <div className={`absolute inset-0 transition-all duration-300 ${activeDivision==='Todos' ? 'bg-samred/60' : 'bg-dark/65 group-hover:bg-dark/40'}`} />
               <div className="absolute inset-0 flex flex-col justify-end p-3">
                 <p className="font-display text-base text-white leading-tight">TODOS</p>
@@ -965,7 +965,7 @@ function PageProyectos() {
                   className={`group relative flex-shrink-0 rounded overflow-hidden transition-all duration-300 ${isActive ? 'ring-2' : 'ring-1 ring-white/10 hover:ring-white/30'}`}
                   style={{ width: '140px', height: '180px', '--ring-color': m.dot, ...(isActive ? { outline: `2px solid ${m.dot}`, outlineOffset: '0px' } : {}) }}
                 >
-                  {sample && <img src={sample.img} alt={key} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]" />}
+                  {sample && <img src={sample.img} alt={key} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]" loading="lazy" />}
                   <div className={`absolute inset-0 transition-all duration-300 ${isActive ? 'bg-dark/50' : 'bg-dark/70 group-hover:bg-dark/45'}`} />
                   <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: m.dot }} />
                   <div className="absolute inset-0 flex flex-col justify-end p-3">
@@ -1027,7 +1027,7 @@ function PageProyectos() {
                   >
                     {/* Image */}
                     <div className="relative overflow-hidden" style={{ height: '200px' }}>
-                      <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
+                      <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
                       <div className="absolute inset-0 bg-gradient-to-t from-dark/85 via-dark/20 to-transparent" />
                       <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot||'#C8102E' }} />
                       {p.status === 'active' && (
@@ -1213,7 +1213,7 @@ function PageContacto() {
   return (
     <div className="pt-16">
       <div className="relative h-36 md:h-48 overflow-hidden">
-        <img src={IMG(28)} alt="" className="w-full h-full object-cover object-top" />
+        <img src={IMG(28)} alt="" className="w-full h-full object-cover object-top" loading="lazy" />
         <div className="absolute inset-0 bg-dark/70 flex items-end pb-8 px-8 md:px-16">
           <div className="max-w-7xl w-full mx-auto"><h1 className="font-display text-5xl md:text-6xl text-white tracking-wide">CONTACTO</h1></div>
         </div>

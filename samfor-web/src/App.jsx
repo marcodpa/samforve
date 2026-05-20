@@ -416,7 +416,7 @@ function Navbar({ page, setPage, scrolled }) {
       <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
         <button onClick={() => { setPage('inicio'); setOpen(false) }} className="flex items-center gap-2.5">
           <SamforLogo size={36} />
-          <span className="font-display text-[1.6rem] text-dark tracking-wide leading-none">SAMFOR</span>
+          <span className="text-dark leading-none" style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, fontSize: '1.75rem', letterSpacing: '-0.02em', textTransform: 'uppercase' }}>SAMFOR</span>
         </button>
         <div className="hidden md:flex items-center gap-7">
           {links.map(l => (

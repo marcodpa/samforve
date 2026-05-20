@@ -565,45 +565,78 @@ function ProjectCard({ project, onClick }) {
 
 // ─── CLIENTS GRID ─────────────────────────────────────────────────────────────
 function ClientsSection({ setPage }) {
+  const row1 = CLIENT_GRID.slice(0, 8)
+  const row2 = CLIENT_GRID.slice(7)
+
   return (
-    <section className="bg-white py-20 px-4 md:px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="scroll-reveal text-center mb-12">
-          <div className="inline-flex items-center gap-2 text-samred text-xs font-sub font-semibold uppercase tracking-widest mb-3">
-            <span className="h-px w-8 bg-samred" />Confían en nosotros<span className="h-px w-8 bg-samred" />
-          </div>
-          <h2 className="font-display text-[2.75rem] md:text-5xl text-dark tracking-wide">NUESTROS CLIENTES</h2>
-          <p className="text-secondary text-base mt-3 max-w-md mx-auto leading-relaxed">
-            Instituciones líderes del sector público, privado e internacional que confían en nuestra capacidad técnica.
-          </p>
-        </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-4">
-          {CLIENT_GRID.slice(0, 11).map((c, i) => (
-            <div key={i} className="scroll-reveal group flex flex-col items-center border border-border rounded bg-white hover:border-samred/40 hover:shadow-[0_4px_20px_rgba(200,16,46,0.08)] transition-all duration-200 p-5" style={{ transitionDelay: `${(i % 8) * 40}ms` }}>
-              <div className="w-full h-16 flex items-center justify-center rounded mb-3 overflow-hidden" style={{ background: c.bg || '#fff' }}>
-                <img src={c.img} alt={c.name} className="max-h-12 max-w-[80%] object-contain" loading="lazy" />
+    <section className="bg-dark overflow-hidden" style={{ height: '100dvh' }}>
+      <div className="h-full flex flex-col">
+
+        {/* TOP — header + marquee rows, centered vertically */}
+        <div className="flex-1 flex flex-col justify-center px-6 md:px-14 lg:px-20 py-10">
+
+          {/* Header — split left/right */}
+          <div className="scroll-reveal flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
+            <div>
+              <div className="flex items-center gap-3 mb-3">
+                <span className="h-[3px] w-10 bg-samred" />
+                <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Confían en nosotros</span>
               </div>
-              <p className="font-sub font-bold text-xs uppercase tracking-wide text-dark text-center leading-tight mb-1.5">{c.name}</p>
-              <span className={`text-[0.625rem] font-mono font-semibold uppercase tracking-wider px-2 py-0.5 rounded ${SECTOR_COLORS[c.sector] || 'bg-gray-100 text-gray-600'}`}>{c.sector}</span>
+              <h2 className="font-display text-[2.25rem] md:text-[3rem] text-white leading-none">NUESTROS<br />CLIENTES</h2>
             </div>
-          ))}
-          <div className="scroll-reveal flex flex-col items-center justify-center rounded bg-samred cursor-pointer hover:bg-samred/90 active:scale-[0.97] transition-all duration-200 p-5 min-h-[140px]"
-            style={{ transitionDelay: `${(11 % 8) * 40}ms` }}
-            onClick={() => setPage('quienes-somos')} role="button" tabIndex={0}
-            onKeyDown={e => e.key === 'Enter' && setPage('quienes-somos')}
-          >
-            <Plus size={28} className="text-white mb-2" strokeWidth={2} />
-            <p className="font-sub font-bold text-sm uppercase tracking-wide text-white text-center mb-0.5">Más Clientes</p>
-            <p className="text-white/70 text-[0.625rem] font-mono uppercase tracking-widest text-center">Portafolio Nacional</p>
+            <p className="text-white/40 text-sm max-w-xs leading-relaxed md:text-right">
+              Instituciones líderes del sector público, privado e internacional que trabajan con SAMFOR desde hace décadas.
+            </p>
+          </div>
+
+          {/* Marquee row 1 — left to right */}
+          <div className="relative mb-4 overflow-hidden">
+            <div className="flex gap-4 animate-[marquee_35s_linear_infinite]" style={{ width: 'max-content' }}>
+              {[...row1, ...row1].map((c, i) => (
+                <div key={i} className="flex-shrink-0 flex items-center gap-3 bg-white/5 border border-white/10 rounded px-5 py-3 hover:border-samred/50 hover:bg-white/8 transition-all duration-200 group">
+                  <div className="w-10 h-10 rounded flex items-center justify-center overflow-hidden flex-shrink-0" style={{ background: c.bg === '#000' ? '#111' : '#fff' }}>
+                    <img src={c.img} alt={c.name} className="max-h-8 max-w-[2rem] object-contain" loading="lazy" />
+                  </div>
+                  <div>
+                    <p className="font-sub font-bold text-xs uppercase tracking-wide text-white/80 group-hover:text-white transition-colors">{c.name}</p>
+                    <p className="text-white/35 text-[0.6rem] font-mono uppercase tracking-widest">{c.sector}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Marquee row 2 — right to left */}
+          <div className="relative overflow-hidden">
+            <div className="flex gap-4 animate-[marquee_45s_linear_infinite_reverse]" style={{ width: 'max-content' }}>
+              {[...row2, ...row2].map((c, i) => (
+                <div key={i} className="flex-shrink-0 flex items-center gap-3 bg-white/5 border border-white/10 rounded px-5 py-3 hover:border-samred/50 transition-all duration-200 group">
+                  <div className="w-10 h-10 rounded flex items-center justify-center overflow-hidden flex-shrink-0" style={{ background: c.bg === '#000' ? '#111' : '#fff' }}>
+                    <img src={c.img} alt={c.name} className="max-h-8 max-w-[2rem] object-contain" loading="lazy" />
+                  </div>
+                  <div>
+                    <p className="font-sub font-bold text-xs uppercase tracking-wide text-white/80 group-hover:text-white transition-colors">{c.name}</p>
+                    <p className="text-white/35 text-[0.6rem] font-mono uppercase tracking-widest">{c.sector}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-        <div className="scroll-reveal mt-10 bg-dark rounded overflow-hidden flex flex-col md:flex-row items-center justify-between gap-4 px-7 py-5">
-          <div>
-            <p className="font-sub font-bold text-white text-base md:text-lg">Confían en SAMFOR</p>
-            <p className="text-white/55 text-sm">Instituciones públicas, privadas e industriales de Venezuela</p>
+
+        {/* BOTTOM — stat bar */}
+        <div className="border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 px-6 md:px-14 lg:px-20 py-5">
+          <div className="flex items-center gap-8 flex-wrap">
+            {[['20+', 'Clientes internacionales'], ['59', 'Años de confianza'], ['6', 'Sectores atendidos']].map(([val, lbl]) => (
+              <div key={lbl} className="flex items-baseline gap-2">
+                <span className="font-display text-2xl text-samred">{val}</span>
+                <span className="font-sub text-xs uppercase tracking-widest text-white/40">{lbl}</span>
+              </div>
+            ))}
           </div>
           <button onClick={() => setPage('contacto')} className="flex-shrink-0 btn-primary whitespace-nowrap">Ser parte de nuestros clientes</button>
         </div>
+
       </div>
     </section>
   )

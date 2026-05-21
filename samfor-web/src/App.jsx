@@ -424,9 +424,9 @@ function Navbar({ page, setPage, scrolled, forceDark }) {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navBg}`}>
-      <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 h-20 flex items-center justify-between">
         <button onClick={() => { setPage('inicio'); setOpen(false) }} className="flex items-center">
-          <img src="/logo.png" alt="SAMFOR" className={`h-9 w-auto transition-all duration-300 ${dark ? 'brightness-0 invert' : ''}`} />
+          <img src="/logo.png" alt="SAMFOR" className={`h-14 w-auto transition-all duration-300 ${dark ? 'brightness-0 invert' : ''}`} />
         </button>
         <div className="hidden md:flex items-center gap-7">
           {links.map(l => (
@@ -1017,7 +1017,7 @@ function PageProyectos({ onProjectOpen }) {
   ALL_PROJECTS.forEach(p => { counts[p.division] = (counts[p.division] || 0) + 1 })
 
   return (
-    <div className="pt-16">
+    <div className="pt-20">
 
       {/* ── HERO ── */}
       <div className="relative overflow-hidden" style={{ height: 'calc(100dvh - 4rem)' }}>
@@ -1259,7 +1259,7 @@ function PageQuienesSomos({ setPage }) {
   useScrollReveal()
 
   return (
-    <div className="pt-16">
+    <div className="pt-20">
 
       {/* ── HERO — full-bleed, foto1 principal ── */}
       <section className="relative overflow-hidden" style={{ height: '100dvh' }}>
@@ -1517,7 +1517,7 @@ function PageContacto() {
   const handleJobSubmit = async e => { e.preventDefault(); setJobSending(true); await new Promise(r => setTimeout(r, 1500)); setJobSending(false); setJobSent(true) }
 
   return (
-    <div className="pt-16">
+    <div className="pt-20">
 
       {/* ── HERO ── */}
       <section className="relative overflow-hidden" style={{ height: '100dvh' }}>

@@ -462,7 +462,7 @@ function Footer({ setPage }) {
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-white/10">
           <div>
-            <div className="mb-4"><img src="/logo.png" alt="SAMFOR" className="h-10 w-auto brightness-0 invert" /></div>
+            <div className="mb-4"><img src="/logo.png" alt="SAMFOR" style={{ height: '100px' }} className="w-auto brightness-0 invert" /></div>
             <p className="text-white/55 text-sm leading-relaxed mb-5 max-w-xs">Construyendo Venezuela desde 1966. Empresa líder en construcción industrial, servicios petroleros y ambientales.</p>
           </div>
           <div>

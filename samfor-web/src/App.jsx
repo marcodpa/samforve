@@ -55,7 +55,6 @@ const CLIENT_GRID = [
   // ── Petroquímica ──
   { img: IMG(171),                       name: 'Pequiven',           sector: 'Petroquímica',   bg: '#fff' },
   { img: '/clients/cardon-iv.png',       name: 'Cardón IV',          sector: 'Petroquímica',   bg: '#fff' },
-  { img: CB('polinter.com'),             name: 'Polinter',           sector: 'Petroquímica',   bg: '#fff' },
   // ── Servicios Oilfield ──
   { img: '/clients/baker-hughes.png',    name: 'Baker Hughes',       sector: 'Servicios',      bg: '#fff' },
   { img: '/clients/mi-swaco.png',        name: 'Mi-SWACO',           sector: 'Servicios',      bg: '#fff' },
@@ -68,7 +67,6 @@ const CLIENT_GRID = [
   // ── Transporte / Infraestructura ──
   { img: '/clients/metro-maracaibo.png', name: 'Metro Maracaibo',    sector: 'Transporte',     bg: '#fff' },
   { img: '/clients/fontur.png',          name: 'Fontur',             sector: 'Transporte',     bg: '#fff' },
-  { img: null,                           name: 'BAER',               sector: 'Transporte',     bg: '#003DA5', accent: '#fff' },
   // ── Energía eléctrica Venezuela ──
   { img: '/clients/corpoelec.png',       name: 'Corpoelec',          sector: 'Electricidad',   bg: '#fff' },
   { img: '/clients/cvg-edelca.png',      name: 'CVG EDELCA',         sector: 'Electricidad',   bg: '#fff' },
@@ -85,14 +83,9 @@ const CLIENT_GRID = [
   { img: '/clients/mppop.png',           name: 'MPPOP',              sector: 'Gobierno',       bg: '#fff' },
   { img: '/clients/min-agricultura.png', name: 'Min. Agricultura',   sector: 'Gobierno',       bg: '#fff' },
   { img: '/clients/min-aguas.png',       name: 'Min. Aguas',         sector: 'Gobierno',       bg: '#fff' },
-  // ── Acuicultura ──
-  { img: IMG(245),                       name: 'VeneAcuícola',       sector: 'Acuicultura',    bg: '#fff' },
-  { img: IMG(246),                       name: 'VeneShrimp',         sector: 'Acuicultura',    bg: '#fff' },
   // ── Otros ──
   { img: '/clients/lukiven.png',         name: 'Lukiven S.A.',       sector: 'Industrial',     bg: '#fff' },
-  { img: null,                           name: 'Arrayco',            sector: 'Industrial',     bg: '#003DA5', accent: '#fff' },
   { img: '/clients/farmatodo.png',       name: 'Farmatodo',          sector: 'Retail',         bg: '#fff' },
-  { img: null,                           name: 'Corpoven',           sector: 'Energía',        bg: '#CC0000', accent: '#fff' },
 ]
 
 const SECTOR_COLORS = {

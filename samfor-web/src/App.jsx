@@ -41,51 +41,51 @@ const METRICS = [
 const CB = (domain) => `https://logo.clearbit.com/${domain}`
 const CLIENT_GRID = [
   // ── Energía / Petróleo internacional ──
-  { img: '/clients/pdvsa.png',           name: 'PDVSA',              sector: 'Energía',        bg: '#fff' },
-  { img: '/clients/chevron.png',         name: 'Chevron',            sector: 'Energía',        bg: '#fff' },
-  { img: '/clients/shell.png',           name: 'Shell',              sector: 'Energía',        bg: '#fff' },
-  { img: '/clients/repsol.png',          name: 'Repsol',             sector: 'Energía',        bg: '#fff' },
-  { img: '/clients/eni.png',             name: 'Eni',                sector: 'Energía',        bg: '#fff' },
-  { img: '/clients/cnpc.png',            name: 'CNPC',               sector: 'Energía',        bg: '#fff' },
-  { img: '/clients/halliburton.png',     name: 'Halliburton',        sector: 'Energía',        bg: '#fff' },
-  { img: '/clients/slb.png',             name: 'SLB',                sector: 'Energía',        bg: '#fff' },
-  { img: '/clients/weatherford.png',     name: 'Weatherford',        sector: 'Energía',        bg: '#fff' },
-  { img: '/clients/gazprom.png',         name: 'Gazprom',            sector: 'Energía',        bg: '#fff' },
-  { img: '/clients/petrex.png',           name: 'Petrex',             sector: 'Energía',        bg: '#fff' },
+  { img: '/clients/pdvsa.webp',           name: 'PDVSA',              sector: 'Energía',        bg: '#fff' },
+  { img: '/clients/chevron.webp',         name: 'Chevron',            sector: 'Energía',        bg: '#fff' },
+  { img: '/clients/shell.webp',           name: 'Shell',              sector: 'Energía',        bg: '#fff' },
+  { img: '/clients/repsol.webp',          name: 'Repsol',             sector: 'Energía',        bg: '#fff' },
+  { img: '/clients/eni.webp',             name: 'Eni',                sector: 'Energía',        bg: '#fff' },
+  { img: '/clients/cnpc.webp',            name: 'CNPC',               sector: 'Energía',        bg: '#fff' },
+  { img: '/clients/halliburton.webp',     name: 'Halliburton',        sector: 'Energía',        bg: '#fff' },
+  { img: '/clients/slb.webp',             name: 'SLB',                sector: 'Energía',        bg: '#fff' },
+  { img: '/clients/weatherford.webp',     name: 'Weatherford',        sector: 'Energía',        bg: '#fff' },
+  { img: '/clients/gazprom.webp',         name: 'Gazprom',            sector: 'Energía',        bg: '#fff' },
+  { img: '/clients/petrex.webp',           name: 'Petrex',             sector: 'Energía',        bg: '#fff' },
   // ── Petroquímica ──
   { img: IMG(171),                       name: 'Pequiven',           sector: 'Petroquímica',   bg: '#fff' },
-  { img: '/clients/cardon-iv.png',       name: 'Cardón IV',          sector: 'Petroquímica',   bg: '#fff' },
+  { img: '/clients/cardon-iv.webp',       name: 'Cardón IV',          sector: 'Petroquímica',   bg: '#fff' },
   // ── Servicios Oilfield ──
-  { img: '/clients/baker-hughes.png',    name: 'Baker Hughes',       sector: 'Servicios',      bg: '#fff' },
-  { img: '/clients/mi-swaco.png',        name: 'Mi-SWACO',           sector: 'Servicios',      bg: '#fff' },
+  { img: '/clients/baker-hughes.webp',    name: 'Baker Hughes',       sector: 'Servicios',      bg: '#fff' },
+  { img: '/clients/mi-swaco.webp',        name: 'Mi-SWACO',           sector: 'Servicios',      bg: '#fff' },
   // ── CAF / Instituciones financieras ──
-  { img: '/clients/caf.png',             name: 'CAF',                sector: 'Finanzas',       bg: '#fff' },
-  { img: '/clients/bnc.png',             name: 'BNC',                sector: 'Finanzas',       bg: '#fff' },
+  { img: '/clients/caf.webp',             name: 'CAF',                sector: 'Finanzas',       bg: '#fff' },
+  { img: '/clients/bnc.webp',             name: 'BNC',                sector: 'Finanzas',       bg: '#fff' },
   // ── Internacional / ONU ──
-  { img: '/clients/wfp.png',             name: 'WFP / ONU',          sector: 'Internacional',  bg: '#fff' },
-  { img: '/clients/unhcr.png',           name: 'UNHCR / ACNUR',      sector: 'Internacional',  bg: '#fff' },
+  { img: '/clients/wfp.webp',             name: 'WFP / ONU',          sector: 'Internacional',  bg: '#fff' },
+  { img: '/clients/unhcr.webp',           name: 'UNHCR / ACNUR',      sector: 'Internacional',  bg: '#fff' },
   // ── Transporte / Infraestructura ──
-  { img: '/clients/metro-maracaibo.png', name: 'Metro Maracaibo',    sector: 'Transporte',     bg: '#fff' },
-  { img: '/clients/fontur.png',          name: 'Fontur',             sector: 'Transporte',     bg: '#fff' },
+  { img: '/clients/metro-maracaibo.webp', name: 'Metro Maracaibo',    sector: 'Transporte',     bg: '#fff' },
+  { img: '/clients/fontur.webp',          name: 'Fontur',             sector: 'Transporte',     bg: '#fff' },
   // ── Energía eléctrica Venezuela ──
-  { img: '/clients/corpoelec.png',       name: 'Corpoelec',          sector: 'Electricidad',   bg: '#fff' },
-  { img: '/clients/cvg-edelca.png',      name: 'CVG EDELCA',         sector: 'Electricidad',   bg: '#fff' },
+  { img: '/clients/corpoelec.webp',       name: 'Corpoelec',          sector: 'Electricidad',   bg: '#fff' },
+  { img: '/clients/cvg-edelca.webp',      name: 'CVG EDELCA',         sector: 'Electricidad',   bg: '#fff' },
   // ── Industria / Consumo ──
-  { img: '/clients/pepsi.png',           name: 'Pepsi-Cola',         sector: 'Industria',      bg: '#fff' },
-  { img: '/clients/polar.png',           name: 'Empresas Polar',     sector: 'Industria',      bg: '#fff' },
-  { img: '/clients/regional.png',        name: 'C. Regional',        sector: 'Industria',      bg: '#fff' },
-  { img: '/clients/carbones-guasare.png', name: 'Carbones del Guasare', sector: 'Minería',    bg: '#fff' },
+  { img: '/clients/pepsi.webp',           name: 'Pepsi-Cola',         sector: 'Industria',      bg: '#fff' },
+  { img: '/clients/polar.webp',           name: 'Empresas Polar',     sector: 'Industria',      bg: '#fff' },
+  { img: '/clients/regional.webp',        name: 'C. Regional',        sector: 'Industria',      bg: '#fff' },
+  { img: '/clients/carbones-guasare.webp', name: 'Carbones del Guasare', sector: 'Minería',    bg: '#fff' },
   // ── Gobierno / Municipios ──
-  { img: '/clients/gob-falcon.png',      name: 'Gob. Falcón',        sector: 'Gobierno',       bg: '#fff' },
-  { img: '/clients/alcaldia-miranda.png', name: 'Alcaldía Miranda',  sector: 'Gobierno',       bg: '#fff' },
-  { img: '/clients/alcaldia-lagunillas.png', name: 'Alcaldía Lagunillas', sector: 'Gobierno',  bg: '#fff' },
-  { img: '/clients/minec.png',           name: 'Min. Ambiente',      sector: 'Gobierno',       bg: '#fff' },
-  { img: '/clients/mppop.png',           name: 'MPPOP',              sector: 'Gobierno',       bg: '#fff' },
-  { img: '/clients/min-agricultura.png', name: 'Min. Agricultura',   sector: 'Gobierno',       bg: '#fff' },
-  { img: '/clients/min-aguas.png',       name: 'Min. Aguas',         sector: 'Gobierno',       bg: '#fff' },
+  { img: '/clients/gob-falcon.webp',      name: 'Gob. Falcón',        sector: 'Gobierno',       bg: '#fff' },
+  { img: '/clients/alcaldia-miranda.webp', name: 'Alcaldía Miranda',  sector: 'Gobierno',       bg: '#fff' },
+  { img: '/clients/alcaldia-lagunillas.webp', name: 'Alcaldía Lagunillas', sector: 'Gobierno',  bg: '#fff' },
+  { img: '/clients/minec.webp',           name: 'Min. Ambiente',      sector: 'Gobierno',       bg: '#fff' },
+  { img: '/clients/mppop.webp',           name: 'MPPOP',              sector: 'Gobierno',       bg: '#fff' },
+  { img: '/clients/min-agricultura.webp', name: 'Min. Agricultura',   sector: 'Gobierno',       bg: '#fff' },
+  { img: '/clients/min-aguas.webp',       name: 'Min. Aguas',         sector: 'Gobierno',       bg: '#fff' },
   // ── Otros ──
-  { img: '/clients/lukiven.png',         name: 'Lukiven S.A.',       sector: 'Industrial',     bg: '#fff' },
-  { img: '/clients/farmatodo.png',       name: 'Farmatodo',          sector: 'Retail',         bg: '#fff' },
+  { img: '/clients/lukiven.webp',         name: 'Lukiven S.A.',       sector: 'Industrial',     bg: '#fff' },
+  { img: '/clients/farmatodo.webp',       name: 'Farmatodo',          sector: 'Retail',         bg: '#fff' },
 ]
 
 const SECTOR_COLORS = {
@@ -721,7 +721,7 @@ function ClientLogo({ c }) {
   return (
     <div className="w-12 h-12 rounded flex items-center justify-center overflow-hidden flex-shrink-0" style={{ background: bgColor }}>
       {showImg
-        ? <img src={c.img} alt={c.name} className="max-h-9 max-w-[2.5rem] object-contain" loading="lazy" onError={() => setImgOk(false)} />
+        ? <img src={c.img} alt={c.name} className="max-h-9 max-w-[2.5rem] object-contain" onError={() => setImgOk(false)} />
         : <span className="font-display font-bold text-xs leading-none" style={{ color: c.accent || bgColor === '#111' ? '#fff' : '#fff' }}>{initials}</span>
       }
     </div>

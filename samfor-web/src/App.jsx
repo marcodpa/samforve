@@ -1307,10 +1307,10 @@ function PageProyectos({ onProjectOpen }) {
                 {[...filtered, ...filtered].map((p, i) => (
                   <div key={`${p.id}-${i}`}
                     className="group flex-shrink-0 cursor-pointer rounded overflow-hidden bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300 flex flex-col"
-                    style={{ width: 'clamp(240px,75vw,320px)' }}
+                    style={{ width: 'clamp(260px,26vw,420px)' }}
                     onClick={() => openProject(p)}
                   >
-                    <div className="relative overflow-hidden" style={{ height: '200px' }}>
+                    <div className="relative overflow-hidden" style={{ height: 'clamp(180px,16vw,280px)' }}>
                       <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
                       <div className="absolute inset-0 bg-gradient-to-t from-dark/85 via-dark/20 to-transparent" />
                       <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot||'#C8102E' }} />

@@ -1778,7 +1778,7 @@ function PageContacto() {
       {/* ── ÚNETE A SAMFOR — dark + foto equipo ── */}
       <section className="relative overflow-hidden" style={{ minHeight: '520px' }}>
         <img src="/ct-jobs2.webp" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
-        <div className="absolute inset-0 bg-gradient-to-r from-dark/92 via-dark/75 to-dark/30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/90 to-dark/40" />
         <div className="relative px-5 md:px-16 lg:px-24 py-12 md:py-20 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center max-w-7xl mx-auto">
 
           {/* Left — text */}
@@ -1787,8 +1787,8 @@ function PageContacto() {
               <span className="h-[3px] w-10 bg-samred" />
               <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Trabaja con Nosotros</span>
             </div>
-            <h2 className="font-display text-[clamp(2.5rem,5vw,4rem)] text-white leading-none mb-6">ÚNETE<br />A SAMFOR</h2>
-            <p className="text-white text-base leading-relaxed max-w-md mb-0">
+            <h2 className="font-display text-[clamp(2.5rem,5vw,4rem)] text-white leading-none mb-6" style={{ textShadow: '0 2px 16px rgba(0,0,0,0.6)' }}>ÚNETE<br />A SAMFOR</h2>
+            <p className="text-white text-base leading-relaxed max-w-md mb-0" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.8)' }}>
               Forma parte del equipo que construye la infraestructura energética e industrial de Venezuela. Buscamos profesionales comprometidos con la excelencia técnica y la seguridad.
             </p>
           </div>

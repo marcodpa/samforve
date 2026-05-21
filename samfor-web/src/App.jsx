@@ -740,11 +740,17 @@ function ClientCard({ c }) {
   )
 }
 
+const CARD_PX = 240   // ancho aprox de cada card en px
+const SPEED   = 55    // px por segundo — velocidad constante en cualquier pantalla
+
 function ClientsSection({ setPage }) {
   const third = Math.ceil(CLIENT_GRID.length / 3)
   const row1 = CLIENT_GRID.slice(0, third)
   const row2 = CLIENT_GRID.slice(third, third * 2)
   const row3 = CLIENT_GRID.slice(third * 2)
+  const dur1 = Math.round(row1.length * CARD_PX / SPEED)
+  const dur2 = Math.round(row2.length * CARD_PX / SPEED)
+  const dur3 = Math.round(row3.length * CARD_PX / SPEED)
 
   return (
     <section className="bg-dark overflow-hidden" style={{ minHeight: 'min(100dvh,auto)' }} data-clients>
@@ -769,21 +775,21 @@ function ClientsSection({ setPage }) {
 
           {/* Marquee row 1 — left to right */}
           <div className="relative mb-4 overflow-hidden">
-            <div className="marquee-auto flex gap-4 animate-[marquee_40s_linear_infinite]" style={{ width: 'max-content', willChange: 'transform', backfaceVisibility: 'hidden' }}>
+            <div className="marquee-auto flex gap-4" style={{ width: 'max-content', willChange: 'transform', backfaceVisibility: 'hidden', animation: `marquee ${dur1}s linear infinite` }}>
               {[...row1, ...row1].map((c, i) => <ClientCard key={i} c={c} />)}
             </div>
           </div>
 
           {/* Marquee row 2 — right to left */}
           <div className="relative mb-4 overflow-hidden">
-            <div className="marquee-auto flex gap-4 animate-[marquee-reverse_50s_linear_infinite]" style={{ width: 'max-content', willChange: 'transform', backfaceVisibility: 'hidden' }}>
+            <div className="marquee-auto flex gap-4" style={{ width: 'max-content', willChange: 'transform', backfaceVisibility: 'hidden', animation: `marquee-reverse ${dur2}s linear infinite` }}>
               {[...row2, ...row2].map((c, i) => <ClientCard key={i} c={c} />)}
             </div>
           </div>
 
           {/* Marquee row 3 — left to right */}
           <div className="relative overflow-hidden">
-            <div className="marquee-auto flex gap-4 animate-[marquee_45s_linear_infinite]" style={{ width: 'max-content', willChange: 'transform', backfaceVisibility: 'hidden' }}>
+            <div className="marquee-auto flex gap-4" style={{ width: 'max-content', willChange: 'transform', backfaceVisibility: 'hidden', animation: `marquee ${dur3}s linear infinite` }}>
               {[...row3, ...row3].map((c, i) => <ClientCard key={i} c={c} />)}
             </div>
           </div>
@@ -1336,7 +1342,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
             onMouseLeave={e => e.currentTarget.querySelector('.carousel-track').style.animationPlayState='running'}
           >
             <div className="carousel-track flex gap-5"
-              style={{ width: 'max-content', animation: `marquee ${Math.max(filtered.length * 6, 40)}s linear infinite`, willChange: 'transform', backfaceVisibility: 'hidden' }}
+              style={{ width: 'max-content', animation: `marquee ${Math.round(filtered.length * 340 / SPEED)}s linear infinite`, willChange: 'transform', backfaceVisibility: 'hidden' }}
             >
               {[...filtered, ...filtered].map((p, i) => (
                 <div key={`${p.id}-${i}`}

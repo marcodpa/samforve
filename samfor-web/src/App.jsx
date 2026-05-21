@@ -1299,8 +1299,39 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
         </div>
 
         {/* ── CARRUSEL — full width, fuera del contenedor con padding ── */}
-        {filtered.length > 0 && !listView && (
-          <div className="overflow-hidden relative mt-0"
+        {filtered.length > 0 && !listView && (<>
+          {/* MÓVIL — scroll manual con touch */}
+          <div className="lg:hidden overflow-x-auto pb-3" style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
+            <div className="flex gap-4 px-4" style={{ width: 'max-content' }}>
+              {filtered.map((p, i) => (
+                <div key={`m-${p.id}`}
+                  className="group flex-shrink-0 cursor-pointer rounded overflow-hidden bg-white/5 border border-white/10 active:border-white/40 transition-all duration-300 flex flex-col"
+                  style={{ width: '72vw', maxWidth: '300px' }}
+                  onClick={() => openProject(p)}
+                >
+                  <div className="relative overflow-hidden" style={{ height: '160px' }}>
+                    <img src={p.img} alt={p.title} className="w-full h-full object-cover" loading="lazy" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-dark/85 via-dark/20 to-transparent" />
+                    <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot||'#C8102E' }} />
+                    {p.status === 'active' && (
+                      <div className="absolute top-2 right-2 flex items-center gap-1 bg-dark/70 px-2 py-0.5 rounded-full">
+                        <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
+                        <span className="text-green-400 text-[0.55rem] font-mono uppercase tracking-widest">Activo</span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-4 flex flex-col flex-1">
+                    <div className="mb-1.5"><DivisionBadge division={p.division} size="xs" /></div>
+                    <h3 className="font-sub font-bold text-[0.85rem] uppercase tracking-wide text-white/85 leading-snug mb-1 flex-1 line-clamp-2">{p.title}</h3>
+                    <p className="text-white/35 text-[0.7rem]">{p.client}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* DESKTOP — animación automática */}
+          <div className="hidden lg:block overflow-hidden relative"
             onMouseEnter={e => e.currentTarget.querySelector('.carousel-track').style.animationPlayState='paused'}
             onMouseLeave={e => e.currentTarget.querySelector('.carousel-track').style.animationPlayState='running'}
           >
@@ -1338,7 +1369,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
             <div className="absolute top-0 left-0 w-16 h-full bg-gradient-to-r from-dark to-transparent pointer-events-none" />
             <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-dark to-transparent pointer-events-none" />
           </div>
-        )}
+        </>)}
       </div>
 
     </div>

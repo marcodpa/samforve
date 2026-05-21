@@ -425,9 +425,8 @@ function Navbar({ page, setPage, scrolled, forceDark }) {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navBg}`}>
       <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
-        <button onClick={() => { setPage('inicio'); setOpen(false) }} className="flex items-center gap-2.5">
-          <SamforLogo size={36} invert={dark} />
-          <span className={`${textColor} leading-none transition-colors duration-300`} style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, fontSize: '1.75rem', letterSpacing: '-0.02em', textTransform: 'uppercase' }}>SAMFOR</span>
+        <button onClick={() => { setPage('inicio'); setOpen(false) }} className="flex items-center">
+          <img src="/logo.png" alt="SAMFOR" className={`h-9 w-auto transition-all duration-300 ${dark ? 'brightness-0 invert' : ''}`} />
         </button>
         <div className="hidden md:flex items-center gap-7">
           {links.map(l => (
@@ -463,7 +462,7 @@ function Footer({ setPage }) {
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-white/10">
           <div>
-            <div className="flex items-center gap-3 mb-4"><SamforLogo size={38} invert /><span className="font-display text-2xl tracking-wide">SAMFOR</span></div>
+            <div className="mb-4"><img src="/logo.png" alt="SAMFOR" className="h-10 w-auto brightness-0 invert" /></div>
             <p className="text-white/55 text-sm leading-relaxed mb-5 max-w-xs">Construyendo Venezuela desde 1966. Empresa líder en construcción industrial, servicios petroleros y ambientales.</p>
           </div>
           <div>

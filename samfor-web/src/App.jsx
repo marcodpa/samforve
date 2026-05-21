@@ -41,16 +41,16 @@ const METRICS = [
 const CB = (domain) => `https://logo.clearbit.com/${domain}`
 const CLIENT_GRID = [
   // ── Energía / Petróleo internacional ──
-  { img: IMG(163),                       name: 'PDVSA',              sector: 'Energía',        bg: '#fff' },
-  { img: IMG(183),                       name: 'Chevron',            sector: 'Energía',        bg: '#fff' },
-  { img: IMG(179),                       name: 'Shell',              sector: 'Energía',        bg: '#000' },
-  { img: IMG(181),                       name: 'Repsol',             sector: 'Energía',        bg: '#fff' },
-  { img: IMG(185),                       name: 'Eni',                sector: 'Energía',        bg: '#FFD700' },
-  { img: IMG(187),                       name: 'CNPC',               sector: 'Energía',        bg: '#fff' },
-  { img: CB('halliburton.com'),          name: 'Halliburton',        sector: 'Energía',        bg: '#EC1B2E' },
-  { img: CB('slb.com'),                  name: 'SLB',                sector: 'Energía',        bg: '#00AEEF' },
-  { img: CB('weatherford.com'),          name: 'Weatherford',        sector: 'Energía',        bg: '#fff' },
-  { img: CB('gazprom.com'),              name: 'Gazprom',            sector: 'Energía',        bg: '#003DA5' },
+  { img: '/clients/pdvsa.png',           name: 'PDVSA',              sector: 'Energía',        bg: '#fff' },
+  { img: '/clients/chevron.png',         name: 'Chevron',            sector: 'Energía',        bg: '#fff' },
+  { img: '/clients/shell.png',           name: 'Shell',              sector: 'Energía',        bg: '#fff' },
+  { img: '/clients/repsol.png',          name: 'Repsol',             sector: 'Energía',        bg: '#fff' },
+  { img: '/clients/eni.png',             name: 'Eni',                sector: 'Energía',        bg: '#fff' },
+  { img: '/clients/cnpc.png',            name: 'CNPC',               sector: 'Energía',        bg: '#fff' },
+  { img: '/clients/halliburton.png',     name: 'Halliburton',        sector: 'Energía',        bg: '#fff' },
+  { img: '/clients/slb.png',             name: 'SLB',                sector: 'Energía',        bg: '#fff' },
+  { img: '/clients/weatherford.png',     name: 'Weatherford',        sector: 'Energía',        bg: '#fff' },
+  { img: '/clients/gazprom.png',         name: 'Gazprom',            sector: 'Energía',        bg: '#fff' },
   { img: CB('saipem.com'),               name: 'Petrex / Saipem',    sector: 'Energía',        bg: '#fff' },
   // ── Petroquímica ──
   { img: IMG(171),                       name: 'Pequiven',           sector: 'Petroquímica',   bg: '#fff' },

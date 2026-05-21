@@ -1324,7 +1324,7 @@ function PageQuienesSomos({ setPage }) {
             </p>
             {/* Stats row */}
             <div className="flex flex-wrap gap-8">
-              {[['59', 'Años de trayectoria'], ['500+', 'Proyectos ejecutados'], ['6', 'Divisiones especializadas'], ['1999', 'Cert. desechos peligrosos']].map(([n, l]) => (
+              {[['59', 'Años de trayectoria'], ['+100', 'Proyectos ejecutados'], ['6', 'Divisiones especializadas'], ['1999', 'Cert. desechos peligrosos']].map(([n, l]) => (
                 <div key={l}>
                   <div className="font-display text-[2rem] text-samred leading-none">{n}</div>
                   <div className="font-sub text-[0.65rem] uppercase tracking-widest text-white/45 mt-1 max-w-[8rem] leading-snug">{l}</div>

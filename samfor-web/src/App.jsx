@@ -791,11 +791,11 @@ function ClientsSection({ setPage }) {
 
         {/* BOTTOM — stat bar */}
         <div className="border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 px-6 md:px-14 lg:px-20 py-5">
-          <div className="flex items-center gap-8 flex-wrap">
+          <div className="flex items-center gap-4 md:gap-8">
             {[['50+', 'Clientes históricos'], ['59', 'Años de confianza'], ['9', 'Sectores atendidos']].map(([val, lbl]) => (
-              <div key={lbl} className="flex items-baseline gap-2">
-                <span className="font-display text-2xl text-samred">{val}</span>
-                <span className="font-sub text-xs uppercase tracking-widest text-white/40">{lbl}</span>
+              <div key={lbl} className="flex items-baseline gap-1.5">
+                <span className="font-display text-lg md:text-2xl text-samred">{val}</span>
+                <span className="font-sub text-[0.55rem] md:text-xs uppercase tracking-widest text-white/40 leading-tight max-w-[4rem] md:max-w-none">{lbl}</span>
               </div>
             ))}
           </div>
@@ -1128,11 +1128,11 @@ function PageProyectos({ onProjectOpen }) {
           </div>
 
           {/* Bottom stats */}
-          <div className="flex gap-10 flex-wrap border-t border-white/10 pt-5">
+          <div className="flex gap-5 md:gap-10 border-t border-white/10 pt-5">
             {[['100+','Proyectos'], ['6','Divisiones'], ['59','Años']].map(([v,l]) => (
               <div key={l}>
-                <p className="font-display text-2xl text-samred leading-none">{v}</p>
-                <p className="font-sub text-[0.625rem] uppercase tracking-widest text-white/35 mt-0.5">{l}</p>
+                <p className="font-display text-lg md:text-2xl text-samred leading-none">{v}</p>
+                <p className="font-sub text-[0.55rem] md:text-[0.625rem] uppercase tracking-widest text-white/35 mt-0.5">{l}</p>
               </div>
             ))}
           </div>

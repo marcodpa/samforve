@@ -1653,7 +1653,7 @@ function PageContacto() {
 
       {/* ── ÚNETE A SAMFOR — dark + foto equipo ── */}
       <section className="relative overflow-hidden" style={{ minHeight: '520px' }}>
-        <img src="/ct-team.jpg" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+        <img src="/ct-jobs.jpg" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
         <div className="absolute inset-0 bg-gradient-to-r from-dark/92 via-dark/75 to-dark/30" />
         <div className="relative px-8 md:px-16 lg:px-24 py-20 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
 

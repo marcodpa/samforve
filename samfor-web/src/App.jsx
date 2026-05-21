@@ -510,46 +510,46 @@ function ProjectDetailPage({ project, onClose }) {
   return (
     <div className="bg-dark min-h-screen pt-16">
 
-      {/* ── HERO — full-width landscape image ── */}
-      <div className="relative w-full overflow-hidden" style={{ height: '62vh', minHeight: '340px' }}>
+      {/* ── HERO — full image visible ── */}
+      <div className="relative w-full bg-[#060809] flex items-center justify-center" style={{ minHeight: '72vh' }}>
         <img
           src={project.img}
           alt={project.title}
-          className="w-full h-full object-cover object-center"
+          className="w-full h-auto max-h-[80vh] object-contain"
           loading="lazy"
         />
-        {/* Layered gradients: dark bottom + left tint for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/50 to-dark/10" />
-        <div className="absolute inset-0 bg-gradient-to-r from-dark/60 via-transparent to-transparent" />
-        {/* Red accent bar — bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-samred" />
-
-        {/* Back button */}
+        {/* Subtle dark vignette on sides only */}
+        <div className="absolute inset-0 bg-gradient-to-r from-dark/40 via-transparent to-dark/40 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-dark to-transparent pointer-events-none" />
+        {/* Back button — top left */}
         <button onClick={onClose}
-          className="absolute top-6 left-6 md:left-10 flex items-center gap-2 bg-dark/55 backdrop-blur-sm border border-white/15 text-white/80 hover:text-white hover:border-white/40 transition-all px-3.5 py-2 rounded text-xs font-sub font-semibold uppercase tracking-widest"
+          className="absolute top-6 left-6 md:left-10 flex items-center gap-2 bg-dark/60 backdrop-blur-sm border border-white/15 text-white/80 hover:text-white hover:border-white/40 transition-all px-3.5 py-2 rounded text-xs font-sub font-semibold uppercase tracking-widest z-10"
         >
           <ArrowRight size={12} className="rotate-180" /> Proyectos
         </button>
 
-        {/* Status badge */}
+        {/* Status badge — top right */}
         {project.status === 'active' && (
-          <div className="absolute top-6 right-6 md:right-10 flex items-center gap-1.5 bg-dark/60 backdrop-blur-sm px-3 py-1.5 rounded-full border border-green-500/30">
+          <div className="absolute top-6 right-6 md:right-10 flex items-center gap-1.5 bg-dark/60 backdrop-blur-sm px-3 py-1.5 rounded-full border border-green-500/30 z-10">
             <span className="w-1.5 h-1.5 rounded-full bg-green-400 dot-pulse" />
             <span className="text-green-400 text-[0.6875rem] font-mono uppercase tracking-widest">En Ejecución</span>
           </div>
         )}
 
-        {/* Title overlay at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 px-6 md:px-14 lg:px-20 pb-8">
-          <div className="max-w-5xl">
-            <div className="mb-3"><DivisionBadge division={project.division} /></div>
-            <h1 className="font-display text-[clamp(2rem,5vw,4rem)] text-white leading-none tracking-wide">{project.title}</h1>
-          </div>
+        {/* Red accent bar — bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-samred" />
+      </div>
+
+      {/* ── TITLE BLOCK — below image ── */}
+      <div className="px-6 md:px-14 lg:px-20 pt-10 pb-2">
+        <div className="max-w-5xl mx-auto">
+          <div className="mb-3"><DivisionBadge division={project.division} /></div>
+          <h1 className="font-display text-[clamp(2rem,5vw,4rem)] text-white leading-none tracking-wide">{project.title}</h1>
         </div>
       </div>
 
       {/* ── CONTENT ── */}
-      <div className="px-6 md:px-14 lg:px-20 py-14">
+      <div className="px-6 md:px-14 lg:px-20 py-10">
         <div className="max-w-5xl mx-auto">
 
           {/* Client + meta row */}

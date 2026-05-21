@@ -38,22 +38,68 @@ const METRICS = [
   { value: 6, suffix: '', label: 'Líneas de servicio' },
 ]
 
+const CB = (domain) => `https://logo.clearbit.com/${domain}`
 const CLIENT_GRID = [
-  { img: IMG(163), name: 'PDVSA', sector: 'Energía', bg: '#fff' },
-  { img: IMG(183), name: 'Chevron', sector: 'Energía', bg: '#fff' },
-  { img: IMG(179), name: 'Shell', sector: 'Energía', bg: '#000' },
-  { img: IMG(171), name: 'Pequiven', sector: 'Petroquímica', bg: '#fff' },
-  { img: IMG(181), name: 'Repsol', sector: 'Energía', bg: '#fff' },
-  { img: IMG(185), name: 'Eni', sector: 'Energía', bg: '#FFD700' },
-  { img: IMG(187), name: 'CNPC', sector: 'Energía', bg: '#fff' },
-  { img: IMG(193), name: 'Baker Hughes', sector: 'Servicios', bg: '#000' },
-  { img: IMG(206), name: 'WFP / ONU', sector: 'Internacional', bg: '#fff' },
-  { img: IMG(211), name: 'UNHCR / ACNUR', sector: 'Internacional', bg: '#fff' },
-  { img: IMG(219), name: 'Metro Maracaibo', sector: 'Transporte', bg: '#fff' },
-  { img: IMG(245), name: 'VeneAcuícola', sector: 'Acuicultura', bg: '#fff' },
-  { img: IMG(246), name: 'VeneShrimp', sector: 'Acuicultura', bg: '#fff' },
-  { img: IMG(237), name: 'PetroCaribe', sector: 'Energía', bg: '#fff' },
-  { img: IMG(177), name: 'Lagoven', sector: 'Energía', bg: '#fff' },
+  // ── Energía / Petróleo internacional ──
+  { img: IMG(163),                       name: 'PDVSA',              sector: 'Energía',        bg: '#fff' },
+  { img: IMG(183),                       name: 'Chevron',            sector: 'Energía',        bg: '#fff' },
+  { img: IMG(179),                       name: 'Shell',              sector: 'Energía',        bg: '#000' },
+  { img: IMG(181),                       name: 'Repsol',             sector: 'Energía',        bg: '#fff' },
+  { img: IMG(185),                       name: 'Eni',                sector: 'Energía',        bg: '#FFD700' },
+  { img: IMG(187),                       name: 'CNPC',               sector: 'Energía',        bg: '#fff' },
+  { img: CB('halliburton.com'),          name: 'Halliburton',        sector: 'Energía',        bg: '#EC1B2E' },
+  { img: CB('slb.com'),                  name: 'SLB',                sector: 'Energía',        bg: '#00AEEF' },
+  { img: CB('weatherford.com'),          name: 'Weatherford',        sector: 'Energía',        bg: '#fff' },
+  { img: CB('gazprom.com'),              name: 'Gazprom',            sector: 'Energía',        bg: '#003DA5' },
+  { img: CB('saipem.com'),               name: 'Petrex / Saipem',    sector: 'Energía',        bg: '#fff' },
+  { img: IMG(237),                       name: 'PetroCaribe',        sector: 'Energía',        bg: '#fff' },
+  { img: IMG(177),                       name: 'Lagoven',            sector: 'Energía',        bg: '#fff' },
+  // ── Petroquímica ──
+  { img: IMG(171),                       name: 'Pequiven',           sector: 'Petroquímica',   bg: '#fff' },
+  { img: null,                           name: 'Cardón IV',          sector: 'Petroquímica',   bg: '#004B8D', accent: '#fff' },
+  { img: null,                           name: 'Maraven',            sector: 'Petroquímica',   bg: '#006633', accent: '#fff' },
+  { img: null,                           name: 'Suelopetrol',        sector: 'Petroquímica',   bg: '#003087', accent: '#fff' },
+  { img: CB('polinter.com'),             name: 'Polinter',           sector: 'Petroquímica',   bg: '#fff' },
+  // ── Servicios Oilfield ──
+  { img: IMG(193),                       name: 'Baker Hughes',       sector: 'Servicios',      bg: '#000' },
+  { img: CB('slb.com'),                  name: 'Mi-SWACO',           sector: 'Servicios',      bg: '#00AEEF' },
+  // ── CAF / Instituciones financieras ──
+  { img: CB('caf.com'),                  name: 'CAF',                sector: 'Finanzas',       bg: '#003DA5' },
+  { img: null,                           name: 'BOD',                sector: 'Finanzas',       bg: '#E4002B', accent: '#fff' },
+  { img: null,                           name: 'BNC',                sector: 'Finanzas',       bg: '#003087', accent: '#fff' },
+  // ── Internacional / ONU ──
+  { img: IMG(206),                       name: 'WFP / ONU',          sector: 'Internacional',  bg: '#fff' },
+  { img: IMG(211),                       name: 'UNHCR / ACNUR',      sector: 'Internacional',  bg: '#fff' },
+  // ── Transporte / Infraestructura ──
+  { img: IMG(219),                       name: 'Metro Maracaibo',    sector: 'Transporte',     bg: '#fff' },
+  { img: null,                           name: 'Fontur',             sector: 'Transporte',     bg: '#C8102E', accent: '#fff' },
+  { img: null,                           name: 'BAER',               sector: 'Transporte',     bg: '#003DA5', accent: '#fff' },
+  // ── Energía eléctrica Venezuela ──
+  { img: null,                           name: 'Corpoelec',          sector: 'Electricidad',   bg: '#0057A8', accent: '#fff' },
+  { img: null,                           name: 'Enelven',            sector: 'Electricidad',   bg: '#F6A800', accent: '#000' },
+  { img: null,                           name: 'CVG EDELCA',         sector: 'Electricidad',   bg: '#006633', accent: '#fff' },
+  { img: null,                           name: 'Estizulia',          sector: 'Electricidad',   bg: '#FFCC00', accent: '#000' },
+  // ── Industria / Consumo ──
+  { img: CB('pepsi.com'),                name: 'Pepsi-Cola',         sector: 'Industria',      bg: '#004B93' },
+  { img: null,                           name: 'Polar',              sector: 'Industria',      bg: '#003DA5', accent: '#fff' },
+  { img: null,                           name: 'C. Regional',        sector: 'Industria',      bg: '#C8102E', accent: '#fff' },
+  { img: null,                           name: 'Carbones del Guasare', sector: 'Minería',      bg: '#4A4A4A', accent: '#fff' },
+  // ── Gobierno / Municipios ──
+  { img: null,                           name: 'Gob. Falcón',        sector: 'Gobierno',       bg: '#007B3E', accent: '#fff' },
+  { img: null,                           name: 'Alcaldía Miranda',   sector: 'Gobierno',       bg: '#003DA5', accent: '#fff' },
+  { img: null,                           name: 'Alcaldía Lagunillas', sector: 'Gobierno',      bg: '#C8102E', accent: '#fff' },
+  { img: null,                           name: 'Min. Ambiente',      sector: 'Gobierno',       bg: '#006633', accent: '#fff' },
+  { img: null,                           name: 'MPPOP',              sector: 'Gobierno',       bg: '#003DA5', accent: '#fff' },
+  { img: null,                           name: 'MPPAT',              sector: 'Gobierno',       bg: '#2E7D32', accent: '#fff' },
+  { img: null,                           name: 'Min. Aguas',         sector: 'Gobierno',       bg: '#0057A8', accent: '#fff' },
+  // ── Acuicultura ──
+  { img: IMG(245),                       name: 'VeneAcuícola',       sector: 'Acuicultura',    bg: '#fff' },
+  { img: IMG(246),                       name: 'VeneShrimp',         sector: 'Acuicultura',    bg: '#fff' },
+  // ── Otros ──
+  { img: null,                           name: 'Lukiven S.A.',       sector: 'Industrial',     bg: '#C8102E', accent: '#fff' },
+  { img: null,                           name: 'Arrayco',            sector: 'Industrial',     bg: '#003DA5', accent: '#fff' },
+  { img: null,                           name: 'Farmatodo',          sector: 'Retail',         bg: '#E4002B', accent: '#fff' },
+  { img: null,                           name: 'Corpoven',           sector: 'Energía',        bg: '#CC0000', accent: '#fff' },
 ]
 
 const SECTOR_COLORS = {
@@ -681,15 +727,44 @@ function ProjectCard({ project, onClick }) {
 }
 
 // ─── CLIENTS GRID ─────────────────────────────────────────────────────────────
+function ClientLogo({ c }) {
+  const [imgOk, setImgOk] = useState(true)
+  const initials = c.name.split(/[\s/]+/).slice(0, 2).map(w => w[0]).join('').toUpperCase()
+  const showImg = c.img && imgOk
+  const bgColor = c.bg === '#000' ? '#111' : (c.bg || '#1a2233')
+  return (
+    <div className="w-12 h-12 rounded flex items-center justify-center overflow-hidden flex-shrink-0" style={{ background: bgColor }}>
+      {showImg
+        ? <img src={c.img} alt={c.name} className="max-h-9 max-w-[2.5rem] object-contain" loading="lazy" onError={() => setImgOk(false)} />
+        : <span className="font-display font-bold text-xs leading-none" style={{ color: c.accent || bgColor === '#111' ? '#fff' : '#fff' }}>{initials}</span>
+      }
+    </div>
+  )
+}
+
+function ClientCard({ c }) {
+  return (
+    <div className="flex-shrink-0 flex items-center gap-4 bg-white/5 border border-white/10 rounded px-7 py-4 hover:border-samred/50 hover:bg-white/8 transition-all duration-200 group">
+      <ClientLogo c={c} />
+      <div>
+        <p className="font-sub font-bold text-sm uppercase tracking-wide text-white/80 group-hover:text-white transition-colors">{c.name}</p>
+        <p className="text-white/35 text-[0.65rem] font-mono uppercase tracking-widest">{c.sector}</p>
+      </div>
+    </div>
+  )
+}
+
 function ClientsSection({ setPage }) {
-  const row1 = CLIENT_GRID.slice(0, 8)
-  const row2 = CLIENT_GRID.slice(7)
+  const third = Math.ceil(CLIENT_GRID.length / 3)
+  const row1 = CLIENT_GRID.slice(0, third)
+  const row2 = CLIENT_GRID.slice(third, third * 2)
+  const row3 = CLIENT_GRID.slice(third * 2)
 
   return (
     <section className="bg-dark overflow-hidden" style={{ minHeight: 'min(100dvh,auto)' }} data-clients>
       <div className="flex flex-col">
 
-        {/* TOP — header + marquee rows, centered vertically */}
+        {/* TOP — header + marquee rows */}
         <div className="flex flex-col justify-center px-6 md:px-14 lg:px-20 py-12">
 
           {/* Header — split left/right */}
@@ -702,41 +777,28 @@ function ClientsSection({ setPage }) {
               <h2 className="font-display text-[2.25rem] md:text-[3rem] text-white leading-none">NUESTROS<br />CLIENTES</h2>
             </div>
             <p className="text-white/40 text-sm max-w-xs leading-relaxed md:text-right">
-              Instituciones líderes del sector público, privado e internacional que trabajan con SAMFOR desde hace décadas.
+              Más de 50 empresas e instituciones del sector público, privado e internacional han confiado en SAMFOR a lo largo de sus 59 años.
             </p>
           </div>
 
           {/* Marquee row 1 — left to right */}
           <div className="relative mb-4 overflow-hidden">
-            <div className="flex gap-4 animate-[marquee_35s_linear_infinite]" style={{ width: 'max-content' }}>
-              {[...row1, ...row1].map((c, i) => (
-                <div key={i} className="flex-shrink-0 flex items-center gap-4 bg-white/5 border border-white/10 rounded px-7 py-4 hover:border-samred/50 hover:bg-white/8 transition-all duration-200 group">
-                  <div className="w-12 h-12 rounded flex items-center justify-center overflow-hidden flex-shrink-0" style={{ background: c.bg === '#000' ? '#111' : '#fff' }}>
-                    <img src={c.img} alt={c.name} className="max-h-9 max-w-[2.5rem] object-contain" loading="lazy" />
-                  </div>
-                  <div>
-                    <p className="font-sub font-bold text-sm uppercase tracking-wide text-white/80 group-hover:text-white transition-colors">{c.name}</p>
-                    <p className="text-white/35 text-[0.65rem] font-mono uppercase tracking-widest">{c.sector}</p>
-                  </div>
-                </div>
-              ))}
+            <div className="flex gap-4 animate-[marquee_40s_linear_infinite]" style={{ width: 'max-content' }}>
+              {[...row1, ...row1].map((c, i) => <ClientCard key={i} c={c} />)}
             </div>
           </div>
 
           {/* Marquee row 2 — right to left */}
+          <div className="relative mb-4 overflow-hidden">
+            <div className="flex gap-4 animate-[marquee_50s_linear_infinite_reverse]" style={{ width: 'max-content' }}>
+              {[...row2, ...row2].map((c, i) => <ClientCard key={i} c={c} />)}
+            </div>
+          </div>
+
+          {/* Marquee row 3 — left to right */}
           <div className="relative overflow-hidden">
-            <div className="flex gap-4 animate-[marquee_45s_linear_infinite_reverse]" style={{ width: 'max-content' }}>
-              {[...row2, ...row2].map((c, i) => (
-                <div key={i} className="flex-shrink-0 flex items-center gap-4 bg-white/5 border border-white/10 rounded px-7 py-4 hover:border-samred/50 transition-all duration-200 group">
-                  <div className="w-12 h-12 rounded flex items-center justify-center overflow-hidden flex-shrink-0" style={{ background: c.bg === '#000' ? '#111' : '#fff' }}>
-                    <img src={c.img} alt={c.name} className="max-h-9 max-w-[2.5rem] object-contain" loading="lazy" />
-                  </div>
-                  <div>
-                    <p className="font-sub font-bold text-sm uppercase tracking-wide text-white/80 group-hover:text-white transition-colors">{c.name}</p>
-                    <p className="text-white/35 text-[0.65rem] font-mono uppercase tracking-widest">{c.sector}</p>
-                  </div>
-                </div>
-              ))}
+            <div className="flex gap-4 animate-[marquee_45s_linear_infinite]" style={{ width: 'max-content' }}>
+              {[...row3, ...row3].map((c, i) => <ClientCard key={i} c={c} />)}
             </div>
           </div>
         </div>
@@ -744,7 +806,7 @@ function ClientsSection({ setPage }) {
         {/* BOTTOM — stat bar */}
         <div className="border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 px-6 md:px-14 lg:px-20 py-5">
           <div className="flex items-center gap-8 flex-wrap">
-            {[['20+', 'Clientes internacionales'], ['59', 'Años de confianza'], ['6', 'Sectores atendidos']].map(([val, lbl]) => (
+            {[['50+', 'Clientes históricos'], ['59', 'Años de confianza'], ['9', 'Sectores atendidos']].map(([val, lbl]) => (
               <div key={lbl} className="flex items-baseline gap-2">
                 <span className="font-display text-2xl text-samred">{val}</span>
                 <span className="font-sub text-xs uppercase tracking-widest text-white/40">{lbl}</span>

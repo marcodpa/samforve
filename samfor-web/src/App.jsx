@@ -84,14 +84,14 @@ const CLIENT_GRID = [
   { img: '/clients/minec.png',           name: 'Min. Ambiente',      sector: 'Gobierno',       bg: '#fff' },
   { img: '/clients/mppop.png',           name: 'MPPOP',              sector: 'Gobierno',       bg: '#fff' },
   { img: '/clients/min-agricultura.png', name: 'Min. Agricultura',   sector: 'Gobierno',       bg: '#fff' },
-  { img: null,                           name: 'Min. Aguas',         sector: 'Gobierno',       bg: '#0057A8', accent: '#fff' },
+  { img: '/clients/min-aguas.png',       name: 'Min. Aguas',         sector: 'Gobierno',       bg: '#fff' },
   // ── Acuicultura ──
   { img: IMG(245),                       name: 'VeneAcuícola',       sector: 'Acuicultura',    bg: '#fff' },
   { img: IMG(246),                       name: 'VeneShrimp',         sector: 'Acuicultura',    bg: '#fff' },
   // ── Otros ──
-  { img: null,                           name: 'Lukiven S.A.',       sector: 'Industrial',     bg: '#C8102E', accent: '#fff' },
+  { img: '/clients/lukiven.png',         name: 'Lukiven S.A.',       sector: 'Industrial',     bg: '#fff' },
   { img: null,                           name: 'Arrayco',            sector: 'Industrial',     bg: '#003DA5', accent: '#fff' },
-  { img: null,                           name: 'Farmatodo',          sector: 'Retail',         bg: '#E4002B', accent: '#fff' },
+  { img: '/clients/farmatodo.png',       name: 'Farmatodo',          sector: 'Retail',         bg: '#fff' },
   { img: null,                           name: 'Corpoven',           sector: 'Energía',        bg: '#CC0000', accent: '#fff' },
 ]
 

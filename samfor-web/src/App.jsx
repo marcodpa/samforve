@@ -686,11 +686,11 @@ function ClientsSection({ setPage }) {
   const row2 = CLIENT_GRID.slice(7)
 
   return (
-    <section className="bg-dark overflow-hidden" style={{ height: '100dvh' }}>
-      <div className="h-full flex flex-col">
+    <section className="bg-dark overflow-hidden" style={{ minHeight: 'min(100dvh,auto)' }} data-clients>
+      <div className="flex flex-col">
 
         {/* TOP — header + marquee rows, centered vertically */}
-        <div className="flex-1 flex flex-col justify-center px-6 md:px-14 lg:px-20 py-10">
+        <div className="flex flex-col justify-center px-6 md:px-14 lg:px-20 py-12">
 
           {/* Header — split left/right */}
           <div className="scroll-reveal flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
@@ -828,8 +828,9 @@ function PageInicio({ setPage }) {
       </section>
 
       {/* SERVICES */}
-      <section className="bg-dark overflow-hidden" style={{ height: '100dvh' }}>
-        <div className="grid grid-cols-1 lg:grid-cols-2" style={{ height: '100%' }}>
+      <section className="bg-dark overflow-hidden" style={{ height: 'auto', minHeight: 0 }} data-lg-height="100dvh">
+        <style>{`@media(min-width:1024px){section[data-lg-height]{height:100dvh!important}}`}</style>
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:h-full">
 
           {/* LEFT — list */}
           <div className="px-6 md:px-14 lg:px-16 flex flex-col justify-center py-10">
@@ -882,7 +883,8 @@ function PageInicio({ setPage }) {
       </section>
 
       {/* FEATURED PROJECTS */}
-      <section className="bg-white px-6 md:px-14 lg:px-20 flex flex-col justify-center" style={{ minHeight: '100dvh' }}>
+      <section className="bg-white px-6 md:px-14 lg:px-20 flex flex-col justify-center" style={{ minHeight: 'auto' }} data-lg-min="100dvh">
+        <style>{`@media(min-width:1024px){section[data-lg-min]{min-height:100dvh!important}}`}</style>
         <div className="max-w-7xl mx-auto w-full py-16">
 
           {/* Header */}
@@ -906,7 +908,7 @@ function PageInicio({ setPage }) {
             {featured[0] && (
               <div
                 className="group relative rounded overflow-hidden cursor-pointer"
-                style={{ minHeight: '480px' }}
+                style={{ minHeight: 'clamp(260px,50vw,480px)' }}
                 onClick={() => setPage('proyectos')}
                 role="button" tabIndex={0}
                 onKeyDown={e => e.key === 'Enter' && setPage('proyectos')}
@@ -938,7 +940,7 @@ function PageInicio({ setPage }) {
                 <div
                   key={p.id}
                   className="group relative rounded overflow-hidden cursor-pointer flex-1"
-                  style={{ minHeight: '228px' }}
+                  style={{ minHeight: 'clamp(180px,30vw,228px)' }}
                   onClick={() => setPage('proyectos')}
                   role="button" tabIndex={0}
                   onKeyDown={e => e.key === 'Enter' && setPage('proyectos')}
@@ -1105,8 +1107,8 @@ function PageProyectos({ onProjectOpen }) {
           </span>
         </div>
 
-        {/* Grid de divisiones — 7 cols en desktop, scroll en mobile */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-0 border-t border-white/10">
+        {/* Divisiones — scroll horizontal en mobile, grid en desktop */}
+        <div className="hidden lg:grid lg:grid-cols-7 gap-0 border-t border-white/10">
 
           {/* TODOS */}
           <button
@@ -1155,6 +1157,19 @@ function PageProyectos({ onProjectOpen }) {
             )
           })}
         </div>
+
+        {/* Mobile — horizontal pill scroll */}
+        <div className="lg:hidden overflow-x-auto border-t border-white/10 px-4 py-3 flex gap-2" style={{ scrollbarWidth: 'none' }}>
+          {[['Todos', 'Todos', <LayoutGrid size={13}/>, ALL_PROJECTS.length], ...Object.entries(DIVISION_META).map(([key, m]) => [key, m.label.replace('Proyectos ','').replace('División ','').replace('Servicios ',''), m.icon, counts[key]||0])].map(([key, label, icon, count]) => (
+            <button key={key}
+              onClick={() => setActiveDivision(key)}
+              className={`flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-sub font-bold uppercase tracking-wide transition-all duration-200 ${activeDivision===key ? 'bg-samred border-samred text-white' : 'border-white/15 text-white/55 hover:border-white/40 hover:text-white/80'}`}
+            >
+              <span className={activeDivision===key ? 'text-white' : 'text-white/40'}>{icon}</span>
+              {label} <span className="font-mono text-[0.6rem] opacity-60">({count})</span>
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* ── PROYECTOS ── */}
@@ -1162,10 +1177,10 @@ function PageProyectos({ onProjectOpen }) {
         <div className="max-w-7xl mx-auto">
 
           {/* Header row */}
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
             <div className="flex items-center gap-3">
               {activeDivision !== 'Todos' && <div className="h-6 w-[3px] rounded-full flex-shrink-0" style={{ background: DIVISION_META[activeDivision]?.dot }} />}
-              <h3 className="font-display text-[1.75rem] text-white leading-none">
+              <h3 className="font-display text-[1.5rem] md:text-[1.75rem] text-white leading-none">
                 {activeDivision === 'Todos' ? 'TODOS LOS PROYECTOS' : DIVISION_META[activeDivision]?.label?.toUpperCase()}
               </h3>
               <span className="font-mono text-xs text-white/30 ml-1">{filtered.length}</span>
@@ -1244,7 +1259,7 @@ function PageProyectos({ onProjectOpen }) {
                 {[...filtered, ...filtered].map((p, i) => (
                   <div key={`${p.id}-${i}`}
                     className="group flex-shrink-0 cursor-pointer rounded overflow-hidden bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300 flex flex-col"
-                    style={{ width: '320px' }}
+                    style={{ width: 'clamp(240px,75vw,320px)' }}
                     onClick={() => openProject(p)}
                   >
                     <div className="relative overflow-hidden" style={{ height: '200px' }}>
@@ -1293,7 +1308,7 @@ function PageQuienesSomos({ setPage }) {
         <div className="absolute inset-0 bg-gradient-to-r from-dark/85 via-dark/55 to-dark/10" />
         <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent" />
         {/* Content */}
-        <div className="relative h-full flex flex-col justify-end px-8 md:px-16 lg:px-24 pb-20">
+        <div className="relative h-full flex flex-col justify-end px-5 md:px-16 lg:px-24 pb-14 md:pb-20">
           <div className="max-w-3xl">
             <div className="flex items-center gap-3 mb-5">
               <span className="h-[3px] w-10 bg-samred" />
@@ -1326,9 +1341,9 @@ function PageQuienesSomos({ setPage }) {
       </section>
 
       {/* ── QUIÉNES SOMOS — split: texto izq, foto der ── */}
-      <section className="grid grid-cols-1 lg:grid-cols-2" style={{ minHeight: '80vh' }}>
+      <section className="grid grid-cols-1 lg:grid-cols-2 lg:min-h-[80vh]">
         {/* Left — text */}
-        <div className="bg-white flex items-center px-8 md:px-16 py-20">
+        <div className="bg-white flex items-center px-5 md:px-16 py-12 md:py-20">
           <div className="max-w-lg">
             <div className="flex items-center gap-3 mb-6">
               <span className="h-[3px] w-10 bg-samred" />
@@ -1360,7 +1375,7 @@ function PageQuienesSomos({ setPage }) {
           </div>
         </div>
         {/* Right — welding photo */}
-        <div className="relative overflow-hidden" style={{ minHeight: '500px' }}>
+        <div className="relative overflow-hidden" style={{ minHeight: '300px' }}>
           <img src="/qs-welding.webp" alt="Soldadores SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
           <div className="absolute inset-0 bg-gradient-to-l from-transparent to-dark/20" />
           <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-samred" />
@@ -1368,7 +1383,7 @@ function PageQuienesSomos({ setPage }) {
       </section>
 
       {/* ── MISIÓN / VISIÓN — dark bg ── */}
-      <section className="bg-dark py-24 px-8 md:px-16 lg:px-24">
+      <section className="bg-dark py-14 md:py-24 px-5 md:px-16 lg:px-24">
         <div className="max-w-7xl mx-auto">
           <div className="scroll-reveal flex items-center gap-3 mb-16">
             <span className="h-[3px] w-10 bg-samred" />
@@ -1392,9 +1407,9 @@ function PageQuienesSomos({ setPage }) {
       </section>
 
       {/* ── VENTAJAS — split: foto izq, lista der ── */}
-      <section className="grid grid-cols-1 lg:grid-cols-2" style={{ minHeight: '75vh' }}>
+      <section className="grid grid-cols-1 lg:grid-cols-2 lg:min-h-[75vh]">
         {/* Left — electrical photo */}
-        <div className="relative overflow-hidden order-2 lg:order-1" style={{ minHeight: '420px' }}>
+        <div className="relative overflow-hidden order-2 lg:order-1" style={{ minHeight: '300px' }}>
           <img src="/qs-electrical.webp" alt="Técnicos eléctricos SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
           <div className="absolute inset-0 bg-gradient-to-r from-transparent to-dark/20" />
           <div className="absolute top-0 left-0 bottom-0 w-[4px] bg-samred" />
@@ -1406,7 +1421,7 @@ function PageQuienesSomos({ setPage }) {
           </div>
         </div>
         {/* Right — advantages */}
-        <div className="bg-surface flex items-center px-8 md:px-16 py-20 order-1 lg:order-2">
+        <div className="bg-surface flex items-center px-5 md:px-16 py-12 md:py-20 order-1 lg:order-2">
           <div className="w-full max-w-lg">
             <div className="flex items-center gap-3 mb-6">
               <span className="h-[3px] w-10 bg-samred" />
@@ -1434,7 +1449,7 @@ function PageQuienesSomos({ setPage }) {
       </section>
 
       {/* ── HISTORIA — timeline ── */}
-      <section className="bg-white py-24 px-8 md:px-16">
+      <section className="bg-white py-14 md:py-24 px-5 md:px-16">
         <div className="max-w-5xl mx-auto">
           <div className="scroll-reveal mb-16">
             <div className="flex items-center gap-3 mb-4">
@@ -1466,7 +1481,7 @@ function PageQuienesSomos({ setPage }) {
       </section>
 
       {/* ── FICHA + CLIENTES ── */}
-      <section className="bg-dark py-20 px-8 md:px-16 lg:px-24">
+      <section className="bg-dark py-14 md:py-20 px-5 md:px-16 lg:px-24">
         <div className="max-w-7xl mx-auto">
           <div className="scroll-reveal flex items-center gap-3 mb-12">
             <span className="h-[3px] w-10 bg-samred" />
@@ -1550,7 +1565,7 @@ function PageContacto() {
         <img src="/ct-hero.webp" alt="SAMFOR operaciones" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
         <div className="absolute inset-0 bg-gradient-to-r from-dark/90 via-dark/60 to-dark/20" />
         <div className="absolute inset-0 bg-gradient-to-t from-dark/50 via-transparent to-transparent" />
-        <div className="relative h-full flex flex-col justify-end px-8 md:px-16 lg:px-24 pb-20">
+        <div className="relative h-full flex flex-col justify-end px-5 md:px-16 lg:px-24 pb-14 md:pb-20">
           <div className="max-w-2xl">
             <div className="flex items-center gap-3 mb-5">
               <span className="h-[3px] w-10 bg-samred" />
@@ -1581,7 +1596,7 @@ function PageContacto() {
       <section className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr]">
 
         {/* Left — info + foto decorativa */}
-        <div className="bg-dark flex flex-col justify-between px-8 md:px-14 py-16">
+        <div className="bg-dark flex flex-col justify-between px-5 md:px-14 py-12 md:py-16">
           <div>
             <div className="flex items-center gap-3 mb-8">
               <span className="h-[3px] w-10 bg-samred" />
@@ -1617,7 +1632,7 @@ function PageContacto() {
         </div>
 
         {/* Right — form */}
-        <div className="bg-white px-8 md:px-14 py-16">
+        <div className="bg-white px-5 md:px-14 py-12 md:py-16">
           {sent ? (
             <div className="flex flex-col items-center justify-center h-full py-20 text-center">
               <div className="w-16 h-16 rounded-full bg-green-50 border border-green-200 flex items-center justify-center mb-5">
@@ -1681,7 +1696,7 @@ function PageContacto() {
       <section className="relative overflow-hidden" style={{ minHeight: '520px' }}>
         <img src="/ct-jobs2.webp" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
         <div className="absolute inset-0 bg-gradient-to-r from-dark/92 via-dark/75 to-dark/30" />
-        <div className="relative px-8 md:px-16 lg:px-24 py-20 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
+        <div className="relative px-5 md:px-16 lg:px-24 py-12 md:py-20 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center max-w-7xl mx-auto">
 
           {/* Left — text */}
           <div>

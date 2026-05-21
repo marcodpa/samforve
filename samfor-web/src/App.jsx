@@ -1788,18 +1788,18 @@ function PageContacto() {
               <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Trabaja con Nosotros</span>
             </div>
             <h2 className="font-display text-[clamp(2.5rem,5vw,4rem)] text-white leading-none mb-6">ÚNETE<br />A SAMFOR</h2>
-            <p className="text-white/55 text-base leading-relaxed max-w-md mb-0">
+            <p className="text-white text-base leading-relaxed max-w-md mb-0">
               Forma parte del equipo que construye la infraestructura energética e industrial de Venezuela. Buscamos profesionales comprometidos con la excelencia técnica y la seguridad.
             </p>
           </div>
 
           {/* Right — postulation form */}
-          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded p-8">
+          <div className="bg-white/15 backdrop-blur-sm border border-white/25 rounded p-8">
             {jobSent ? (
               <div className="flex flex-col items-center py-8 text-center">
                 <CheckCircle size={36} className="text-green-400 mb-4" />
                 <h3 className="font-display text-2xl text-white mb-2">POSTULACIÓN RECIBIDA</h3>
-                <p className="text-white/50 text-sm mb-6 max-w-xs">Revisaremos tu perfil y nos pondremos en contacto si hay oportunidad.</p>
+                <p className="text-white text-sm mb-6 max-w-xs">Revisaremos tu perfil y nos pondremos en contacto si hay oportunidad.</p>
                 <button onClick={()=>{ setJobSent(false); setJobForm({name:'',email:'',phone:'',area:'',exp:'',cv:null,letter:''}) }} className="btn-primary">Nueva Postulación</button>
               </div>
             ) : (
@@ -1807,33 +1807,33 @@ function PageContacto() {
                 <h3 className="font-display text-xl text-white mb-2">FORMULARIO DE POSTULACIÓN</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.6rem] font-mono text-white/35 uppercase tracking-widest">Nombre *</label>
-                    <input className="form-input bg-white/8 border-white/15 text-white placeholder:text-white/25 focus:border-samred" required value={jobForm.name} onChange={e=>setJobForm(f=>({...f,name:e.target.value}))} placeholder="Nombre completo" />
+                    <label className="text-[0.6rem] font-mono text-white uppercase tracking-widest">Nombre *</label>
+                    <input className="form-input bg-white/15 border-white/30 text-white placeholder:text-white/50 focus:border-samred" required value={jobForm.name} onChange={e=>setJobForm(f=>({...f,name:e.target.value}))} placeholder="Nombre completo" />
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.6rem] font-mono text-white/35 uppercase tracking-widest">Email *</label>
-                    <input className="form-input bg-white/8 border-white/15 text-white placeholder:text-white/25 focus:border-samred" type="email" required value={jobForm.email} onChange={e=>setJobForm(f=>({...f,email:e.target.value}))} placeholder="tu@email.com" />
+                    <label className="text-[0.6rem] font-mono text-white uppercase tracking-widest">Email *</label>
+                    <input className="form-input bg-white/15 border-white/30 text-white placeholder:text-white/50 focus:border-samred" type="email" required value={jobForm.email} onChange={e=>setJobForm(f=>({...f,email:e.target.value}))} placeholder="tu@email.com" />
                   </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.6rem] font-mono text-white/35 uppercase tracking-widest">Área</label>
-                    <select className="form-input bg-white/8 border-white/15 text-white focus:border-samred" value={jobForm.area} onChange={e=>setJobForm(f=>({...f,area:e.target.value}))}>
+                    <label className="text-[0.6rem] font-mono text-white uppercase tracking-widest">Área</label>
+                    <select className="form-input bg-white/15 border-white/30 text-white focus:border-samred" value={jobForm.area} onChange={e=>setJobForm(f=>({...f,area:e.target.value}))}>
                       <option value="" className="bg-dark">Seleccionar...</option>
                       {['Ing. Eléctrica','Ing. Civil','Ing. Mecánica','Instrumentación','Telecomunicaciones','Ambiental','Transporte','Administración','Otra'].map(a=><option key={a} className="bg-dark">{a}</option>)}
                     </select>
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.6rem] font-mono text-white/35 uppercase tracking-widest">Experiencia</label>
-                    <select className="form-input bg-white/8 border-white/15 text-white focus:border-samred" value={jobForm.exp} onChange={e=>setJobForm(f=>({...f,exp:e.target.value}))}>
+                    <label className="text-[0.6rem] font-mono text-white uppercase tracking-widest">Experiencia</label>
+                    <select className="form-input bg-white/15 border-white/30 text-white focus:border-samred" value={jobForm.exp} onChange={e=>setJobForm(f=>({...f,exp:e.target.value}))}>
                       <option value="" className="bg-dark">Seleccionar...</option>
                       {['0-2 años','3-5 años','6-10 años','10+ años'].map(x=><option key={x} className="bg-dark">{x}</option>)}
                     </select>
                   </div>
                 </div>
                 <div>
-                  <label className="text-[0.6rem] font-mono text-white/35 uppercase tracking-widest block mb-1.5">CV / Hoja de Vida</label>
-                  <div className={`upload-zone border-white/15 bg-white/5 text-white/40 hover:border-samred/60 ${drag?'border-samred/60':''}`}
+                  <label className="text-[0.6rem] font-mono text-white uppercase tracking-widest block mb-1.5">CV / Hoja de Vida</label>
+                  <div className={`upload-zone border-white/30 bg-white/10 text-white hover:border-samred/60 ${drag?'border-samred/60':''}`}
                     onDragOver={e=>{e.preventDefault();setDrag(true)}} onDragLeave={()=>setDrag(false)}
                     onDrop={e=>{e.preventDefault();setDrag(false);const f=e.dataTransfer.files[0];if(f)setJobForm(jf=>({...jf,cv:f}))}}
                     onClick={()=>document.getElementById('cv-input').click()}>

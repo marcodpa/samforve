@@ -1622,7 +1622,7 @@ function PageContacto() {
           </div>
           {/* Decorative photo — turbina */}
           <div className="relative rounded overflow-hidden" style={{ height: '220px' }}>
-            <img src="/ct-turbina.webp" alt="Reemplazo Turbina SAMFOR" className="w-full h-full object-cover object-center" loading="lazy" />
+            <img src="/ct-turbina2.webp" alt="Técnico SAMFOR en campo" className="w-full h-full object-cover object-center" loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-t from-dark/60 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-samred" />
             <div className="absolute bottom-4 left-5">

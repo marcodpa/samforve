@@ -770,18 +770,11 @@ function PageInicio({ setPage }) {
 
   const heroSlides = ['/hero.jpg', '/hero2.jpg', '/hero3.jpg']
   const [heroIdx, setHeroIdx] = useState(0)
-  const [heroPrev, setHeroPrev] = useState(null)
-  const [heroFading, setHeroFading] = useState(false)
 
   useEffect(() => {
-    const t = setInterval(() => {
-      setHeroPrev(heroIdx)
-      setHeroFading(true)
-      setHeroIdx(i => (i + 1) % heroSlides.length)
-      setTimeout(() => { setHeroPrev(null); setHeroFading(false) }, 900)
-    }, 5000)
+    const t = setInterval(() => setHeroIdx(i => (i + 1) % heroSlides.length), 5000)
     return () => clearInterval(t)
-  }, [heroIdx])
+  }, [])
 
   return (
     <div>
@@ -789,27 +782,25 @@ function PageInicio({ setPage }) {
       <section className="relative flex flex-col items-start justify-end px-6 md:px-14 lg:px-20 pb-24 overflow-hidden"
         style={{ minHeight: '100dvh' }}
       >
-        {/* Slides */}
-        {heroPrev !== null && (
-          <div className="absolute inset-0 bg-center bg-cover" style={{ backgroundImage: `url("${heroSlides[heroPrev]}")` }} />
-        )}
-        <div
-          className="absolute inset-0 bg-center bg-cover transition-opacity duration-[900ms]"
-          style={{ backgroundImage: `url("${heroSlides[heroIdx]}")`, opacity: heroFading ? 0 : 1 }}
-        />
+        {/* All slides stacked — active one fades in, others fade out */}
+        {heroSlides.map((src, i) => (
+          <div key={src} className="absolute inset-0 bg-center bg-cover"
+            style={{ backgroundImage: `url("${src}")`, opacity: i === heroIdx ? 1 : 0, transition: 'opacity 1.2s ease-in-out', zIndex: i === heroIdx ? 1 : 0 }}
+          />
+        ))}
         {/* Overlay */}
-        <div className="absolute inset-0 bg-dark/60" />
+        <div className="absolute inset-0 bg-dark/60" style={{ zIndex: 2 }} />
 
         {/* Dots */}
-        <div className="absolute bottom-8 right-8 flex gap-2 z-10">
+        <div className="absolute bottom-8 right-8 flex gap-2" style={{ zIndex: 3 }}>
           {heroSlides.map((_, i) => (
-            <button key={i} onClick={() => { setHeroPrev(heroIdx); setHeroFading(true); setHeroIdx(i); setTimeout(() => { setHeroPrev(null); setHeroFading(false) }, 900) }}
+            <button key={i} onClick={() => setHeroIdx(i)}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${i === heroIdx ? 'bg-samred scale-125' : 'bg-white/40 hover:bg-white/70'}`}
             />
           ))}
         </div>
 
-        <div className="relative z-10 text-left">
+        <div className="relative text-left" style={{ zIndex: 3 }}>
           <div className="badge-since inline-flex items-center gap-2 bg-samred text-white text-[0.5625rem] font-mono font-semibold uppercase tracking-[0.15em] px-2 py-1 rounded mb-4">
             <span className="w-1 h-1 rounded-full bg-white" />Desde 1966
           </div>
@@ -821,7 +812,7 @@ function PageInicio({ setPage }) {
             <button onClick={() => setPage('quienes-somos')} className="btn-outline-white">Conócenos</button>
           </div>
         </div>
-        <div className="scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 select-none z-10">
+        <div className="scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 select-none" style={{ zIndex: 3 }}>
           <span className="text-white/40 text-[0.625rem] font-mono uppercase tracking-widest">Scroll</span>
           <ChevronDown size={14} className="text-white/40" />
         </div>

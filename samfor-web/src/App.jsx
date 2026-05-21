@@ -768,7 +768,7 @@ function PageInicio({ setPage }) {
     ALL_PROJECTS.find(p => p.id === 104), // Metro Maracaibo
   ]
 
-  const heroSlides = ['/hero.jpg', '/hero2.jpg', '/hero3.jpg']
+  const heroSlides = ['/hero.webp', '/hero2.webp', '/hero3.webp']
   const [heroIdx, setHeroIdx] = useState(0)
 
   useEffect(() => {
@@ -864,7 +864,7 @@ function PageInicio({ setPage }) {
           {/* RIGHT — photo, fills full column height */}
           <div className="relative hidden lg:block">
             <img
-              src="/services-photo.jpg"
+              src="/services-photo.webp"
               alt="Equipo SAMFOR en obra"
               className="absolute inset-0 w-full h-full object-cover object-center"
               loading="lazy"
@@ -973,7 +973,7 @@ function PageInicio({ setPage }) {
       <section className="relative overflow-hidden flex items-center justify-center px-4 md:px-8" style={{ minHeight: '60dvh' }}>
         {/* Photo */}
         <img
-          src="/cta-bg.jpg"
+          src="/cta-bg.webp"
           alt=""
           className="absolute inset-0 w-full h-full object-cover object-center"
           loading="lazy"
@@ -1047,7 +1047,7 @@ function PageProyectos({ onProjectOpen }) {
 
       {/* ── HERO ── */}
       <div className="relative overflow-hidden" style={{ height: 'calc(100dvh - 4rem)' }}>
-        <img src="/proyectos-hero.jpg" alt="SAMFOR Proyectos" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+        <img src="/proyectos-hero.webp" alt="SAMFOR Proyectos" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
         <div className="absolute inset-0 bg-gradient-to-r from-dark/95 via-dark/70 to-dark/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-transparent to-transparent" />
         <div className="absolute top-0 right-0 w-[3px] h-full bg-samred" />
@@ -1289,7 +1289,7 @@ function PageQuienesSomos({ setPage }) {
 
       {/* ── HERO — full-bleed, foto1 principal ── */}
       <section className="relative overflow-hidden" style={{ height: '100dvh' }}>
-        <img src="/qs-hero.jpg" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
+        <img src="/qs-hero.webp" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
         <div className="absolute inset-0 bg-gradient-to-r from-dark/85 via-dark/55 to-dark/10" />
         <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent" />
         {/* Content */}
@@ -1361,7 +1361,7 @@ function PageQuienesSomos({ setPage }) {
         </div>
         {/* Right — welding photo */}
         <div className="relative overflow-hidden" style={{ minHeight: '500px' }}>
-          <img src="/qs-welding.jpg" alt="Soldadores SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+          <img src="/qs-welding.webp" alt="Soldadores SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
           <div className="absolute inset-0 bg-gradient-to-l from-transparent to-dark/20" />
           <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-samred" />
         </div>
@@ -1395,7 +1395,7 @@ function PageQuienesSomos({ setPage }) {
       <section className="grid grid-cols-1 lg:grid-cols-2" style={{ minHeight: '75vh' }}>
         {/* Left — electrical photo */}
         <div className="relative overflow-hidden order-2 lg:order-1" style={{ minHeight: '420px' }}>
-          <img src="/qs-electrical.jpg" alt="Técnicos eléctricos SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+          <img src="/qs-electrical.webp" alt="Técnicos eléctricos SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
           <div className="absolute inset-0 bg-gradient-to-r from-transparent to-dark/20" />
           <div className="absolute top-0 left-0 bottom-0 w-[4px] bg-samred" />
           {/* Floating label */}
@@ -1547,7 +1547,7 @@ function PageContacto() {
 
       {/* ── HERO ── */}
       <section className="relative overflow-hidden" style={{ height: '100dvh' }}>
-        <img src="/ct-hero.jpg" alt="SAMFOR operaciones" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
+        <img src="/ct-hero.webp" alt="SAMFOR operaciones" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
         <div className="absolute inset-0 bg-gradient-to-r from-dark/90 via-dark/60 to-dark/20" />
         <div className="absolute inset-0 bg-gradient-to-t from-dark/50 via-transparent to-transparent" />
         <div className="relative h-full flex flex-col justify-end px-8 md:px-16 lg:px-24 pb-20">
@@ -1607,7 +1607,7 @@ function PageContacto() {
           </div>
           {/* Decorative photo — turbina */}
           <div className="relative rounded overflow-hidden" style={{ height: '220px' }}>
-            <img src="/ct-turbina.jpg" alt="Reemplazo Turbina SAMFOR" className="w-full h-full object-cover object-center" loading="lazy" />
+            <img src="/ct-turbina.webp" alt="Reemplazo Turbina SAMFOR" className="w-full h-full object-cover object-center" loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-t from-dark/60 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-samred" />
             <div className="absolute bottom-4 left-5">
@@ -1679,7 +1679,7 @@ function PageContacto() {
 
       {/* ── ÚNETE A SAMFOR — dark + foto equipo ── */}
       <section className="relative overflow-hidden" style={{ minHeight: '520px' }}>
-        <img src="/ct-jobs2.jpg" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+        <img src="/ct-jobs2.webp" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
         <div className="absolute inset-0 bg-gradient-to-r from-dark/92 via-dark/75 to-dark/30" />
         <div className="relative px-8 md:px-16 lg:px-24 py-20 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
 

@@ -710,13 +710,13 @@ function ClientsSection({ setPage }) {
           <div className="relative mb-4 overflow-hidden">
             <div className="flex gap-4 animate-[marquee_35s_linear_infinite]" style={{ width: 'max-content' }}>
               {[...row1, ...row1].map((c, i) => (
-                <div key={i} className="flex-shrink-0 flex items-center gap-3 bg-white/5 border border-white/10 rounded px-5 py-3 hover:border-samred/50 hover:bg-white/8 transition-all duration-200 group">
-                  <div className="w-10 h-10 rounded flex items-center justify-center overflow-hidden flex-shrink-0" style={{ background: c.bg === '#000' ? '#111' : '#fff' }}>
-                    <img src={c.img} alt={c.name} className="max-h-8 max-w-[2rem] object-contain" loading="lazy" />
+                <div key={i} className="flex-shrink-0 flex items-center gap-4 bg-white/5 border border-white/10 rounded px-7 py-4 hover:border-samred/50 hover:bg-white/8 transition-all duration-200 group">
+                  <div className="w-12 h-12 rounded flex items-center justify-center overflow-hidden flex-shrink-0" style={{ background: c.bg === '#000' ? '#111' : '#fff' }}>
+                    <img src={c.img} alt={c.name} className="max-h-9 max-w-[2.5rem] object-contain" loading="lazy" />
                   </div>
                   <div>
-                    <p className="font-sub font-bold text-xs uppercase tracking-wide text-white/80 group-hover:text-white transition-colors">{c.name}</p>
-                    <p className="text-white/35 text-[0.6rem] font-mono uppercase tracking-widest">{c.sector}</p>
+                    <p className="font-sub font-bold text-sm uppercase tracking-wide text-white/80 group-hover:text-white transition-colors">{c.name}</p>
+                    <p className="text-white/35 text-[0.65rem] font-mono uppercase tracking-widest">{c.sector}</p>
                   </div>
                 </div>
               ))}
@@ -727,13 +727,13 @@ function ClientsSection({ setPage }) {
           <div className="relative overflow-hidden">
             <div className="flex gap-4 animate-[marquee_45s_linear_infinite_reverse]" style={{ width: 'max-content' }}>
               {[...row2, ...row2].map((c, i) => (
-                <div key={i} className="flex-shrink-0 flex items-center gap-3 bg-white/5 border border-white/10 rounded px-5 py-3 hover:border-samred/50 transition-all duration-200 group">
-                  <div className="w-10 h-10 rounded flex items-center justify-center overflow-hidden flex-shrink-0" style={{ background: c.bg === '#000' ? '#111' : '#fff' }}>
-                    <img src={c.img} alt={c.name} className="max-h-8 max-w-[2rem] object-contain" loading="lazy" />
+                <div key={i} className="flex-shrink-0 flex items-center gap-4 bg-white/5 border border-white/10 rounded px-7 py-4 hover:border-samred/50 transition-all duration-200 group">
+                  <div className="w-12 h-12 rounded flex items-center justify-center overflow-hidden flex-shrink-0" style={{ background: c.bg === '#000' ? '#111' : '#fff' }}>
+                    <img src={c.img} alt={c.name} className="max-h-9 max-w-[2.5rem] object-contain" loading="lazy" />
                   </div>
                   <div>
-                    <p className="font-sub font-bold text-xs uppercase tracking-wide text-white/80 group-hover:text-white transition-colors">{c.name}</p>
-                    <p className="text-white/35 text-[0.6rem] font-mono uppercase tracking-widest">{c.sector}</p>
+                    <p className="font-sub font-bold text-sm uppercase tracking-wide text-white/80 group-hover:text-white transition-colors">{c.name}</p>
+                    <p className="text-white/35 text-[0.65rem] font-mono uppercase tracking-widest">{c.sector}</p>
                   </div>
                 </div>
               ))}

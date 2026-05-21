@@ -63,19 +63,19 @@ const CLIENT_GRID = [
   { img: '/clients/caf.png',             name: 'CAF',                sector: 'Finanzas',       bg: '#fff' },
   { img: '/clients/bnc.png',             name: 'BNC',                sector: 'Finanzas',       bg: '#fff' },
   // ── Internacional / ONU ──
-  { img: IMG(206),                       name: 'WFP / ONU',          sector: 'Internacional',  bg: '#fff' },
-  { img: IMG(211),                       name: 'UNHCR / ACNUR',      sector: 'Internacional',  bg: '#fff' },
+  { img: '/clients/wfp.png',             name: 'WFP / ONU',          sector: 'Internacional',  bg: '#fff' },
+  { img: '/clients/unhcr.png',           name: 'UNHCR / ACNUR',      sector: 'Internacional',  bg: '#fff' },
   // ── Transporte / Infraestructura ──
-  { img: IMG(219),                       name: 'Metro Maracaibo',    sector: 'Transporte',     bg: '#fff' },
-  { img: null,                           name: 'Fontur',             sector: 'Transporte',     bg: '#C8102E', accent: '#fff' },
+  { img: '/clients/metro-maracaibo.png', name: 'Metro Maracaibo',    sector: 'Transporte',     bg: '#fff' },
+  { img: '/clients/fontur.png',          name: 'Fontur',             sector: 'Transporte',     bg: '#fff' },
   { img: null,                           name: 'BAER',               sector: 'Transporte',     bg: '#003DA5', accent: '#fff' },
   // ── Energía eléctrica Venezuela ──
-  { img: null,                           name: 'Corpoelec',          sector: 'Electricidad',   bg: '#0057A8', accent: '#fff' },
-  { img: null,                           name: 'CVG EDELCA',         sector: 'Electricidad',   bg: '#006633', accent: '#fff' },
+  { img: '/clients/corpoelec.png',       name: 'Corpoelec',          sector: 'Electricidad',   bg: '#fff' },
+  { img: '/clients/cvg-edelca.png',      name: 'CVG EDELCA',         sector: 'Electricidad',   bg: '#fff' },
   // ── Industria / Consumo ──
-  { img: CB('pepsi.com'),                name: 'Pepsi-Cola',         sector: 'Industria',      bg: '#004B93' },
-  { img: null,                           name: 'Polar',              sector: 'Industria',      bg: '#003DA5', accent: '#fff' },
-  { img: null,                           name: 'C. Regional',        sector: 'Industria',      bg: '#C8102E', accent: '#fff' },
+  { img: '/clients/pepsi.png',           name: 'Pepsi-Cola',         sector: 'Industria',      bg: '#fff' },
+  { img: '/clients/polar.png',           name: 'Empresas Polar',     sector: 'Industria',      bg: '#fff' },
+  { img: '/clients/regional.png',        name: 'C. Regional',        sector: 'Industria',      bg: '#fff' },
   { img: null,                           name: 'Carbones del Guasare', sector: 'Minería',      bg: '#4A4A4A', accent: '#fff' },
   // ── Gobierno / Municipios ──
   { img: null,                           name: 'Gob. Falcón',        sector: 'Gobierno',       bg: '#007B3E', accent: '#fff' },

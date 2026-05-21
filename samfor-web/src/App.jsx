@@ -52,13 +52,9 @@ const CLIENT_GRID = [
   { img: CB('weatherford.com'),          name: 'Weatherford',        sector: 'Energía',        bg: '#fff' },
   { img: CB('gazprom.com'),              name: 'Gazprom',            sector: 'Energía',        bg: '#003DA5' },
   { img: CB('saipem.com'),               name: 'Petrex / Saipem',    sector: 'Energía',        bg: '#fff' },
-  { img: IMG(237),                       name: 'PetroCaribe',        sector: 'Energía',        bg: '#fff' },
-  { img: IMG(177),                       name: 'Lagoven',            sector: 'Energía',        bg: '#fff' },
   // ── Petroquímica ──
   { img: IMG(171),                       name: 'Pequiven',           sector: 'Petroquímica',   bg: '#fff' },
   { img: null,                           name: 'Cardón IV',          sector: 'Petroquímica',   bg: '#004B8D', accent: '#fff' },
-  { img: null,                           name: 'Maraven',            sector: 'Petroquímica',   bg: '#006633', accent: '#fff' },
-  { img: null,                           name: 'Suelopetrol',        sector: 'Petroquímica',   bg: '#003087', accent: '#fff' },
   { img: CB('polinter.com'),             name: 'Polinter',           sector: 'Petroquímica',   bg: '#fff' },
   // ── Servicios Oilfield ──
   { img: IMG(193),                       name: 'Baker Hughes',       sector: 'Servicios',      bg: '#000' },
@@ -76,9 +72,7 @@ const CLIENT_GRID = [
   { img: null,                           name: 'BAER',               sector: 'Transporte',     bg: '#003DA5', accent: '#fff' },
   // ── Energía eléctrica Venezuela ──
   { img: null,                           name: 'Corpoelec',          sector: 'Electricidad',   bg: '#0057A8', accent: '#fff' },
-  { img: null,                           name: 'Enelven',            sector: 'Electricidad',   bg: '#F6A800', accent: '#000' },
   { img: null,                           name: 'CVG EDELCA',         sector: 'Electricidad',   bg: '#006633', accent: '#fff' },
-  { img: null,                           name: 'Estizulia',          sector: 'Electricidad',   bg: '#FFCC00', accent: '#000' },
   // ── Industria / Consumo ──
   { img: CB('pepsi.com'),                name: 'Pepsi-Cola',         sector: 'Industria',      bg: '#004B93' },
   { img: null,                           name: 'Polar',              sector: 'Industria',      bg: '#003DA5', accent: '#fff' },

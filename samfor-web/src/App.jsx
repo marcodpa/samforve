@@ -1585,7 +1585,42 @@ function PageQuienesSomos({ setPage }) {
         </div>
       </section>
 
-      <ClientsSection setPage={setPage} />
+      {/* ── CLIENTES — grid estático ── */}
+      <section className="bg-dark py-14 md:py-24 px-5 md:px-16 lg:px-24">
+        <div className="max-w-7xl mx-auto">
+          <div className="scroll-reveal flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
+            <div>
+              <div className="flex items-center gap-3 mb-3">
+                <span className="h-[3px] w-10 bg-samred" />
+                <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Historial de clientes</span>
+              </div>
+              <h2 className="font-display text-[2.25rem] md:text-[3rem] text-white leading-none">NUESTROS<br />CLIENTES</h2>
+            </div>
+            <p className="text-white/40 text-sm max-w-xs leading-relaxed md:text-right">
+              Más de 50 empresas e instituciones del sector público, privado e internacional a lo largo de 59 años.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+            {CLIENT_GRID.map((c, i) => (
+              <div key={i} className="scroll-reveal flex flex-col items-center gap-3 bg-white/5 border border-white/10 rounded-lg px-4 py-5 hover:border-samred/40 hover:bg-white/8 transition-all duration-200" style={{ transitionDelay: `${(i % 12) * 40}ms` }}>
+                <div className="w-16 h-16 rounded-md flex items-center justify-center overflow-hidden flex-shrink-0 bg-white p-1.5">
+                  {c.img
+                    ? <img src={c.img} alt={c.name} className="max-h-full max-w-full object-contain" onError={e => { e.target.style.display='none'; e.target.nextSibling.style.display='flex' }} />
+                    : null
+                  }
+                  <span className={`${c.img ? 'hidden' : 'flex'} w-full h-full items-center justify-center font-display font-bold text-sm rounded`} style={{ background: c.bg || '#1a2233', color: c.accent || '#fff' }}>
+                    {c.name.split(/[\s/]+/).slice(0,2).map(w=>w[0]).join('').toUpperCase()}
+                  </span>
+                </div>
+                <div className="text-center">
+                  <p className="font-sub font-bold text-[0.65rem] uppercase tracking-wide text-white/75 leading-tight">{c.name}</p>
+                  <p className="text-white/30 text-[0.55rem] font-mono uppercase tracking-widest mt-0.5">{c.sector}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
     </div>
   )

@@ -1221,8 +1221,8 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
       </div>
 
       {/* ── PROYECTOS ── */}
-      <div className="bg-dark py-12 px-6 md:px-14 lg:px-20">
-        <div className="max-w-7xl mx-auto">
+      <div className="bg-dark py-12">
+        <div className="max-w-7xl mx-auto px-6 md:px-14 lg:px-20">
 
           {/* Header row */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
@@ -1295,48 +1295,50 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
               ))}
             </div>
 
-          ) : (
-            /* ── CARRUSEL ── */
-            <div className="overflow-hidden relative"
-              onMouseEnter={e => e.currentTarget.querySelector('.carousel-track').style.animationPlayState='paused'}
-              onMouseLeave={e => e.currentTarget.querySelector('.carousel-track').style.animationPlayState='running'}
+          ) : null}
+        </div>
+
+        {/* ── CARRUSEL — full width, fuera del contenedor con padding ── */}
+        {filtered.length > 0 && !listView && (
+          <div className="overflow-hidden relative mt-0"
+            onMouseEnter={e => e.currentTarget.querySelector('.carousel-track').style.animationPlayState='paused'}
+            onMouseLeave={e => e.currentTarget.querySelector('.carousel-track').style.animationPlayState='running'}
+          >
+            <div className="carousel-track flex gap-5"
+              style={{ width: 'max-content', animation: `marquee ${Math.max(filtered.length * 6, 40)}s linear infinite` }}
             >
-              <div className="carousel-track flex gap-5"
-                style={{ width: 'max-content', animation: `marquee ${Math.max(filtered.length * 6, 40)}s linear infinite` }}
-              >
-                {[...filtered, ...filtered].map((p, i) => (
-                  <div key={`${p.id}-${i}`}
-                    className="group flex-shrink-0 cursor-pointer rounded overflow-hidden bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300 flex flex-col"
-                    style={{ width: 'clamp(260px,26vw,420px)' }}
-                    onClick={() => openProject(p)}
-                  >
-                    <div className="relative overflow-hidden" style={{ height: 'clamp(180px,16vw,280px)' }}>
-                      <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-dark/85 via-dark/20 to-transparent" />
-                      <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot||'#C8102E' }} />
-                      {p.status === 'active' && (
-                        <div className="absolute top-3 right-3 flex items-center gap-1.5 bg-dark/70 backdrop-blur-sm px-2.5 py-1 rounded-full">
-                          <span className="w-1.5 h-1.5 rounded-full bg-green-400 dot-pulse" />
-                          <span className="text-green-400 text-[0.6rem] font-mono uppercase tracking-widest">Activo</span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="p-5 flex flex-col flex-1">
-                      <div className="mb-2"><DivisionBadge division={p.division} /></div>
-                      <h3 className="font-sub font-bold text-[1rem] uppercase tracking-wide text-white/80 group-hover:text-white transition-colors leading-snug mb-2 line-clamp-2">{p.title}</h3>
-                      <p className="text-white/35 text-xs flex-1">{p.client}</p>
-                      <div className="flex items-center gap-1.5 text-samred text-xs font-sub font-semibold uppercase tracking-widest mt-4 pt-4 border-t border-white/8 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        Ver detalle <ArrowRight size={12} />
+              {[...filtered, ...filtered].map((p, i) => (
+                <div key={`${p.id}-${i}`}
+                  className="group flex-shrink-0 cursor-pointer rounded overflow-hidden bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300 flex flex-col"
+                  style={{ width: 'clamp(260px,26vw,420px)' }}
+                  onClick={() => openProject(p)}
+                >
+                  <div className="relative overflow-hidden" style={{ height: 'clamp(180px,16vw,280px)' }}>
+                    <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-dark/85 via-dark/20 to-transparent" />
+                    <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot||'#C8102E' }} />
+                    {p.status === 'active' && (
+                      <div className="absolute top-3 right-3 flex items-center gap-1.5 bg-dark/70 backdrop-blur-sm px-2.5 py-1 rounded-full">
+                        <span className="w-1.5 h-1.5 rounded-full bg-green-400 dot-pulse" />
+                        <span className="text-green-400 text-[0.6rem] font-mono uppercase tracking-widest">Activo</span>
                       </div>
+                    )}
+                  </div>
+                  <div className="p-5 flex flex-col flex-1">
+                    <div className="mb-2"><DivisionBadge division={p.division} /></div>
+                    <h3 className="font-sub font-bold text-[1rem] uppercase tracking-wide text-white/80 group-hover:text-white transition-colors leading-snug mb-2 line-clamp-2">{p.title}</h3>
+                    <p className="text-white/35 text-xs flex-1">{p.client}</p>
+                    <div className="flex items-center gap-1.5 text-samred text-xs font-sub font-semibold uppercase tracking-widest mt-4 pt-4 border-t border-white/8 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      Ver detalle <ArrowRight size={12} />
                     </div>
                   </div>
-                ))}
-              </div>
-              <div className="absolute top-0 left-0 w-16 h-full bg-gradient-to-r from-dark to-transparent pointer-events-none" />
-              <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-dark to-transparent pointer-events-none" />
+                </div>
+              ))}
             </div>
-          )}
-        </div>
+            <div className="absolute top-0 left-0 w-16 h-full bg-gradient-to-r from-dark to-transparent pointer-events-none" />
+            <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-dark to-transparent pointer-events-none" />
+          </div>
+        )}
       </div>
 
     </div>

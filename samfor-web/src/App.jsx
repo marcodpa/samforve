@@ -769,21 +769,21 @@ function ClientsSection({ setPage }) {
 
           {/* Marquee row 1 — left to right */}
           <div className="relative mb-4 overflow-hidden">
-            <div className="flex gap-4 animate-[marquee_40s_linear_infinite]" style={{ width: 'max-content' }}>
+            <div className="marquee-auto flex gap-4 animate-[marquee_40s_linear_infinite]" style={{ width: 'max-content', willChange: 'transform', backfaceVisibility: 'hidden' }}>
               {[...row1, ...row1].map((c, i) => <ClientCard key={i} c={c} />)}
             </div>
           </div>
 
           {/* Marquee row 2 — right to left */}
           <div className="relative mb-4 overflow-hidden">
-            <div className="flex gap-4 animate-[marquee_50s_linear_infinite_reverse]" style={{ width: 'max-content' }}>
+            <div className="marquee-auto flex gap-4 animate-[marquee-reverse_50s_linear_infinite]" style={{ width: 'max-content', willChange: 'transform', backfaceVisibility: 'hidden' }}>
               {[...row2, ...row2].map((c, i) => <ClientCard key={i} c={c} />)}
             </div>
           </div>
 
           {/* Marquee row 3 — left to right */}
           <div className="relative overflow-hidden">
-            <div className="flex gap-4 animate-[marquee_45s_linear_infinite]" style={{ width: 'max-content' }}>
+            <div className="marquee-auto flex gap-4 animate-[marquee_45s_linear_infinite]" style={{ width: 'max-content', willChange: 'transform', backfaceVisibility: 'hidden' }}>
               {[...row3, ...row3].map((c, i) => <ClientCard key={i} c={c} />)}
             </div>
           </div>
@@ -1336,7 +1336,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
             onMouseLeave={e => e.currentTarget.querySelector('.carousel-track').style.animationPlayState='running'}
           >
             <div className="carousel-track flex gap-5"
-              style={{ width: 'max-content', animation: `marquee ${Math.max(filtered.length * 6, 40)}s linear infinite` }}
+              style={{ width: 'max-content', animation: `marquee ${Math.max(filtered.length * 6, 40)}s linear infinite`, willChange: 'transform', backfaceVisibility: 'hidden' }}
             >
               {[...filtered, ...filtered].map((p, i) => (
                 <div key={`${p.id}-${i}`}

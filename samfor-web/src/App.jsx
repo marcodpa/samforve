@@ -51,18 +51,17 @@ const CLIENT_GRID = [
   { img: '/clients/slb.png',             name: 'SLB',                sector: 'Energía',        bg: '#fff' },
   { img: '/clients/weatherford.png',     name: 'Weatherford',        sector: 'Energía',        bg: '#fff' },
   { img: '/clients/gazprom.png',         name: 'Gazprom',            sector: 'Energía',        bg: '#fff' },
-  { img: CB('saipem.com'),               name: 'Petrex / Saipem',    sector: 'Energía',        bg: '#fff' },
+  { img: '/clients/petrex.png',           name: 'Petrex',             sector: 'Energía',        bg: '#fff' },
   // ── Petroquímica ──
   { img: IMG(171),                       name: 'Pequiven',           sector: 'Petroquímica',   bg: '#fff' },
-  { img: null,                           name: 'Cardón IV',          sector: 'Petroquímica',   bg: '#004B8D', accent: '#fff' },
+  { img: '/clients/cardon-iv.png',       name: 'Cardón IV',          sector: 'Petroquímica',   bg: '#fff' },
   { img: CB('polinter.com'),             name: 'Polinter',           sector: 'Petroquímica',   bg: '#fff' },
   // ── Servicios Oilfield ──
-  { img: IMG(193),                       name: 'Baker Hughes',       sector: 'Servicios',      bg: '#000' },
-  { img: CB('slb.com'),                  name: 'Mi-SWACO',           sector: 'Servicios',      bg: '#00AEEF' },
+  { img: '/clients/baker-hughes.png',    name: 'Baker Hughes',       sector: 'Servicios',      bg: '#fff' },
+  { img: '/clients/mi-swaco.png',        name: 'Mi-SWACO',           sector: 'Servicios',      bg: '#fff' },
   // ── CAF / Instituciones financieras ──
-  { img: CB('caf.com'),                  name: 'CAF',                sector: 'Finanzas',       bg: '#003DA5' },
-  { img: null,                           name: 'BOD',                sector: 'Finanzas',       bg: '#E4002B', accent: '#fff' },
-  { img: null,                           name: 'BNC',                sector: 'Finanzas',       bg: '#003087', accent: '#fff' },
+  { img: '/clients/caf.png',             name: 'CAF',                sector: 'Finanzas',       bg: '#fff' },
+  { img: '/clients/bnc.png',             name: 'BNC',                sector: 'Finanzas',       bg: '#fff' },
   // ── Internacional / ONU ──
   { img: IMG(206),                       name: 'WFP / ONU',          sector: 'Internacional',  bg: '#fff' },
   { img: IMG(211),                       name: 'UNHCR / ACNUR',      sector: 'Internacional',  bg: '#fff' },

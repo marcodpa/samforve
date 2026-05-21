@@ -416,9 +416,9 @@ function CounterItem({ value, suffix, label }) {
     return () => io.disconnect()
   }, [])
   return (
-    <div ref={ref} className="text-center px-5 py-7 flex-1 min-w-[130px]">
-      <div className="font-display text-[3.5rem] md:text-[4rem] text-samred leading-none tabular-nums">{count}{suffix}</div>
-      <div className="font-sub text-xs font-semibold uppercase tracking-widest text-secondary mt-2">{label}</div>
+    <div ref={ref} className="text-center px-2 py-5 md:px-5 md:py-7 flex-1">
+      <div className="font-display text-[2rem] md:text-[4rem] text-samred leading-none tabular-nums">{count}{suffix}</div>
+      <div className="font-sub text-[0.55rem] md:text-xs font-semibold uppercase tracking-widest text-secondary mt-1 md:mt-2 leading-tight">{label}</div>
     </div>
   )
 }
@@ -869,7 +869,7 @@ function PageInicio({ setPage, navigateToProyectos }) {
       {/* METRICS */}
       <section className="border-y-[3px] border-samred bg-white">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="flex flex-wrap justify-around divide-x divide-border">
+          <div className="flex justify-around divide-x divide-border">
             {METRICS.map(m => <CounterItem key={m.label} {...m} />)}
           </div>
         </div>

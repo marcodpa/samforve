@@ -23,12 +23,12 @@ const DIVISION_META = {
 // ─── DATA ────────────────────────────────────────────────────────────────────
 
 const SERVICES = [
-  { icon: <Zap size={28}/>, title: 'Obras Eléctricas', desc: 'Diseño y construcción de plantas eléctricas, subestaciones, tendido de alta tensión, automatización industrial y sistemas SCADA.' },
-  { icon: <Building2 size={28}/>, title: 'Obras Civiles', desc: 'Movimiento de tierras, edificaciones, carreteras, puentes, muelles y construcción en plataformas petroleras y petroquímicas.' },
-  { icon: <Settings size={28}/>, title: 'Obras Mecánicas', desc: 'Oleoductos, acueductos, tanques, estaciones de bombeo, instalación de tuberías y mantenimiento de facilidades de producción.' },
-  { icon: <Truck size={28}/>, title: 'Transporte', desc: 'Transporte especializado de hidrocarburos, equipos industriales y personal. Cobertura terrestre, aérea y marítima en todo Venezuela.' },
-  { icon: <Leaf size={28}/>, title: 'Servicios Ambientales', desc: 'Manejadora de Desechos Peligrosos autorizada desde 1999. Recolección, transporte, tratamiento y disposición final conforme a normativas.' },
-  { icon: <Ship size={28}/>, title: 'Servicios Marítimos/Lacustres', desc: 'Operaciones en el Lago de Maracaibo, costas venezolanas y Archipiélago Los Monjes. Transporte hacia plataformas offshore con embarcaciones especializadas.' },
+  { icon: <Zap size={28}/>, title: 'Obras Eléctricas', division: 'Eléctricos', desc: 'Diseño y construcción de plantas eléctricas, subestaciones, tendido de alta tensión, automatización industrial y sistemas SCADA.' },
+  { icon: <Building2 size={28}/>, title: 'Obras Civiles', division: 'Civiles', desc: 'Movimiento de tierras, edificaciones, carreteras, puentes, muelles y construcción en plataformas petroleras y petroquímicas.' },
+  { icon: <Settings size={28}/>, title: 'Obras Mecánicas', division: 'Mecánicos', desc: 'Oleoductos, acueductos, tanques, estaciones de bombeo, instalación de tuberías y mantenimiento de facilidades de producción.' },
+  { icon: <Truck size={28}/>, title: 'Transporte', division: 'Transporte', desc: 'Transporte especializado de hidrocarburos, equipos industriales y personal. Cobertura terrestre, aérea y marítima en todo Venezuela.' },
+  { icon: <Leaf size={28}/>, title: 'Servicios Ambientales', division: 'Ambientales', desc: 'Manejadora de Desechos Peligrosos autorizada desde 1999. Recolección, transporte, tratamiento y disposición final conforme a normativas.' },
+  { icon: <Ship size={28}/>, title: 'Servicios Marítimos/Lacustres', division: 'Otras', desc: 'Operaciones en el Lago de Maracaibo, costas venezolanas y Archipiélago Los Monjes. Transporte hacia plataformas offshore con embarcaciones especializadas.' },
 ]
 
 const METRICS = [
@@ -808,7 +808,7 @@ function ClientsSection({ setPage }) {
 }
 
 // ─── PAGE: INICIO ─────────────────────────────────────────────────────────────
-function PageInicio({ setPage }) {
+function PageInicio({ setPage, navigateToProyectos }) {
   useScrollReveal()
   const featured = [
     ALL_PROJECTS.find(p => p.id === 1),   // Termoeléctrica Bajo Grande (active)
@@ -891,7 +891,7 @@ function PageInicio({ setPage }) {
             </div>
             <div className="stagger divide-y divide-white/10">
               {SERVICES.map((s, i) => (
-                <div key={s.title} className="group flex items-start gap-5 py-3 cursor-default transition-all duration-300">
+                <div key={s.title} className="group flex items-start gap-5 py-3 cursor-pointer transition-all duration-300" onClick={() => navigateToProyectos(s.division)}>
                   <span className="font-mono text-[0.625rem] text-white/25 group-hover:text-samred pt-1 transition-colors duration-300 flex-shrink-0 w-5">
                     {String(i + 1).padStart(2, '0')}
                   </span>
@@ -1043,9 +1043,9 @@ function PageInicio({ setPage }) {
 }
 
 // ─── PAGE: PROYECTOS ──────────────────────────────────────────────────────────
-function PageProyectos({ onProjectOpen }) {
+function PageProyectos({ onProjectOpen, initialDivision }) {
   useScrollReveal()
-  const [activeDivision, setActiveDivision] = useState('Todos')
+  const [activeDivision, setActiveDivision] = useState(initialDivision || 'Todos')
   const [statusFilter, setStatusFilter] = useState('Todos')
   const [selectedProject, setSelectedProject] = useState(null)
   const [listView, setListView] = useState(false)
@@ -1863,6 +1863,7 @@ export default function App() {
   const [page, setPage] = useState('inicio')
   const [scrolled, setScrolled] = useState(false)
   const [projectOpen, setProjectOpen] = useState(false)
+  const [initialDivision, setInitialDivision] = useState('Todos')
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
@@ -1875,9 +1876,14 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'instant' })
   }, [page])
 
+  const navigateToProyectos = (division) => {
+    setInitialDivision(division || 'Todos')
+    setPage('proyectos')
+  }
+
   const pages = {
-    inicio: <PageInicio setPage={setPage} />,
-    proyectos: <PageProyectos onProjectOpen={setProjectOpen} />,
+    inicio: <PageInicio setPage={setPage} navigateToProyectos={navigateToProyectos} />,
+    proyectos: <PageProyectos onProjectOpen={setProjectOpen} initialDivision={initialDivision} />,
     'quienes-somos': <PageQuienesSomos setPage={setPage} />,
     contacto: <PageContacto />,
   }

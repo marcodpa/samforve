@@ -1069,38 +1069,43 @@ function PageServicios({ initialService }) {
           </div>
         </section>
 
-        {/* ── CAPACIDADES — dark grid numerado ── */}
-        <section className="bg-dark py-14 md:py-24 px-5 md:px-16 lg:px-24">
-          <div className="max-w-7xl mx-auto">
-            <div className="scroll-reveal flex items-center gap-3 mb-14">
+        {/* ── CAPACIDADES — split foto vertical + lista ── */}
+        <section className="bg-dark grid grid-cols-1 lg:grid-cols-[1fr_420px] xl:grid-cols-[1fr_500px] min-h-[80vh]">
+
+          {/* LEFT — lista numerada */}
+          <div className="px-5 md:px-16 lg:px-20 py-14 md:py-24 flex flex-col justify-center">
+            <div className="scroll-reveal flex items-center gap-3 mb-4">
               <span className="h-[3px] w-10 bg-samred" />
-              <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Capacidades técnicas — {active}</span>
+              <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Capacidades técnicas</span>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-0 border border-white/10 rounded overflow-hidden">
+            <h3 className="scroll-reveal font-display text-[clamp(2rem,3.5vw,3rem)] text-white leading-none mb-12">{active.toUpperCase()}</h3>
+            <div className="divide-y divide-white/8">
               {detail.capabilities.map((cap, i) => (
-                <div key={i} className="scroll-reveal p-8 border-b border-r border-white/10" style={{ transitionDelay: `${i * 60}ms` }}>
-                  <div className="font-mono text-[0.6rem] text-samred/60 tracking-widest mb-3">{String(i + 1).padStart(2,'0')}</div>
-                  <div className="h-[2px] w-8 bg-samred mb-5" />
-                  <p className="text-white/70 text-sm leading-relaxed">{cap}</p>
+                <div key={i} className="scroll-reveal flex items-start gap-6 py-5 group" style={{ transitionDelay: `${i * 50}ms` }}>
+                  <span className="font-mono text-[0.6rem] text-samred/50 tracking-widest flex-shrink-0 mt-1 w-6">{String(i + 1).padStart(2,'0')}</span>
+                  <div className="flex-shrink-0 w-[2px] self-stretch bg-white/8 group-hover:bg-samred transition-colors duration-300" />
+                  <p className="text-white/65 text-[0.9375rem] leading-relaxed group-hover:text-white/90 transition-colors duration-300">{cap}</p>
                 </div>
               ))}
             </div>
           </div>
-        </section>
 
-        {/* ── GALERÍA — mosaico 4 fotos ── */}
-        <section className="grid grid-cols-2 lg:grid-cols-4" style={{ height: 'clamp(340px,45vw,580px)' }}>
-          {['/sv-photo4.webp','/sv-photo1.webp','/sv-photo2.webp','/sv-photo3.webp'].map((src, i) => (
-            <div key={i} className="relative overflow-hidden group">
-              <img src={src} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
-              <div className="absolute inset-0 bg-dark/30 group-hover:bg-dark/10 transition-colors duration-500" />
-              {i === 0 && (
-                <div className="absolute bottom-6 left-6">
-                  <span className="font-sub font-semibold text-[0.65rem] uppercase tracking-widest text-white/60">Nuestro trabajo en campo</span>
-                </div>
-              )}
+          {/* RIGHT — foto vertical sticky */}
+          <div className="relative hidden lg:block overflow-hidden">
+            <img src="/sv-photo3.webp" alt="Ingeniería SAMFOR"
+              className="absolute inset-0 w-full h-full object-cover object-center"
+              loading="lazy" />
+            {/* Gradient izq para fundir con el dark */}
+            <div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/20 to-transparent" />
+            {/* Gradient abajo */}
+            <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent" />
+            {/* Línea roja abajo */}
+            <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-samred" />
+            {/* Etiqueta */}
+            <div className="absolute bottom-8 right-8 text-right">
+              <span className="font-mono text-[0.55rem] uppercase tracking-widest text-white/40">Ingeniería de precisión</span>
             </div>
-          ))}
+          </div>
         </section>
 
         {/* ── PROYECTOS RELACIONADOS ── */}

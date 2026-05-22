@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import {
-  Zap, Building2, Settings, Truck, Leaf, Ship,
+  Zap, Building2, Settings, Truck, Leaf, Ship, Cpu,
   ChevronRight, Menu, X, ArrowRight, MapPin, Phone, Mail, Globe,
   Upload, CheckCircle, Award, Target, Plus,
   Shield, Star, ChevronDown, Users, Wrench, LayoutGrid, List
@@ -18,6 +18,7 @@ const DIVISION_META = {
   'Transporte':      { label: 'División Transporte',   icon: <Truck size={16}/>,      color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E' },
   'Ambientales':     { label: 'Servicios Ambientales', icon: <Leaf size={16}/>,       color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E' },
   'Otras':           { label: 'Otras Divisiones',      icon: <Ship size={16}/>,       color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E' },
+  'Automatización':  { label: 'Automatización y Control', icon: <Cpu size={16}/>,    color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E' },
 }
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
@@ -29,7 +30,117 @@ const SERVICES = [
   { icon: <Truck size={28}/>, title: 'Transporte', division: 'Transporte', desc: 'Transporte especializado de hidrocarburos, equipos industriales y personal. Cobertura terrestre, aérea y marítima en todo Venezuela.' },
   { icon: <Leaf size={28}/>, title: 'Servicios Ambientales', division: 'Ambientales', desc: 'Manejadora de Desechos Peligrosos autorizada desde 1999. Recolección, transporte, tratamiento y disposición final conforme a normativas.' },
   { icon: <Ship size={28}/>, title: 'Servicios Marítimos/Lacustres', division: 'Otras', desc: 'Operaciones en el Lago de Maracaibo, costas venezolanas y Archipiélago Los Monjes. Transporte hacia plataformas offshore con embarcaciones especializadas.' },
+  { icon: <Cpu size={28}/>, title: 'Automatización y Control', division: 'Automatización', desc: 'Sistemas PLC/DCS, instrumentación industrial, SCADA, control de procesos y redes industriales para facilidades petroleras y petroquímicas.' },
 ]
+
+const SERVICES_DETAIL = {
+  'Obras Eléctricas': {
+    heroImg: '/qs-electrical.webp',
+    tagline: 'Energía y potencia para la industria',
+    longDesc: 'SAMFOR diseña, construye y mantiene instalaciones eléctricas de alta complejidad para la industria petrolera, petroquímica y de servicios públicos. Con más de 59 años de experiencia, nuestro equipo ejecuta proyectos desde subestaciones de transmisión hasta sistemas de automatización industrial, garantizando continuidad operativa y estándares internacionales.',
+    capabilities: [
+      'Subestaciones de alta, media y baja tensión',
+      'Tendido de líneas de transmisión y distribución',
+      'Sistemas SCADA e instrumentación eléctrica',
+      'Instalaciones eléctricas en facilidades industriales',
+      'Iluminación industrial y perimetral',
+      'Mantenimiento predictivo, preventivo y correctivo',
+      'Pruebas y puesta en servicio de equipos eléctricos',
+    ],
+    division: 'Eléctricos',
+  },
+  'Obras Civiles': {
+    heroImg: '/proyectos-hero.webp',
+    tagline: 'Infraestructura que soporta la industria',
+    longDesc: 'Ejecutamos obras civiles de gran envergadura para el sector energético, petroquímico y de infraestructura pública. Desde movimiento de tierras y fundaciones hasta edificaciones completas, carreteras industriales y estructuras costeras, SAMFOR aporta ingeniería, equipos propios y personal altamente calificado.',
+    capabilities: [
+      'Movimiento de tierras y excavaciones',
+      'Edificaciones industriales y administrativas',
+      'Carreteras, accesos y plataformas',
+      'Puentes y obras de arte vial',
+      'Muelles y estructuras costeras',
+      'Obras en plataformas petroleras',
+      'Fundaciones especiales y estructuras de concreto',
+    ],
+    division: 'Civiles',
+  },
+  'Obras Mecánicas': {
+    heroImg: '/services-photo.webp',
+    tagline: 'Ingeniería mecánica de alto desempeño',
+    longDesc: 'Especialistas en la construcción y mantenimiento de facilidades de producción, sistemas de tuberías y equipos mecánicos rotativos. SAMFOR garantiza la integridad mecánica de plantas y campos a través de procedimientos rigurosos de inspección, soldadura certificada y montaje de equipos.',
+    capabilities: [
+      'Oleoductos, gasoductos y poliductos',
+      'Tanques de almacenamiento de hidrocarburos',
+      'Estaciones de bombeo y compresión',
+      'Instalación de tuberías en facilidades',
+      'Mantenimiento de plantas de proceso',
+      'Montaje de equipos rotativos y estáticos',
+      'Inspección y pruebas hidrostáticas',
+    ],
+    division: 'Mecánicos',
+  },
+  'Transporte': {
+    heroImg: '/cta-bg.webp',
+    tagline: 'Logística especializada en todo Venezuela',
+    longDesc: 'Contamos con una flota de vehículos especializados y embarcaciones para el transporte seguro de hidrocarburos, equipos industriales y personal. Operamos en todo el territorio venezolano con cobertura terrestre, marítima y lacustre, cumpliendo las más estrictas normas de seguridad industrial y transporte de materiales peligrosos.',
+    capabilities: [
+      'Transporte terrestre de hidrocarburos',
+      'Transporte de equipos y materiales industriales',
+      'Transporte de personal operativo',
+      'Logística y cadena de suministro',
+      'Vehículos especializados certificados',
+      'Operadores con licencias especiales',
+      'Gestión de manifiestos y documentación legal',
+    ],
+    division: 'Transporte',
+  },
+  'Servicios Ambientales': {
+    heroImg: '/qs-hero.webp',
+    tagline: 'Gestión ambiental responsable desde 1999',
+    longDesc: 'SAMFOR es una Manejadora de Desechos Peligrosos autorizada por el Ministerio del Ecosistema desde 1999. Ofrecemos soluciones integrales para el manejo, tratamiento y disposición final de residuos industriales, garantizando cumplimiento de normativas ambientales venezolanas e internacionales.',
+    capabilities: [
+      'Recolección y transporte de desechos peligrosos',
+      'Tratamiento físico-químico de efluentes',
+      'Disposición final en rellenos autorizados',
+      'Auditorías e informes ambientales',
+      'Remediación de suelos contaminados',
+      'Manejo de derrames de hidrocarburos',
+      'Capacitación en gestión ambiental',
+    ],
+    division: 'Ambientales',
+  },
+  'Servicios Marítimos/Lacustres': {
+    heroImg: '/hero2.webp',
+    tagline: 'Operaciones en el Lago y costas venezolanas',
+    longDesc: 'Con décadas de presencia en el Lago de Maracaibo y las costas venezolanas, SAMFOR opera embarcaciones especializadas para el transporte de personal, equipos y materiales hacia plataformas offshore. Nuestras operaciones cubren desde el Lago de Maracaibo hasta el Archipiélago Los Monjes y el Golfo de Venezuela.',
+    capabilities: [
+      'Transporte a plataformas offshore',
+      'Operaciones en Lago de Maracaibo',
+      'Embarcaciones especializadas certificadas',
+      'Transporte de personal y equipos',
+      'Operaciones en Los Monjes y Campo Perla',
+      'Tripulaciones certificadas PDVSA',
+      'Servicio 24/7 con embarcaciones de respaldo',
+    ],
+    division: 'Otras',
+  },
+  'Automatización y Control': {
+    heroImg: '/qs-electrical.webp',
+    tagline: 'Inteligencia industrial para procesos críticos',
+    longDesc: 'SAMFOR implementa soluciones de automatización y control para la industria petrolera y petroquímica venezolana. Desde sistemas PLC/DCS hasta plataformas SCADA completas, nuestro equipo de ingenieros especializados garantiza la integración, programación y puesta en marcha de sistemas de control de última generación.',
+    capabilities: [
+      'Sistemas PLC (Allen-Bradley, Siemens, Schneider)',
+      'Sistemas DCS y control distribuido',
+      'Plataformas SCADA para supervisión remota',
+      'Instrumentación industrial de campo',
+      'Redes industriales Ethernet/IP, Profibus, Modbus',
+      'HMI y paneles de operación local',
+      'Integración con sistemas ERP y MES',
+      'Mantenimiento y soporte de sistemas de control',
+    ],
+    division: 'Automatización',
+  },
+}
 
 const METRICS = [
   { value: 59, suffix: '', label: 'Años de experiencia' },
@@ -359,6 +470,31 @@ const ALL_PROJECTS = [
     desc: 'Operaciones marítimas y lacustres en el Lago de Maracaibo y costas de Venezuela. Transporte de personal y equipos.',
     detail: 'Más de 59 años de operaciones vinculadas con las costas venezolanas, el Lago de Maracaibo y el Archipiélago Los Monjes.',
   },
+  // ── AUTOMATIZACIÓN Y CONTROL ──
+  {
+    id: 301, status: 'active', division: 'Automatización',
+    client: 'Chevron Global Technology Service Company',
+    title: 'Sistema SCADA Planta Termoeléctrica Bajo Grande',
+    img: IMG(28),
+    desc: 'Implementación y mantenimiento de sistema SCADA para supervisión y control de turbogeneradores, sistemas eléctricos y utilidades de la planta.',
+    detail: 'Integración de PLCs Allen-Bradley con HMI FactoryTalk. Comunicación Ethernet/IP y ControlNet. Monitoreo en tiempo real de 1,200+ variables de proceso.',
+  },
+  {
+    id: 302, status: 'active', division: 'Automatización',
+    client: 'Chevron Global Technology Service Company',
+    title: 'Automatización Sistema de Agua Campo Boscán',
+    img: IMG(62),
+    desc: 'Automatización integral del sistema de distribución y tratamiento de agua para Campo Boscán. PLCs, instrumentación de campo y telemetría.',
+    detail: 'Instalación de sensores de flujo, presión y nivel. Programación de PLC Siemens S7-300. Interfaz HMI local y remota con reportes automáticos de operación.',
+  },
+  {
+    id: 303, status: 'completed', division: 'Automatización',
+    client: 'CORPOELEC',
+    title: 'Sistema de Control y Protección Subestación 155 KV',
+    img: IMG(23),
+    desc: 'Sistema de protección de relés digitales y control automatizado para la nueva subestación 155 KV en la Costa Oriental del Lago.',
+    detail: 'Relés de protección SEL-700G y SEL-451. Sistema de control distribuido con comunicación IEC 61850. Panel de supervisión local y enlace SCADA a centro de control.',
+  },
 ]
 
 const TIMELINE = [
@@ -439,6 +575,7 @@ function Navbar({ page, setPage, scrolled, forceDark }) {
   const [open, setOpen] = useState(false)
   const links = [
     { id: 'inicio', label: 'Inicio' },
+    { id: 'servicios', label: 'Servicios' },
     { id: 'proyectos', label: 'Proyectos' },
     { id: 'quienes-somos', label: 'Quiénes Somos' },
     { id: 'contacto', label: 'Contacto' },
@@ -813,8 +950,146 @@ function ClientsSection({ setPage }) {
   )
 }
 
+// ─── PAGE: SERVICIOS ──────────────────────────────────────────────────────────
+function PageServicios({ initialService }) {
+  useScrollReveal()
+  const [active, setActive] = useState(initialService || SERVICES[0].title)
+  const detail = SERVICES_DETAIL[active] || SERVICES_DETAIL[SERVICES[0].title]
+  const relatedProjects = ALL_PROJECTS.filter(p => p.division === detail.division).slice(0, 8)
+
+  return (
+    <div className="bg-dark min-h-screen">
+
+      {/* HERO */}
+      <div className="relative overflow-hidden" style={{ height: '45dvh', minHeight: '280px' }}>
+        <img
+          key={detail.heroImg}
+          src={detail.heroImg}
+          alt={active}
+          className="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-700"
+          loading="eager"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-dark/95 via-dark/70 to-dark/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-dark/60 to-transparent" />
+        <div className="absolute inset-0 flex flex-col justify-end px-6 md:px-14 lg:px-20 pb-10" style={{ zIndex: 2 }}>
+          <div className="flex items-center gap-3 mb-3">
+            <span className="h-[3px] w-8 bg-samred" />
+            <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Lo que hacemos</span>
+          </div>
+          <h1 className="font-display text-[clamp(2rem,5vw,3.5rem)] text-white leading-none">NUESTROS<br />SERVICIOS</h1>
+        </div>
+      </div>
+
+      {/* TABS + DETAIL */}
+      <div className="flex flex-col lg:flex-row" style={{ minHeight: '55dvh' }}>
+
+        {/* LEFT — service tabs */}
+        <div className="lg:w-[300px] xl:w-[340px] flex-shrink-0 border-b lg:border-b-0 lg:border-r border-white/10 bg-[#0a0d12]">
+          {/* Mobile: horizontal scroll */}
+          <div className="lg:hidden overflow-x-auto flex" style={{ scrollbarWidth: 'none' }}>
+            {SERVICES.map((s) => (
+              <button key={s.title}
+                onClick={() => setActive(s.title)}
+                className={`flex-shrink-0 flex items-center gap-2 px-5 py-4 border-b-2 text-xs font-sub font-bold uppercase tracking-widest transition-all duration-200 whitespace-nowrap
+                  ${active === s.title ? 'border-samred text-white bg-white/5' : 'border-transparent text-white/40 hover:text-white/70'}`}
+              >
+                <span className={active === s.title ? 'text-samred' : 'text-white/30'}>{s.icon}</span>
+                {s.title}
+              </button>
+            ))}
+          </div>
+          {/* Desktop: vertical list */}
+          <div className="hidden lg:flex flex-col py-4">
+            {SERVICES.map((s, i) => (
+              <button key={s.title}
+                onClick={() => setActive(s.title)}
+                className={`group flex items-start gap-4 px-6 py-4 text-left border-l-[3px] transition-all duration-200
+                  ${active === s.title ? 'border-samred bg-white/5' : 'border-transparent hover:bg-white/3'}`}
+              >
+                <span className={`flex-shrink-0 mt-0.5 transition-colors duration-200 ${active === s.title ? 'text-samred' : 'text-white/30 group-hover:text-white/60'}`}>{s.icon}</span>
+                <div>
+                  <p className={`font-sub font-bold text-[0.8125rem] uppercase tracking-wider transition-colors duration-200 ${active === s.title ? 'text-white' : 'text-white/55 group-hover:text-white/80'}`}>{s.title}</p>
+                  <p className="font-mono text-[0.6rem] text-white/25 uppercase tracking-widest mt-0.5">{ALL_PROJECTS.filter(p => p.division === s.division).length} proyectos</p>
+                </div>
+                {active === s.title && <ArrowRight size={14} className="text-samred ml-auto flex-shrink-0 mt-1" />}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* RIGHT — service detail */}
+        <div className="flex-1 overflow-hidden">
+          <div className="px-6 md:px-10 lg:px-14 py-10">
+            {/* Service header */}
+            <div className="mb-8 scroll-reveal">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-samred">{SERVICES.find(s => s.title === active)?.icon}</span>
+                <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">{detail.tagline}</span>
+              </div>
+              <h2 className="font-display text-[clamp(1.75rem,3.5vw,2.75rem)] text-white leading-none mb-5">{active.toUpperCase()}</h2>
+              <p className="text-white/60 text-[0.9375rem] leading-relaxed max-w-2xl">{detail.longDesc}</p>
+            </div>
+
+            {/* Capabilities grid */}
+            <div className="mb-10 scroll-reveal">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="h-[2px] w-6 bg-samred" />
+                <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-white/50">Capacidades</span>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
+                {detail.capabilities.map((cap, i) => (
+                  <div key={i} className="flex items-start gap-3 py-2 border-b border-white/8">
+                    <span className="w-1 h-1 rounded-full bg-samred flex-shrink-0 mt-2" />
+                    <p className="text-white/70 text-sm leading-relaxed">{cap}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Related projects */}
+            {relatedProjects.length > 0 && (
+              <div className="scroll-reveal">
+                <div className="flex items-center gap-3 mb-5">
+                  <span className="h-[2px] w-6 bg-samred" />
+                  <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-white/50">Proyectos relacionados</span>
+                </div>
+                <div className="overflow-x-auto pb-3" style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
+                  <div className="flex gap-4" style={{ width: 'max-content' }}>
+                    {relatedProjects.map(p => (
+                      <div key={p.id}
+                        className="flex-shrink-0 group rounded overflow-hidden bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300"
+                        style={{ width: '260px' }}
+                      >
+                        <div className="relative overflow-hidden" style={{ height: '150px' }}>
+                          <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent" />
+                          <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot || '#C8102E' }} />
+                          {p.status === 'active' && (
+                            <div className="absolute top-2 right-2 flex items-center gap-1 bg-dark/70 px-2 py-0.5 rounded-full">
+                              <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
+                              <span className="text-green-400 text-[0.55rem] font-mono uppercase tracking-widest">Activo</span>
+                            </div>
+                          )}
+                        </div>
+                        <div className="p-4">
+                          <h4 className="font-sub font-bold text-[0.8125rem] uppercase tracking-wide text-white/85 leading-snug mb-1 line-clamp-2">{p.title}</h4>
+                          <p className="text-white/35 text-[0.7rem]">{p.client}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 // ─── PAGE: INICIO ─────────────────────────────────────────────────────────────
-function PageInicio({ setPage, navigateToProyectos }) {
+function PageInicio({ setPage, navigateToServicios }) {
   useScrollReveal()
   const featured = [
     ALL_PROJECTS.find(p => p.id === 1),   // Termoeléctrica Bajo Grande (active)
@@ -911,7 +1186,7 @@ function PageInicio({ setPage, navigateToProyectos }) {
             </div>
             <div className="stagger divide-y divide-white/10 pb-2 lg:pb-0">
               {SERVICES.map((s, i) => (
-                <div key={s.title} className="group flex items-start gap-5 py-3 cursor-pointer transition-all duration-300" onClick={() => navigateToProyectos(s.division)}>
+                <div key={s.title} className="group flex items-start gap-5 py-3 cursor-pointer transition-all duration-300" onClick={() => navigateToServicios(s.title)}>
                   <span className="font-mono text-[0.625rem] text-white/25 group-hover:text-samred pt-1 transition-colors duration-300 flex-shrink-0 w-5">
                     {String(i + 1).padStart(2, '0')}
                   </span>
@@ -1919,6 +2194,7 @@ export default function App() {
   const [scrolled, setScrolled] = useState(false)
   const [projectOpen, setProjectOpen] = useState(false)
   const [initialDivision, setInitialDivision] = useState('Todos')
+  const [initialService, setInitialService] = useState(SERVICES[0].title)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
@@ -1936,8 +2212,14 @@ export default function App() {
     setPage('proyectos')
   }
 
+  const navigateToServicios = (serviceTitle) => {
+    setInitialService(serviceTitle || SERVICES[0].title)
+    setPage('servicios')
+  }
+
   const pages = {
-    inicio: <PageInicio setPage={setPage} navigateToProyectos={navigateToProyectos} />,
+    inicio: <PageInicio setPage={setPage} navigateToServicios={navigateToServicios} />,
+    servicios: <PageServicios initialService={initialService} />,
     proyectos: <PageProyectos onProjectOpen={setProjectOpen} initialDivision={initialDivision} />,
     'quienes-somos': <PageQuienesSomos setPage={setPage} />,
     contacto: <PageContacto />,

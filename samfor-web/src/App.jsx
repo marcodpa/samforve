@@ -80,7 +80,7 @@ const SERVICES_DETAIL = {
     division: 'Mecánicos',
   },
   'Transporte': {
-    heroImg: '/cta-bg.webp',
+    heroImg: '/sv-transporte.webp',
     tagline: 'Logística especializada en todo Venezuela',
     longDesc: 'Contamos con una flota de vehículos especializados y embarcaciones para el transporte seguro de hidrocarburos, equipos industriales y personal. Operamos en todo el territorio venezolano con cobertura terrestre, marítima y lacustre, cumpliendo las más estrictas normas de seguridad industrial y transporte de materiales peligrosos.',
     capabilities: [
@@ -956,7 +956,7 @@ const SV_CARD_PHOTOS = {
   'Obras Eléctricas':          '/sv-photo1.webp',
   'Obras Civiles':             '/proyectos-hero.webp',
   'Obras Mecánicas':           '/sv-photo2.webp',
-  'Transporte':                '/cta-bg.webp',
+  'Transporte':                '/sv-transporte.webp',
   'Servicios Ambientales':     '/qs-hero.webp',
   'Servicios Marítimos/Lacustres': '/hero2.webp',
   'Automatización y Control':  '/sv-photo3.webp',

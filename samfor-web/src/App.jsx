@@ -959,131 +959,195 @@ function PageServicios({ initialService }) {
   const relatedProjects = ALL_PROJECTS.filter(p => p.division === detail.division).slice(0, 8)
 
   return (
-    <div className="bg-dark min-h-screen">
+    <div className="pt-24">
 
-      {/* HERO */}
-      <div className="relative overflow-hidden" style={{ height: '45dvh', minHeight: '280px' }}>
-        <img
-          key={detail.heroImg}
-          src={detail.heroImg}
-          alt={active}
-          className="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-700"
-          loading="eager"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-dark/95 via-dark/70 to-dark/30" />
-        <div className="absolute inset-0 bg-gradient-to-t from-dark/60 to-transparent" />
-        <div className="absolute inset-0 flex flex-col justify-end px-6 md:px-14 lg:px-20 pb-10" style={{ zIndex: 2 }}>
-          <div className="flex items-center gap-3 mb-3">
-            <span className="h-[3px] w-8 bg-samred" />
-            <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Lo que hacemos</span>
+      {/* ── HERO — full-bleed foto atardecer ── */}
+      <section className="relative overflow-hidden" style={{ height: '100dvh' }}>
+        <img src="/sv-photo4.webp" alt="SAMFOR Servicios" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
+        <div className="absolute inset-0 bg-gradient-to-r from-dark/90 via-dark/60 to-dark/15" />
+        <div className="absolute inset-0 bg-gradient-to-t from-dark/70 via-transparent to-transparent" />
+        <div className="relative h-full flex flex-col justify-end px-5 md:px-16 lg:px-24 pb-14 md:pb-20">
+          <div className="max-w-3xl">
+            <div className="flex items-center gap-3 mb-5">
+              <span className="h-[3px] w-10 bg-samred" />
+              <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.25em] text-white/55">Lo que hacemos · {SERVICES.length} líneas de servicio</span>
+            </div>
+            <h1 className="font-display text-[clamp(3rem,7vw,6rem)] text-white leading-none tracking-wide mb-6">
+              INGENIERÍA.<br />
+              <span className="text-samred">EXPERIENCIA.</span><br />
+              RESULTADOS.
+            </h1>
+            <p className="text-white/65 text-lg max-w-xl leading-relaxed mb-10">
+              Más de 59 años ejecutando obras y servicios de alta complejidad para la industria petrolera, petroquímica y civil en Venezuela.
+            </p>
+            <div className="flex flex-wrap gap-8">
+              {[['59', 'Años de trayectoria'], ['+100', 'Proyectos ejecutados'], [String(SERVICES.length), 'Divisiones activas']].map(([n, l]) => (
+                <div key={l}>
+                  <div className="font-display text-[2rem] text-samred leading-none">{n}</div>
+                  <div className="font-sub text-[0.65rem] uppercase tracking-widest text-white/45 mt-1 max-w-[8rem] leading-snug">{l}</div>
+                </div>
+              ))}
+            </div>
           </div>
-          <h1 className="font-display text-[clamp(2rem,5vw,3.5rem)] text-white leading-none">NUESTROS<br />SERVICIOS</h1>
         </div>
-      </div>
+        <div className="absolute bottom-7 right-10 flex flex-col items-center gap-1.5 opacity-40">
+          <div className="w-[1px] h-10 bg-white animate-pulse" />
+          <span className="font-mono text-[0.55rem] uppercase tracking-widest text-white rotate-90 translate-x-3">scroll</span>
+        </div>
+      </section>
 
-      {/* TABS + DETAIL */}
-      <div className="flex flex-col lg:flex-row" style={{ minHeight: '55dvh' }}>
-
-        {/* LEFT — service tabs */}
-        <div className="lg:w-[300px] xl:w-[340px] flex-shrink-0 border-b lg:border-b-0 lg:border-r border-white/10 bg-[#0a0d12]">
-          {/* Mobile: horizontal scroll */}
-          <div className="lg:hidden overflow-x-auto flex" style={{ scrollbarWidth: 'none' }}>
-            {SERVICES.map((s) => (
-              <button key={s.title}
-                onClick={() => setActive(s.title)}
-                className={`flex-shrink-0 flex items-center gap-2 px-5 py-4 border-b-2 text-xs font-sub font-bold uppercase tracking-widest transition-all duration-200 whitespace-nowrap
-                  ${active === s.title ? 'border-samred text-white bg-white/5' : 'border-transparent text-white/40 hover:text-white/70'}`}
-              >
-                <span className={active === s.title ? 'text-samred' : 'text-white/30'}>{s.icon}</span>
-                {s.title}
-              </button>
-            ))}
+      {/* ── SELECTOR DE SERVICIOS — grid numerado como misión/visión ── */}
+      <section className="bg-dark py-14 md:py-20 px-5 md:px-16 lg:px-24">
+        <div className="max-w-7xl mx-auto">
+          <div className="scroll-reveal flex items-center gap-3 mb-12">
+            <span className="h-[3px] w-10 bg-samred" />
+            <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Nuestras divisiones</span>
           </div>
-          {/* Desktop: vertical list */}
-          <div className="hidden lg:flex flex-col py-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 border border-white/10 rounded overflow-hidden">
             {SERVICES.map((s, i) => (
               <button key={s.title}
-                onClick={() => setActive(s.title)}
-                className={`group flex items-start gap-4 px-6 py-4 text-left border-l-[3px] transition-all duration-200
-                  ${active === s.title ? 'border-samred bg-white/5' : 'border-transparent hover:bg-white/3'}`}
+                onClick={() => { setActive(s.title); document.getElementById('sv-detalle')?.scrollIntoView({ behavior: 'smooth', block: 'start' }) }}
+                className={`scroll-reveal group text-left p-8 border-b sm:border-b border-r border-white/10 transition-all duration-300
+                  ${active === s.title ? 'bg-samred/10' : 'hover:bg-white/4'}`}
+                style={{ transitionDelay: `${i * 50}ms` }}
               >
-                <span className={`flex-shrink-0 mt-0.5 transition-colors duration-200 ${active === s.title ? 'text-samred' : 'text-white/30 group-hover:text-white/60'}`}>{s.icon}</span>
-                <div>
-                  <p className={`font-sub font-bold text-[0.8125rem] uppercase tracking-wider transition-colors duration-200 ${active === s.title ? 'text-white' : 'text-white/55 group-hover:text-white/80'}`}>{s.title}</p>
-                  <p className="font-mono text-[0.6rem] text-white/25 uppercase tracking-widest mt-0.5">{ALL_PROJECTS.filter(p => p.division === s.division).length} proyectos</p>
-                </div>
-                {active === s.title && <ArrowRight size={14} className="text-samred ml-auto flex-shrink-0 mt-1" />}
+                <div className="font-mono text-[0.6rem] text-samred/50 tracking-widest mb-4">{String(i + 1).padStart(2, '0')}</div>
+                <div className={`mb-4 transition-colors duration-300 ${active === s.title ? 'text-samred' : 'text-white/30 group-hover:text-white/70'}`}>{s.icon}</div>
+                <div className={`h-[2px] w-8 mb-4 transition-all duration-300 ${active === s.title ? 'bg-samred' : 'bg-white/15 group-hover:bg-white/40'}`} />
+                <p className={`font-display text-[1.1rem] leading-tight mb-2 transition-colors duration-300 ${active === s.title ? 'text-white' : 'text-white/70 group-hover:text-white'}`}>{s.title.toUpperCase()}</p>
+                <p className="text-white/35 text-xs leading-relaxed line-clamp-2">{s.desc}</p>
+                {active === s.title && <div className="mt-4 flex items-center gap-2 text-samred text-[0.65rem] font-sub font-bold uppercase tracking-widest"><span className="w-3 h-[1.5px] bg-samred" /> Activo</div>}
               </button>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* RIGHT — service detail */}
-        <div className="flex-1 overflow-hidden">
-          <div className="px-6 md:px-10 lg:px-14 py-10">
-            {/* Service header */}
-            <div className="mb-8 scroll-reveal">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-samred">{SERVICES.find(s => s.title === active)?.icon}</span>
-                <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">{detail.tagline}</span>
+      {/* ── DETALLE — split foto + texto ── */}
+      <div id="sv-detalle">
+
+        {/* Split: texto izquierda blanco / foto derecha */}
+        <section className="grid grid-cols-1 lg:grid-cols-2 lg:min-h-[85vh]">
+          <div className="bg-white flex items-center px-5 md:px-16 py-14 md:py-20 order-2 lg:order-1">
+            <div className="max-w-lg w-full">
+              <div className="flex items-center gap-3 mb-6">
+                <span className="h-[3px] w-10 bg-samred" />
+                <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">
+                  {String(activeIdx + 1).padStart(2,'0')} de {String(SERVICES.length).padStart(2,'0')} — Servicio activo
+                </span>
               </div>
-              <h2 className="font-display text-[clamp(1.75rem,3.5vw,2.75rem)] text-white leading-none mb-5">{active.toUpperCase()}</h2>
-              <p className="text-white/60 text-[0.9375rem] leading-relaxed max-w-2xl">{detail.longDesc}</p>
+              <div className="flex items-center gap-4 mb-3">
+                <span className="text-samred">{SERVICES[activeIdx]?.icon}</span>
+                <h2 className="font-display text-[clamp(2rem,4vw,3.25rem)] text-dark leading-none">{active.toUpperCase()}</h2>
+              </div>
+              <p className="text-samred font-sub font-semibold text-[0.75rem] uppercase tracking-widest mb-6">{detail.tagline}</p>
+              <p className="text-secondary text-base leading-relaxed mb-10">{detail.longDesc}</p>
+              <div className="flex items-center gap-4">
+                {activeIdx > 0 && (
+                  <button onClick={() => { setActive(SERVICES[activeIdx - 1].title); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+                    className="flex items-center gap-2 text-[0.75rem] font-sub font-bold uppercase tracking-widest text-secondary border border-border px-4 py-2 rounded hover:border-dark hover:text-dark transition-all">
+                    ← Anterior
+                  </button>
+                )}
+                {activeIdx < SERVICES.length - 1 && (
+                  <button onClick={() => { setActive(SERVICES[activeIdx + 1].title); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+                    className="flex items-center gap-2 text-[0.75rem] font-sub font-bold uppercase tracking-widest text-white bg-samred border border-samred px-4 py-2 rounded hover:bg-red-700 transition-all ml-auto">
+                    Siguiente →
+                  </button>
+                )}
+              </div>
             </div>
+          </div>
+          <div className="relative overflow-hidden order-1 lg:order-2" style={{ minHeight: '400px' }}>
+            <img key={detail.heroImg} src={detail.heroImg} alt={active}
+              className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+            <div className="absolute inset-0 bg-gradient-to-l from-transparent to-dark/10" />
+            <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-samred" />
+            <div className="absolute top-6 left-6 bg-dark/75 backdrop-blur-sm px-4 py-2">
+              <span className="font-mono text-samred text-[0.6rem] uppercase tracking-widest">{String(activeIdx + 1).padStart(2,'0')} / {String(SERVICES.length).padStart(2,'0')}</span>
+            </div>
+          </div>
+        </section>
 
-            {/* Capabilities grid */}
-            <div className="mb-10 scroll-reveal">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="h-[2px] w-6 bg-samred" />
-                <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-white/50">Capacidades</span>
+        {/* ── CAPACIDADES — dark grid numerado ── */}
+        <section className="bg-dark py-14 md:py-24 px-5 md:px-16 lg:px-24">
+          <div className="max-w-7xl mx-auto">
+            <div className="scroll-reveal flex items-center gap-3 mb-14">
+              <span className="h-[3px] w-10 bg-samred" />
+              <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Capacidades técnicas — {active}</span>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-0 border border-white/10 rounded overflow-hidden">
+              {detail.capabilities.map((cap, i) => (
+                <div key={i} className="scroll-reveal p-8 border-b border-r border-white/10" style={{ transitionDelay: `${i * 60}ms` }}>
+                  <div className="font-mono text-[0.6rem] text-samred/60 tracking-widest mb-3">{String(i + 1).padStart(2,'0')}</div>
+                  <div className="h-[2px] w-8 bg-samred mb-5" />
+                  <p className="text-white/70 text-sm leading-relaxed">{cap}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── GALERÍA — mosaico 4 fotos ── */}
+        <section className="grid grid-cols-2 lg:grid-cols-4" style={{ height: 'clamp(340px,45vw,580px)' }}>
+          {['/sv-photo4.webp','/sv-photo1.webp','/sv-photo2.webp','/sv-photo3.webp'].map((src, i) => (
+            <div key={i} className="relative overflow-hidden group">
+              <img src={src} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
+              <div className="absolute inset-0 bg-dark/30 group-hover:bg-dark/10 transition-colors duration-500" />
+              {i === 0 && (
+                <div className="absolute bottom-6 left-6">
+                  <span className="font-sub font-semibold text-[0.65rem] uppercase tracking-widest text-white/60">Nuestro trabajo en campo</span>
+                </div>
+              )}
+            </div>
+          ))}
+        </section>
+
+        {/* ── PROYECTOS RELACIONADOS ── */}
+        {relatedProjects.length > 0 && (
+          <section className="bg-dark py-14 md:py-20">
+            <div className="max-w-7xl mx-auto px-5 md:px-16 lg:px-24 mb-10">
+              <div className="scroll-reveal flex items-center justify-between">
+                <div>
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="h-[3px] w-10 bg-samred" />
+                    <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Portafolio</span>
+                  </div>
+                  <h3 className="font-display text-[clamp(1.75rem,3vw,2.5rem)] text-white leading-none">PROYECTOS RELACIONADOS</h3>
+                </div>
+                <span className="font-mono text-xs text-white/25 hidden md:block">{relatedProjects.length} proyectos</span>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
-                {detail.capabilities.map((cap, i) => (
-                  <div key={i} className="flex items-start gap-3 py-2 border-b border-white/8">
-                    <span className="w-1 h-1 rounded-full bg-samred flex-shrink-0 mt-2" />
-                    <p className="text-white/70 text-sm leading-relaxed">{cap}</p>
+            </div>
+            <div className="overflow-hidden">
+              <div className="flex gap-5 px-5 md:px-16 lg:px-24"
+                style={{ width: 'max-content', animation: relatedProjects.length > 3 ? `marquee ${Math.round(relatedProjects.length * 300 / SPEED)}s linear infinite` : 'none', willChange: 'transform' }}>
+                {(relatedProjects.length > 3 ? [...relatedProjects, ...relatedProjects] : relatedProjects).map((p, i) => (
+                  <div key={`${p.id}-${i}`}
+                    className="flex-shrink-0 group rounded overflow-hidden bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300"
+                    style={{ width: '280px' }}>
+                    <div className="relative overflow-hidden" style={{ height: '180px' }}>
+                      <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-dark/85 to-transparent" />
+                      <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot || '#C8102E' }} />
+                      {p.status === 'active' && (
+                        <div className="absolute top-3 right-3 flex items-center gap-1 bg-dark/70 backdrop-blur-sm px-2 py-0.5 rounded-full">
+                          <span className="w-1.5 h-1.5 rounded-full bg-green-400 dot-pulse" />
+                          <span className="text-green-400 text-[0.55rem] font-mono uppercase tracking-widest">Activo</span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-5">
+                      <div className="mb-2"><DivisionBadge division={p.division} size="xs" /></div>
+                      <h4 className="font-sub font-bold text-[0.875rem] uppercase tracking-wide text-white/85 leading-snug mb-1 line-clamp-2">{p.title}</h4>
+                      <p className="text-white/35 text-[0.7rem]">{p.client}</p>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
+          </section>
+        )}
 
-            {/* Related projects */}
-            {relatedProjects.length > 0 && (
-              <div className="scroll-reveal">
-                <div className="flex items-center gap-3 mb-5">
-                  <span className="h-[2px] w-6 bg-samred" />
-                  <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-white/50">Proyectos relacionados</span>
-                </div>
-                <div className="overflow-x-auto pb-3" style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
-                  <div className="flex gap-4" style={{ width: 'max-content' }}>
-                    {relatedProjects.map(p => (
-                      <div key={p.id}
-                        className="flex-shrink-0 group rounded overflow-hidden bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300"
-                        style={{ width: '260px' }}
-                      >
-                        <div className="relative overflow-hidden" style={{ height: '150px' }}>
-                          <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent" />
-                          <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot || '#C8102E' }} />
-                          {p.status === 'active' && (
-                            <div className="absolute top-2 right-2 flex items-center gap-1 bg-dark/70 px-2 py-0.5 rounded-full">
-                              <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
-                              <span className="text-green-400 text-[0.55rem] font-mono uppercase tracking-widest">Activo</span>
-                            </div>
-                          )}
-                        </div>
-                        <div className="p-4">
-                          <h4 className="font-sub font-bold text-[0.8125rem] uppercase tracking-wide text-white/85 leading-snug mb-1 line-clamp-2">{p.title}</h4>
-                          <p className="text-white/35 text-[0.7rem]">{p.client}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
       </div>
     </div>
   )

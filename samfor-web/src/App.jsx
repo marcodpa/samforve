@@ -951,12 +951,186 @@ function ClientsSection({ setPage }) {
 }
 
 // ─── PAGE: SERVICIOS ──────────────────────────────────────────────────────────
+// Card photo for lobby (different from hero detail photo)
+const SV_CARD_PHOTOS = {
+  'Obras Eléctricas':          '/sv-photo1.webp',
+  'Obras Civiles':             '/proyectos-hero.webp',
+  'Obras Mecánicas':           '/sv-photo2.webp',
+  'Transporte':                '/cta-bg.webp',
+  'Servicios Ambientales':     '/qs-hero.webp',
+  'Servicios Marítimos/Lacustres': '/hero2.webp',
+  'Automatización y Control':  '/sv-photo3.webp',
+}
+
+function ServicioDetalle({ title, onBack }) {
+  useScrollReveal()
+  const detail = SERVICES_DETAIL[title]
+  const activeIdx = SERVICES.findIndex(s => s.title === title)
+  const relatedProjects = ALL_PROJECTS.filter(p => p.division === detail.division).slice(0, 8)
+
+  return (
+    <div>
+      {/* ── HERO individual servicio ── */}
+      <section className="relative overflow-hidden" style={{ height: '100dvh' }}>
+        <img src={SV_CARD_PHOTOS[title]} alt={title}
+          className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
+        <div className="absolute inset-0 bg-gradient-to-r from-dark/90 via-dark/60 to-dark/15" />
+        <div className="absolute inset-0 bg-gradient-to-t from-dark/70 via-transparent to-transparent" />
+        <div className="relative h-full flex flex-col justify-end px-5 md:px-16 lg:px-24 pb-14 md:pb-20">
+          <div className="max-w-3xl">
+            <button onClick={onBack} className="flex items-center gap-2 text-white/50 hover:text-white text-xs font-sub font-bold uppercase tracking-widest mb-8 transition-colors group">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="transition-transform group-hover:-translate-x-1"><path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              Todos los servicios
+            </button>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="h-[3px] w-10 bg-samred" />
+              <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.25em] text-white/55">
+                {String(activeIdx + 1).padStart(2,'0')} de {String(SERVICES.length).padStart(2,'0')} — Nuestros servicios
+              </span>
+            </div>
+            <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-white leading-none tracking-wide mb-4">{title.toUpperCase()}</h1>
+            <p className="text-samred font-sub font-semibold text-sm uppercase tracking-widest">{detail.tagline}</p>
+          </div>
+        </div>
+        <div className="absolute bottom-7 right-10 flex flex-col items-center gap-1.5 opacity-40">
+          <div className="w-[1px] h-10 bg-white animate-pulse" />
+          <span className="font-mono text-[0.55rem] uppercase tracking-widest text-white rotate-90 translate-x-3">scroll</span>
+        </div>
+      </section>
+
+      {/* ── DESCRIPCIÓN — split texto / foto ── */}
+      <section className="grid grid-cols-1 lg:grid-cols-2 lg:min-h-[80vh]">
+        <div className="bg-white flex items-center px-5 md:px-16 py-14 md:py-20">
+          <div className="max-w-lg">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="h-[3px] w-10 bg-samred" />
+              <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Descripción del servicio</span>
+            </div>
+            <div className="flex items-center gap-4 mb-6">
+              <span className="text-samred">{SERVICES[activeIdx]?.icon}</span>
+              <h2 className="font-display text-[clamp(1.75rem,3.5vw,3rem)] text-dark leading-none">{title.toUpperCase()}</h2>
+            </div>
+            <p className="text-secondary text-base leading-relaxed mb-10">{detail.longDesc}</p>
+            <div className="flex items-center gap-3">
+              {activeIdx > 0 && (
+                <button onClick={() => onBack('prev', activeIdx - 1)}
+                  className="flex items-center gap-2 text-xs font-sub font-bold uppercase tracking-widest text-secondary border border-border px-4 py-2 rounded hover:border-dark hover:text-dark transition-all">
+                  ← Anterior
+                </button>
+              )}
+              {activeIdx < SERVICES.length - 1 && (
+                <button onClick={() => onBack('next', activeIdx + 1)}
+                  className="flex items-center gap-2 text-xs font-sub font-bold uppercase tracking-widest text-white bg-samred border border-samred px-4 py-2 rounded hover:bg-red-700 transition-all ml-auto">
+                  Siguiente →
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+        <div className="relative overflow-hidden" style={{ minHeight: '400px' }}>
+          <img src={detail.heroImg} alt={title} className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+          <div className="absolute inset-0 bg-gradient-to-l from-transparent to-dark/10" />
+          <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-samred" />
+        </div>
+      </section>
+
+      {/* ── CAPACIDADES — split lista + foto vertical ── */}
+      <section className="bg-dark grid grid-cols-1 lg:grid-cols-[1fr_420px] xl:grid-cols-[1fr_500px] min-h-[80vh]">
+        <div className="px-5 md:px-16 lg:px-20 py-14 md:py-24 flex flex-col justify-center">
+          <div className="scroll-reveal flex items-center gap-3 mb-4">
+            <span className="h-[3px] w-10 bg-samred" />
+            <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Capacidades técnicas</span>
+          </div>
+          <h3 className="scroll-reveal font-display text-[clamp(2rem,3.5vw,3rem)] text-white leading-none mb-12">{title.toUpperCase()}</h3>
+          <div className="divide-y divide-white/8">
+            {detail.capabilities.map((cap, i) => (
+              <div key={i} className="scroll-reveal flex items-start gap-6 py-5 group" style={{ transitionDelay: `${i * 50}ms` }}>
+                <span className="font-mono text-[0.6rem] text-samred/50 tracking-widest flex-shrink-0 mt-1 w-6">{String(i + 1).padStart(2,'0')}</span>
+                <div className="flex-shrink-0 w-[2px] self-stretch bg-white/8 group-hover:bg-samred transition-colors duration-300" />
+                <p className="text-white/65 text-[0.9375rem] leading-relaxed group-hover:text-white/90 transition-colors duration-300">{cap}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="relative hidden lg:block overflow-hidden">
+          <img src="/sv-photo3.webp" alt="Ingeniería SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+          <div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-samred" />
+          <div className="absolute bottom-8 right-8 text-right">
+            <span className="font-mono text-[0.55rem] uppercase tracking-widest text-white/40">Ingeniería de precisión</span>
+          </div>
+        </div>
+      </section>
+
+      {/* ── PROYECTOS RELACIONADOS ── */}
+      {relatedProjects.length > 0 && (
+        <section className="bg-dark py-14 md:py-20 border-t border-white/10">
+          <div className="max-w-7xl mx-auto px-5 md:px-16 lg:px-24 mb-10">
+            <div className="scroll-reveal flex items-center justify-between">
+              <div>
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="h-[3px] w-10 bg-samred" />
+                  <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Portafolio</span>
+                </div>
+                <h3 className="font-display text-[clamp(1.75rem,3vw,2.5rem)] text-white leading-none">PROYECTOS RELACIONADOS</h3>
+              </div>
+              <span className="font-mono text-xs text-white/25 hidden md:block">{relatedProjects.length} proyectos</span>
+            </div>
+          </div>
+          <div className="overflow-hidden">
+            <div className="flex gap-5 px-5 md:px-16 lg:px-24"
+              style={{ width:'max-content', animation: relatedProjects.length > 3 ? `marquee ${Math.round(relatedProjects.length*300/SPEED)}s linear infinite` : 'none', willChange:'transform' }}>
+              {(relatedProjects.length > 3 ? [...relatedProjects,...relatedProjects] : relatedProjects).map((p, i) => (
+                <div key={`${p.id}-${i}`}
+                  className="flex-shrink-0 group rounded overflow-hidden bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300"
+                  style={{ width:'280px' }}>
+                  <div className="relative overflow-hidden" style={{ height:'180px' }}>
+                    <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-dark/85 to-transparent" />
+                    <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot||'#C8102E' }} />
+                    {p.status==='active' && (
+                      <div className="absolute top-3 right-3 flex items-center gap-1 bg-dark/70 backdrop-blur-sm px-2 py-0.5 rounded-full">
+                        <span className="w-1.5 h-1.5 rounded-full bg-green-400 dot-pulse" />
+                        <span className="text-green-400 text-[0.55rem] font-mono uppercase tracking-widest">Activo</span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-5">
+                    <div className="mb-2"><DivisionBadge division={p.division} size="xs" /></div>
+                    <h4 className="font-sub font-bold text-[0.875rem] uppercase tracking-wide text-white/85 leading-snug mb-1 line-clamp-2">{p.title}</h4>
+                    <p className="text-white/35 text-[0.7rem]">{p.client}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+    </div>
+  )
+}
+
 function PageServicios({ initialService }) {
   useScrollReveal()
-  const [active, setActive] = useState(initialService || SERVICES[0].title)
-  const detail = SERVICES_DETAIL[active] || SERVICES_DETAIL[SERVICES[0].title]
-  const activeIdx = SERVICES.findIndex(s => s.title === active)
-  const relatedProjects = ALL_PROJECTS.filter(p => p.division === detail.division).slice(0, 8)
+  const [selected, setSelected] = useState(initialService || null)
+
+  const handleSelect = (title) => {
+    setSelected(title)
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }
+  const handleBack = (dir, idx) => {
+    if (dir === 'prev' || dir === 'next') { setSelected(SERVICES[idx].title); window.scrollTo({ top: 0, behavior: 'instant' }) }
+    else { setSelected(null); window.scrollTo({ top: 0, behavior: 'instant' }) }
+  }
+
+  if (selected) return <div className="pt-24"><ServicioDetalle title={selected} onBack={handleBack} /></div>
+
+  // ── LOBBY ──
+  const active = null
+  const detail = null
+  const activeIdx = -1
+  const relatedProjects = []
 
   return (
     <div className="pt-24">
@@ -996,167 +1170,68 @@ function PageServicios({ initialService }) {
         </div>
       </section>
 
-      {/* ── SELECTOR DE SERVICIOS — grid numerado como misión/visión ── */}
+      {/* ── LOBBY — cards fotográficas ── */}
       <section className="bg-dark py-14 md:py-20 px-5 md:px-16 lg:px-24">
         <div className="max-w-7xl mx-auto">
-          <div className="scroll-reveal flex items-center gap-3 mb-12">
-            <span className="h-[3px] w-10 bg-samred" />
-            <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Nuestras divisiones</span>
+          <div className="scroll-reveal flex items-center justify-between mb-12">
+            <div className="flex items-center gap-3">
+              <span className="h-[3px] w-10 bg-samred" />
+              <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Selecciona un servicio</span>
+            </div>
+            <span className="font-mono text-xs text-white/25 hidden md:block">{SERVICES.length} divisiones</span>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 border border-white/10 rounded overflow-hidden">
-            {SERVICES.map((s, i) => (
-              <button key={s.title}
-                onClick={() => { setActive(s.title); document.getElementById('sv-detalle')?.scrollIntoView({ behavior: 'smooth', block: 'start' }) }}
-                className={`scroll-reveal group text-left p-8 border-b sm:border-b border-r border-white/10 transition-all duration-300
-                  ${active === s.title ? 'bg-samred/10' : 'hover:bg-white/4'}`}
-                style={{ transitionDelay: `${i * 50}ms` }}
-              >
-                <div className="font-mono text-[0.6rem] text-samred/50 tracking-widest mb-4">{String(i + 1).padStart(2, '0')}</div>
-                <div className={`mb-4 transition-colors duration-300 ${active === s.title ? 'text-samred' : 'text-white/30 group-hover:text-white/70'}`}>{s.icon}</div>
-                <div className={`h-[2px] w-8 mb-4 transition-all duration-300 ${active === s.title ? 'bg-samred' : 'bg-white/15 group-hover:bg-white/40'}`} />
-                <p className={`font-display text-[1.1rem] leading-tight mb-2 transition-colors duration-300 ${active === s.title ? 'text-white' : 'text-white/70 group-hover:text-white'}`}>{s.title.toUpperCase()}</p>
-                <p className="text-white/35 text-xs leading-relaxed line-clamp-2">{s.desc}</p>
-                {active === s.title && <div className="mt-4 flex items-center gap-2 text-samred text-[0.65rem] font-sub font-bold uppercase tracking-widest"><span className="w-3 h-[1.5px] bg-samred" /> Activo</div>}
+          {/* Fila 1 — 3 cards grandes */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+            {SERVICES.slice(0,3).map((s,i) => (
+              <button key={s.title} onClick={() => handleSelect(s.title)}
+                className="scroll-reveal group relative overflow-hidden rounded cursor-pointer text-left"
+                style={{ height:'clamp(240px,26vw,380px)', transitionDelay:`${i*60}ms` }}>
+                <img src={SV_CARD_PHOTOS[s.title]} alt={s.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-dark/5" />
+                <div className="absolute inset-0 bg-samred/0 group-hover:bg-samred/12 transition-all duration-500" />
+                <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left" />
+                <div className="absolute inset-0 p-7 flex flex-col justify-end">
+                  <span className="font-mono text-[0.55rem] text-white/30 tracking-widest mb-3">{String(i+1).padStart(2,'0')}</span>
+                  <div className="text-white/50 group-hover:text-samred mb-3 transition-colors duration-300">{s.icon}</div>
+                  <h3 className="font-display text-[1.25rem] text-white leading-tight mb-2">{s.title.toUpperCase()}</h3>
+                  <p className="text-white/45 text-[0.75rem] leading-relaxed line-clamp-2 group-hover:text-white/65 transition-colors duration-300">{s.desc}</p>
+                  <div className="flex items-center gap-2 mt-5 text-samred text-[0.65rem] font-sub font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:translate-y-0 transition-all duration-300">
+                    Ver servicio <ArrowRight size={11} />
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+          {/* Fila 2 — 4 cards más compactas */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {SERVICES.slice(3).map((s,i) => (
+              <button key={s.title} onClick={() => handleSelect(s.title)}
+                className="scroll-reveal group relative overflow-hidden rounded cursor-pointer text-left"
+                style={{ height:'clamp(170px,18vw,260px)', transitionDelay:`${(i+3)*60}ms` }}>
+                <img src={SV_CARD_PHOTOS[s.title]} alt={s.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/55 to-dark/10" />
+                <div className="absolute inset-0 bg-samred/0 group-hover:bg-samred/12 transition-all duration-500" />
+                <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left" />
+                <div className="absolute inset-0 p-5 flex flex-col justify-end">
+                  <span className="font-mono text-[0.55rem] text-white/30 tracking-widest mb-2">{String(i+4).padStart(2,'0')}</span>
+                  <div className="text-white/50 group-hover:text-samred mb-2 transition-colors duration-300">{s.icon}</div>
+                  <h3 className="font-display text-[1rem] text-white leading-tight">{s.title.toUpperCase()}</h3>
+                  <div className="flex items-center gap-1.5 mt-3 text-samred text-[0.6rem] font-sub font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:translate-y-0 transition-all duration-300">
+                    Ver servicio <ArrowRight size={10} />
+                  </div>
+                </div>
               </button>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── DETALLE — split foto + texto ── */}
-      <div id="sv-detalle">
-
-        {/* Split: texto izquierda blanco / foto derecha */}
-        <section className="grid grid-cols-1 lg:grid-cols-2 lg:min-h-[85vh]">
-          <div className="bg-white flex items-center px-5 md:px-16 py-14 md:py-20 order-2 lg:order-1">
-            <div className="max-w-lg w-full">
-              <div className="flex items-center gap-3 mb-6">
-                <span className="h-[3px] w-10 bg-samred" />
-                <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">
-                  {String(activeIdx + 1).padStart(2,'0')} de {String(SERVICES.length).padStart(2,'0')} — Servicio activo
-                </span>
-              </div>
-              <div className="flex items-center gap-4 mb-3">
-                <span className="text-samred">{SERVICES[activeIdx]?.icon}</span>
-                <h2 className="font-display text-[clamp(2rem,4vw,3.25rem)] text-dark leading-none">{active.toUpperCase()}</h2>
-              </div>
-              <p className="text-samred font-sub font-semibold text-[0.75rem] uppercase tracking-widest mb-6">{detail.tagline}</p>
-              <p className="text-secondary text-base leading-relaxed mb-10">{detail.longDesc}</p>
-              <div className="flex items-center gap-4">
-                {activeIdx > 0 && (
-                  <button onClick={() => { setActive(SERVICES[activeIdx - 1].title); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
-                    className="flex items-center gap-2 text-[0.75rem] font-sub font-bold uppercase tracking-widest text-secondary border border-border px-4 py-2 rounded hover:border-dark hover:text-dark transition-all">
-                    ← Anterior
-                  </button>
-                )}
-                {activeIdx < SERVICES.length - 1 && (
-                  <button onClick={() => { setActive(SERVICES[activeIdx + 1].title); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
-                    className="flex items-center gap-2 text-[0.75rem] font-sub font-bold uppercase tracking-widest text-white bg-samred border border-samred px-4 py-2 rounded hover:bg-red-700 transition-all ml-auto">
-                    Siguiente →
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
-          <div className="relative overflow-hidden order-1 lg:order-2" style={{ minHeight: '400px' }}>
-            <img key={detail.heroImg} src={detail.heroImg} alt={active}
-              className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
-            <div className="absolute inset-0 bg-gradient-to-l from-transparent to-dark/10" />
-            <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-samred" />
-            <div className="absolute top-6 left-6 bg-dark/75 backdrop-blur-sm px-4 py-2">
-              <span className="font-mono text-samred text-[0.6rem] uppercase tracking-widest">{String(activeIdx + 1).padStart(2,'0')} / {String(SERVICES.length).padStart(2,'0')}</span>
-            </div>
-          </div>
-        </section>
-
-        {/* ── CAPACIDADES — split foto vertical + lista ── */}
-        <section className="bg-dark grid grid-cols-1 lg:grid-cols-[1fr_420px] xl:grid-cols-[1fr_500px] min-h-[80vh]">
-
-          {/* LEFT — lista numerada */}
-          <div className="px-5 md:px-16 lg:px-20 py-14 md:py-24 flex flex-col justify-center">
-            <div className="scroll-reveal flex items-center gap-3 mb-4">
-              <span className="h-[3px] w-10 bg-samred" />
-              <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Capacidades técnicas</span>
-            </div>
-            <h3 className="scroll-reveal font-display text-[clamp(2rem,3.5vw,3rem)] text-white leading-none mb-12">{active.toUpperCase()}</h3>
-            <div className="divide-y divide-white/8">
-              {detail.capabilities.map((cap, i) => (
-                <div key={i} className="scroll-reveal flex items-start gap-6 py-5 group" style={{ transitionDelay: `${i * 50}ms` }}>
-                  <span className="font-mono text-[0.6rem] text-samred/50 tracking-widest flex-shrink-0 mt-1 w-6">{String(i + 1).padStart(2,'0')}</span>
-                  <div className="flex-shrink-0 w-[2px] self-stretch bg-white/8 group-hover:bg-samred transition-colors duration-300" />
-                  <p className="text-white/65 text-[0.9375rem] leading-relaxed group-hover:text-white/90 transition-colors duration-300">{cap}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* RIGHT — foto vertical sticky */}
-          <div className="relative hidden lg:block overflow-hidden">
-            <img src="/sv-photo3.webp" alt="Ingeniería SAMFOR"
-              className="absolute inset-0 w-full h-full object-cover object-center"
-              loading="lazy" />
-            {/* Gradient izq para fundir con el dark */}
-            <div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/20 to-transparent" />
-            {/* Gradient abajo */}
-            <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent" />
-            {/* Línea roja abajo */}
-            <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-samred" />
-            {/* Etiqueta */}
-            <div className="absolute bottom-8 right-8 text-right">
-              <span className="font-mono text-[0.55rem] uppercase tracking-widest text-white/40">Ingeniería de precisión</span>
-            </div>
-          </div>
-        </section>
-
-        {/* ── PROYECTOS RELACIONADOS ── */}
-        {relatedProjects.length > 0 && (
-          <section className="bg-dark py-14 md:py-20">
-            <div className="max-w-7xl mx-auto px-5 md:px-16 lg:px-24 mb-10">
-              <div className="scroll-reveal flex items-center justify-between">
-                <div>
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="h-[3px] w-10 bg-samred" />
-                    <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Portafolio</span>
-                  </div>
-                  <h3 className="font-display text-[clamp(1.75rem,3vw,2.5rem)] text-white leading-none">PROYECTOS RELACIONADOS</h3>
-                </div>
-                <span className="font-mono text-xs text-white/25 hidden md:block">{relatedProjects.length} proyectos</span>
-              </div>
-            </div>
-            <div className="overflow-hidden">
-              <div className="flex gap-5 px-5 md:px-16 lg:px-24"
-                style={{ width: 'max-content', animation: relatedProjects.length > 3 ? `marquee ${Math.round(relatedProjects.length * 300 / SPEED)}s linear infinite` : 'none', willChange: 'transform' }}>
-                {(relatedProjects.length > 3 ? [...relatedProjects, ...relatedProjects] : relatedProjects).map((p, i) => (
-                  <div key={`${p.id}-${i}`}
-                    className="flex-shrink-0 group rounded overflow-hidden bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300"
-                    style={{ width: '280px' }}>
-                    <div className="relative overflow-hidden" style={{ height: '180px' }}>
-                      <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-dark/85 to-transparent" />
-                      <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot || '#C8102E' }} />
-                      {p.status === 'active' && (
-                        <div className="absolute top-3 right-3 flex items-center gap-1 bg-dark/70 backdrop-blur-sm px-2 py-0.5 rounded-full">
-                          <span className="w-1.5 h-1.5 rounded-full bg-green-400 dot-pulse" />
-                          <span className="text-green-400 text-[0.55rem] font-mono uppercase tracking-widest">Activo</span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="p-5">
-                      <div className="mb-2"><DivisionBadge division={p.division} size="xs" /></div>
-                      <h4 className="font-sub font-bold text-[0.875rem] uppercase tracking-wide text-white/85 leading-snug mb-1 line-clamp-2">{p.title}</h4>
-                      <p className="text-white/35 text-[0.7rem]">{p.client}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-
-      </div>
     </div>
   )
 }
+
 
 // ─── PAGE: INICIO ─────────────────────────────────────────────────────────────
 function PageInicio({ setPage, navigateToServicios }) {

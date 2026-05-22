@@ -1578,7 +1578,6 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
             <div className="absolute inset-0 flex flex-col items-start justify-end p-4">
               <div className="text-white/70 mb-2 group-hover:text-white transition-colors"><LayoutGrid size={18}/></div>
               <p className="font-display text-[1.1rem] text-white leading-none mb-1">TODOS</p>
-              <p className="font-mono text-[0.6rem] text-white/50 uppercase tracking-widest">{ALL_PROJECTS.length} proy.</p>
             </div>
             {/* Right border */}
             <div className="absolute top-0 right-0 w-px h-full bg-white/10" />
@@ -1604,7 +1603,6 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
                   <p className={`font-display text-[0.95rem] leading-none mb-1 transition-colors duration-300 ${isActive ? 'text-white' : 'text-white/80 group-hover:text-white'}`}>
                     {m.label.replace('Proyectos ', '').replace('División ', '').replace('Servicios ', '').toUpperCase()}
                   </p>
-                  <p className="font-mono text-[0.6rem] text-white/40 uppercase tracking-widest">{counts[key]||0} proy.</p>
                 </div>
                 {/* Right border separator */}
                 {i < 5 && <div className="absolute top-0 right-0 w-px h-full bg-white/10" />}
@@ -1628,7 +1626,6 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
               <div className="absolute inset-0 flex flex-col items-start justify-end p-2">
                 <div className="text-white/70 mb-0.5"><LayoutGrid size={11}/></div>
                 <p className="font-display text-[0.6rem] text-white leading-none mb-0.5">TODOS</p>
-                <p className="font-mono text-[0.45rem] text-white/50 uppercase tracking-widest">{ALL_PROJECTS.length}p</p>
               </div>
               <div className="absolute top-0 right-0 w-px h-full bg-white/10" />
             </button>
@@ -1650,7 +1647,6 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
                     <p className={`font-display text-[0.55rem] leading-none mb-0.5 transition-colors duration-300 ${isActive ? 'text-white' : 'text-white/80'}`}>
                       {m.label.replace('Proyectos ','').replace('División ','').replace('Servicios ','').split(' ')[0].toUpperCase()}
                     </p>
-                    <p className="font-mono text-[0.45rem] text-white/40 uppercase tracking-widest">{counts[key]||0}p</p>
                   </div>
                   <div className="absolute top-0 right-0 w-px h-full bg-white/10" />
                 </button>

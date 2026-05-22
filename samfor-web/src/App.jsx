@@ -2339,7 +2339,7 @@ export default function App() {
   const [scrolled, setScrolled] = useState(false)
   const [projectOpen, setProjectOpen] = useState(false)
   const [initialDivision, setInitialDivision] = useState('Todos')
-  const [initialService, setInitialService] = useState(SERVICES[0].title)
+  const [initialService, setInitialService] = useState(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)

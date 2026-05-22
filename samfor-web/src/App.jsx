@@ -947,7 +947,7 @@ function PageInicio({ setPage, navigateToProyectos }) {
       <section className="bg-white px-6 md:px-14 lg:px-20 flex flex-col justify-center" style={{ minHeight: 'auto' }} data-lg-min="100dvh">
         <style>{`
           @media(min-width:1024px){section[data-lg-min]{min-height:100dvh!important}}
-          @media(max-width:1023px){.featured-card{height:58vw!important;min-height:200px!important;max-height:280px!important}}
+          @media(max-width:1023px){.featured-card{height:56vw!important;min-height:180px!important;max-height:260px!important;flex:none!important}}
         `}</style>
         <div className="max-w-7xl mx-auto w-full py-16">
 
@@ -972,7 +972,7 @@ function PageInicio({ setPage, navigateToProyectos }) {
             {featured[0] && (
               <div
                 className="featured-card group relative rounded overflow-hidden cursor-pointer"
-                style={{ minHeight: 'clamp(260px,50vw,480px)' }}
+                style={{ minHeight: 'clamp(260px,50vw,480px)', height: 'clamp(260px,50vw,480px)' }}
                 onClick={() => setPage('proyectos')}
                 role="button" tabIndex={0}
                 onKeyDown={e => e.key === 'Enter' && setPage('proyectos')}
@@ -1004,7 +1004,7 @@ function PageInicio({ setPage, navigateToProyectos }) {
                 <div
                   key={p.id}
                   className="featured-card group relative rounded overflow-hidden cursor-pointer flex-1"
-                  style={{ minHeight: 'clamp(180px,30vw,228px)' }}
+                  style={{ minHeight: 'clamp(180px,30vw,228px)', height: 'clamp(180px,30vw,228px)' }}
                   onClick={() => setPage('proyectos')}
                   role="button" tabIndex={0}
                   onKeyDown={e => e.key === 'Enter' && setPage('proyectos')}

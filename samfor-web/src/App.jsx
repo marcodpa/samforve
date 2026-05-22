@@ -887,7 +887,7 @@ function PageInicio({ setPage, navigateToProyectos }) {
 
         {/* MÓVIL — foto fondo de toda la sección */}
         <img src="/services-photo.webp" alt="" className="lg:hidden absolute inset-0 w-full h-full object-cover object-right" loading="lazy" aria-hidden="true" />
-        <div className="lg:hidden absolute inset-0" style={{ background: 'linear-gradient(to right, #0D1117 20%, rgba(13,17,23,0.6) 50%, rgba(13,17,23,0.1) 100%)' }} />
+        <div className="lg:hidden absolute inset-0" style={{ background: 'linear-gradient(to right, #0D1117 0%, rgba(13,17,23,0.88) 30%, rgba(13,17,23,0.6) 55%, rgba(13,17,23,0.2) 80%, transparent 100%)' }} />
 
         <div className="relative grid grid-cols-1 lg:grid-cols-2 lg:h-full">
 

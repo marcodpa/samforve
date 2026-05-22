@@ -35,7 +35,7 @@ const SERVICES = [
 
 const SERVICES_DETAIL = {
   'Obras Eléctricas': {
-    heroImg: '/sv-photo1.webp',
+    heroImg: '/sv-electrica.webp',
     tagline: 'Energía y potencia para la industria',
     longDesc: 'SAMFOR diseña, construye y mantiene instalaciones eléctricas de alta complejidad para la industria petrolera, petroquímica y de servicios públicos. Con más de 59 años de experiencia, nuestro equipo ejecuta proyectos desde subestaciones de transmisión hasta sistemas de automatización industrial, garantizando continuidad operativa y estándares internacionales.',
     capabilities: [
@@ -50,7 +50,7 @@ const SERVICES_DETAIL = {
     division: 'Eléctricos',
   },
   'Obras Civiles': {
-    heroImg: '/proyectos-hero.webp',
+    heroImg: '/sv-civil.webp',
     tagline: 'Infraestructura que soporta la industria',
     longDesc: 'Ejecutamos obras civiles de gran envergadura para el sector energético, petroquímico y de infraestructura pública. Desde movimiento de tierras y fundaciones hasta edificaciones completas, carreteras industriales y estructuras costeras, SAMFOR aporta ingeniería, equipos propios y personal altamente calificado.',
     capabilities: [
@@ -65,7 +65,7 @@ const SERVICES_DETAIL = {
     division: 'Civiles',
   },
   'Obras Mecánicas': {
-    heroImg: '/sv-photo2.webp',
+    heroImg: '/sv-mecanica.webp',
     tagline: 'Ingeniería mecánica de alto desempeño',
     longDesc: 'Especialistas en la construcción y mantenimiento de facilidades de producción, sistemas de tuberías y equipos mecánicos rotativos. SAMFOR garantiza la integridad mecánica de plantas y campos a través de procedimientos rigurosos de inspección, soldadura certificada y montaje de equipos.',
     capabilities: [
@@ -953,9 +953,9 @@ function ClientsSection({ setPage }) {
 // ─── PAGE: SERVICIOS ──────────────────────────────────────────────────────────
 // Card photo for lobby (different from hero detail photo)
 const SV_CARD_PHOTOS = {
-  'Obras Eléctricas':          '/sv-photo1.webp',
-  'Obras Civiles':             '/proyectos-hero.webp',
-  'Obras Mecánicas':           '/sv-photo2.webp',
+  'Obras Eléctricas':          '/sv-electrica.webp',
+  'Obras Civiles':             '/sv-civil.webp',
+  'Obras Mecánicas':           '/sv-mecanica.webp',
   'Transporte':                '/sv-transporte.webp',
   'Servicios Ambientales':     '/qs-hero.webp',
   'Servicios Marítimos/Lacustres': '/hero2.webp',

@@ -36,6 +36,7 @@ const SERVICES = [
 const SERVICES_DETAIL = {
   'Obras Eléctricas': {
     heroImg: '/sv-electrica.webp',
+    descImg: '/sv-electrica-desc.webp',
     tagline: 'Energía y potencia para la industria',
     longDesc: 'SAMFOR diseña, construye y mantiene instalaciones eléctricas de alta complejidad para la industria petrolera, petroquímica y de servicios públicos. Con más de 59 años de experiencia, nuestro equipo ejecuta proyectos desde subestaciones de transmisión hasta sistemas de automatización industrial, garantizando continuidad operativa y estándares internacionales.',
     capabilities: [
@@ -1028,7 +1029,7 @@ function ServicioDetalle({ title, onBack }) {
           </div>
         </div>
         <div className="relative overflow-hidden" style={{ minHeight: '400px' }}>
-          <img src={detail.heroImg} alt={title} className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+          <img src={detail.descImg || detail.heroImg} alt={title} className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
           <div className="absolute inset-0 bg-gradient-to-l from-transparent to-dark/10" />
           <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-samred" />
         </div>

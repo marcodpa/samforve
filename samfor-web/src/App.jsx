@@ -1563,7 +1563,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
         </div>
 
         {/* Divisiones — scroll horizontal en mobile, grid en desktop */}
-        <div className="hidden lg:grid lg:grid-cols-7 gap-0 border-t border-white/10">
+        <div className="hidden lg:grid lg:grid-cols-8 gap-0 border-t border-white/10">
 
           {/* TODOS */}
           <button
@@ -1614,21 +1614,21 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
         </div>
 
         {/* Mobile — horizontal photo-card scroll */}
-        <div className="lg:hidden overflow-x-auto border-t border-white/10" style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
-          <div className="flex">
+        <div className="lg:hidden border-t border-white/10">
+          <div className="flex w-full">
             {/* TODOS */}
             <button
               onClick={() => setActiveDivision('Todos')}
-              className={`group relative flex-shrink-0 overflow-hidden transition-all duration-300 ${activeDivision==='Todos' ? 'opacity-100' : 'opacity-55'}`}
-              style={{ width: '38vw', height: '120px' }}
+              className={`group relative overflow-hidden transition-all duration-300 ${activeDivision==='Todos' ? 'opacity-100' : 'opacity-55'}`}
+              style={{ width: 'calc(100%/8)', minWidth: 0, height: '90px' }}
             >
               <img src={IMG(28)} alt="Todos" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
               <div className={`absolute inset-0 transition-all duration-300 ${activeDivision==='Todos' ? 'bg-samred/55' : 'bg-dark/75'}`} />
               {activeDivision==='Todos' && <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred" />}
-              <div className="absolute inset-0 flex flex-col items-start justify-end p-3">
-                <div className="text-white/70 mb-1"><LayoutGrid size={14}/></div>
-                <p className="font-display text-[0.8rem] text-white leading-none mb-0.5">TODOS</p>
-                <p className="font-mono text-[0.55rem] text-white/50 uppercase tracking-widest">{ALL_PROJECTS.length} proy.</p>
+              <div className="absolute inset-0 flex flex-col items-start justify-end p-2">
+                <div className="text-white/70 mb-0.5"><LayoutGrid size={11}/></div>
+                <p className="font-display text-[0.6rem] text-white leading-none mb-0.5">TODOS</p>
+                <p className="font-mono text-[0.45rem] text-white/50 uppercase tracking-widest">{ALL_PROJECTS.length}p</p>
               </div>
               <div className="absolute top-0 right-0 w-px h-full bg-white/10" />
             </button>
@@ -1639,18 +1639,18 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
               return (
                 <button key={key}
                   onClick={() => setActiveDivision(key)}
-                  className={`group relative flex-shrink-0 overflow-hidden transition-all duration-300 ${isActive ? 'opacity-100' : 'opacity-55'}`}
-                  style={{ width: '38vw', height: '120px' }}
+                  className={`group relative overflow-hidden transition-all duration-300 ${isActive ? 'opacity-100' : 'opacity-55'}`}
+                  style={{ width: 'calc(100%/8)', minWidth: 0, height: '90px' }}
                 >
                   {sample && <img src={sample.img} alt={key} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />}
                   <div className={`absolute inset-0 transition-all duration-300 ${isActive ? 'bg-dark/40' : 'bg-dark/75'}`} />
                   {isActive && <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred" />}
-                  <div className="absolute inset-0 flex flex-col items-start justify-end p-3">
-                    <div className={`mb-1 transition-colors duration-300 ${isActive ? 'text-samred' : 'text-white/50'}`}>{m.icon}</div>
-                    <p className={`font-display text-[0.8rem] leading-none mb-0.5 transition-colors duration-300 ${isActive ? 'text-white' : 'text-white/80'}`}>
-                      {m.label.replace('Proyectos ','').replace('División ','').replace('Servicios ','').toUpperCase()}
+                  <div className="absolute inset-0 flex flex-col items-start justify-end p-2">
+                    <div className={`mb-0.5 transition-colors duration-300 ${isActive ? 'text-samred' : 'text-white/50'}`} style={{transform:'scale(0.75)',transformOrigin:'left bottom'}}>{m.icon}</div>
+                    <p className={`font-display text-[0.55rem] leading-none mb-0.5 transition-colors duration-300 ${isActive ? 'text-white' : 'text-white/80'}`}>
+                      {m.label.replace('Proyectos ','').replace('División ','').replace('Servicios ','').split(' ')[0].toUpperCase()}
                     </p>
-                    <p className="font-mono text-[0.55rem] text-white/40 uppercase tracking-widest">{counts[key]||0} proy.</p>
+                    <p className="font-mono text-[0.45rem] text-white/40 uppercase tracking-widest">{counts[key]||0}p</p>
                   </div>
                   <div className="absolute top-0 right-0 w-px h-full bg-white/10" />
                 </button>

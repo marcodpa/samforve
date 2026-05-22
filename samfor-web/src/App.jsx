@@ -1120,7 +1120,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
 
       {/* ── HERO ── */}
       <div className="relative overflow-hidden" style={{ height: 'calc(100dvh - 4rem)' }}>
-        <img src="/proyectos-hero.webp" alt="SAMFOR Proyectos" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+        <img src="/proyectos-hero.webp" alt="SAMFOR Proyectos" className="absolute inset-0 w-full h-full object-cover object-[30%_center] lg:object-center" loading="lazy" />
         <div className="absolute inset-0 bg-gradient-to-r from-dark/95 via-dark/70 to-dark/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-transparent to-transparent" />
         <div className="absolute top-0 right-0 w-[3px] h-full bg-samred" />
@@ -1323,11 +1323,13 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
 
         {/* ── CARRUSEL — full width, fuera del contenedor con padding ── */}
         {filtered.length > 0 && !listView && (<>
-          {/* MÓVIL — scroll manual con touch */}
-          <div className="lg:hidden overflow-x-auto pb-3" style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
-            <div className="flex gap-4 px-4" style={{ width: 'max-content' }}>
-              {filtered.map((p, i) => (
-                <div key={`m-${p.id}`}
+          {/* MÓVIL — animación automática */}
+          <div className="lg:hidden overflow-hidden relative">
+            <div className="flex gap-4"
+              style={{ width: 'max-content', animation: `marquee ${Math.round(filtered.length * 280 / SPEED)}s linear infinite`, willChange: 'transform', backfaceVisibility: 'hidden' }}
+            >
+              {[...filtered, ...filtered].map((p, i) => (
+                <div key={`m-${p.id}-${i}`}
                   className="group flex-shrink-0 cursor-pointer rounded overflow-hidden bg-white/5 border border-white/10 active:border-white/40 transition-all duration-300 flex flex-col"
                   style={{ width: '72vw', maxWidth: '300px' }}
                   onClick={() => openProject(p)}
@@ -1701,7 +1703,7 @@ function PageContacto() {
 
       {/* ── HERO ── */}
       <section className="relative overflow-hidden" style={{ height: '100dvh' }}>
-        <img src="/ct-hero.webp" alt="SAMFOR operaciones" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
+        <img src="/ct-hero.webp" alt="SAMFOR operaciones" className="absolute inset-0 w-full h-full object-cover object-[30%_center] lg:object-center" loading="eager" />
         <div className="absolute inset-0 bg-gradient-to-r from-dark/90 via-dark/60 to-dark/20" />
         <div className="absolute inset-0 bg-gradient-to-t from-dark/50 via-transparent to-transparent" />
         <div className="relative h-full flex flex-col justify-end px-5 md:px-16 lg:px-24 pb-14 md:pb-20">

@@ -822,11 +822,12 @@ function PageInicio({ setPage, navigateToProyectos }) {
     ALL_PROJECTS.find(p => p.id === 104), // Metro Maracaibo
   ]
 
-  const heroSlides = ['/hero.webp', '/hero2.webp', '/hero3.webp']
+  const heroDesktop = ['/hero.webp', '/hero2.webp', '/hero3.webp']
+  const heroMobile  = ['/hero-mobile1.webp', '/hero-mobile2.webp', '/hero-mobile3.webp']
   const [heroIdx, setHeroIdx] = useState(0)
 
   useEffect(() => {
-    const t = setInterval(() => setHeroIdx(i => (i + 1) % heroSlides.length), 5000)
+    const t = setInterval(() => setHeroIdx(i => (i + 1) % 3), 5000)
     return () => clearInterval(t)
   }, [])
 
@@ -836,9 +837,15 @@ function PageInicio({ setPage, navigateToProyectos }) {
       <section className="relative flex flex-col items-start justify-end px-6 md:px-14 lg:px-20 pb-24 overflow-hidden"
         style={{ minHeight: '100dvh' }}
       >
-        {/* All slides stacked — active one fades in, others fade out */}
-        {heroSlides.map((src, i) => (
-          <div key={src} className="absolute inset-0 bg-center bg-cover"
+        {/* Desktop slides */}
+        {heroDesktop.map((src, i) => (
+          <div key={`d-${src}`} className="hidden lg:block absolute inset-0 bg-center bg-cover"
+            style={{ backgroundImage: `url("${src}")`, opacity: i === heroIdx ? 1 : 0, transition: 'opacity 1.2s ease-in-out', zIndex: i === heroIdx ? 1 : 0 }}
+          />
+        ))}
+        {/* Mobile slides */}
+        {heroMobile.map((src, i) => (
+          <div key={`m-${src}`} className="lg:hidden absolute inset-0 bg-center bg-cover"
             style={{ backgroundImage: `url("${src}")`, opacity: i === heroIdx ? 1 : 0, transition: 'opacity 1.2s ease-in-out', zIndex: i === heroIdx ? 1 : 0 }}
           />
         ))}
@@ -847,7 +854,7 @@ function PageInicio({ setPage, navigateToProyectos }) {
 
         {/* Dots */}
         <div className="absolute bottom-8 right-8 flex gap-2" style={{ zIndex: 3 }}>
-          {heroSlides.map((_, i) => (
+          {[0,1,2].map(i => (
             <button key={i} onClick={() => setHeroIdx(i)}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${i === heroIdx ? 'bg-samred scale-125' : 'bg-white/40 hover:bg-white/70'}`}
             />

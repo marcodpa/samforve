@@ -181,9 +181,9 @@ body {
 }
 .marquee-track:hover { animation-play-state: paused; }
 
-/* Pausa marquees en móvil para evitar conflicto con scroll táctil */
+/* Marquees en móvil: corren más despacio para no verse locos */
 @media (max-width: 1023px) {
-  .marquee-auto { animation-play-state: paused !important; }
+  .marquee-auto { animation-duration: calc(var(--marquee-dur, 60s) * 1.6) !important; }
 }
 
 /* ── NAV LINK ── */

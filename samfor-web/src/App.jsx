@@ -1193,17 +1193,50 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
           })}
         </div>
 
-        {/* Mobile — horizontal pill scroll */}
-        <div className="lg:hidden overflow-x-auto border-t border-white/10 px-4 py-3 flex gap-2" style={{ scrollbarWidth: 'none' }}>
-          {[['Todos', 'Todos', <LayoutGrid size={13}/>, ALL_PROJECTS.length], ...Object.entries(DIVISION_META).map(([key, m]) => [key, m.label.replace('Proyectos ','').replace('División ','').replace('Servicios ',''), m.icon, counts[key]||0])].map(([key, label, icon, count]) => (
-            <button key={key}
-              onClick={() => setActiveDivision(key)}
-              className={`flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-sub font-bold uppercase tracking-wide transition-all duration-200 ${activeDivision===key ? 'bg-samred border-samred text-white' : 'border-white/15 text-white/55 hover:border-white/40 hover:text-white/80'}`}
+        {/* Mobile — horizontal photo-card scroll */}
+        <div className="lg:hidden overflow-x-auto border-t border-white/10" style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
+          <div className="flex">
+            {/* TODOS */}
+            <button
+              onClick={() => setActiveDivision('Todos')}
+              className={`group relative flex-shrink-0 overflow-hidden transition-all duration-300 ${activeDivision==='Todos' ? 'opacity-100' : 'opacity-55'}`}
+              style={{ width: '38vw', height: '120px' }}
             >
-              <span className={activeDivision===key ? 'text-white' : 'text-white/40'}>{icon}</span>
-              {label} <span className="font-mono text-[0.6rem] opacity-60">({count})</span>
+              <img src={IMG(28)} alt="Todos" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+              <div className={`absolute inset-0 transition-all duration-300 ${activeDivision==='Todos' ? 'bg-samred/55' : 'bg-dark/75'}`} />
+              {activeDivision==='Todos' && <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred" />}
+              <div className="absolute inset-0 flex flex-col items-start justify-end p-3">
+                <div className="text-white/70 mb-1"><LayoutGrid size={14}/></div>
+                <p className="font-display text-[0.8rem] text-white leading-none mb-0.5">TODOS</p>
+                <p className="font-mono text-[0.55rem] text-white/50 uppercase tracking-widest">{ALL_PROJECTS.length} proy.</p>
+              </div>
+              <div className="absolute top-0 right-0 w-px h-full bg-white/10" />
             </button>
-          ))}
+            {/* Cada división */}
+            {Object.entries(DIVISION_META).map(([key, m]) => {
+              const sample = ALL_PROJECTS.find(p => p.division === key)
+              const isActive = activeDivision === key
+              return (
+                <button key={key}
+                  onClick={() => setActiveDivision(key)}
+                  className={`group relative flex-shrink-0 overflow-hidden transition-all duration-300 ${isActive ? 'opacity-100' : 'opacity-55'}`}
+                  style={{ width: '38vw', height: '120px' }}
+                >
+                  {sample && <img src={sample.img} alt={key} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />}
+                  <div className={`absolute inset-0 transition-all duration-300 ${isActive ? 'bg-dark/40' : 'bg-dark/75'}`} />
+                  {isActive && <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred" />}
+                  <div className="absolute inset-0 flex flex-col items-start justify-end p-3">
+                    <div className={`mb-1 transition-colors duration-300 ${isActive ? 'text-samred' : 'text-white/50'}`}>{m.icon}</div>
+                    <p className={`font-display text-[0.8rem] leading-none mb-0.5 transition-colors duration-300 ${isActive ? 'text-white' : 'text-white/80'}`}>
+                      {m.label.replace('Proyectos ','').replace('División ','').replace('Servicios ','').toUpperCase()}
+                    </p>
+                    <p className="font-mono text-[0.55rem] text-white/40 uppercase tracking-widest">{counts[key]||0} proy.</p>
+                  </div>
+                  <div className="absolute top-0 right-0 w-px h-full bg-white/10" />
+                </button>
+              )
+            })}
+          </div>
         </div>
       </div>
 

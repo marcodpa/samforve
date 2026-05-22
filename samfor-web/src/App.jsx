@@ -945,7 +945,10 @@ function PageInicio({ setPage, navigateToProyectos }) {
 
       {/* FEATURED PROJECTS */}
       <section className="bg-white px-6 md:px-14 lg:px-20 flex flex-col justify-center" style={{ minHeight: 'auto' }} data-lg-min="100dvh">
-        <style>{`@media(min-width:1024px){section[data-lg-min]{min-height:100dvh!important}}`}</style>
+        <style>{`
+          @media(min-width:1024px){section[data-lg-min]{min-height:100dvh!important}}
+          @media(max-width:1023px){.featured-card{height:58vw!important;min-height:200px!important;max-height:280px!important}}
+        `}</style>
         <div className="max-w-7xl mx-auto w-full py-16">
 
           {/* Header */}
@@ -968,7 +971,7 @@ function PageInicio({ setPage, navigateToProyectos }) {
             {/* BIG card — first project */}
             {featured[0] && (
               <div
-                className="group relative rounded overflow-hidden cursor-pointer"
+                className="featured-card group relative rounded overflow-hidden cursor-pointer"
                 style={{ minHeight: 'clamp(260px,50vw,480px)' }}
                 onClick={() => setPage('proyectos')}
                 role="button" tabIndex={0}
@@ -1000,7 +1003,7 @@ function PageInicio({ setPage, navigateToProyectos }) {
               {featured.slice(1).filter(Boolean).map((p) => (
                 <div
                   key={p.id}
-                  className="group relative rounded overflow-hidden cursor-pointer flex-1"
+                  className="featured-card group relative rounded overflow-hidden cursor-pointer flex-1"
                   style={{ minHeight: 'clamp(180px,30vw,228px)' }}
                   onClick={() => setPage('proyectos')}
                   role="button" tabIndex={0}

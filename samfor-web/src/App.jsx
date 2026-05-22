@@ -823,7 +823,7 @@ function PageInicio({ setPage, navigateToProyectos }) {
   ]
 
   const heroDesktop = ['/hero.webp', '/hero2.webp', '/hero3.webp']
-  const heroMobile  = ['/hero-mobile1.webp', '/hero-mobile2.webp', '/hero-mobile3.webp']
+  const heroMobile  = ['/hero-mobile1-v2.webp', '/hero-mobile2.webp', '/hero-mobile3.webp']
   const [heroIdx, setHeroIdx] = useState(0)
 
   useEffect(() => {

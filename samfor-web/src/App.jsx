@@ -17,7 +17,7 @@ const DIVISION_META = {
   'Eléctricos':      { label: 'Proyectos Eléctricos',  icon: <Zap size={16}/>,        color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E' },
   'Transporte':      { label: 'División Transporte',   icon: <Truck size={16}/>,      color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E' },
   'Ambientales':     { label: 'Servicios Ambientales', icon: <Leaf size={16}/>,       color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E' },
-  'Otras':           { label: 'Otras Divisiones',      icon: <Ship size={16}/>,       color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E' },
+  'Otras':           { label: 'Servicios Marítimos',   icon: <Ship size={16}/>,       color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E' },
   'Automatización':  { label: 'Automatización y Control', icon: <Cpu size={16}/>,    color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E' },
 }
 
@@ -958,7 +958,7 @@ const SV_CARD_PHOTOS = {
   'Obras Mecánicas':           '/sv-mecanica.webp',
   'Transporte':                '/sv-transporte.webp',
   'Servicios Ambientales':     '/qs-hero.webp',
-  'Servicios Marítimos/Lacustres': '/hero2.webp',
+  'Servicios Marítimos/Lacustres': '/projects/img-005.jpg',
   'Automatización y Control':  '/sv-photo3.webp',
 }
 

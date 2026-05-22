@@ -882,35 +882,27 @@ function PageInicio({ setPage, navigateToProyectos }) {
       </section>
 
       {/* SERVICES */}
-      <section className="bg-dark overflow-hidden" style={{ height: 'auto', minHeight: 0 }} data-lg-height="100dvh">
+      <section className="bg-dark overflow-hidden relative" style={{ height: 'auto', minHeight: 0 }} data-lg-height="100dvh">
         <style>{`@media(min-width:1024px){section[data-lg-height]{height:100dvh!important}}`}</style>
-        <div className="grid grid-cols-1 lg:grid-cols-2 lg:h-full">
+
+        {/* MÓVIL — foto fondo de toda la sección */}
+        <img src="/services-photo.webp" alt="" className="lg:hidden absolute inset-0 w-full h-full object-cover object-right" loading="lazy" aria-hidden="true" />
+        <div className="lg:hidden absolute inset-0" style={{ background: 'linear-gradient(to right, #0D1117 35%, rgba(13,17,23,0.82) 58%, rgba(13,17,23,0.3) 100%)' }} />
+
+        <div className="relative grid grid-cols-1 lg:grid-cols-2 lg:h-full">
 
           {/* LEFT — list */}
-          <div className="px-6 md:px-14 lg:px-16 flex flex-col justify-center py-0 lg:py-10">
+          <div className="px-6 md:px-14 lg:px-16 flex flex-col justify-center py-10">
 
-            {/* MÓVIL — foto derecha, texto izquierda con degradado */}
-            <div className="relative lg:hidden overflow-hidden mb-6" style={{ height: '56vw', minHeight: '210px', maxHeight: '300px' }}>
-              <img src="/services-photo.webp" alt="Equipo SAMFOR en obra" className="absolute inset-0 w-full h-full object-cover object-right" loading="lazy" />
-              <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, #0D1117 30%, rgba(13,17,23,0.75) 60%, transparent 100%)' }} />
-              <div className="absolute inset-0 flex flex-col justify-center px-6">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="h-[2px] w-7 bg-samred" />
-                  <span className="font-sub font-semibold text-[0.6rem] uppercase tracking-widest text-samred">Lo que hacemos</span>
-                </div>
-                <h2 className="font-display text-[2.1rem] text-white leading-none">NUESTROS<br />SERVICIOS</h2>
-              </div>
-            </div>
-
-            {/* DESKTOP — header normal */}
-            <div className="scroll-reveal mb-6 hidden lg:block">
+            {/* Header */}
+            <div className="scroll-reveal mb-6">
               <div className="flex items-center gap-3 mb-3">
                 <span className="h-[3px] w-10 bg-samred" />
                 <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Lo que hacemos</span>
               </div>
               <h2 className="font-display text-[2.25rem] md:text-[2.75rem] text-white leading-none">NUESTROS<br />SERVICIOS</h2>
             </div>
-            <div className="stagger divide-y divide-white/10 px-6 lg:px-0 pb-8 lg:pb-0">
+            <div className="stagger divide-y divide-white/10 pb-2 lg:pb-0">
               {SERVICES.map((s, i) => (
                 <div key={s.title} className="group flex items-start gap-5 py-3 cursor-pointer transition-all duration-300" onClick={() => navigateToProyectos(s.division)}>
                   <span className="font-mono text-[0.625rem] text-white/25 group-hover:text-samred pt-1 transition-colors duration-300 flex-shrink-0 w-5">

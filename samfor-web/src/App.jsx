@@ -889,19 +889,17 @@ function PageInicio({ setPage, navigateToProyectos }) {
           {/* LEFT — list */}
           <div className="px-6 md:px-14 lg:px-16 flex flex-col justify-center py-0 lg:py-10">
 
-            {/* MÓVIL — foto hero encima de la lista */}
-            <div className="relative lg:hidden overflow-hidden mb-6" style={{ height: '52vw', minHeight: '200px', maxHeight: '320px' }}>
-              <img src="/services-photo.webp" alt="Equipo SAMFOR en obra" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
-              <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-r from-dark/60 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 px-6 pb-5">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="h-[2px] w-8 bg-samred" />
+            {/* MÓVIL — foto derecha, texto izquierda con degradado */}
+            <div className="relative lg:hidden overflow-hidden mb-6" style={{ height: '56vw', minHeight: '210px', maxHeight: '300px' }}>
+              <img src="/services-photo.webp" alt="Equipo SAMFOR en obra" className="absolute inset-0 w-full h-full object-cover object-right" loading="lazy" />
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, #0D1117 30%, rgba(13,17,23,0.75) 60%, transparent 100%)' }} />
+              <div className="absolute inset-0 flex flex-col justify-center px-6">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="h-[2px] w-7 bg-samred" />
                   <span className="font-sub font-semibold text-[0.6rem] uppercase tracking-widest text-samred">Lo que hacemos</span>
                 </div>
-                <h2 className="font-display text-[2rem] text-white leading-none">NUESTROS<br />SERVICIOS</h2>
+                <h2 className="font-display text-[2.1rem] text-white leading-none">NUESTROS<br />SERVICIOS</h2>
               </div>
-              <div className="absolute top-0 right-0 w-[3px] h-full bg-samred" />
             </div>
 
             {/* DESKTOP — header normal */}

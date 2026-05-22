@@ -972,68 +972,32 @@ function PageInicio({ setPage, navigateToProyectos }) {
             </button>
           </div>
 
-          {/* Magazine grid: big left + two stacked right */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-4 stagger">
-
-            {/* BIG card — first project */}
-            {featured[0] && (
+          {/* 3 equal cards */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 stagger">
+            {featured.filter(Boolean).map((p) => (
               <div
+                key={p.id}
                 className="featured-card group relative rounded overflow-hidden cursor-pointer"
-                style={{ minHeight: 'clamp(260px,50vw,480px)', height: 'clamp(260px,50vw,480px)' }}
+                style={{ minHeight: 'clamp(180px,30vw,228px)', height: 'clamp(180px,30vw,228px)' }}
                 onClick={() => setPage('proyectos')}
                 role="button" tabIndex={0}
                 onKeyDown={e => e.key === 'Enter' && setPage('proyectos')}
               >
                 <img
-                  src={featured[0].img}
-                  alt={featured[0].title}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  src={p.img}
+                  alt={p.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
                 />
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/30 to-transparent" />
-                {/* Division bar top */}
-                <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[featured[0].division]?.dot || '#C8102E' }} />
-                {/* Content */}
-                <div className="absolute inset-0 p-7 flex flex-col justify-end">
-                  <div className="mb-3"><DivisionBadge division={featured[0].division} /></div>
-                  <h3 className="font-display text-[1.75rem] md:text-[2.25rem] text-white leading-tight mb-2">{featured[0].title}</h3>
-                  <p className="text-white/50 text-xs font-sub uppercase tracking-widest mb-5">{featured[0].client}</p>
-                  <div className="flex items-center gap-2 text-white text-xs font-sub font-bold uppercase tracking-widest border-t border-white/15 pt-4 opacity-60 group-hover:opacity-100 transition-opacity duration-300">
-                    Ver proyecto <ArrowRight size={12} className="transition-transform duration-300 group-hover:translate-x-1" />
-                  </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/30 to-transparent" />
+                <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot || '#C8102E' }} />
+                <div className="absolute inset-0 p-5 flex flex-col justify-end">
+                  <div className="mb-2"><DivisionBadge division={p.division} /></div>
+                  <h3 className="font-sub font-bold text-[0.9375rem] uppercase tracking-wide text-white leading-snug mb-1">{p.title}</h3>
+                  <p className="text-white/40 text-[0.6875rem] font-sub uppercase tracking-widest">{p.client}</p>
                 </div>
+                <div className="absolute bottom-0 left-0 w-0 group-hover:w-full h-[2px] bg-samred transition-all duration-500 ease-out" />
               </div>
-            )}
-
-            {/* RIGHT — two small cards */}
-            <div className="flex flex-col gap-4">
-              {featured.slice(1).filter(Boolean).map((p) => (
-                <div
-                  key={p.id}
-                  className="featured-card group relative rounded overflow-hidden cursor-pointer flex-1"
-                  style={{ minHeight: 'clamp(180px,30vw,228px)', height: 'clamp(180px,30vw,228px)' }}
-                  onClick={() => setPage('proyectos')}
-                  role="button" tabIndex={0}
-                  onKeyDown={e => e.key === 'Enter' && setPage('proyectos')}
-                >
-                  <img
-                    src={p.img}
-                    alt={p.title}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/30 to-transparent" />
-                  {/* Division bar top */}
-                  <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot || '#C8102E' }} />
-                  <div className="absolute inset-0 p-5 flex flex-col justify-end">
-                    <div className="mb-2"><DivisionBadge division={p.division} /></div>
-                    <h3 className="font-sub font-bold text-[0.9375rem] uppercase tracking-wide text-white leading-snug mb-1">{p.title}</h3>
-                    <p className="text-white/40 text-[0.6875rem] font-sub uppercase tracking-widest">{p.client}</p>
-                  </div>
-                  {/* Hover accent line bottom */}
-                  <div className="absolute bottom-0 left-0 w-0 group-hover:w-full h-[2px] bg-samred transition-all duration-500 ease-out" />
-                </div>
-              ))}
-            </div>
+            ))}
 
           </div>
         </div>

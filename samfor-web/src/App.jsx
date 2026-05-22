@@ -35,7 +35,7 @@ const SERVICES = [
 
 const SERVICES_DETAIL = {
   'Obras Eléctricas': {
-    heroImg: '/qs-electrical.webp',
+    heroImg: '/sv-photo1.webp',
     tagline: 'Energía y potencia para la industria',
     longDesc: 'SAMFOR diseña, construye y mantiene instalaciones eléctricas de alta complejidad para la industria petrolera, petroquímica y de servicios públicos. Con más de 59 años de experiencia, nuestro equipo ejecuta proyectos desde subestaciones de transmisión hasta sistemas de automatización industrial, garantizando continuidad operativa y estándares internacionales.',
     capabilities: [
@@ -65,7 +65,7 @@ const SERVICES_DETAIL = {
     division: 'Civiles',
   },
   'Obras Mecánicas': {
-    heroImg: '/services-photo.webp',
+    heroImg: '/sv-photo2.webp',
     tagline: 'Ingeniería mecánica de alto desempeño',
     longDesc: 'Especialistas en la construcción y mantenimiento de facilidades de producción, sistemas de tuberías y equipos mecánicos rotativos. SAMFOR garantiza la integridad mecánica de plantas y campos a través de procedimientos rigurosos de inspección, soldadura certificada y montaje de equipos.',
     capabilities: [
@@ -125,7 +125,7 @@ const SERVICES_DETAIL = {
     division: 'Otras',
   },
   'Automatización y Control': {
-    heroImg: '/qs-electrical.webp',
+    heroImg: '/sv-photo3.webp',
     tagline: 'Inteligencia industrial para procesos críticos',
     longDesc: 'SAMFOR implementa soluciones de automatización y control para la industria petrolera y petroquímica venezolana. Desde sistemas PLC/DCS hasta plataformas SCADA completas, nuestro equipo de ingenieros especializados garantiza la integración, programación y puesta en marcha de sistemas de control de última generación.',
     capabilities: [
@@ -955,6 +955,7 @@ function PageServicios({ initialService }) {
   useScrollReveal()
   const [active, setActive] = useState(initialService || SERVICES[0].title)
   const detail = SERVICES_DETAIL[active] || SERVICES_DETAIL[SERVICES[0].title]
+  const activeIdx = SERVICES.findIndex(s => s.title === active)
   const relatedProjects = ALL_PROJECTS.filter(p => p.division === detail.division).slice(0, 8)
 
   return (

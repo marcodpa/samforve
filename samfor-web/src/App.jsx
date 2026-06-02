@@ -38,7 +38,7 @@ const SERVICES_DETAIL = {
     heroImg: '/sv-electrica.webp',
     descImg: '/sv-electrica-desc.webp',
     tagline: 'Energía y potencia para la industria',
-    longDesc: 'SAMFOR diseña, construye y mantiene instalaciones eléctricas de alta complejidad para la industria petrolera, petroquímica y de servicios públicos. Con más de 59 años de experiencia, nuestro equipo ejecuta proyectos desde subestaciones de transmisión hasta sistemas de automatización industrial, garantizando continuidad operativa y estándares internacionales.',
+    longDesc: 'SAMFOR diseña, construye y mantiene instalaciones eléctricas de alta complejidad para la industria petrolera, petroquímica y de servicios públicos. Con más de 60 años de experiencia, nuestro equipo ejecuta proyectos desde subestaciones de transmisión hasta sistemas de automatización industrial, garantizando continuidad operativa y estándares internacionales.',
     capabilities: [
       'Subestaciones de alta, media y baja tensión',
       'Tendido de líneas de transmisión y distribución',
@@ -144,7 +144,7 @@ const SERVICES_DETAIL = {
 }
 
 const METRICS = [
-  { value: 59, suffix: '', label: 'Años de experiencia' },
+  { value: 60, suffix: '', label: 'Años de experiencia' },
   { value: 100, suffix: '+', label: 'Proyectos ejecutados' },
   { value: 20, suffix: '+', label: 'Clientes internacionales' },
   { value: 6, suffix: '', label: 'Líneas de servicio' },
@@ -469,7 +469,7 @@ const ALL_PROJECTS = [
     title: 'Servicios Marítimos Lago de Maracaibo',
     img: IMG(5),
     desc: 'Operaciones marítimas y lacustres en el Lago de Maracaibo y costas de Venezuela. Transporte de personal y equipos.',
-    detail: 'Más de 59 años de operaciones vinculadas con las costas venezolanas, el Lago de Maracaibo y el Archipiélago Los Monjes.',
+    detail: 'Más de 60 años de operaciones vinculadas con las costas venezolanas, el Lago de Maracaibo y el Archipiélago Los Monjes.',
   },
   // ── AUTOMATIZACIÓN Y CONTROL ──
   {
@@ -504,7 +504,7 @@ const TIMELINE = [
   { year: '1999', title: 'Autorización Ambiental', desc: 'Autorización del Ministerio del Ecosistema como Manejadora de Desechos Peligrosos. Nueva línea de negocios estratégica.' },
   { year: '2000s', title: 'Expansión Regional', desc: 'Contratos con Shell, Petrobras, Eni/Repsol y Cardón IV. Operaciones en Los Monjes y Campo Perla offshore.' },
   { year: '2015', title: 'Proyectos Hito', desc: 'Metro de Maracaibo, Gasoductos Anaco–Barquisimeto y contratos con WFP/UNHCR de Naciones Unidas.' },
-  { year: '2025', title: '59 Años de Trayectoria', desc: 'Proyectos activos con Chevron y PDVSA. 59 años de excelencia técnica y compromiso con Venezuela.' },
+  { year: '2026', title: '60 Años de Trayectoria', desc: 'Proyectos activos con Chevron y PDVSA. 60 años de excelencia técnica y compromiso con Venezuela.' },
 ]
 
 // ─── HOOKS ───────────────────────────────────────────────────────────────────
@@ -736,7 +736,7 @@ function ProjectDetailPage({ project, onClose }) {
               <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-white/35 mb-2">Estado</p>
               {project.status === 'active' ? (
                 <span className="flex items-center gap-2 text-green-400 text-sm font-sub font-semibold">
-                  <span className="w-2 h-2 rounded-full bg-green-400 dot-pulse flex-shrink-0" /> En Ejecución 2025
+                  <span className="w-2 h-2 rounded-full bg-green-400 dot-pulse flex-shrink-0" /> En Ejecución 2026
                 </span>
               ) : (
                 <span className="flex items-center gap-2 text-white/45 text-sm font-sub font-semibold">
@@ -907,7 +907,7 @@ function ClientsSection({ setPage }) {
               <h2 className="font-display text-[2.25rem] md:text-[3rem] text-white leading-none">NUESTROS<br />CLIENTES</h2>
             </div>
             <p className="text-white/40 text-sm max-w-xs leading-relaxed md:text-right">
-              Más de 50 empresas e instituciones del sector público, privado e internacional han confiado en SAMFOR a lo largo de sus 59 años.
+              Más de 50 empresas e instituciones del sector público, privado e internacional han confiado en SAMFOR a lo largo de sus 60 años.
             </p>
           </div>
 
@@ -936,7 +936,7 @@ function ClientsSection({ setPage }) {
         {/* BOTTOM — stat bar */}
         <div className="border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 px-6 md:px-14 lg:px-20 py-5">
           <div className="flex items-center gap-4 md:gap-8">
-            {[['50+', 'Clientes históricos'], ['59', 'Años de confianza'], ['9', 'Sectores atendidos']].map(([val, lbl]) => (
+            {[['50+', 'Clientes históricos'], ['60', 'Años de confianza'], ['9', 'Sectores atendidos']].map(([val, lbl]) => (
               <div key={lbl} className="flex items-baseline gap-1.5">
                 <span className="font-display text-lg md:text-2xl text-samred">{val}</span>
                 <span className="font-sub text-[0.55rem] md:text-xs uppercase tracking-widest text-white/40 leading-tight max-w-[4rem] md:max-w-none">{lbl}</span>
@@ -1153,10 +1153,10 @@ function PageServicios({ initialService }) {
               RESULTADOS.
             </h1>
             <p className="text-white/65 text-lg max-w-xl leading-relaxed mb-10">
-              Más de 59 años ejecutando obras y servicios de alta complejidad para la industria petrolera, petroquímica y civil en Venezuela.
+              Más de 60 años ejecutando obras y servicios de alta complejidad para la industria petrolera, petroquímica y civil en Venezuela.
             </p>
             <div className="flex flex-wrap gap-8">
-              {[['59', 'Años de trayectoria'], ['+100', 'Proyectos ejecutados'], [String(SERVICES.length), 'Divisiones activas']].map(([n, l]) => (
+              {[['60', 'Años de trayectoria'], ['+100', 'Proyectos ejecutados'], [String(SERVICES.length), 'Divisiones activas']].map(([n, l]) => (
                 <div key={l}>
                   <div className="font-display text-[2rem] text-samred leading-none">{n}</div>
                   <div className="font-sub text-[0.65rem] uppercase tracking-widest text-white/45 mt-1 max-w-[8rem] leading-snug">{l}</div>
@@ -1537,7 +1537,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
 
           {/* Bottom stats */}
           <div className="flex gap-5 md:gap-10 border-t border-white/10 pt-5">
-            {[['100+','Proyectos'], ['6','Divisiones'], ['59','Años']].map(([v,l]) => (
+            {[['100+','Proyectos'], ['6','Divisiones'], ['60','Años']].map(([v,l]) => (
               <div key={l}>
                 <p className="font-display text-lg md:text-2xl text-samred leading-none">{v}</p>
                 <p className="font-sub text-[0.55rem] md:text-[0.625rem] uppercase tracking-widest text-white/35 mt-0.5">{l}</p>
@@ -1844,7 +1844,7 @@ function PageQuienesSomos({ setPage }) {
             </p>
             {/* Stats row */}
             <div className="flex flex-wrap gap-8">
-              {[['59', 'Años de trayectoria'], ['+100', 'Proyectos ejecutados'], ['6', 'Divisiones especializadas'], ['1999', 'Cert. desechos peligrosos']].map(([n, l]) => (
+              {[['60', 'Años de trayectoria'], ['+100', 'Proyectos ejecutados'], ['6', 'Divisiones especializadas'], ['1999', 'Cert. desechos peligrosos']].map(([n, l]) => (
                 <div key={l}>
                   <div className="font-display text-[2rem] text-samred leading-none">{n}</div>
                   <div className="font-sub text-[0.65rem] uppercase tracking-widest text-white/45 mt-1 max-w-[8rem] leading-snug">{l}</div>
@@ -2017,7 +2017,7 @@ function PageQuienesSomos({ setPage }) {
                 {[
                   ['Razón Social', 'SAMFOR, S.A.'],
                   ['Fundación', '1966 — Maracaibo, Venezuela'],
-                  ['Trayectoria', '59 años de operación continua'],
+                  ['Trayectoria', '60 años de operación continua'],
                   ['Sector', 'Petrolero, Petroquímico, Carbonífero, Civil'],
                   ['Servicios', '6 líneas de negocio especializadas'],
                   ['Certificación', 'Manejadora de Desechos Peligrosos (desde 1999)'],
@@ -2069,7 +2069,7 @@ function PageQuienesSomos({ setPage }) {
               <h2 className="font-display text-[2.25rem] md:text-[3rem] text-white leading-none">NUESTROS<br />CLIENTES</h2>
             </div>
             <p className="text-white/40 text-sm max-w-xs leading-relaxed md:text-right">
-              Más de 50 empresas e instituciones del sector público, privado e internacional a lo largo de 59 años.
+              Más de 50 empresas e instituciones del sector público, privado e internacional a lo largo de 60 años.
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">

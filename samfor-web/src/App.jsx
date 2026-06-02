@@ -2330,8 +2330,149 @@ function PageContacto() {
   )
 }
 
+// ─── INTRO SCREEN ─────────────────────────────────────────────────────────────
+function IntroScreen({ onEnter }) {
+  const [phase, setPhase] = useState('idle') // idle → typing → visible → exit
+
+  useEffect(() => {
+    // Start typing after short delay
+    const t1 = setTimeout(() => setPhase('typing'), 400)
+    return () => clearTimeout(t1)
+  }, [])
+
+  useEffect(() => {
+    if (phase === 'typing') {
+      const t = setTimeout(() => setPhase('visible'), 1800)
+      return () => clearTimeout(t)
+    }
+  }, [phase])
+
+  const handleEnter = () => {
+    setPhase('exit')
+    setTimeout(onEnter, 900)
+  }
+
+  const stats = [
+    { value: '60', label: 'Años de experiencia' },
+    { value: '+100', label: 'Proyectos ejecutados' },
+    { value: '7', label: 'Divisiones especializadas' },
+  ]
+
+  return (
+    <div
+      className="fixed inset-0 z-[9999] overflow-hidden"
+      style={{
+        opacity: phase === 'exit' ? 0 : 1,
+        transform: phase === 'exit' ? 'scale(1.04)' : 'scale(1)',
+        transition: phase === 'exit' ? 'opacity 0.9s ease, transform 0.9s ease' : 'none',
+        pointerEvents: phase === 'exit' ? 'none' : 'auto',
+      }}
+    >
+      {/* BG photo */}
+      <img
+        src="/intro-bg.webp"
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover object-center"
+        style={{ transform: 'scale(1.05)' }}
+      />
+
+      {/* Dark gradient layers */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/30" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
+
+      {/* Fine grain texture overlay */}
+      <div className="absolute inset-0 opacity-[0.03]"
+        style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E")', backgroundSize: '200px' }} />
+
+      {/* Top bar */}
+      <div className="absolute top-0 left-0 right-0 flex items-center justify-between px-8 md:px-14 pt-8"
+        style={{ opacity: phase === 'idle' ? 0 : 1, transition: 'opacity 0.8s ease 0.3s' }}>
+        <img src="/logo.png" alt="SAMFOR" className="h-16 md:h-20 w-auto brightness-0 invert" />
+        <div className="flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-samred animate-pulse" />
+          <span className="font-sub text-[0.65rem] tracking-[0.25em] uppercase text-white/50">Venezuela · Desde 1966</span>
+        </div>
+      </div>
+
+      {/* Main content */}
+      <div className="absolute inset-0 flex flex-col justify-end px-8 md:px-14 pb-12 md:pb-16">
+
+        {/* Eyebrow line */}
+        <div className="flex items-center gap-3 mb-5"
+          style={{ opacity: phase === 'idle' ? 0 : 1, transform: phase === 'idle' ? 'translateY(12px)' : 'translateY(0)', transition: 'opacity 0.7s ease 0.5s, transform 0.7s ease 0.5s' }}>
+          <span className="block w-8 h-[1.5px] bg-samred" />
+          <span className="font-sub text-[0.65rem] tracking-[0.3em] uppercase text-white/60">Contratista Industrial de Alta Complejidad</span>
+        </div>
+
+        {/* Headline — typewriter */}
+        <h1 className="font-display text-[3rem] sm:text-[4.5rem] md:text-[5.5rem] lg:text-[6.5rem] leading-none text-white mb-6 tracking-wide overflow-hidden">
+          <span className="block"
+            style={{
+              clipPath: phase === 'idle' ? 'inset(0 100% 0 0)' : 'inset(0 0% 0 0)',
+              transition: phase !== 'idle' ? 'clip-path 1.1s cubic-bezier(0.77,0,0.175,1) 0.2s' : 'none',
+            }}>
+            CONSTRUIMOS
+          </span>
+          <span className="block text-samred"
+            style={{
+              clipPath: phase === 'idle' ? 'inset(0 100% 0 0)' : 'inset(0 0% 0 0)',
+              transition: phase !== 'idle' ? 'clip-path 1.1s cubic-bezier(0.77,0,0.175,1) 0.55s' : 'none',
+            }}>
+            VENEZUELA.
+          </span>
+        </h1>
+
+        {/* Description */}
+        <p className="text-white/70 text-base md:text-lg max-w-xl leading-relaxed mb-8 font-body"
+          style={{ opacity: phase === 'visible' ? 1 : 0, transform: phase === 'visible' ? 'translateY(0)' : 'translateY(16px)', transition: 'opacity 0.8s ease 0.1s, transform 0.8s ease 0.1s' }}>
+          Somos una empresa venezolana con 60 años de trayectoria ejecutando proyectos de ingeniería de alta complejidad para la industria petrolera, petroquímica, civil y de servicios públicos en todo el país.
+        </p>
+
+        {/* Stats row */}
+        <div className="flex flex-wrap gap-x-10 gap-y-4 mb-10"
+          style={{ opacity: phase === 'visible' ? 1 : 0, transition: 'opacity 0.8s ease 0.3s' }}>
+          {stats.map((s, i) => (
+            <div key={i} className="flex flex-col">
+              <span className="font-display text-[2rem] md:text-[2.5rem] text-white leading-none">{s.value}</span>
+              <span className="font-sub text-[0.65rem] tracking-widest uppercase text-white/45 mt-1">{s.label}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA row */}
+        <div className="flex items-center gap-6"
+          style={{ opacity: phase === 'visible' ? 1 : 0, transform: phase === 'visible' ? 'translateY(0)' : 'translateY(12px)', transition: 'opacity 0.8s ease 0.45s, transform 0.8s ease 0.45s' }}>
+          <button
+            onClick={handleEnter}
+            className="group flex items-center gap-3 bg-samred text-white font-sub font-bold text-[0.75rem] tracking-[0.2em] uppercase px-8 py-4 rounded transition-all hover:bg-red-700 active:scale-[0.97]"
+          >
+            Explorar Sitio
+            <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
+          </button>
+          <button
+            onClick={handleEnter}
+            className="font-sub text-[0.7rem] tracking-[0.2em] uppercase text-white/50 hover:text-white transition-colors"
+          >
+            Continuar →
+          </button>
+        </div>
+      </div>
+
+      {/* Bottom progress bar */}
+      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/10">
+        <div className="h-full bg-samred"
+          style={{
+            width: phase === 'visible' ? '100%' : phase === 'typing' ? '55%' : '0%',
+            transition: phase === 'typing' ? 'width 1.4s ease' : phase === 'visible' ? 'width 0.6s ease' : 'none',
+          }} />
+      </div>
+    </div>
+  )
+}
+
 // ─── ROOT ─────────────────────────────────────────────────────────────────────
 export default function App() {
+  const [showIntro, setShowIntro] = useState(true)
   const [page, setPage] = useState('inicio')
   const [scrolled, setScrolled] = useState(false)
   const [projectOpen, setProjectOpen] = useState(false)
@@ -2369,6 +2510,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col font-body">
+      {showIntro && <IntroScreen onEnter={() => setShowIntro(false)} />}
       <Navbar page={page} setPage={setPage} scrolled={scrolled} forceDark={projectOpen} />
       <main className="flex-1">{pages[page] || pages['inicio']}</main>
       <Footer setPage={setPage} />

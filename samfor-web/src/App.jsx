@@ -553,9 +553,9 @@ function CounterItem({ value, suffix, label }) {
     return () => io.disconnect()
   }, [])
   return (
-    <div ref={ref} className="text-center px-2 py-5 md:px-5 md:py-7 flex-1">
-      <div className="font-display text-[2.5rem] md:text-[4.5rem] text-samred leading-none tabular-nums">{count}{suffix}</div>
-      <div className="font-sub text-[0.8rem] md:text-[0.9rem] font-semibold uppercase tracking-widest text-secondary mt-2 md:mt-3 leading-tight">{label}</div>
+    <div ref={ref} className="text-center px-1.5 py-4 sm:px-3 sm:py-5 md:px-5 md:py-7 flex-1">
+      <div className="font-display text-[2rem] sm:text-[2.8rem] md:text-[4rem] lg:text-[4.5rem] text-samred leading-none tabular-nums">{count}{suffix}</div>
+      <div className="font-sub text-[0.72rem] sm:text-[0.8rem] md:text-[0.88rem] font-semibold uppercase tracking-widest text-secondary mt-1.5 md:mt-2.5 leading-tight">{label}</div>
     </div>
   )
 }
@@ -647,7 +647,7 @@ function Navbar({ page, setPage, scrolled, forceDark, logoProgress = 1 }) {
             <img src="/logo.png" alt="SAMFOR" style={{ height: '120px' }} className={`w-auto ${dark ? 'brightness-0 invert' : ''}`} />
           </button>
         ) : (
-          <div aria-hidden="true" style={{ height: '175px', width: '260px', flexShrink: 0 }} />
+          <div aria-hidden="true" style={{ height: '175px', width: 'clamp(180px,20vw,280px)', flexShrink: 0 }} />
         )}
 
         <div className="hidden md:flex items-center gap-7">
@@ -1029,7 +1029,7 @@ function ServicioDetalle({ title, onBack }) {
           className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
         <div className="absolute inset-0 bg-gradient-to-r from-dark/90 via-dark/60 to-dark/15" />
         <div className="absolute inset-0 bg-gradient-to-t from-dark/70 via-transparent to-transparent" />
-        <div className="relative h-full flex flex-col justify-end px-5 md:px-16 lg:px-24 pb-14 md:pb-20">
+        <div className="relative h-full flex flex-col justify-end px-5 sm:px-8 md:px-16 lg:px-24 pb-10 md:pb-16 lg:pb-20">
           <div className="max-w-3xl">
             <button onClick={onBack} className="flex items-center gap-2 text-white/50 hover:text-white text-xs font-sub font-bold uppercase tracking-widest mb-8 transition-colors group">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="transition-transform group-hover:-translate-x-1"><path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -1088,7 +1088,7 @@ function ServicioDetalle({ title, onBack }) {
       </section>
 
       {/* ── CAPACIDADES — split lista + foto vertical ── */}
-      <section className="bg-dark grid grid-cols-1 lg:grid-cols-[1fr_420px] xl:grid-cols-[1fr_500px] min-h-[80vh]">
+      <section className="bg-dark grid grid-cols-1 md:grid-cols-[1fr_380px] lg:grid-cols-[1fr_420px] xl:grid-cols-[1fr_500px] min-h-[80vh]">
         <div className="px-5 md:px-16 lg:px-20 py-14 md:py-24 flex flex-col justify-center">
           <div className="scroll-reveal flex items-center gap-3 mb-4">
             <span className="h-[3px] w-10 bg-samred" />
@@ -1105,7 +1105,7 @@ function ServicioDetalle({ title, onBack }) {
             ))}
           </div>
         </div>
-        <div className="relative hidden lg:block overflow-hidden">
+        <div className="relative hidden md:block overflow-hidden">
           <img src="/sv-photo3.webp" alt="Ingeniería SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
           <div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/20 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent" />
@@ -1193,7 +1193,7 @@ function PageServicios({ initialService }) {
         <img src="/sv-photo4.webp" alt="SAMFOR Servicios" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
         <div className="absolute inset-0 bg-gradient-to-r from-dark/90 via-dark/60 to-dark/15" />
         <div className="absolute inset-0 bg-gradient-to-t from-dark/70 via-transparent to-transparent" />
-        <div className="relative h-full flex flex-col justify-end px-5 md:px-16 lg:px-24 pb-14 md:pb-20">
+        <div className="relative h-full flex flex-col justify-end px-5 sm:px-8 md:px-16 lg:px-24 pb-10 md:pb-16 lg:pb-20">
           <div className="max-w-3xl">
             <div className="flex items-center gap-3 mb-5">
               <span className="h-[3px] w-10 bg-samred" />
@@ -1234,7 +1234,7 @@ function PageServicios({ initialService }) {
             <span className="font-mono text-xs text-white/25 hidden md:block">{SERVICES.length} divisiones</span>
           </div>
           {/* Fila 1 — 3 cards grandes */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-4">
             {SERVICES.slice(0,3).map((s,i) => (
               <button key={s.title} onClick={() => handleSelect(s.title)}
                 className="scroll-reveal group relative overflow-hidden rounded cursor-pointer text-left"
@@ -1257,7 +1257,7 @@ function PageServicios({ initialService }) {
             ))}
           </div>
           {/* Fila 2 — 4 cards más compactas */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
             {SERVICES.slice(3).map((s,i) => (
               <button key={s.title} onClick={() => handleSelect(s.title)}
                 className="scroll-reveal group relative overflow-hidden rounded cursor-pointer text-left"
@@ -1363,10 +1363,10 @@ function PageInicio({ setPage, navigateToServicios }) {
 
       {/* QUIÉNES SOMOS — home snippet */}
       <section className="bg-white overflow-hidden">
-        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[560px] lg:min-h-[640px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 min-h-[480px] md:min-h-[560px] lg:min-h-[640px]">
 
           {/* LEFT — photo */}
-          <div className="relative h-72 sm:h-96 lg:h-auto order-1 lg:order-none">
+          <div className="relative h-64 sm:h-80 md:h-auto order-1 md:order-none">
             <img
               src="/intro-bg.webp"
               alt="SAMFOR en campo"
@@ -1374,9 +1374,9 @@ function PageInicio({ setPage, navigateToServicios }) {
               loading="lazy"
             />
             {/* subtle red bottom accent */}
-            <div className="absolute bottom-0 left-0 right-0 h-1 bg-samred lg:hidden" />
+            <div className="absolute bottom-0 left-0 right-0 h-1 bg-samred md:hidden" />
             {/* right fade on desktop */}
-            <div className="hidden lg:block absolute inset-y-0 right-0 w-24 bg-gradient-to-r from-transparent to-white" />
+            <div className="hidden md:block absolute inset-y-0 right-0 w-24 bg-gradient-to-r from-transparent to-white" />
             {/* floating year badge */}
             <div className="absolute bottom-6 left-6 bg-dark/80 backdrop-blur-sm border border-white/10 rounded px-4 py-3">
               <span className="font-display text-[2rem] text-white leading-none">60</span>
@@ -1438,10 +1438,10 @@ function PageInicio({ setPage, navigateToServicios }) {
       <section className="bg-dark overflow-hidden relative">
 
         {/* MÓVIL — foto fondo de toda la sección */}
-        <img src="/services-photo.webp" alt="" className="lg:hidden absolute inset-0 w-full h-full object-cover object-right" loading="lazy" aria-hidden="true" />
-        <div className="lg:hidden absolute inset-0" style={{ background: 'linear-gradient(to right, #0D1117 0%, rgba(13,17,23,0.88) 30%, rgba(13,17,23,0.6) 55%, rgba(13,17,23,0.2) 80%, transparent 100%)' }} />
+        <img src="/services-photo.webp" alt="" className="md:hidden absolute inset-0 w-full h-full object-cover object-right" loading="lazy" aria-hidden="true" />
+        <div className="md:hidden absolute inset-0" style={{ background: 'linear-gradient(to right, #0D1117 0%, rgba(13,17,23,0.88) 30%, rgba(13,17,23,0.6) 55%, rgba(13,17,23,0.2) 80%, transparent 100%)' }} />
 
-        <div className="relative grid grid-cols-1 lg:grid-cols-2">
+        <div className="relative grid grid-cols-1 md:grid-cols-2">
 
           {/* LEFT — list */}
           <div className="px-6 md:px-14 lg:px-16 flex flex-col justify-center py-14 lg:py-20">
@@ -1488,7 +1488,7 @@ function PageInicio({ setPage, navigateToServicios }) {
           </div>
 
           {/* RIGHT — photo, sticky so it stays visible while scrolling through the list */}
-          <div className="relative hidden lg:block" style={{ minHeight: '100%' }}>
+          <div className="relative hidden md:block" style={{ minHeight: '100%' }}>
             <div className="sticky top-0 h-screen">
               <img
                 src="/services-photo.webp"
@@ -1532,12 +1532,12 @@ function PageInicio({ setPage, navigateToServicios }) {
           </div>
 
           {/* 3 equal cards */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 stagger">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 stagger">
             {featured.filter(Boolean).map((p) => (
               <div
                 key={p.id}
                 className="featured-card group relative rounded overflow-hidden cursor-pointer"
-                style={{ minHeight: 'clamp(180px,30vw,228px)', height: 'clamp(180px,30vw,228px)' }}
+                style={{ minHeight: 'clamp(180px,25vw,260px)', height: 'clamp(180px,25vw,260px)' }}
                 onClick={() => setPage('proyectos')}
                 role="button" tabIndex={0}
                 onKeyDown={e => e.key === 'Enter' && setPage('proyectos')}
@@ -1702,13 +1702,13 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
         </div>
 
         {/* Divisiones — scroll horizontal en mobile, grid en desktop */}
-        <div className="hidden lg:grid lg:grid-cols-8 gap-0 border-t border-white/10">
+        <div className="grid grid-cols-4 sm:grid-cols-8 gap-0 border-t border-white/10">
 
           {/* TODOS */}
           <button
             onClick={() => setActiveDivision('Todos')}
             className={`group relative overflow-hidden transition-all duration-300 ${activeDivision==='Todos' ? 'opacity-100' : 'opacity-60 hover:opacity-90'}`}
-            style={{ height: '260px' }}
+            style={{ height: 'clamp(110px,18vw,260px)' }}
           >
             <img src={IMG(28)} alt="Todos" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
             <div className={`absolute inset-0 transition-all duration-300 ${activeDivision==='Todos' ? 'bg-samred/55' : 'bg-dark/75 group-hover:bg-dark/55'}`} />
@@ -1730,16 +1730,16 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
               <button key={key}
                 onClick={() => setActiveDivision(key)}
                 className={`group relative overflow-hidden transition-all duration-300 ${isActive ? 'opacity-100' : 'opacity-55 hover:opacity-90'}`}
-                style={{ height: '260px' }}
+                style={{ height: 'clamp(110px,18vw,260px)' }}
               >
                 {sample && <img src={sample.img} alt={key} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />}
                 <div className={`absolute inset-0 transition-all duration-300 ${isActive ? 'bg-dark/40' : 'bg-dark/75 group-hover:bg-dark/50'}`} />
                 {/* Top accent when active */}
                 {isActive && <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred" />}
                 {/* Bottom content */}
-                <div className="absolute inset-0 flex flex-col items-start justify-end p-4">
-                  <div className={`mb-2 transition-colors duration-300 ${isActive ? 'text-samred' : 'text-white/50 group-hover:text-white/80'}`}>{m.icon}</div>
-                  <p className={`font-display text-[0.95rem] leading-none mb-1 transition-colors duration-300 ${isActive ? 'text-white' : 'text-white/80 group-hover:text-white'}`}>
+                <div className="absolute inset-0 flex flex-col items-start justify-end p-2 sm:p-4">
+                  <div className={`mb-1 sm:mb-2 transition-colors duration-300 ${isActive ? 'text-samred' : 'text-white/50 group-hover:text-white/80'}`} style={{transform:'scale(0.8) sm:scale(1)',transformOrigin:'left bottom'}}>{m.icon}</div>
+                  <p className={`font-display text-[0.65rem] sm:text-[0.95rem] leading-none mb-0.5 sm:mb-1 transition-colors duration-300 ${isActive ? 'text-white' : 'text-white/80 group-hover:text-white'}`}>
                     {m.label.replace('Proyectos ', '').replace('División ', '').replace('Servicios ', '').toUpperCase()}
                   </p>
                 </div>
@@ -1750,49 +1750,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
           })}
         </div>
 
-        {/* Mobile — horizontal photo-card scroll */}
-        <div className="lg:hidden border-t border-white/10">
-          <div className="flex w-full">
-            {/* TODOS */}
-            <button
-              onClick={() => setActiveDivision('Todos')}
-              className={`group relative overflow-hidden transition-all duration-300 ${activeDivision==='Todos' ? 'opacity-100' : 'opacity-55'}`}
-              style={{ width: 'calc(100%/8)', minWidth: 0, height: '90px' }}
-            >
-              <img src={IMG(28)} alt="Todos" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-              <div className={`absolute inset-0 transition-all duration-300 ${activeDivision==='Todos' ? 'bg-samred/55' : 'bg-dark/75'}`} />
-              {activeDivision==='Todos' && <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred" />}
-              <div className="absolute inset-0 flex flex-col items-start justify-end p-2">
-                <div className="text-white/70 mb-0.5"><LayoutGrid size={11}/></div>
-                <p className="font-display text-[0.75rem] text-white leading-none mb-0.5">TODOS</p>
-              </div>
-              <div className="absolute top-0 right-0 w-px h-full bg-white/10" />
-            </button>
-            {/* Cada división */}
-            {Object.entries(DIVISION_META).map(([key, m]) => {
-              const sample = ALL_PROJECTS.find(p => p.division === key)
-              const isActive = activeDivision === key
-              return (
-                <button key={key}
-                  onClick={() => setActiveDivision(key)}
-                  className={`group relative overflow-hidden transition-all duration-300 ${isActive ? 'opacity-100' : 'opacity-55'}`}
-                  style={{ width: 'calc(100%/8)', minWidth: 0, height: '90px' }}
-                >
-                  {sample && <img src={sample.img} alt={key} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />}
-                  <div className={`absolute inset-0 transition-all duration-300 ${isActive ? 'bg-dark/40' : 'bg-dark/75'}`} />
-                  {isActive && <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred" />}
-                  <div className="absolute inset-0 flex flex-col items-start justify-end p-2">
-                    <div className={`mb-0.5 transition-colors duration-300 ${isActive ? 'text-samred' : 'text-white/50'}`} style={{transform:'scale(0.75)',transformOrigin:'left bottom'}}>{m.icon}</div>
-                    <p className={`font-display text-[0.72rem] leading-none mb-0.5 transition-colors duration-300 ${isActive ? 'text-white' : 'text-white/80'}`}>
-                      {m.label.replace('Proyectos ','').replace('División ','').replace('Servicios ','').split(' ')[0].toUpperCase()}
-                    </p>
-                  </div>
-                  <div className="absolute top-0 right-0 w-px h-full bg-white/10" />
-                </button>
-              )
-            })}
-          </div>
-        </div>
+
       </div>
 
       {/* ── PROYECTOS ── */}
@@ -1876,7 +1834,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
         {/* ── CARRUSEL — full width, fuera del contenedor con padding ── */}
         {filtered.length > 0 && !listView && (<>
           {/* MÓVIL — animación automática */}
-          <div className="lg:hidden overflow-hidden relative">
+          <div className="md:hidden overflow-hidden relative">
             <div className="flex gap-4"
               style={{ width: 'max-content', animation: `marquee ${Math.round(filtered.length * 280 / SPEED)}s linear infinite`, willChange: 'transform', backfaceVisibility: 'hidden' }}
             >
@@ -1908,7 +1866,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
           </div>
 
           {/* DESKTOP — animación automática */}
-          <div className="hidden lg:block overflow-hidden relative"
+          <div className="hidden md:block overflow-hidden relative"
             onMouseEnter={e => e.currentTarget.querySelector('.carousel-track').style.animationPlayState='paused'}
             onMouseLeave={e => e.currentTarget.querySelector('.carousel-track').style.animationPlayState='running'}
           >
@@ -1965,13 +1923,13 @@ function PageQuienesSomos({ setPage }) {
         <img src="/qs-hero.webp" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
         <div className="absolute inset-0 bg-gradient-to-r from-dark/85 via-dark/55 to-dark/10" />
         <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent" />
-        <div className="relative h-full flex flex-col justify-end px-5 md:px-16 lg:px-24 pb-10 md:pb-20">
+        <div className="relative h-full flex flex-col justify-end px-5 sm:px-8 md:px-16 lg:px-24 pb-10 md:pb-16 lg:pb-20">
           <div className="max-w-3xl">
             <div className="flex items-center gap-3 mb-4">
               <span className="h-[3px] w-10 bg-samred" />
               <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.25em] text-white/55">Nuestra empresa · Desde 1966</span>
             </div>
-            <h1 className="font-display text-[clamp(2.6rem,7vw,6rem)] text-white leading-none tracking-wide mb-5">
+            <h1 className="font-display text-[clamp(2.2rem,6vw,6rem)] text-white leading-none tracking-wide mb-5">
               UNA EMPRESA.<br />
               <span className="text-samred">SEIS DÉCADAS.</span><br />
               UN ESTÁNDAR.
@@ -1999,7 +1957,7 @@ function PageQuienesSomos({ setPage }) {
       {/* ── QUIÉNES SOMOS — foto inmersiva + texto superpuesto en mobile ── */}
       <section className="relative overflow-hidden bg-dark">
         {/* Mobile: full-bleed foto con contenido encima */}
-        <div className="lg:hidden relative" style={{ minHeight: '420px' }}>
+        <div className="md:hidden relative" style={{ minHeight: '420px' }}>
           <img src="/qs-welding.webp" alt="Soldadores SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(13,17,23,0.3) 0%, rgba(13,17,23,0.75) 60%, #0D1117 100%)' }} />
           <div className="relative px-5 pt-12 pb-10 flex flex-col justify-end h-full">
@@ -2011,7 +1969,7 @@ function PageQuienesSomos({ setPage }) {
           </div>
         </div>
         {/* Mobile: texto debajo con fondo oscuro */}
-        <div className="lg:hidden bg-dark px-5 pb-12">
+        <div className="md:hidden bg-dark px-5 pb-12">
           <p className="text-white/70 text-[1rem] leading-relaxed mb-5">
             Empresa venezolana fundada en 1966 en Maracaibo, dedicada a construcción civil, eléctrica, mecánica, telecomunicaciones, transporte y servicios ambientales para la industria petrolera y petroquímica.
           </p>
@@ -2036,8 +1994,8 @@ function PageQuienesSomos({ setPage }) {
           </div>
         </div>
         {/* Desktop: split original */}
-        <div className="hidden lg:grid lg:grid-cols-2 lg:min-h-[80vh]">
-          <div className="bg-white flex items-center px-16 py-20">
+        <div className="hidden md:grid md:grid-cols-2 lg:min-h-[80vh]">
+          <div className="bg-white flex items-center px-8 md:px-12 lg:px-16 py-12 md:py-16 lg:py-20">
             <div className="max-w-lg">
               <div className="flex items-center gap-3 mb-6">
                 <span className="h-[3px] w-10 bg-samred" />
@@ -2079,7 +2037,7 @@ function PageQuienesSomos({ setPage }) {
             <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Identidad corporativa</span>
           </div>
           {/* Mobile: full-width stacked cards with big numbers */}
-          <div className="lg:hidden flex flex-col gap-0 border border-white/10 rounded-2xl overflow-hidden">
+          <div className="md:hidden flex flex-col gap-0 border border-white/10 rounded-2xl overflow-hidden">
             {[
               { num: '01', title: 'MISIÓN', body: 'Ejecutar de manera rentable y eficiente, en armonía con el ambiente, obras y servicios de construcción civil, eléctrica, telecomunicación, transporte y servicios ambientales, asegurando la satisfacción del cliente y el desarrollo del talento humano.' },
               { num: '02', title: 'VISIÓN', body: 'Ser una empresa líder en Construcción, Transporte y Servicios Ambientales, reconocida por su excelencia, calidad de servicios, solidez del equipo humano y compromiso con el desarrollo sostenible de Venezuela.' },
@@ -2095,7 +2053,7 @@ function PageQuienesSomos({ setPage }) {
             ))}
           </div>
           {/* Desktop: grid original */}
-          <div className="hidden lg:grid lg:grid-cols-3 gap-0 border border-white/10 rounded overflow-hidden">
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-0 border border-white/10 rounded overflow-hidden">
             {[
               { num: '01', title: 'MISIÓN', body: 'Ejecutar de manera rentable y eficiente, en armonía con el ambiente, obras y servicios de construcción civil, eléctrica, telecomunicación, transporte y servicios ambientales, asegurando la satisfacción del cliente y el desarrollo del talento humano.' },
               { num: '02', title: 'VISIÓN', body: 'Ser una empresa líder en Construcción, Transporte y Servicios Ambientales, reconocida por su excelencia, calidad de servicios, solidez del equipo humano y compromiso con el desarrollo sostenible de Venezuela.' },
@@ -2115,8 +2073,8 @@ function PageQuienesSomos({ setPage }) {
       {/* ── VENTAJAS — móvil: foto hero + lista compacta ── */}
       <section className="bg-surface">
         {/* Mobile: foto header + lista en blanco */}
-        <div className="lg:hidden">
-          <div className="relative overflow-hidden" style={{ height: '260px' }}>
+        <div className="md:hidden">
+          <div className="relative overflow-hidden" style={{ height: 'clamp(110px,18vw,260px)' }}>
             <img src="/qs-electrical.webp" alt="Técnicos eléctricos SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-t from-dark/80 to-dark/20" />
             <div className="absolute bottom-0 left-0 right-0 h-1 bg-samred" />
@@ -2150,7 +2108,7 @@ function PageQuienesSomos({ setPage }) {
           </div>
         </div>
         {/* Desktop: split original */}
-        <div className="hidden lg:grid lg:grid-cols-2 lg:min-h-[75vh]">
+        <div className="hidden md:grid md:grid-cols-2 lg:min-h-[75vh]">
           <div className="relative overflow-hidden order-2 lg:order-1" style={{ minHeight: '300px' }}>
             <img src="/qs-electrical.webp" alt="Técnicos eléctricos SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-r from-transparent to-dark/20" />
@@ -2161,7 +2119,7 @@ function PageQuienesSomos({ setPage }) {
               <div className="text-white/40 text-xs font-mono mt-0.5">Ministerio del Ecosistema · 1999</div>
             </div>
           </div>
-          <div className="bg-surface flex items-center px-16 py-20 order-1 lg:order-2">
+          <div className="bg-surface flex items-center px-8 md:px-12 lg:px-16 py-12 md:py-16 lg:py-20 order-1 lg:order-2">
             <div className="w-full max-w-lg">
               <div className="flex items-center gap-3 mb-6">
                 <span className="h-[3px] w-10 bg-samred" />
@@ -2200,7 +2158,7 @@ function PageQuienesSomos({ setPage }) {
             <h2 className="font-display text-[clamp(2.5rem,5vw,4rem)] text-dark leading-none">NUESTRA<br />TRAYECTORIA</h2>
           </div>
           {/* Mobile: cards con año grande como fondo */}
-          <div className="lg:hidden flex flex-col gap-4">
+          <div className="md:hidden flex flex-col gap-4">
             {TIMELINE.map((item, i) => (
               <div key={i} className="scroll-reveal relative bg-dark rounded-2xl px-5 py-6 overflow-hidden" style={{ transitionDelay: `${i * 50}ms` }}>
                 {/* Ghost year */}
@@ -2215,7 +2173,7 @@ function PageQuienesSomos({ setPage }) {
             ))}
           </div>
           {/* Desktop: timeline original */}
-          <div className="hidden lg:block relative">
+          <div className="hidden md:block relative">
             <div className="absolute left-[7.5rem] top-2 bottom-2 w-[2px] bg-gradient-to-b from-samred via-samred/40 to-transparent" />
             <div className="flex flex-col gap-10">
               {TIMELINE.map((item, i) => (
@@ -2245,7 +2203,7 @@ function PageQuienesSomos({ setPage }) {
             <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Datos corporativos</span>
           </div>
           {/* Mobile: compact stacked */}
-          <div className="lg:hidden flex flex-col gap-4">
+          <div className="md:hidden flex flex-col gap-4">
             <div className="border border-white/10 rounded-2xl overflow-hidden">
               <div className="bg-white/5 border-b border-white/10 px-5 py-3">
                 <span className="font-sub font-bold text-xs uppercase tracking-widest text-white/50">Ficha de Empresa</span>
@@ -2289,7 +2247,7 @@ function PageQuienesSomos({ setPage }) {
             </div>
           </div>
           {/* Desktop: original grid */}
-          <div className="hidden lg:grid lg:grid-cols-2 gap-6">
+          <div className="hidden md:grid md:grid-cols-2 gap-6">
             <div className="border border-white/10 rounded overflow-hidden">
               <div className="bg-white/5 border-b border-white/10 px-7 py-4">
                 <span className="font-sub font-bold text-xs uppercase tracking-widest text-white/60">Ficha de Empresa</span>
@@ -2397,7 +2355,7 @@ function PageContacto() {
         <img src="/ct-hero.webp" alt="SAMFOR operaciones" className="absolute inset-0 w-full h-full object-cover object-[30%_center] lg:object-center" loading="eager" />
         <div className="absolute inset-0 bg-gradient-to-r from-dark/90 via-dark/60 to-dark/20" />
         <div className="absolute inset-0 bg-gradient-to-t from-dark/50 via-transparent to-transparent" />
-        <div className="relative h-full flex flex-col justify-end px-5 md:px-16 lg:px-24 pb-14 md:pb-20">
+        <div className="relative h-full flex flex-col justify-end px-5 sm:px-8 md:px-16 lg:px-24 pb-10 md:pb-16 lg:pb-20">
           <div className="max-w-2xl">
             <div className="flex items-center gap-3 mb-5">
               <span className="h-[3px] w-10 bg-samred" />
@@ -2425,7 +2383,7 @@ function PageContacto() {
       </section>
 
       {/* ── FORMULARIO PRINCIPAL — split: info izq, form der ── */}
-      <section className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr]">
+      <section className="grid grid-cols-1 md:grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1.2fr]">
 
         {/* Left — info + foto decorativa */}
         <div className="bg-dark flex flex-col justify-between px-5 md:px-14 py-12 md:py-16">

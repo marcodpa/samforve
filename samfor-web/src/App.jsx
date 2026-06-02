@@ -554,8 +554,8 @@ function CounterItem({ value, suffix, label }) {
   }, [])
   return (
     <div ref={ref} className="text-center px-2 py-5 md:px-5 md:py-7 flex-1">
-      <div className="font-display text-[2rem] md:text-[4rem] text-samred leading-none tabular-nums">{count}{suffix}</div>
-      <div className="font-sub text-[0.55rem] md:text-xs font-semibold uppercase tracking-widest text-secondary mt-1 md:mt-2 leading-tight">{label}</div>
+      <div className="font-display text-[2.5rem] md:text-[4.5rem] text-samred leading-none tabular-nums">{count}{suffix}</div>
+      <div className="font-sub text-[0.8rem] md:text-[0.9rem] font-semibold uppercase tracking-widest text-secondary mt-2 md:mt-3 leading-tight">{label}</div>
     </div>
   )
 }
@@ -565,7 +565,7 @@ function DivisionBadge({ division, size = 'sm' }) {
   const m = DIVISION_META[division]
   if (!m) return null
   return (
-    <span className={`inline-flex items-center gap-1 font-mono font-semibold rounded border px-2 py-0.5 ${m.color} ${size === 'xs' ? 'text-[0.6rem]' : 'text-xs'}`}>
+    <span className={`inline-flex items-center gap-1 font-mono font-semibold rounded border px-2 py-0.5 ${m.color} ${size === 'xs' ? 'text-[0.75rem]' : 'text-xs'}`}>
       {m.icon}{m.label}
     </span>
   )
@@ -690,19 +690,19 @@ function Footer({ setPage }) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-white/10">
           <div>
             <div className="mb-4"><img src="/logo.png" alt="SAMFOR" style={{ height: '100px' }} className="w-auto brightness-0 invert" /></div>
-            <p className="text-white/55 text-sm leading-relaxed mb-5 max-w-xs">Construyendo Venezuela desde 1966. Empresa líder en construcción industrial, servicios petroleros y ambientales.</p>
+            <p className="text-white/55 text-base leading-relaxed mb-5 max-w-xs">Construyendo Venezuela desde 1966. Empresa líder en construcción industrial, servicios petroleros y ambientales.</p>
           </div>
           <div>
-            <h4 className="font-sub font-semibold text-xs uppercase tracking-widest text-white/40 mb-5">Navegación</h4>
+            <h4 className="font-sub font-semibold text-sm uppercase tracking-widest text-white/40 mb-5">Navegación</h4>
             <div className="flex flex-col gap-2.5">
               {[['inicio','Inicio'],['proyectos','Proyectos'],['quienes-somos','Quiénes Somos'],['contacto','Contacto']].map(([id,label]) => (
-                <button key={id} onClick={() => setPage(id)} className="text-left text-white/65 hover:text-white transition-colors text-sm">{label}</button>
+                <button key={id} onClick={() => setPage(id)} className="text-left text-white/65 hover:text-white transition-colors text-base">{label}</button>
               ))}
             </div>
           </div>
           <div>
-            <h4 className="font-sub font-semibold text-xs uppercase tracking-widest text-white/40 mb-5">Contacto</h4>
-            <div className="flex flex-col gap-3 text-sm text-white/65">
+            <h4 className="font-sub font-semibold text-sm uppercase tracking-widest text-white/40 mb-5">Contacto</h4>
+            <div className="flex flex-col gap-3 text-base text-white/65">
               <div className="flex items-start gap-2.5"><MapPin size={13} className="mt-0.5 flex-shrink-0 text-samred" /><span>Av. 3H entre Calles 68-70 N.69-61, Maracaibo, Venezuela</span></div>
               <div className="flex items-center gap-2.5"><Mail size={13} className="flex-shrink-0 text-samred" /><span>samfor@samfor.com</span></div>
               <div className="flex items-center gap-2.5"><Phone size={13} className="flex-shrink-0 text-samred" /><span>+58 261 814 4444</span></div>
@@ -759,7 +759,7 @@ function ProjectDetailPage({ project, onClose }) {
         {project.status === 'active' && (
           <div className="absolute top-6 right-6 md:right-10 flex items-center gap-1.5 bg-dark/60 backdrop-blur-sm px-3 py-1.5 rounded-full border border-green-500/30 z-10">
             <span className="w-1.5 h-1.5 rounded-full bg-green-400 dot-pulse" />
-            <span className="text-green-400 text-[0.6875rem] font-mono uppercase tracking-widest">En Ejecución</span>
+            <span className="text-green-400 text-[0.82rem] font-mono uppercase tracking-widest">En Ejecución</span>
           </div>
         )}
 
@@ -782,15 +782,15 @@ function ProjectDetailPage({ project, onClose }) {
           {/* Client + meta row */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-0 mb-12 border border-white/10 rounded overflow-hidden">
             <div className="px-7 py-6 border-b md:border-b-0 md:border-r border-white/10">
-              <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-samred mb-2">Cliente</p>
+              <p className="font-sub font-semibold text-[0.78rem] uppercase tracking-[0.2em] text-samred mb-2">Cliente</p>
               <p className="font-sub font-bold text-base text-white leading-snug">{project.client}</p>
             </div>
             <div className="px-7 py-6 border-b md:border-b-0 md:border-r border-white/10">
-              <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-white/35 mb-2">División</p>
-              <p className="font-sub font-bold text-sm uppercase tracking-wide text-white/80">{m?.label}</p>
+              <p className="font-sub font-semibold text-[0.78rem] uppercase tracking-[0.2em] text-white/35 mb-2">División</p>
+              <p className="font-sub font-bold text-base uppercase tracking-wide text-white/80">{m?.label}</p>
             </div>
             <div className="px-7 py-6">
-              <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-white/35 mb-2">Estado</p>
+              <p className="font-sub font-semibold text-[0.78rem] uppercase tracking-[0.2em] text-white/35 mb-2">Estado</p>
               {project.status === 'active' ? (
                 <span className="flex items-center gap-2 text-green-400 text-sm font-sub font-semibold">
                   <span className="w-2 h-2 rounded-full bg-green-400 dot-pulse flex-shrink-0" /> En Ejecución 2026
@@ -807,7 +807,7 @@ function ProjectDetailPage({ project, onClose }) {
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1px_1fr] gap-0 mb-14">
             {project.desc && (
               <div className="lg:pr-12 pb-10 lg:pb-0">
-                <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-white/35 mb-5">Descripción</p>
+                <p className="font-sub font-semibold text-[0.78rem] uppercase tracking-[0.2em] text-white/35 mb-5">Descripción</p>
                 <p className="text-white/70 text-[1rem] leading-relaxed">{project.desc}</p>
               </div>
             )}
@@ -817,7 +817,7 @@ function ProjectDetailPage({ project, onClose }) {
             )}
             {project.detail && (
               <div className="lg:pl-12 pt-10 lg:pt-0">
-                <p className="font-sub font-semibold text-[0.625rem] uppercase tracking-[0.2em] text-white/35 mb-5">Alcance del Proyecto</p>
+                <p className="font-sub font-semibold text-[0.78rem] uppercase tracking-[0.2em] text-white/35 mb-5">Alcance del Proyecto</p>
                 <div className="border-l-[3px] border-samred pl-5">
                   <p className="text-white/60 text-[0.9375rem] leading-relaxed">{project.detail}</p>
                 </div>
@@ -841,7 +841,7 @@ function ProjectDetailPage({ project, onClose }) {
           <div className="max-w-5xl mx-auto">
             <div className="flex items-center gap-3 mb-8">
               <span className="h-[3px] w-8 bg-samred" />
-              <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Proyectos relacionados</span>
+              <span className="font-sub font-semibold text-[0.82rem] uppercase tracking-widest text-samred">Proyectos relacionados</span>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {related.map(p => (
@@ -855,7 +855,7 @@ function ProjectDetailPage({ project, onClose }) {
                     <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred" />
                   </div>
                   <div className="p-4">
-                    <p className="text-gray-400 text-[0.65rem] font-mono uppercase tracking-widest mb-1">{p.client}</p>
+                    <p className="text-gray-400 text-[0.8rem] font-mono uppercase tracking-widest mb-1">{p.client}</p>
                     <h3 className="font-sub font-bold text-sm uppercase tracking-wide text-dark group-hover:text-samred transition-colors leading-snug line-clamp-2">{p.title}</h3>
                     <div className="flex items-center gap-1 text-samred text-xs font-sub font-semibold uppercase tracking-widest mt-3 opacity-0 group-hover:opacity-100 transition-opacity">
                       Ver detalle <ArrowRight size={11} />
@@ -893,9 +893,9 @@ function ProjectCard({ project, onClick }) {
         <div className="absolute bottom-0 left-0 right-0 h-[3px]" style={{ background: m?.dot || '#C8102E' }} />
       </div>
       <div className="p-4">
-        <p className="text-[0.6875rem] font-mono font-semibold text-secondary uppercase tracking-wide mb-1.5 line-clamp-1">{project.client}</p>
-        <h3 className="font-sub font-bold text-sm text-dark mb-3 leading-snug line-clamp-2">{project.title}</h3>
-        <p className="text-secondary text-xs leading-relaxed mb-3 line-clamp-2">{project.desc}</p>
+        <p className="text-[0.82rem] font-mono font-semibold text-secondary uppercase tracking-wide mb-1.5 line-clamp-1">{project.client}</p>
+        <h3 className="font-sub font-bold text-base text-dark mb-3 leading-snug line-clamp-2">{project.title}</h3>
+        <p className="text-secondary text-base leading-relaxed mb-3 line-clamp-2">{project.desc}</p>
         <div className="flex items-center justify-between gap-2">
           <DivisionBadge division={project.division} size="xs" />
           <span className="text-samred text-xs font-sub font-semibold uppercase tracking-wide flex items-center gap-1 group-hover:gap-2 transition-all flex-shrink-0">
@@ -928,8 +928,8 @@ function ClientCard({ c }) {
     <div className="flex-shrink-0 flex items-center gap-4 bg-white/5 border border-white/10 rounded px-7 py-4 hover:border-samred/50 hover:bg-white/8 transition-all duration-200 group">
       <ClientLogo c={c} />
       <div>
-        <p className="font-sub font-bold text-sm uppercase tracking-wide text-white/80 group-hover:text-white transition-colors">{c.name}</p>
-        <p className="text-white/35 text-[0.65rem] font-mono uppercase tracking-widest">{c.sector}</p>
+        <p className="font-sub font-bold text-base uppercase tracking-wide text-white/80 group-hover:text-white transition-colors">{c.name}</p>
+        <p className="text-white/35 text-[0.8rem] font-mono uppercase tracking-widest">{c.sector}</p>
       </div>
     </div>
   )
@@ -959,11 +959,11 @@ function ClientsSection({ setPage }) {
             <div>
               <div className="flex items-center gap-3 mb-3">
                 <span className="h-[3px] w-10 bg-samred" />
-                <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Confían en nosotros</span>
+                <span className="font-sub font-semibold text-[0.82rem] uppercase tracking-widest text-samred">Confían en nosotros</span>
               </div>
               <h2 className="font-display text-[2.25rem] md:text-[3rem] text-white leading-none">NUESTROS<br />CLIENTES</h2>
             </div>
-            <p className="text-white/40 text-sm max-w-xs leading-relaxed md:text-right">
+            <p className="text-white/40 text-base max-w-xs leading-relaxed md:text-right">
               Más de 50 empresas e instituciones del sector público, privado e internacional han confiado en SAMFOR a lo largo de sus 60 años.
             </p>
           </div>
@@ -995,8 +995,8 @@ function ClientsSection({ setPage }) {
           <div className="flex items-center gap-4 md:gap-8">
             {[['50+', 'Clientes históricos'], ['60', 'Años de confianza'], ['9', 'Sectores atendidos']].map(([val, lbl]) => (
               <div key={lbl} className="flex items-baseline gap-1.5">
-                <span className="font-display text-lg md:text-2xl text-samred">{val}</span>
-                <span className="font-sub text-[0.55rem] md:text-xs uppercase tracking-widest text-white/40 leading-tight max-w-[4rem] md:max-w-none">{lbl}</span>
+                <span className="font-display text-xl md:text-3xl text-samred">{val}</span>
+                <span className="font-sub text-[0.8rem] md:text-sm uppercase tracking-widest text-white/40 leading-tight max-w-[4rem] md:max-w-none">{lbl}</span>
               </div>
             ))}
           </div>
@@ -1042,7 +1042,7 @@ function ServicioDetalle({ title, onBack }) {
             </button>
             <div className="flex items-center gap-3 mb-4">
               <span className="h-[3px] w-10 bg-samred" />
-              <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.25em] text-white/55">
+              <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.25em] text-white/55">
                 {String(activeIdx + 1).padStart(2,'0')} de {String(SERVICES.length).padStart(2,'0')} — Nuestros servicios
               </span>
             </div>
@@ -1052,7 +1052,7 @@ function ServicioDetalle({ title, onBack }) {
         </div>
         <div className="absolute bottom-7 right-10 flex flex-col items-center gap-1.5 opacity-40">
           <div className="w-[1px] h-10 bg-white animate-pulse" />
-          <span className="font-mono text-[0.55rem] uppercase tracking-widest text-white rotate-90 translate-x-3">scroll</span>
+          <span className="font-mono text-[0.72rem] uppercase tracking-widest text-white rotate-90 translate-x-3">scroll</span>
         </div>
       </section>
 
@@ -1062,7 +1062,7 @@ function ServicioDetalle({ title, onBack }) {
           <div className="max-w-lg">
             <div className="flex items-center gap-3 mb-6">
               <span className="h-[3px] w-10 bg-samred" />
-              <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Descripción del servicio</span>
+              <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Descripción del servicio</span>
             </div>
             <div className="flex items-center gap-4 mb-6">
               <span className="text-samred">{SERVICES[activeIdx]?.icon}</span>
@@ -1097,13 +1097,13 @@ function ServicioDetalle({ title, onBack }) {
         <div className="px-5 md:px-16 lg:px-20 py-14 md:py-24 flex flex-col justify-center">
           <div className="scroll-reveal flex items-center gap-3 mb-4">
             <span className="h-[3px] w-10 bg-samred" />
-            <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Capacidades técnicas</span>
+            <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Capacidades técnicas</span>
           </div>
           <h3 className="scroll-reveal font-display text-[clamp(2rem,3.5vw,3rem)] text-white leading-none mb-12">{title.toUpperCase()}</h3>
           <div className="divide-y divide-white/8">
             {detail.capabilities.map((cap, i) => (
               <div key={i} className="scroll-reveal flex items-start gap-6 py-5 group" style={{ transitionDelay: `${i * 50}ms` }}>
-                <span className="font-mono text-[0.6rem] text-samred/50 tracking-widest flex-shrink-0 mt-1 w-6">{String(i + 1).padStart(2,'0')}</span>
+                <span className="font-mono text-[0.75rem] text-samred/50 tracking-widest flex-shrink-0 mt-1 w-6">{String(i + 1).padStart(2,'0')}</span>
                 <div className="flex-shrink-0 w-[2px] self-stretch bg-white/8 group-hover:bg-samred transition-colors duration-300" />
                 <p className="text-white/65 text-[0.9375rem] leading-relaxed group-hover:text-white/90 transition-colors duration-300">{cap}</p>
               </div>
@@ -1116,7 +1116,7 @@ function ServicioDetalle({ title, onBack }) {
           <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-samred" />
           <div className="absolute bottom-8 right-8 text-right">
-            <span className="font-mono text-[0.55rem] uppercase tracking-widest text-white/40">Ingeniería de precisión</span>
+            <span className="font-mono text-[0.72rem] uppercase tracking-widest text-white/40">Ingeniería de precisión</span>
           </div>
         </div>
       </section>
@@ -1129,7 +1129,7 @@ function ServicioDetalle({ title, onBack }) {
               <div>
                 <div className="flex items-center gap-3 mb-2">
                   <span className="h-[3px] w-10 bg-samred" />
-                  <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Portafolio</span>
+                  <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Portafolio</span>
                 </div>
                 <h3 className="font-display text-[clamp(1.75rem,3vw,2.5rem)] text-white leading-none">PROYECTOS RELACIONADOS</h3>
               </div>
@@ -1150,14 +1150,14 @@ function ServicioDetalle({ title, onBack }) {
                     {p.status==='active' && (
                       <div className="absolute top-3 right-3 flex items-center gap-1 bg-dark/70 backdrop-blur-sm px-2 py-0.5 rounded-full">
                         <span className="w-1.5 h-1.5 rounded-full bg-green-400 dot-pulse" />
-                        <span className="text-green-400 text-[0.55rem] font-mono uppercase tracking-widest">Activo</span>
+                        <span className="text-green-400 text-[0.72rem] font-mono uppercase tracking-widest">Activo</span>
                       </div>
                     )}
                   </div>
                   <div className="p-5">
                     <div className="mb-2"><DivisionBadge division={p.division} size="xs" /></div>
                     <h4 className="font-sub font-bold text-[0.875rem] uppercase tracking-wide text-white/85 leading-snug mb-1 line-clamp-2">{p.title}</h4>
-                    <p className="text-white/35 text-[0.7rem]">{p.client}</p>
+                    <p className="text-white/35 text-[0.85rem]">{p.client}</p>
                   </div>
                 </div>
               ))}
@@ -1202,7 +1202,7 @@ function PageServicios({ initialService }) {
           <div className="max-w-3xl">
             <div className="flex items-center gap-3 mb-5">
               <span className="h-[3px] w-10 bg-samred" />
-              <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.25em] text-white/55">Lo que hacemos · {SERVICES.length} líneas de servicio</span>
+              <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.25em] text-white/55">Lo que hacemos · {SERVICES.length} líneas de servicio</span>
             </div>
             <h1 className="font-display text-[clamp(3rem,7vw,6rem)] text-white leading-none tracking-wide mb-6">
               INGENIERÍA.<br />
@@ -1216,7 +1216,7 @@ function PageServicios({ initialService }) {
               {[['60', 'Años de trayectoria'], ['+100', 'Proyectos ejecutados'], [String(SERVICES.length), 'Divisiones activas']].map(([n, l]) => (
                 <div key={l}>
                   <div className="font-display text-[2rem] text-samred leading-none">{n}</div>
-                  <div className="font-sub text-[0.65rem] uppercase tracking-widest text-white/45 mt-1 max-w-[8rem] leading-snug">{l}</div>
+                  <div className="font-sub text-[0.88rem] uppercase tracking-widest text-white/45 mt-1 max-w-[8rem] leading-snug">{l}</div>
                 </div>
               ))}
             </div>
@@ -1224,7 +1224,7 @@ function PageServicios({ initialService }) {
         </div>
         <div className="absolute bottom-7 right-10 flex flex-col items-center gap-1.5 opacity-40">
           <div className="w-[1px] h-10 bg-white animate-pulse" />
-          <span className="font-mono text-[0.55rem] uppercase tracking-widest text-white rotate-90 translate-x-3">scroll</span>
+          <span className="font-mono text-[0.72rem] uppercase tracking-widest text-white rotate-90 translate-x-3">scroll</span>
         </div>
       </section>
 
@@ -1234,7 +1234,7 @@ function PageServicios({ initialService }) {
           <div className="scroll-reveal flex items-center justify-between mb-12">
             <div className="flex items-center gap-3">
               <span className="h-[3px] w-10 bg-samred" />
-              <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Selecciona un servicio</span>
+              <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Selecciona un servicio</span>
             </div>
             <span className="font-mono text-xs text-white/25 hidden md:block">{SERVICES.length} divisiones</span>
           </div>
@@ -1250,11 +1250,11 @@ function PageServicios({ initialService }) {
                 <div className="absolute inset-0 bg-samred/0 group-hover:bg-samred/12 transition-all duration-500" />
                 <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left" />
                 <div className="absolute inset-0 p-7 flex flex-col justify-end">
-                  <span className="font-mono text-[0.55rem] text-white/30 tracking-widest mb-3">{String(i+1).padStart(2,'0')}</span>
+                  <span className="font-mono text-[0.72rem] text-white/30 tracking-widest mb-3">{String(i+1).padStart(2,'0')}</span>
                   <div className="text-white/50 group-hover:text-samred mb-3 transition-colors duration-300">{s.icon}</div>
                   <h3 className="font-display text-[1.25rem] text-white leading-tight mb-2">{s.title.toUpperCase()}</h3>
-                  <p className="text-white/45 text-[0.75rem] leading-relaxed line-clamp-2 group-hover:text-white/65 transition-colors duration-300">{s.desc}</p>
-                  <div className="flex items-center gap-2 mt-5 text-samred text-[0.65rem] font-sub font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:translate-y-0 transition-all duration-300">
+                  <p className="text-white/45 text-[0.85rem] leading-relaxed line-clamp-2 group-hover:text-white/65 transition-colors duration-300">{s.desc}</p>
+                  <div className="flex items-center gap-2 mt-5 text-samred text-[0.8rem] font-sub font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:translate-y-0 transition-all duration-300">
                     Ver servicio <ArrowRight size={11} />
                   </div>
                 </div>
@@ -1273,10 +1273,10 @@ function PageServicios({ initialService }) {
                 <div className="absolute inset-0 bg-samred/0 group-hover:bg-samred/12 transition-all duration-500" />
                 <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left" />
                 <div className="absolute inset-0 p-5 flex flex-col justify-end">
-                  <span className="font-mono text-[0.55rem] text-white/30 tracking-widest mb-2">{String(i+4).padStart(2,'0')}</span>
+                  <span className="font-mono text-[0.72rem] text-white/30 tracking-widest mb-2">{String(i+4).padStart(2,'0')}</span>
                   <div className="text-white/50 group-hover:text-samred mb-2 transition-colors duration-300">{s.icon}</div>
                   <h3 className="font-display text-[1rem] text-white leading-tight">{s.title.toUpperCase()}</h3>
-                  <div className="flex items-center gap-1.5 mt-3 text-samred text-[0.6rem] font-sub font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:translate-y-0 transition-all duration-300">
+                  <div className="flex items-center gap-1.5 mt-3 text-samred text-[0.75rem] font-sub font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:translate-y-0 transition-all duration-300">
                     Ver servicio <ArrowRight size={10} />
                   </div>
                 </div>
@@ -1352,7 +1352,7 @@ function PageInicio({ setPage, navigateToServicios }) {
           </div>
         </div>
         <div className="scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 select-none" style={{ zIndex: 3 }}>
-          <span className="text-white/40 text-[0.625rem] font-mono uppercase tracking-widest">Scroll</span>
+          <span className="text-white/40 text-[0.78rem] font-mono uppercase tracking-widest">Scroll</span>
           <ChevronDown size={14} className="text-white/40" />
         </div>
       </section>
@@ -1385,7 +1385,7 @@ function PageInicio({ setPage, navigateToServicios }) {
             {/* floating year badge */}
             <div className="absolute bottom-6 left-6 bg-dark/80 backdrop-blur-sm border border-white/10 rounded px-4 py-3">
               <span className="font-display text-[2rem] text-white leading-none">60</span>
-              <span className="block font-sub text-[0.6rem] tracking-[0.2em] uppercase text-white/55 mt-0.5">Años de trayectoria</span>
+              <span className="block font-sub text-[0.75rem] tracking-[0.2em] uppercase text-white/55 mt-0.5">Años de trayectoria</span>
             </div>
           </div>
 
@@ -1395,7 +1395,7 @@ function PageInicio({ setPage, navigateToServicios }) {
             {/* eyebrow */}
             <div className="scroll-reveal flex items-center gap-3 mb-5">
               <span className="h-[2px] w-8 bg-samred flex-shrink-0" />
-              <span className="font-sub font-semibold text-[0.65rem] tracking-[0.28em] uppercase text-samred">Quiénes somos</span>
+              <span className="font-sub font-semibold text-[0.8rem] tracking-[0.28em] uppercase text-samred">Quiénes somos</span>
             </div>
 
             <h2 className="scroll-reveal font-display text-[2.4rem] md:text-[3rem] lg:text-[3.4rem] text-dark leading-none mb-6 tracking-wide">
@@ -1420,7 +1420,7 @@ function PageInicio({ setPage, navigateToServicios }) {
               ].map(({ n, l }) => (
                 <div key={n} className="border-l-2 border-samred pl-3">
                   <span className="font-display text-[1.75rem] text-dark leading-none">{n}</span>
-                  <span className="block font-sub text-[0.6rem] tracking-widest uppercase text-dark/45 mt-1 whitespace-pre-line">{l}</span>
+                  <span className="block font-sub text-[0.82rem] tracking-widest uppercase text-dark/45 mt-1 whitespace-pre-line">{l}</span>
                 </div>
               ))}
             </div>
@@ -1456,14 +1456,14 @@ function PageInicio({ setPage, navigateToServicios }) {
             <div className="scroll-reveal mb-6">
               <div className="flex items-center gap-3 mb-3">
                 <span className="h-[3px] w-10 bg-samred" />
-                <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Lo que hacemos</span>
+                <span className="font-sub font-semibold text-[0.82rem] uppercase tracking-widest text-samred">Lo que hacemos</span>
               </div>
               <h2 className="font-display text-[2.25rem] md:text-[2.75rem] text-white leading-none">NUESTROS<br />SERVICIOS</h2>
             </div>
             <div className="stagger divide-y divide-white/10 pb-2 lg:pb-0">
               {SERVICES.map((s, i) => (
                 <div key={s.title} className="group flex items-start gap-5 py-3 cursor-pointer transition-all duration-300" onClick={() => navigateToServicios(s.title)}>
-                  <span className="font-mono text-[0.625rem] text-white/25 group-hover:text-samred pt-1 transition-colors duration-300 flex-shrink-0 w-5">
+                  <span className="font-mono text-[0.78rem] text-white/25 group-hover:text-samred pt-1 transition-colors duration-300 flex-shrink-0 w-5">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <div className="text-white/30 group-hover:text-samred transition-colors duration-300 flex-shrink-0 mt-0.5">
@@ -1471,7 +1471,7 @@ function PageInicio({ setPage, navigateToServicios }) {
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="font-sub font-bold text-[0.9375rem] uppercase tracking-wider text-white/80 group-hover:text-white transition-colors duration-300 mb-0.5">{s.title}</h3>
-                    <p className="text-white/40 text-xs leading-relaxed group-hover:text-white/55 transition-colors duration-300">{s.desc}</p>
+                    <p className="text-white/40 text-[0.9rem] leading-relaxed group-hover:text-white/55 transition-colors duration-300">{s.desc}</p>
                   </div>
                   <div className="flex-shrink-0 mt-1 opacity-0 group-hover:opacity-100 translate-x-[-4px] group-hover:translate-x-0 transition-all duration-300">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 3l5 4-5 4" stroke="#C8102E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -1493,7 +1493,7 @@ function PageInicio({ setPage, navigateToServicios }) {
             <div className="absolute inset-0 bg-gradient-to-t from-dark/70 via-transparent to-transparent" />
             <div className="absolute bottom-10 right-10 text-right">
               <p className="font-display text-xl text-white leading-tight mb-1">PROFESIONALES<br />EN CADA OBRA</p>
-              <p className="text-white/40 text-[0.6875rem] font-sub uppercase tracking-widest">Campo Boscán — Venezuela</p>
+              <p className="text-white/40 text-[0.88rem] font-sub uppercase tracking-widest">Campo Boscán — Venezuela</p>
             </div>
             <div className="absolute top-0 right-0 w-[3px] h-full bg-samred" />
           </div>
@@ -1514,7 +1514,7 @@ function PageInicio({ setPage, navigateToServicios }) {
             <div>
               <div className="flex items-center gap-3 mb-3">
                 <span className="h-[3px] w-10 bg-samred" />
-                <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Portafolio</span>
+                <span className="font-sub font-semibold text-[0.82rem] uppercase tracking-widest text-samred">Portafolio</span>
               </div>
               <h2 className="font-display text-[2.5rem] md:text-[3rem] text-dark leading-none">PROYECTOS DESTACADOS</h2>
             </div>
@@ -1544,7 +1544,7 @@ function PageInicio({ setPage, navigateToServicios }) {
                 <div className="absolute inset-0 p-5 flex flex-col justify-end">
                   <div className="mb-2"><DivisionBadge division={p.division} /></div>
                   <h3 className="font-sub font-bold text-[0.9375rem] uppercase tracking-wide text-white leading-snug mb-1">{p.title}</h3>
-                  <p className="text-white/40 text-[0.6875rem] font-sub uppercase tracking-widest">{p.client}</p>
+                  <p className="text-white/40 text-[0.88rem] font-sub uppercase tracking-widest">{p.client}</p>
                 </div>
                 <div className="absolute bottom-0 left-0 w-0 group-hover:w-full h-[2px] bg-samred transition-all duration-500 ease-out" />
               </div>
@@ -1644,7 +1644,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
           {/* Top label */}
           <div className="flex items-center gap-3">
             <span className="h-[3px] w-10 bg-samred" />
-            <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Portafolio</span>
+            <span className="font-sub font-semibold text-[0.82rem] uppercase tracking-widest text-samred">Portafolio</span>
           </div>
 
           {/* Center title */}
@@ -1659,7 +1659,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
                 >
                   <span className="text-white/50 group-hover:text-samred transition-colors">{m.icon}</span>
                   <span className="font-sub font-semibold text-xs uppercase tracking-wide text-white/70 group-hover:text-white transition-colors">{m.label}</span>
-                  <span className="font-mono text-[0.6rem] text-white/30 ml-0.5">{counts[key]||0}</span>
+                  <span className="font-mono text-[0.75rem] text-white/30 ml-0.5">{counts[key]||0}</span>
                 </button>
               ))}
             </div>
@@ -1669,8 +1669,8 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
           <div className="flex gap-5 md:gap-10 border-t border-white/10 pt-5">
             {[['100+','Proyectos'], ['6','Divisiones'], ['60','Años']].map(([v,l]) => (
               <div key={l}>
-                <p className="font-display text-lg md:text-2xl text-samred leading-none">{v}</p>
-                <p className="font-sub text-[0.55rem] md:text-[0.625rem] uppercase tracking-widest text-white/35 mt-0.5">{l}</p>
+                <p className="font-display text-xl md:text-3xl text-samred leading-none">{v}</p>
+                <p className="font-sub text-[0.82rem] md:text-[0.9rem] uppercase tracking-widest text-white/35 mt-0.5">{l}</p>
               </div>
             ))}
           </div>
@@ -1684,7 +1684,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
           <div>
             <div className="flex items-center gap-3 mb-2">
               <span className="h-[3px] w-8 bg-samred" />
-              <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Filtrar por categoría</span>
+              <span className="font-sub font-semibold text-[0.82rem] uppercase tracking-widest text-samred">Filtrar por categoría</span>
             </div>
             <h2 className="font-display text-[2rem] md:text-[2.5rem] text-white leading-none">DIVISIONES</h2>
           </div>
@@ -1756,7 +1756,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
               {activeDivision==='Todos' && <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred" />}
               <div className="absolute inset-0 flex flex-col items-start justify-end p-2">
                 <div className="text-white/70 mb-0.5"><LayoutGrid size={11}/></div>
-                <p className="font-display text-[0.6rem] text-white leading-none mb-0.5">TODOS</p>
+                <p className="font-display text-[0.75rem] text-white leading-none mb-0.5">TODOS</p>
               </div>
               <div className="absolute top-0 right-0 w-px h-full bg-white/10" />
             </button>
@@ -1775,7 +1775,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
                   {isActive && <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred" />}
                   <div className="absolute inset-0 flex flex-col items-start justify-end p-2">
                     <div className={`mb-0.5 transition-colors duration-300 ${isActive ? 'text-samred' : 'text-white/50'}`} style={{transform:'scale(0.75)',transformOrigin:'left bottom'}}>{m.icon}</div>
-                    <p className={`font-display text-[0.55rem] leading-none mb-0.5 transition-colors duration-300 ${isActive ? 'text-white' : 'text-white/80'}`}>
+                    <p className={`font-display text-[0.72rem] leading-none mb-0.5 transition-colors duration-300 ${isActive ? 'text-white' : 'text-white/80'}`}>
                       {m.label.replace('Proyectos ','').replace('División ','').replace('Servicios ','').split(' ')[0].toUpperCase()}
                     </p>
                   </div>
@@ -1844,7 +1844,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
                     {p.status === 'active' && (
                       <div className="absolute top-3 right-3 flex items-center gap-1.5 bg-dark/70 backdrop-blur-sm px-2.5 py-1 rounded-full">
                         <span className="w-1.5 h-1.5 rounded-full bg-green-400 dot-pulse" />
-                        <span className="text-green-400 text-[0.6rem] font-mono uppercase tracking-widest">Activo</span>
+                        <span className="text-green-400 text-[0.75rem] font-mono uppercase tracking-widest">Activo</span>
                       </div>
                     )}
                   </div>
@@ -1852,7 +1852,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
                   <div className="p-5 flex flex-col flex-1">
                     <div className="mb-2"><DivisionBadge division={p.division} /></div>
                     <h3 className="font-sub font-bold text-[1rem] uppercase tracking-wide text-white/85 group-hover:text-white transition-colors leading-snug mb-1 flex-1">{p.title}</h3>
-                    <p className="text-white/35 text-xs mb-1">{p.client}</p>
+                    <p className="text-white/35 text-sm mb-1">{p.client}</p>
                     {p.desc && <p className="text-white/25 text-xs leading-relaxed line-clamp-2 mt-1">{p.desc}</p>}
                     <div className="flex items-center gap-1.5 text-samred text-xs font-sub font-semibold uppercase tracking-widest mt-4 pt-4 border-t border-white/8 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                       Ver detalle <ArrowRight size={12} />
@@ -1885,14 +1885,14 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
                     {p.status === 'active' && (
                       <div className="absolute top-2 right-2 flex items-center gap-1 bg-dark/70 px-2 py-0.5 rounded-full">
                         <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
-                        <span className="text-green-400 text-[0.55rem] font-mono uppercase tracking-widest">Activo</span>
+                        <span className="text-green-400 text-[0.72rem] font-mono uppercase tracking-widest">Activo</span>
                       </div>
                     )}
                   </div>
                   <div className="p-4 flex flex-col flex-1">
                     <div className="mb-1.5"><DivisionBadge division={p.division} size="xs" /></div>
                     <h3 className="font-sub font-bold text-[0.85rem] uppercase tracking-wide text-white/85 leading-snug mb-1 flex-1 line-clamp-2">{p.title}</h3>
-                    <p className="text-white/35 text-[0.7rem]">{p.client}</p>
+                    <p className="text-white/35 text-[0.85rem]">{p.client}</p>
                   </div>
                 </div>
               ))}
@@ -1920,14 +1920,14 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
                     {p.status === 'active' && (
                       <div className="absolute top-3 right-3 flex items-center gap-1.5 bg-dark/70 backdrop-blur-sm px-2.5 py-1 rounded-full">
                         <span className="w-1.5 h-1.5 rounded-full bg-green-400 dot-pulse" />
-                        <span className="text-green-400 text-[0.6rem] font-mono uppercase tracking-widest">Activo</span>
+                        <span className="text-green-400 text-[0.75rem] font-mono uppercase tracking-widest">Activo</span>
                       </div>
                     )}
                   </div>
                   <div className="p-5 flex flex-col flex-1">
                     <div className="mb-2"><DivisionBadge division={p.division} /></div>
                     <h3 className="font-sub font-bold text-[1rem] uppercase tracking-wide text-white/80 group-hover:text-white transition-colors leading-snug mb-2 line-clamp-2">{p.title}</h3>
-                    <p className="text-white/35 text-xs flex-1">{p.client}</p>
+                    <p className="text-white/35 text-sm flex-1">{p.client}</p>
                     <div className="flex items-center gap-1.5 text-samred text-xs font-sub font-semibold uppercase tracking-widest mt-4 pt-4 border-t border-white/8 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       Ver detalle <ArrowRight size={12} />
                     </div>
@@ -1962,7 +1962,7 @@ function PageQuienesSomos({ setPage }) {
           <div className="max-w-3xl">
             <div className="flex items-center gap-3 mb-5">
               <span className="h-[3px] w-10 bg-samred" />
-              <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.25em] text-white/55">Nuestra empresa · Desde 1966</span>
+              <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.25em] text-white/55">Nuestra empresa · Desde 1966</span>
             </div>
             <h1 className="font-display text-[clamp(3rem,7vw,6rem)] text-white leading-none tracking-wide mb-6">
               UNA EMPRESA.<br />
@@ -1977,7 +1977,7 @@ function PageQuienesSomos({ setPage }) {
               {[['60', 'Años de trayectoria'], ['+100', 'Proyectos ejecutados'], ['6', 'Divisiones especializadas'], ['1999', 'Cert. desechos peligrosos']].map(([n, l]) => (
                 <div key={l}>
                   <div className="font-display text-[2rem] text-samred leading-none">{n}</div>
-                  <div className="font-sub text-[0.65rem] uppercase tracking-widest text-white/45 mt-1 max-w-[8rem] leading-snug">{l}</div>
+                  <div className="font-sub text-[0.88rem] uppercase tracking-widest text-white/45 mt-1 max-w-[8rem] leading-snug">{l}</div>
                 </div>
               ))}
             </div>
@@ -1986,7 +1986,7 @@ function PageQuienesSomos({ setPage }) {
         {/* Scroll indicator */}
         <div className="absolute bottom-7 right-10 flex flex-col items-center gap-1.5 opacity-40">
           <div className="w-[1px] h-10 bg-white animate-pulse" />
-          <span className="font-mono text-[0.55rem] uppercase tracking-widest text-white rotate-90 translate-x-3">scroll</span>
+          <span className="font-mono text-[0.72rem] uppercase tracking-widest text-white rotate-90 translate-x-3">scroll</span>
         </div>
       </section>
 
@@ -1997,7 +1997,7 @@ function PageQuienesSomos({ setPage }) {
           <div className="max-w-lg">
             <div className="flex items-center gap-3 mb-6">
               <span className="h-[3px] w-10 bg-samred" />
-              <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Quiénes Somos</span>
+              <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Quiénes Somos</span>
             </div>
             <h2 className="font-display text-[clamp(2.5rem,4vw,3.75rem)] text-dark leading-none mb-8">SAMFOR,<br />S.A.</h2>
             <p className="text-secondary text-base leading-relaxed mb-6">
@@ -2037,7 +2037,7 @@ function PageQuienesSomos({ setPage }) {
         <div className="max-w-7xl mx-auto">
           <div className="scroll-reveal flex items-center gap-3 mb-16">
             <span className="h-[3px] w-10 bg-samred" />
-            <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Identidad corporativa</span>
+            <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Identidad corporativa</span>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border border-white/10 rounded overflow-hidden">
             {[
@@ -2046,10 +2046,10 @@ function PageQuienesSomos({ setPage }) {
               { num: '03', title: 'VALORES', body: 'Lealtad, Responsabilidad y Respeto a la Dignidad Humana son los pilares que guían cada decisión, cada proyecto y cada relación con nuestros clientes, colaboradores y comunidades.' },
             ].map((c, i) => (
               <div key={c.num} className="scroll-reveal p-10 border-b md:border-b-0 md:border-r border-white/10 last:border-0" style={{ transitionDelay: `${i * 100}ms` }}>
-                <div className="font-mono text-[0.65rem] text-samred/60 tracking-widest mb-4">{c.num}</div>
+                <div className="font-mono text-[0.8rem] text-samred/60 tracking-widest mb-4">{c.num}</div>
                 <div className="h-[2px] w-8 bg-samred mb-6" />
                 <h3 className="font-display text-3xl text-white mb-5">{c.title}</h3>
-                <p className="text-white/50 text-sm leading-relaxed">{c.body}</p>
+                <p className="text-white/50 text-base leading-relaxed">{c.body}</p>
               </div>
             ))}
           </div>
@@ -2075,7 +2075,7 @@ function PageQuienesSomos({ setPage }) {
           <div className="w-full max-w-lg">
             <div className="flex items-center gap-3 mb-6">
               <span className="h-[3px] w-10 bg-samred" />
-              <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Por qué elegirnos</span>
+              <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Por qué elegirnos</span>
             </div>
             <h2 className="font-display text-[clamp(2rem,3.5vw,3rem)] text-dark leading-none mb-10">VENTAJAS<br />COMPETITIVAS</h2>
             <div className="flex flex-col gap-0 divide-y divide-border">
@@ -2088,8 +2088,8 @@ function PageQuienesSomos({ setPage }) {
                 <div key={i} className="scroll-reveal flex gap-5 py-6 group" style={{ transitionDelay: `${i * 80}ms` }}>
                   <div className="flex-shrink-0 w-10 h-10 rounded bg-white border border-border flex items-center justify-center text-samred group-hover:bg-samred group-hover:text-white group-hover:border-samred transition-all duration-300">{a.icon}</div>
                   <div>
-                    <h3 className="font-sub font-bold text-sm uppercase tracking-wide text-dark mb-1">{a.title}</h3>
-                    <p className="text-secondary text-sm leading-relaxed">{a.desc}</p>
+                    <h3 className="font-sub font-bold text-base uppercase tracking-wide text-dark mb-1">{a.title}</h3>
+                    <p className="text-secondary text-base leading-relaxed">{a.desc}</p>
                   </div>
                 </div>
               ))}
@@ -2104,7 +2104,7 @@ function PageQuienesSomos({ setPage }) {
           <div className="scroll-reveal mb-16">
             <div className="flex items-center gap-3 mb-4">
               <span className="h-[3px] w-10 bg-samred" />
-              <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Historia</span>
+              <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Historia</span>
             </div>
             <h2 className="font-display text-[clamp(2.5rem,5vw,4rem)] text-dark leading-none">NUESTRA<br />TRAYECTORIA</h2>
           </div>
@@ -2121,7 +2121,7 @@ function PageQuienesSomos({ setPage }) {
                   </div>
                   <div className="flex-1 pb-2">
                     <h3 className="font-sub font-bold text-base text-dark mb-1">{item.title}</h3>
-                    <p className="text-secondary text-sm leading-relaxed">{item.desc}</p>
+                    <p className="text-secondary text-base leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -2135,7 +2135,7 @@ function PageQuienesSomos({ setPage }) {
         <div className="max-w-7xl mx-auto">
           <div className="scroll-reveal flex items-center gap-3 mb-12">
             <span className="h-[3px] w-10 bg-samred" />
-            <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Datos corporativos</span>
+            <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Datos corporativos</span>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Corporate data */}
@@ -2154,8 +2154,8 @@ function PageQuienesSomos({ setPage }) {
                   ['Cobertura', 'Venezuela y operaciones internacionales'],
                 ].map(([k, v]) => (
                   <div key={k} className="flex px-7 py-4 gap-6">
-                    <span className="flex-shrink-0 w-28 font-mono text-[0.65rem] uppercase tracking-widest text-white/30">{k}</span>
-                    <span className="text-white/80 text-sm">{v}</span>
+                    <span className="flex-shrink-0 w-28 font-mono text-[0.88rem] uppercase tracking-widest text-white/30">{k}</span>
+                    <span className="text-white/80 text-base">{v}</span>
                   </div>
                 ))}
               </div>
@@ -2175,8 +2175,8 @@ function PageQuienesSomos({ setPage }) {
                   <div key={item.label} className="flex items-start gap-4">
                     {item.icon}
                     <div>
-                      <div className="font-mono text-[0.6rem] uppercase tracking-widest text-white/30 mb-0.5">{item.label}</div>
-                      <div className="text-white/80 text-sm">{item.value}</div>
+                      <div className="font-mono text-[0.82rem] uppercase tracking-widest text-white/30 mb-0.5">{item.label}</div>
+                      <div className="text-white/80 text-base">{item.value}</div>
                     </div>
                   </div>
                 ))}
@@ -2194,11 +2194,11 @@ function PageQuienesSomos({ setPage }) {
             <div>
               <div className="flex items-center gap-3 mb-3">
                 <span className="h-[3px] w-10 bg-samred" />
-                <span className="font-sub font-semibold text-[0.6875rem] uppercase tracking-widest text-samred">Historial de clientes</span>
+                <span className="font-sub font-semibold text-[0.82rem] uppercase tracking-widest text-samred">Historial de clientes</span>
               </div>
               <h2 className="font-display text-[2.25rem] md:text-[3rem] text-white leading-none">NUESTROS<br />CLIENTES</h2>
             </div>
-            <p className="text-white/40 text-sm max-w-xs leading-relaxed md:text-right">
+            <p className="text-white/40 text-base max-w-xs leading-relaxed md:text-right">
               Más de 50 empresas e instituciones del sector público, privado e internacional a lo largo de 60 años.
             </p>
           </div>
@@ -2215,8 +2215,8 @@ function PageQuienesSomos({ setPage }) {
                   </span>
                 </div>
                 <div className="text-center">
-                  <p className="font-sub font-bold text-[0.65rem] uppercase tracking-wide text-white/75 leading-tight">{c.name}</p>
-                  <p className="text-white/30 text-[0.55rem] font-mono uppercase tracking-widest mt-0.5">{c.sector}</p>
+                  <p className="font-sub font-bold text-[0.88rem] uppercase tracking-wide text-white/75 leading-tight">{c.name}</p>
+                  <p className="text-white/30 text-[0.8rem] font-mono uppercase tracking-widest mt-0.5">{c.sector}</p>
                 </div>
               </div>
             ))}
@@ -2254,7 +2254,7 @@ function PageContacto() {
           <div className="max-w-2xl">
             <div className="flex items-center gap-3 mb-5">
               <span className="h-[3px] w-10 bg-samred" />
-              <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.25em] text-white/50">Contacto</span>
+              <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.25em] text-white/50">Contacto</span>
             </div>
             <h1 className="font-display text-[clamp(3.5rem,8vw,7rem)] text-white leading-none tracking-wide mb-6">
               HABLEMOS<br /><span className="text-samred">.</span>
@@ -2285,7 +2285,7 @@ function PageContacto() {
           <div>
             <div className="flex items-center gap-3 mb-8">
               <span className="h-[3px] w-10 bg-samred" />
-              <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Información de Contacto</span>
+              <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Información de Contacto</span>
             </div>
             <h2 className="font-display text-[clamp(2.5rem,4vw,3.5rem)] text-white leading-none mb-10">ESTAMOS<br />LISTOS<br />PARA TI</h2>
             <div className="flex flex-col gap-6 mb-12">
@@ -2298,8 +2298,8 @@ function PageContacto() {
                 <div key={item.label} className="flex items-start gap-4">
                   <div className="flex-shrink-0 w-8 h-8 rounded border border-white/10 flex items-center justify-center text-samred">{item.icon}</div>
                   <div>
-                    <div className="font-mono text-[0.6rem] uppercase tracking-widest text-white/30 mb-0.5">{item.label}</div>
-                    <div className="text-white/75 text-sm whitespace-pre-line">{item.val}</div>
+                    <div className="font-mono text-[0.82rem] uppercase tracking-widest text-white/30 mb-0.5">{item.label}</div>
+                    <div className="text-white/75 text-base whitespace-pre-line">{item.val}</div>
                   </div>
                 </div>
               ))}
@@ -2311,7 +2311,7 @@ function PageContacto() {
             <div className="absolute inset-0 bg-gradient-to-t from-dark/60 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-samred" />
             <div className="absolute bottom-4 left-5">
-              <span className="font-sub font-bold text-[0.6rem] uppercase tracking-widest text-white/50">Proyecto · Reemplazo Turbina BG-2</span>
+              <span className="font-sub font-bold text-[0.75rem] uppercase tracking-widest text-white/50">Proyecto · Reemplazo Turbina BG-2</span>
             </div>
           </div>
         </div>
@@ -2331,39 +2331,39 @@ function PageContacto() {
             <div>
               <div className="flex items-center gap-3 mb-8">
                 <span className="h-[3px] w-10 bg-samred" />
-                <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Envía tu consulta</span>
+                <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Envía tu consulta</span>
               </div>
               <h2 className="font-display text-[clamp(2rem,3vw,2.75rem)] text-dark leading-none mb-10">¿TIENES UN<br />PROYECTO?</h2>
               <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.6rem] font-mono text-secondary uppercase tracking-widest">Nombre *</label>
+                    <label className="text-[0.82rem] font-mono text-secondary uppercase tracking-widest">Nombre *</label>
                     <input className="form-input" required value={form.name} onChange={e=>setForm(f=>({...f,name:e.target.value}))} placeholder="Carlos Rodríguez" />
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.6rem] font-mono text-secondary uppercase tracking-widest">Empresa</label>
+                    <label className="text-[0.82rem] font-mono text-secondary uppercase tracking-widest">Empresa</label>
                     <input className="form-input" value={form.company} onChange={e=>setForm(f=>({...f,company:e.target.value}))} placeholder="PDVSA, Chevron..." />
                   </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.6rem] font-mono text-secondary uppercase tracking-widest">Email *</label>
+                    <label className="text-[0.82rem] font-mono text-secondary uppercase tracking-widest">Email *</label>
                     <input className="form-input" type="email" required value={form.email} onChange={e=>setForm(f=>({...f,email:e.target.value}))} placeholder="correo@empresa.com" />
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.6rem] font-mono text-secondary uppercase tracking-widest">Teléfono</label>
+                    <label className="text-[0.82rem] font-mono text-secondary uppercase tracking-widest">Teléfono</label>
                     <input className="form-input" type="tel" value={form.phone} onChange={e=>setForm(f=>({...f,phone:e.target.value}))} placeholder="+58 261 000 0000" />
                   </div>
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-[0.6rem] font-mono text-secondary uppercase tracking-widest">Tipo de consulta</label>
+                  <label className="text-[0.82rem] font-mono text-secondary uppercase tracking-widest">Tipo de consulta</label>
                   <select className="form-input" value={form.type} onChange={e=>setForm(f=>({...f,type:e.target.value}))}>
                     <option value="">Seleccionar...</option>
                     {['Propuesta de proyecto','Consulta técnica','Alianza comercial','Otro'].map(o=><option key={o}>{o}</option>)}
                   </select>
                 </div>
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-[0.6rem] font-mono text-secondary uppercase tracking-widest">Mensaje *</label>
+                  <label className="text-[0.82rem] font-mono text-secondary uppercase tracking-widest">Mensaje *</label>
                   <textarea className="form-input min-h-[120px] resize-none" required value={form.message} onChange={e=>setForm(f=>({...f,message:e.target.value}))} placeholder="Describe tu proyecto o consulta..." />
                 </div>
                 <button type="submit" className="btn-primary flex items-center justify-center gap-2 mt-2" disabled={sending}>
@@ -2387,7 +2387,7 @@ function PageContacto() {
           <div>
             <div className="flex items-center gap-3 mb-6">
               <span className="h-[3px] w-10 bg-samred" />
-              <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.2em] text-samred">Trabaja con Nosotros</span>
+              <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Trabaja con Nosotros</span>
             </div>
             <h2 className="font-display text-[clamp(2.5rem,5vw,4rem)] text-white leading-none mb-6" style={{ textShadow: '0 2px 16px rgba(0,0,0,0.6)' }}>ÚNETE<br />A SAMFOR</h2>
             <p className="text-white text-base leading-relaxed max-w-md mb-0" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.8)' }}>
@@ -2409,24 +2409,24 @@ function PageContacto() {
                 <h3 className="font-display text-xl text-white mb-2">FORMULARIO DE POSTULACIÓN</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.6rem] font-mono text-white uppercase tracking-widest">Nombre *</label>
+                    <label className="text-[0.82rem] font-mono text-white uppercase tracking-widest">Nombre *</label>
                     <input className="form-input bg-white/15 border-white/30 text-white placeholder:text-white/50 focus:border-samred" required value={jobForm.name} onChange={e=>setJobForm(f=>({...f,name:e.target.value}))} placeholder="Nombre completo" />
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.6rem] font-mono text-white uppercase tracking-widest">Email *</label>
+                    <label className="text-[0.82rem] font-mono text-white uppercase tracking-widest">Email *</label>
                     <input className="form-input bg-white/15 border-white/30 text-white placeholder:text-white/50 focus:border-samred" type="email" required value={jobForm.email} onChange={e=>setJobForm(f=>({...f,email:e.target.value}))} placeholder="tu@email.com" />
                   </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.6rem] font-mono text-white uppercase tracking-widest">Área</label>
+                    <label className="text-[0.82rem] font-mono text-white uppercase tracking-widest">Área</label>
                     <select className="form-input bg-white/15 border-white/30 text-white focus:border-samred" value={jobForm.area} onChange={e=>setJobForm(f=>({...f,area:e.target.value}))}>
                       <option value="" className="bg-dark">Seleccionar...</option>
                       {['Ing. Eléctrica','Ing. Civil','Ing. Mecánica','Instrumentación','Telecomunicaciones','Ambiental','Transporte','Administración','Otra'].map(a=><option key={a} className="bg-dark">{a}</option>)}
                     </select>
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.6rem] font-mono text-white uppercase tracking-widest">Experiencia</label>
+                    <label className="text-[0.82rem] font-mono text-white uppercase tracking-widest">Experiencia</label>
                     <select className="form-input bg-white/15 border-white/30 text-white focus:border-samred" value={jobForm.exp} onChange={e=>setJobForm(f=>({...f,exp:e.target.value}))}>
                       <option value="" className="bg-dark">Seleccionar...</option>
                       {['0-2 años','3-5 años','6-10 años','10+ años'].map(x=><option key={x} className="bg-dark">{x}</option>)}
@@ -2434,7 +2434,7 @@ function PageContacto() {
                   </div>
                 </div>
                 <div>
-                  <label className="text-[0.6rem] font-mono text-white uppercase tracking-widest block mb-1.5">CV / Hoja de Vida</label>
+                  <label className="text-[0.82rem] font-mono text-white uppercase tracking-widest block mb-1.5">CV / Hoja de Vida</label>
                   <div className={`upload-zone border-white/30 bg-white/10 text-white hover:border-samred/60 ${drag?'border-samred/60':''}`}
                     onDragOver={e=>{e.preventDefault();setDrag(true)}} onDragLeave={()=>setDrag(false)}
                     onDrop={e=>{e.preventDefault();setDrag(false);const f=e.dataTransfer.files[0];if(f)setJobForm(jf=>({...jf,cv:f}))}}

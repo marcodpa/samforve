@@ -610,9 +610,9 @@ function Navbar({ page, setPage, scrolled, forceDark, logoProgress = 1 }) {
   const centerOffset  = Math.max(0, (vpw - 1280) / 2)
   const leftPx        = centerOffset + containerPad
 
-  // Hero anchor: center logo at 44vh
-  const heroCY   = vph * 0.44
-  const heroTop  = heroCY - HERO_H / 2
+  // Hero anchor: logo sits just below navbar (96px from top)
+  const heroTop  = 100
+  const heroCY   = heroTop + HERO_H / 2
 
   // Interpolated values
   const currentH   = HERO_H + (NAV_H - HERO_H) * eased

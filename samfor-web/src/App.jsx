@@ -1960,100 +1960,148 @@ function PageQuienesSomos({ setPage }) {
   return (
     <div className="pt-24">
 
-      {/* ── HERO — full-bleed, foto1 principal ── */}
+      {/* ── HERO ── */}
       <section className="relative overflow-hidden" style={{ height: '100dvh' }}>
         <img src="/qs-hero.webp" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
         <div className="absolute inset-0 bg-gradient-to-r from-dark/85 via-dark/55 to-dark/10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent" />
-        {/* Content */}
-        <div className="relative h-full flex flex-col justify-end px-5 md:px-16 lg:px-24 pb-14 md:pb-20">
+        <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent" />
+        <div className="relative h-full flex flex-col justify-end px-5 md:px-16 lg:px-24 pb-10 md:pb-20">
           <div className="max-w-3xl">
-            <div className="flex items-center gap-3 mb-5">
+            <div className="flex items-center gap-3 mb-4">
               <span className="h-[3px] w-10 bg-samred" />
               <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.25em] text-white/55">Nuestra empresa · Desde 1966</span>
             </div>
-            <h1 className="font-display text-[clamp(3rem,7vw,6rem)] text-white leading-none tracking-wide mb-6">
+            <h1 className="font-display text-[clamp(2.6rem,7vw,6rem)] text-white leading-none tracking-wide mb-5">
               UNA EMPRESA.<br />
               <span className="text-samred">SEIS DÉCADAS.</span><br />
               UN ESTÁNDAR.
             </h1>
-            <p className="text-white/65 text-lg max-w-xl leading-relaxed mb-10">
+            <p className="text-white/65 text-base md:text-lg max-w-xl leading-relaxed mb-8">
               Construyendo Venezuela con excelencia técnica, responsabilidad ambiental y el más alto compromiso con la seguridad industrial.
             </p>
-            {/* Stats row */}
-            <div className="flex flex-wrap gap-8">
-              {[['60', 'Años de trayectoria'], ['+100', 'Proyectos ejecutados'], ['6', 'Divisiones especializadas'], ['1999', 'Cert. desechos peligrosos']].map(([n, l]) => (
-                <div key={l}>
-                  <div className="font-display text-[2rem] text-samred leading-none">{n}</div>
-                  <div className="font-sub text-[0.88rem] uppercase tracking-widest text-white/45 mt-1 max-w-[8rem] leading-snug">{l}</div>
+            {/* Stats — 2×2 grid on mobile, row on desktop */}
+            <div className="grid grid-cols-2 md:flex md:flex-wrap gap-5 md:gap-8">
+              {[['60', 'Años'], ['+100', 'Proyectos'], ['6', 'Divisiones'], ['1999', 'Cert. Ambiental']].map(([n, l]) => (
+                <div key={l} className="bg-white/8 backdrop-blur-sm border border-white/15 rounded-lg px-4 py-3 md:bg-transparent md:border-none md:p-0">
+                  <div className="font-display text-[2.2rem] md:text-[2rem] text-samred leading-none">{n}</div>
+                  <div className="font-sub text-[0.75rem] md:text-[0.88rem] uppercase tracking-widest text-white/50 mt-1">{l}</div>
                 </div>
               ))}
             </div>
           </div>
         </div>
-        {/* Scroll indicator */}
-        <div className="absolute bottom-7 right-10 flex flex-col items-center gap-1.5 opacity-40">
+        <div className="absolute bottom-7 right-8 flex flex-col items-center gap-1.5 opacity-30">
           <div className="w-[1px] h-10 bg-white animate-pulse" />
-          <span className="font-mono text-[0.72rem] uppercase tracking-widest text-white rotate-90 translate-x-3">scroll</span>
+          <span className="font-mono text-[0.65rem] uppercase tracking-widest text-white rotate-90 translate-x-3">scroll</span>
         </div>
       </section>
 
-      {/* ── QUIÉNES SOMOS — split: texto izq, foto der ── */}
-      <section className="grid grid-cols-1 lg:grid-cols-2 lg:min-h-[80vh]">
-        {/* Left — text */}
-        <div className="bg-white flex items-center px-5 md:px-16 py-12 md:py-20">
-          <div className="max-w-lg">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="h-[3px] w-10 bg-samred" />
-              <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Quiénes Somos</span>
+      {/* ── QUIÉNES SOMOS — foto inmersiva + texto superpuesto en mobile ── */}
+      <section className="relative overflow-hidden bg-dark">
+        {/* Mobile: full-bleed foto con contenido encima */}
+        <div className="lg:hidden relative" style={{ minHeight: '420px' }}>
+          <img src="/qs-welding.webp" alt="Soldadores SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(13,17,23,0.3) 0%, rgba(13,17,23,0.75) 60%, #0D1117 100%)' }} />
+          <div className="relative px-5 pt-12 pb-10 flex flex-col justify-end h-full">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="h-[2px] w-6 bg-samred" />
+              <span className="font-sub font-semibold text-[0.75rem] uppercase tracking-[0.25em] text-samred">Quiénes Somos</span>
             </div>
-            <h2 className="font-display text-[clamp(2.5rem,4vw,3.75rem)] text-dark leading-none mb-8">SAMFOR,<br />S.A.</h2>
-            <p className="text-secondary text-base leading-relaxed mb-6">
-              Somos una empresa venezolana fundada en 1966 en Maracaibo, dedicada a la prestación de servicios de construcción civil, eléctrica, mecánica, telecomunicaciones, transporte y servicios ambientales para la industria petrolera, petroquímica, carbonífera y civil.
-            </p>
-            <p className="text-secondary text-base leading-relaxed mb-10">
-              Con casi seis décadas de operación continua, contamos con la infraestructura, el capital humano y los estándares certificados para ejecutar proyectos de alta complejidad en cualquier punto del territorio nacional.
-            </p>
-            {/* Values bullets */}
-            <div className="flex flex-col gap-4">
-              {[
-                { label: 'Lealtad', desc: 'Compromiso con clientes, colaboradores y el país.' },
-                { label: 'Responsabilidad', desc: 'Cumplimiento técnico, ambiental y de seguridad.' },
-                { label: 'Respeto', desc: 'Cada persona tratada con máxima dignidad.' },
-              ].map(v => (
-                <div key={v.label} className="flex items-start gap-4">
-                  <span className="flex-shrink-0 w-[3px] h-full self-stretch bg-samred rounded" />
-                  <div>
-                    <span className="font-sub font-bold text-sm uppercase tracking-widest text-dark">{v.label} — </span>
-                    <span className="text-secondary text-sm">{v.desc}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <h2 className="font-display text-[2.8rem] text-white leading-none mb-4">SAMFOR<br /><span className="text-samred text-[1.8rem]">S.A.</span></h2>
           </div>
         </div>
-        {/* Right — welding photo */}
-        <div className="relative overflow-hidden" style={{ minHeight: '300px' }}>
-          <img src="/qs-welding.webp" alt="Soldadores SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
-          <div className="absolute inset-0 bg-gradient-to-l from-transparent to-dark/20" />
-          <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-samred" />
+        {/* Mobile: texto debajo con fondo oscuro */}
+        <div className="lg:hidden bg-dark px-5 pb-12">
+          <p className="text-white/70 text-[1rem] leading-relaxed mb-5">
+            Empresa venezolana fundada en 1966 en Maracaibo, dedicada a construcción civil, eléctrica, mecánica, telecomunicaciones, transporte y servicios ambientales para la industria petrolera y petroquímica.
+          </p>
+          <p className="text-white/50 text-[0.95rem] leading-relaxed mb-8">
+            Con 60 años de operación continua, contamos con la infraestructura, capital humano y estándares certificados para proyectos de alta complejidad en todo el territorio nacional.
+          </p>
+          {/* Valores como tarjetas horizontales */}
+          <div className="flex flex-col gap-3">
+            {[
+              { label: 'Lealtad', desc: 'Compromiso con clientes, colaboradores y el país.', n: '01' },
+              { label: 'Responsabilidad', desc: 'Cumplimiento técnico, ambiental y de seguridad.', n: '02' },
+              { label: 'Respeto', desc: 'Cada persona tratada con máxima dignidad.', n: '03' },
+            ].map(v => (
+              <div key={v.label} className="flex items-center gap-4 bg-white/5 border border-white/10 rounded-xl px-4 py-4">
+                <span className="font-display text-[1.6rem] text-samred/30 leading-none w-10 flex-shrink-0">{v.n}</span>
+                <div>
+                  <span className="font-sub font-bold text-[0.82rem] uppercase tracking-widest text-white block mb-0.5">{v.label}</span>
+                  <span className="text-white/45 text-[0.85rem]">{v.desc}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* Desktop: split original */}
+        <div className="hidden lg:grid lg:grid-cols-2 lg:min-h-[80vh]">
+          <div className="bg-white flex items-center px-16 py-20">
+            <div className="max-w-lg">
+              <div className="flex items-center gap-3 mb-6">
+                <span className="h-[3px] w-10 bg-samred" />
+                <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Quiénes Somos</span>
+              </div>
+              <h2 className="font-display text-[clamp(2.5rem,4vw,3.75rem)] text-dark leading-none mb-8">SAMFOR,<br />S.A.</h2>
+              <p className="text-secondary text-base leading-relaxed mb-6">Somos una empresa venezolana fundada en 1966 en Maracaibo, dedicada a la prestación de servicios de construcción civil, eléctrica, mecánica, telecomunicaciones, transporte y servicios ambientales para la industria petrolera, petroquímica, carbonífera y civil.</p>
+              <p className="text-secondary text-base leading-relaxed mb-10">Con casi seis décadas de operación continua, contamos con la infraestructura, el capital humano y los estándares certificados para ejecutar proyectos de alta complejidad en cualquier punto del territorio nacional.</p>
+              <div className="flex flex-col gap-4">
+                {[
+                  { label: 'Lealtad', desc: 'Compromiso con clientes, colaboradores y el país.' },
+                  { label: 'Responsabilidad', desc: 'Cumplimiento técnico, ambiental y de seguridad.' },
+                  { label: 'Respeto', desc: 'Cada persona tratada con máxima dignidad.' },
+                ].map(v => (
+                  <div key={v.label} className="flex items-start gap-4">
+                    <span className="flex-shrink-0 w-[3px] h-full self-stretch bg-samred rounded" />
+                    <div>
+                      <span className="font-sub font-bold text-sm uppercase tracking-widest text-dark">{v.label} — </span>
+                      <span className="text-secondary text-sm">{v.desc}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="relative overflow-hidden">
+            <img src="/qs-welding.webp" alt="Soldadores SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+            <div className="absolute inset-0 bg-gradient-to-l from-transparent to-dark/20" />
+            <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-samred" />
+          </div>
         </div>
       </section>
 
-      {/* ── MISIÓN / VISIÓN — dark bg ── */}
-      <section className="bg-dark py-14 md:py-24 px-5 md:px-16 lg:px-24">
+      {/* ── MISIÓN / VISIÓN — móvil: stack vertical dramático ── */}
+      <section className="bg-dark py-12 md:py-24 px-5 md:px-16 lg:px-24">
         <div className="max-w-7xl mx-auto">
-          <div className="scroll-reveal flex items-center gap-3 mb-16">
+          <div className="scroll-reveal flex items-center gap-3 mb-10 md:mb-16">
             <span className="h-[3px] w-10 bg-samred" />
             <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Identidad corporativa</span>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border border-white/10 rounded overflow-hidden">
+          {/* Mobile: full-width stacked cards with big numbers */}
+          <div className="lg:hidden flex flex-col gap-0 border border-white/10 rounded-2xl overflow-hidden">
             {[
               { num: '01', title: 'MISIÓN', body: 'Ejecutar de manera rentable y eficiente, en armonía con el ambiente, obras y servicios de construcción civil, eléctrica, telecomunicación, transporte y servicios ambientales, asegurando la satisfacción del cliente y el desarrollo del talento humano.' },
               { num: '02', title: 'VISIÓN', body: 'Ser una empresa líder en Construcción, Transporte y Servicios Ambientales, reconocida por su excelencia, calidad de servicios, solidez del equipo humano y compromiso con el desarrollo sostenible de Venezuela.' },
               { num: '03', title: 'VALORES', body: 'Lealtad, Responsabilidad y Respeto a la Dignidad Humana son los pilares que guían cada decisión, cada proyecto y cada relación con nuestros clientes, colaboradores y comunidades.' },
             ].map((c, i) => (
-              <div key={c.num} className="scroll-reveal p-10 border-b md:border-b-0 md:border-r border-white/10 last:border-0" style={{ transitionDelay: `${i * 100}ms` }}>
+              <div key={c.num} className="scroll-reveal relative px-6 py-8 border-b border-white/10 last:border-0 overflow-hidden" style={{ transitionDelay: `${i * 80}ms` }}>
+                {/* Big ghost number */}
+                <span className="absolute right-4 top-2 font-display text-[5rem] text-white/4 leading-none select-none">{c.num}</span>
+                <div className="h-[2px] w-8 bg-samred mb-5" />
+                <h3 className="font-display text-[2.2rem] text-white mb-4 leading-none">{c.title}</h3>
+                <p className="text-white/55 text-[0.95rem] leading-relaxed">{c.body}</p>
+              </div>
+            ))}
+          </div>
+          {/* Desktop: grid original */}
+          <div className="hidden lg:grid lg:grid-cols-3 gap-0 border border-white/10 rounded overflow-hidden">
+            {[
+              { num: '01', title: 'MISIÓN', body: 'Ejecutar de manera rentable y eficiente, en armonía con el ambiente, obras y servicios de construcción civil, eléctrica, telecomunicación, transporte y servicios ambientales, asegurando la satisfacción del cliente y el desarrollo del talento humano.' },
+              { num: '02', title: 'VISIÓN', body: 'Ser una empresa líder en Construcción, Transporte y Servicios Ambientales, reconocida por su excelencia, calidad de servicios, solidez del equipo humano y compromiso con el desarrollo sostenible de Venezuela.' },
+              { num: '03', title: 'VALORES', body: 'Lealtad, Responsabilidad y Respeto a la Dignidad Humana son los pilares que guían cada decisión, cada proyecto y cada relación con nuestros clientes, colaboradores y comunidades.' },
+            ].map((c, i) => (
+              <div key={c.num} className="scroll-reveal p-10 border-r border-white/10 last:border-0" style={{ transitionDelay: `${i * 100}ms` }}>
                 <div className="font-mono text-[0.8rem] text-samred/60 tracking-widest mb-4">{c.num}</div>
                 <div className="h-[2px] w-8 bg-samred mb-6" />
                 <h3 className="font-display text-3xl text-white mb-5">{c.title}</h3>
@@ -2064,65 +2112,116 @@ function PageQuienesSomos({ setPage }) {
         </div>
       </section>
 
-      {/* ── VENTAJAS — split: foto izq, lista der ── */}
-      <section className="grid grid-cols-1 lg:grid-cols-2 lg:min-h-[75vh]">
-        {/* Left — electrical photo */}
-        <div className="relative overflow-hidden order-2 lg:order-1" style={{ minHeight: '300px' }}>
-          <img src="/qs-electrical.webp" alt="Técnicos eléctricos SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent to-dark/20" />
-          <div className="absolute top-0 left-0 bottom-0 w-[4px] bg-samred" />
-          {/* Floating label */}
-          <div className="absolute bottom-8 left-8 bg-dark/75 backdrop-blur-sm border border-white/10 px-5 py-3 rounded">
-            <div className="font-sub font-bold text-xs uppercase tracking-widest text-samred mb-0.5">Certificación</div>
-            <div className="text-white text-sm font-medium">Manejadora de Desechos Peligrosos</div>
-            <div className="text-white/40 text-xs font-mono mt-0.5">Ministerio del Ecosistema · 1999</div>
-          </div>
-        </div>
-        {/* Right — advantages */}
-        <div className="bg-surface flex items-center px-5 md:px-16 py-12 md:py-20 order-1 lg:order-2">
-          <div className="w-full max-w-lg">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="h-[3px] w-10 bg-samred" />
-              <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Por qué elegirnos</span>
+      {/* ── VENTAJAS — móvil: foto hero + lista compacta ── */}
+      <section className="bg-surface">
+        {/* Mobile: foto header + lista en blanco */}
+        <div className="lg:hidden">
+          <div className="relative overflow-hidden" style={{ height: '260px' }}>
+            <img src="/qs-electrical.webp" alt="Técnicos eléctricos SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+            <div className="absolute inset-0 bg-gradient-to-t from-dark/80 to-dark/20" />
+            <div className="absolute bottom-0 left-0 right-0 h-1 bg-samred" />
+            <div className="absolute bottom-6 left-5">
+              <div className="font-sub font-bold text-[0.72rem] uppercase tracking-widest text-samred mb-0.5">Certificación</div>
+              <div className="text-white text-sm font-medium">Manejadora de Desechos Peligrosos · 1999</div>
             </div>
-            <h2 className="font-display text-[clamp(2rem,3.5vw,3rem)] text-dark leading-none mb-10">VENTAJAS<br />COMPETITIVAS</h2>
-            <div className="flex flex-col gap-0 divide-y divide-border">
+          </div>
+          <div className="px-5 py-10">
+            <div className="flex items-center gap-3 mb-5">
+              <span className="h-[3px] w-8 bg-samred" />
+              <span className="font-sub font-semibold text-[0.78rem] uppercase tracking-[0.2em] text-samred">Por qué elegirnos</span>
+            </div>
+            <h2 className="font-display text-[2.5rem] text-dark leading-none mb-8">VENTAJAS<br /><span className="text-samred">COMPETITIVAS</span></h2>
+            <div className="flex flex-col gap-0">
               {[
-                { icon: <Target size={20}/>, title: 'Capacidad Operativa', desc: 'Flota completa de vehículos, equipos pesados, maquinaria y aeronave para proyectos en todo el territorio.' },
-                { icon: <CheckCircle size={20}/>, title: 'Calidad Certificada', desc: 'Procesos IPC bajo estándares internacionales. Certificación como Manejadora de Desechos Peligrosos desde 1999.' },
-                { icon: <Users size={20}/>, title: 'Capital Humano', desc: 'Ingenieros y técnicos en eléctrica, civil, mecánica, instrumentación, telecomunicaciones y ambiental.' },
-                { icon: <Shield size={20}/>, title: 'HSE / Seguridad', desc: 'Cultura HSE arraigada. Operaciones en entornos de alto riesgo con cumplimiento de normativas COVENIN.' },
+                { icon: <Target size={22}/>, title: 'Capacidad Operativa', desc: 'Flota de vehículos, equipos pesados, maquinaria y aeronave.' },
+                { icon: <CheckCircle size={22}/>, title: 'Calidad Certificada', desc: 'Estándares IPC internacionales. Cert. Desechos Peligrosos 1999.' },
+                { icon: <Users size={22}/>, title: 'Capital Humano', desc: 'Ingenieros en eléctrica, civil, mecánica, instrumentación y ambiental.' },
+                { icon: <Shield size={22}/>, title: 'HSE / Seguridad', desc: 'Cultura HSE arraigada. Normativas COVENIN en entornos de riesgo.' },
               ].map((a, i) => (
-                <div key={i} className="scroll-reveal flex gap-5 py-6 group" style={{ transitionDelay: `${i * 80}ms` }}>
-                  <div className="flex-shrink-0 w-10 h-10 rounded bg-white border border-border flex items-center justify-center text-samred group-hover:bg-samred group-hover:text-white group-hover:border-samred transition-all duration-300">{a.icon}</div>
+                <div key={i} className="scroll-reveal flex items-start gap-4 py-5 border-b border-border last:border-0" style={{ transitionDelay: `${i * 60}ms` }}>
+                  <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-samred/10 flex items-center justify-center text-samred">{a.icon}</div>
                   <div>
-                    <h3 className="font-sub font-bold text-base uppercase tracking-wide text-dark mb-1">{a.title}</h3>
-                    <p className="text-secondary text-base leading-relaxed">{a.desc}</p>
+                    <h3 className="font-sub font-bold text-[0.92rem] uppercase tracking-wide text-dark mb-1">{a.title}</h3>
+                    <p className="text-secondary text-[0.9rem] leading-relaxed">{a.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
         </div>
+        {/* Desktop: split original */}
+        <div className="hidden lg:grid lg:grid-cols-2 lg:min-h-[75vh]">
+          <div className="relative overflow-hidden order-2 lg:order-1" style={{ minHeight: '300px' }}>
+            <img src="/qs-electrical.webp" alt="Técnicos eléctricos SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent to-dark/20" />
+            <div className="absolute top-0 left-0 bottom-0 w-[4px] bg-samred" />
+            <div className="absolute bottom-8 left-8 bg-dark/75 backdrop-blur-sm border border-white/10 px-5 py-3 rounded">
+              <div className="font-sub font-bold text-xs uppercase tracking-widest text-samred mb-0.5">Certificación</div>
+              <div className="text-white text-sm font-medium">Manejadora de Desechos Peligrosos</div>
+              <div className="text-white/40 text-xs font-mono mt-0.5">Ministerio del Ecosistema · 1999</div>
+            </div>
+          </div>
+          <div className="bg-surface flex items-center px-16 py-20 order-1 lg:order-2">
+            <div className="w-full max-w-lg">
+              <div className="flex items-center gap-3 mb-6">
+                <span className="h-[3px] w-10 bg-samred" />
+                <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Por qué elegirnos</span>
+              </div>
+              <h2 className="font-display text-[clamp(2rem,3.5vw,3rem)] text-dark leading-none mb-10">VENTAJAS<br />COMPETITIVAS</h2>
+              <div className="flex flex-col gap-0 divide-y divide-border">
+                {[
+                  { icon: <Target size={20}/>, title: 'Capacidad Operativa', desc: 'Flota completa de vehículos, equipos pesados, maquinaria y aeronave para proyectos en todo el territorio.' },
+                  { icon: <CheckCircle size={20}/>, title: 'Calidad Certificada', desc: 'Procesos IPC bajo estándares internacionales. Certificación como Manejadora de Desechos Peligrosos desde 1999.' },
+                  { icon: <Users size={20}/>, title: 'Capital Humano', desc: 'Ingenieros y técnicos en eléctrica, civil, mecánica, instrumentación, telecomunicaciones y ambiental.' },
+                  { icon: <Shield size={20}/>, title: 'HSE / Seguridad', desc: 'Cultura HSE arraigada. Operaciones en entornos de alto riesgo con cumplimiento de normativas COVENIN.' },
+                ].map((a, i) => (
+                  <div key={i} className="scroll-reveal flex gap-5 py-6 group" style={{ transitionDelay: `${i * 80}ms` }}>
+                    <div className="flex-shrink-0 w-10 h-10 rounded bg-white border border-border flex items-center justify-center text-samred group-hover:bg-samred group-hover:text-white group-hover:border-samred transition-all duration-300">{a.icon}</div>
+                    <div>
+                      <h3 className="font-sub font-bold text-base uppercase tracking-wide text-dark mb-1">{a.title}</h3>
+                      <p className="text-secondary text-base leading-relaxed">{a.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* ── HISTORIA — timeline ── */}
-      <section className="bg-white py-14 md:py-24 px-5 md:px-16">
+      {/* ── HISTORIA — timeline mobile reimaginado ── */}
+      <section className="bg-white py-12 md:py-24 px-5 md:px-16">
         <div className="max-w-5xl mx-auto">
-          <div className="scroll-reveal mb-16">
+          <div className="scroll-reveal mb-10 md:mb-16">
             <div className="flex items-center gap-3 mb-4">
               <span className="h-[3px] w-10 bg-samred" />
               <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Historia</span>
             </div>
             <h2 className="font-display text-[clamp(2.5rem,5vw,4rem)] text-dark leading-none">NUESTRA<br />TRAYECTORIA</h2>
           </div>
-          <div className="relative">
-            <div className="absolute left-[5.5rem] md:left-[7.5rem] top-2 bottom-2 w-[2px] bg-gradient-to-b from-samred via-samred/40 to-transparent" />
+          {/* Mobile: cards con año grande como fondo */}
+          <div className="lg:hidden flex flex-col gap-4">
+            {TIMELINE.map((item, i) => (
+              <div key={i} className="scroll-reveal relative bg-dark rounded-2xl px-5 py-6 overflow-hidden" style={{ transitionDelay: `${i * 50}ms` }}>
+                {/* Ghost year */}
+                <span className="absolute right-3 bottom-1 font-display text-[4.5rem] text-white/5 leading-none select-none">{item.year}</span>
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="font-display text-[1.6rem] text-samred leading-none">{item.year}</span>
+                  <span className="flex-1 h-[1px] bg-samred/25" />
+                </div>
+                <h3 className="font-sub font-bold text-[0.95rem] uppercase tracking-wide text-white mb-2">{item.title}</h3>
+                <p className="text-white/50 text-[0.9rem] leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+          {/* Desktop: timeline original */}
+          <div className="hidden lg:block relative">
+            <div className="absolute left-[7.5rem] top-2 bottom-2 w-[2px] bg-gradient-to-b from-samred via-samred/40 to-transparent" />
             <div className="flex flex-col gap-10">
               {TIMELINE.map((item, i) => (
-                <div key={i} className="scroll-reveal flex gap-6 md:gap-10 items-start" style={{ transitionDelay: `${i * 60}ms` }}>
-                  <div className="flex-shrink-0 w-16 md:w-24 text-right pt-0.5">
-                    <span className="font-display text-[1.5rem] md:text-[1.75rem] text-samred leading-none">{item.year}</span>
+                <div key={i} className="scroll-reveal flex gap-10 items-start" style={{ transitionDelay: `${i * 60}ms` }}>
+                  <div className="flex-shrink-0 w-24 text-right pt-0.5">
+                    <span className="font-display text-[1.75rem] text-samred leading-none">{item.year}</span>
                   </div>
                   <div className="flex-shrink-0 mt-1.5 relative z-10">
                     <div className="w-3 h-3 rounded-full bg-samred ring-[3px] ring-white shadow" />
@@ -2138,15 +2237,59 @@ function PageQuienesSomos({ setPage }) {
         </div>
       </section>
 
-      {/* ── FICHA + CLIENTES ── */}
-      <section className="bg-dark py-14 md:py-20 px-5 md:px-16 lg:px-24">
+      {/* ── FICHA + CONTACTO ── */}
+      <section className="bg-dark py-12 md:py-20 px-5 md:px-16 lg:px-24">
         <div className="max-w-7xl mx-auto">
-          <div className="scroll-reveal flex items-center gap-3 mb-12">
+          <div className="scroll-reveal flex items-center gap-3 mb-10 md:mb-12">
             <span className="h-[3px] w-10 bg-samred" />
             <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Datos corporativos</span>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Corporate data */}
+          {/* Mobile: compact stacked */}
+          <div className="lg:hidden flex flex-col gap-4">
+            <div className="border border-white/10 rounded-2xl overflow-hidden">
+              <div className="bg-white/5 border-b border-white/10 px-5 py-3">
+                <span className="font-sub font-bold text-xs uppercase tracking-widest text-white/50">Ficha de Empresa</span>
+              </div>
+              <div className="divide-y divide-white/8">
+                {[
+                  ['Fundación', '1966 — Maracaibo, VE'],
+                  ['Trayectoria', '60 años de operación continua'],
+                  ['Sector', 'Petrolero · Petroquímico · Civil'],
+                  ['Servicios', '7 líneas especializadas'],
+                  ['Certificación', 'Desechos Peligrosos (1999)'],
+                  ['Cobertura', 'Venezuela · Internacional'],
+                ].map(([k, v]) => (
+                  <div key={k} className="flex items-center px-5 py-3.5 gap-3">
+                    <span className="flex-shrink-0 font-mono text-[0.72rem] uppercase tracking-widest text-white/30 w-24">{k}</span>
+                    <span className="text-white/75 text-[0.9rem]">{v}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="border border-white/10 rounded-2xl overflow-hidden">
+              <div className="bg-white/5 border-b border-white/10 px-5 py-3">
+                <span className="font-sub font-bold text-xs uppercase tracking-widest text-white/50">Contacto</span>
+              </div>
+              <div className="p-5 flex flex-col gap-5">
+                {[
+                  { icon: <MapPin size={15} className="text-samred flex-shrink-0 mt-0.5" />, label: 'Dirección', value: 'Av. 3H entre Calles 68-70, Maracaibo, Venezuela' },
+                  { icon: <Mail size={15} className="text-samred flex-shrink-0 mt-0.5" />, label: 'Email', value: 'samfor@samfor.com' },
+                  { icon: <Phone size={15} className="text-samred flex-shrink-0 mt-0.5" />, label: 'Tel', value: '+58 261 814 4444' },
+                ].map(item => (
+                  <div key={item.label} className="flex items-start gap-3">
+                    {item.icon}
+                    <div>
+                      <div className="font-mono text-[0.7rem] uppercase tracking-widest text-white/30 mb-0.5">{item.label}</div>
+                      <div className="text-white/75 text-[0.9rem]">{item.value}</div>
+                    </div>
+                  </div>
+                ))}
+                <button onClick={() => setPage('contacto')} className="btn-primary self-start mt-2">Contáctanos</button>
+              </div>
+            </div>
+          </div>
+          {/* Desktop: original grid */}
+          <div className="hidden lg:grid lg:grid-cols-2 gap-6">
             <div className="border border-white/10 rounded overflow-hidden">
               <div className="bg-white/5 border-b border-white/10 px-7 py-4">
                 <span className="font-sub font-bold text-xs uppercase tracking-widest text-white/60">Ficha de Empresa</span>
@@ -2168,7 +2311,6 @@ function PageQuienesSomos({ setPage }) {
                 ))}
               </div>
             </div>
-            {/* Contact */}
             <div className="border border-white/10 rounded overflow-hidden">
               <div className="bg-white/5 border-b border-white/10 px-7 py-4">
                 <span className="font-sub font-bold text-xs uppercase tracking-widest text-white/60">Contacto y Dirección</span>
@@ -2195,10 +2337,10 @@ function PageQuienesSomos({ setPage }) {
         </div>
       </section>
 
-      {/* ── CLIENTES — grid estático ── */}
-      <section className="bg-dark py-14 md:py-24 px-5 md:px-16 lg:px-24">
+      {/* ── CLIENTES ── */}
+      <section className="bg-dark py-12 md:py-24 px-5 md:px-16 lg:px-24">
         <div className="max-w-7xl mx-auto">
-          <div className="scroll-reveal flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
+          <div className="scroll-reveal flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 md:mb-12">
             <div>
               <div className="flex items-center gap-3 mb-3">
                 <span className="h-[3px] w-10 bg-samred" />
@@ -2212,19 +2354,16 @@ function PageQuienesSomos({ setPage }) {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
             {CLIENT_GRID.map((c, i) => (
-              <div key={i} className="scroll-reveal flex flex-col items-center gap-3 bg-white/5 border border-white/10 rounded-lg px-4 py-5 hover:border-samred/40 hover:bg-white/8 transition-all duration-200" style={{ transitionDelay: `${(i % 12) * 40}ms` }}>
-                <div className="w-16 h-16 rounded-md flex items-center justify-center overflow-hidden flex-shrink-0 bg-white p-1.5">
-                  {c.img
-                    ? <img src={c.img} alt={c.name} className="max-h-full max-w-full object-contain" onError={e => { e.target.style.display='none'; e.target.nextSibling.style.display='flex' }} />
-                    : null
-                  }
+              <div key={i} className="scroll-reveal flex flex-col items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-4 py-5 hover:border-samred/40 hover:bg-white/8 transition-all duration-200" style={{ transitionDelay: `${(i % 12) * 40}ms` }}>
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-md flex items-center justify-center overflow-hidden flex-shrink-0 bg-white p-1.5">
+                  {c.img ? <img src={c.img} alt={c.name} className="max-h-full max-w-full object-contain" onError={e => { e.target.style.display='none'; e.target.nextSibling.style.display='flex' }} /> : null}
                   <span className={`${c.img ? 'hidden' : 'flex'} w-full h-full items-center justify-center font-display font-bold text-sm rounded`} style={{ background: c.bg || '#1a2233', color: c.accent || '#fff' }}>
                     {c.name.split(/[\s/]+/).slice(0,2).map(w=>w[0]).join('').toUpperCase()}
                   </span>
                 </div>
                 <div className="text-center">
-                  <p className="font-sub font-bold text-[0.88rem] uppercase tracking-wide text-white/75 leading-tight">{c.name}</p>
-                  <p className="text-white/30 text-[0.8rem] font-mono uppercase tracking-widest mt-0.5">{c.sector}</p>
+                  <p className="font-sub font-bold text-[0.82rem] uppercase tracking-wide text-white/75 leading-tight">{c.name}</p>
+                  <p className="text-white/30 text-[0.72rem] font-mono uppercase tracking-widest mt-0.5">{c.sector}</p>
                 </div>
               </div>
             ))}

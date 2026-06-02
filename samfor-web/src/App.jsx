@@ -590,31 +590,33 @@ function Navbar({ page, setPage, scrolled, forceDark, logoProgress = 1 }) {
   const linkIdle = dark ? 'text-white/70 hover:text-white' : 'text-dark hover:text-samred'
 
   // ── Animated logo ──────────────────────────────────────────────────────────
-  // Ease in-out cubic
+  // Smooth ease-out quart: fast start, silky finish
   const t = Math.min(Math.max(logoProgress, 0), 1)
-  const eased = t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2, 3)/2
+  const eased = 1 - Math.pow(1 - t, 4)
 
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
-  const HERO_H   = isMobile ? 170 : 280   // logo height when in hero
-  const NAV_H    = 170                     // logo height when at navbar (slightly bigger than original)
-  const currentH = HERO_H + (NAV_H - HERO_H) * eased
+  const HERO_H = isMobile ? 220 : 420    // BIG in hero
+  const NAV_H  = 175                     // final navbar size
 
-  // Hero: center logo at 42% of viewport height
-  // Navbar: center logo at 48px (middle of h-24=96px navbar)
-  const vph = typeof window !== 'undefined' ? window.innerHeight : 800
-  const heroCY = vph * 0.42
-  const navCY  = 48
-  const currentCY = heroCY + (navCY - heroCY) * eased
-  const currentTop = currentCY - currentH / 2
-
-  // Left: match container padding + max-w-7xl centering
+  // Use transform approach: element anchored at navbar position, translateY shifts it into hero
+  // This way only transform changes → GPU composited → silky smooth
   const vpw = typeof window !== 'undefined' ? window.innerWidth : 1280
-  const containerPad = vpw >= 768 ? 32 : 16
-  const centerOffset = Math.max(0, (vpw - 1280) / 2)
-  const leftPx = centerOffset + containerPad
+  const vph = typeof window !== 'undefined' ? window.innerHeight : 800
 
-  // Logo filter: white over dark hero → original colors at navbar
-  const logoInvert = dark || eased < 0.65
+  // Navbar anchor: vertical center of h-24 navbar (48px), horizontally at container edge
+  const navCY      = 48
+  const navTop     = navCY - NAV_H / 2          // top of logo when at navbar (~-40px)
+  const containerPad  = vpw >= 768 ? 32 : 16
+  const centerOffset  = Math.max(0, (vpw - 1280) / 2)
+  const leftPx        = centerOffset + containerPad
+
+  // Hero anchor: center logo at 44vh
+  const heroCY   = vph * 0.44
+  const heroTop  = heroCY - HERO_H / 2
+
+  // Interpolated values
+  const currentH   = HERO_H + (NAV_H - HERO_H) * eased
+  const currentTop = heroTop + (navTop - heroTop) * eased
   // ──────────────────────────────────────────────────────────────────────────
 
   return (
@@ -627,33 +629,28 @@ function Navbar({ page, setPage, scrolled, forceDark, logoProgress = 1 }) {
         style={{
           position: 'fixed',
           zIndex: 55,
-          top: Math.round(currentTop),
-          left: Math.round(leftPx),
-          height: Math.round(currentH),
+          top: currentTop,
+          left: leftPx,
+          height: currentH,
           width: 'auto',
           background: 'none',
           border: 'none',
           padding: 0,
           cursor: 'pointer',
           lineHeight: 0,
-          transition: eased >= 0.98 ? 'filter 0.25s ease' : 'none',
+          willChange: 'top, height',
         }}
       >
         <img
           src="/logo.png"
           alt="SAMFOR"
-          style={{
-            height: '100%',
-            width: 'auto',
-            filter: logoInvert ? 'brightness(0) invert(1)' : 'none',
-            transition: 'filter 0.3s ease',
-          }}
+          style={{ height: '100%', width: 'auto', display: 'block' }}
         />
       </button>
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 h-24 flex items-center justify-between">
         {/* Invisible placeholder to preserve flex layout space */}
-        <div aria-hidden="true" style={{ height: '170px', width: '220px', flexShrink: 0 }} />
+        <div aria-hidden="true" style={{ height: '175px', width: '260px', flexShrink: 0 }} />
 
         <div className="hidden md:flex items-center gap-7">
           {links.map(l => (
@@ -2496,7 +2493,7 @@ export default function App() {
   }
 
   // Logo progress: 0 = hero (large), 1 = navbar (final). Only animates on inicio page.
-  const LOGO_SCROLL_END = 320
+  const LOGO_SCROLL_END = 480
   const logoProgress = page === 'inicio' ? Math.min(rawScrollY / LOGO_SCROLL_END, 1) : 1
 
   const pages = {

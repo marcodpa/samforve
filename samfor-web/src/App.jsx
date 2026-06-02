@@ -1437,17 +1437,16 @@ function PageInicio({ setPage, navigateToServicios }) {
       </section>
 
       {/* SERVICES */}
-      <section className="bg-dark overflow-hidden relative" style={{ height: 'auto', minHeight: 0 }} data-lg-height="100dvh">
-        <style>{`@media(min-width:1024px){section[data-lg-height]{height:100dvh!important}}`}</style>
+      <section className="bg-dark overflow-hidden relative">
 
         {/* MÓVIL — foto fondo de toda la sección */}
         <img src="/services-photo.webp" alt="" className="lg:hidden absolute inset-0 w-full h-full object-cover object-right" loading="lazy" aria-hidden="true" />
         <div className="lg:hidden absolute inset-0" style={{ background: 'linear-gradient(to right, #0D1117 0%, rgba(13,17,23,0.88) 30%, rgba(13,17,23,0.6) 55%, rgba(13,17,23,0.2) 80%, transparent 100%)' }} />
 
-        <div className="relative grid grid-cols-1 lg:grid-cols-2 lg:h-full">
+        <div className="relative grid grid-cols-1 lg:grid-cols-2">
 
           {/* LEFT — list */}
-          <div className="px-6 md:px-14 lg:px-16 flex flex-col justify-center py-10">
+          <div className="px-6 md:px-14 lg:px-16 flex flex-col justify-center py-14 lg:py-20">
 
             {/* Header */}
             <div className="scroll-reveal mb-6">
@@ -1457,9 +1456,10 @@ function PageInicio({ setPage, navigateToServicios }) {
               </div>
               <h2 className="font-display text-[2.25rem] md:text-[2.75rem] text-white leading-none">NUESTROS<br />SERVICIOS</h2>
             </div>
-            <div className="stagger divide-y divide-white/10 pb-2 lg:pb-0">
+
+            <div className="stagger divide-y divide-white/10">
               {SERVICES.map((s, i) => (
-                <div key={s.title} className="group flex items-start gap-5 py-3 cursor-pointer transition-all duration-300" onClick={() => navigateToServicios(s.title)}>
+                <div key={s.title} className="group flex items-start gap-5 py-3.5 cursor-pointer transition-all duration-300" onClick={() => navigateToServicios(s.title)}>
                   <span className="font-mono text-[0.78rem] text-white/25 group-hover:text-samred pt-1 transition-colors duration-300 flex-shrink-0 w-5">
                     {String(i + 1).padStart(2, '0')}
                   </span>
@@ -1476,23 +1476,36 @@ function PageInicio({ setPage, navigateToServicios }) {
                 </div>
               ))}
             </div>
+
+            {/* CTA — portafolio */}
+            <div className="mt-8 scroll-reveal">
+              <button
+                onClick={() => setPage('proyectos')}
+                className="group inline-flex items-center gap-3 bg-samred text-white font-sub font-bold text-[0.8rem] tracking-[0.18em] uppercase px-8 py-4 rounded transition-all hover:bg-red-700 active:scale-[0.97]"
+              >
+                Ver Portafolio
+                <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+              </button>
+            </div>
           </div>
 
-          {/* RIGHT — photo, fills full column height */}
-          <div className="relative hidden lg:block">
-            <img
-              src="/services-photo.webp"
-              alt="Equipo SAMFOR en obra"
-              className="absolute inset-0 w-full h-full object-cover object-center"
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/20 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-dark/70 via-transparent to-transparent" />
-            <div className="absolute bottom-10 right-10 text-right">
-              <p className="font-display text-xl text-white leading-tight mb-1">PROFESIONALES<br />EN CADA OBRA</p>
-              <p className="text-white/40 text-[0.88rem] font-sub uppercase tracking-widest">Campo Boscán — Venezuela</p>
+          {/* RIGHT — photo, sticky so it stays visible while scrolling through the list */}
+          <div className="relative hidden lg:block" style={{ minHeight: '100%' }}>
+            <div className="sticky top-0 h-screen">
+              <img
+                src="/services-photo.webp"
+                alt="Equipo SAMFOR en obra"
+                className="absolute inset-0 w-full h-full object-cover object-center"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-dark/70 via-transparent to-transparent" />
+              <div className="absolute bottom-10 right-10 text-right">
+                <p className="font-display text-xl text-white leading-tight mb-1">PROFESIONALES<br />EN CADA OBRA</p>
+                <p className="text-white/40 text-[0.88rem] font-sub uppercase tracking-widest">Campo Boscán — Venezuela</p>
+              </div>
+              <div className="absolute top-0 right-0 w-[3px] h-full bg-samred" />
             </div>
-            <div className="absolute top-0 right-0 w-[3px] h-full bg-samred" />
           </div>
 
         </div>

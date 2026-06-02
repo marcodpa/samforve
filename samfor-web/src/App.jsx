@@ -590,31 +590,25 @@ function Navbar({ page, setPage, scrolled, forceDark, logoProgress = 1 }) {
   const linkIdle = dark ? 'text-white/70 hover:text-white' : 'text-dark hover:text-samred'
 
   // ── Animated logo ──────────────────────────────────────────────────────────
-  // Smooth ease-out quart: fast start, silky finish
-  const t = Math.min(Math.max(logoProgress, 0), 1)
-  const eased = 1 - Math.pow(1 - t, 4)
-
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
-  const HERO_H = isMobile ? 220 : 420    // BIG in hero
-  const NAV_H  = 175                     // final navbar size
-
-  // Use transform approach: element anchored at navbar position, translateY shifts it into hero
-  // This way only transform changes → GPU composited → silky smooth
   const vpw = typeof window !== 'undefined' ? window.innerWidth : 1280
-  const vph = typeof window !== 'undefined' ? window.innerHeight : 800
+  const isMobile = vpw < 768
 
-  // Navbar anchor: vertical center of h-24 navbar (48px), horizontally at container edge
-  const navCY      = 48
-  const navTop     = navCY - NAV_H / 2          // top of logo when at navbar (~-40px)
-  const containerPad  = vpw >= 768 ? 32 : 16
-  const centerOffset  = Math.max(0, (vpw - 1280) / 2)
-  const leftPx        = centerOffset + containerPad
+  // On mobile: no animation — logo lives in the normal navbar flow
+  // On desktop: scroll-driven animation from hero to navbar
+  const t      = Math.min(Math.max(logoProgress, 0), 1)
+  const eased  = 1 - Math.pow(1 - t, 4)   // ease-out quart
 
-  // Hero anchor: logo sits just below navbar (96px from top)
-  const heroTop  = 100
-  const heroCY   = heroTop + HERO_H / 2
+  const HERO_H = 420
+  const NAV_H  = 175
 
-  // Interpolated values
+  const containerPad = vpw >= 768 ? 32 : 16
+  const centerOffset = Math.max(0, (vpw - 1280) / 2)
+  const leftPx       = centerOffset + containerPad
+
+  const navCY  = 48
+  const navTop = navCY - NAV_H / 2
+
+  const heroTop    = 100
   const currentH   = HERO_H + (NAV_H - HERO_H) * eased
   const currentTop = heroTop + (navTop - heroTop) * eased
   // ──────────────────────────────────────────────────────────────────────────
@@ -622,35 +616,39 @@ function Navbar({ page, setPage, scrolled, forceDark, logoProgress = 1 }) {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navBg}`}>
 
-      {/* ── Animated floating logo (scroll-driven) ── */}
-      <button
-        onClick={() => { setPage('inicio'); setOpen(false) }}
-        aria-label="Inicio"
-        style={{
-          position: 'fixed',
-          zIndex: 55,
-          top: currentTop,
-          left: leftPx,
-          height: currentH,
-          width: 'auto',
-          background: 'none',
-          border: 'none',
-          padding: 0,
-          cursor: 'pointer',
-          lineHeight: 0,
-          willChange: 'top, height',
-        }}
-      >
-        <img
-          src="/logo.png"
-          alt="SAMFOR"
-          style={{ height: '100%', width: 'auto', display: 'block' }}
-        />
-      </button>
+      {/* ── Animated floating logo — desktop only ── */}
+      {!isMobile && (
+        <button
+          onClick={() => { setPage('inicio'); setOpen(false) }}
+          aria-label="Inicio"
+          style={{
+            position: 'fixed',
+            zIndex: 55,
+            top: currentTop,
+            left: leftPx,
+            height: currentH,
+            width: 'auto',
+            background: 'none',
+            border: 'none',
+            padding: 0,
+            cursor: 'pointer',
+            lineHeight: 0,
+            willChange: 'top, height',
+          }}
+        >
+          <img src="/logo.png" alt="SAMFOR" style={{ height: '100%', width: 'auto', display: 'block' }} />
+        </button>
+      )}
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 h-24 flex items-center justify-between">
-        {/* Invisible placeholder to preserve flex layout space */}
-        <div aria-hidden="true" style={{ height: '175px', width: '260px', flexShrink: 0 }} />
+        {/* Mobile: real logo button in navbar flow. Desktop: invisible placeholder for layout space */}
+        {isMobile ? (
+          <button onClick={() => { setPage('inicio'); setOpen(false) }} className="flex items-center">
+            <img src="/logo.png" alt="SAMFOR" style={{ height: '120px' }} className={`w-auto ${dark ? 'brightness-0 invert' : ''}`} />
+          </button>
+        ) : (
+          <div aria-hidden="true" style={{ height: '175px', width: '260px', flexShrink: 0 }} />
+        )}
 
         <div className="hidden md:flex items-center gap-7">
           {links.map(l => (

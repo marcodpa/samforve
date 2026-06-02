@@ -598,7 +598,7 @@ function Navbar({ page, setPage, scrolled, forceDark, logoProgress = 1 }) {
   const t      = Math.min(Math.max(logoProgress, 0), 1)
   const eased  = 1 - Math.pow(1 - t, 4)   // ease-out quart
 
-  const HERO_H = 420
+  const HERO_H = 540
   const NAV_H  = 175
 
   const containerPad = vpw >= 768 ? 32 : 16
@@ -608,7 +608,7 @@ function Navbar({ page, setPage, scrolled, forceDark, logoProgress = 1 }) {
   const navCY  = 48
   const navTop = navCY - NAV_H / 2
 
-  const heroTop    = 100
+  const heroTop    = 20
   const currentH   = HERO_H + (NAV_H - HERO_H) * eased
   const currentTop = heroTop + (navTop - heroTop) * eased
   // ──────────────────────────────────────────────────────────────────────────

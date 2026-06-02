@@ -572,7 +572,7 @@ function DivisionBadge({ division, size = 'sm' }) {
 }
 
 // ─── NAVBAR ───────────────────────────────────────────────────────────────────
-function Navbar({ page, setPage, scrolled, forceDark }) {
+function Navbar({ page, setPage, scrolled, forceDark, logoProgress = 1 }) {
   const [open, setOpen] = useState(false)
   const links = [
     { id: 'inicio', label: 'Inicio' },
@@ -582,22 +582,79 @@ function Navbar({ page, setPage, scrolled, forceDark }) {
     { id: 'contacto', label: 'Contacto' },
   ]
 
-  // dark mode: project detail page background
   const dark = forceDark
-  // white mode: scrolled on a normal page, OR always on proyectos tab
   const white = !dark && (scrolled || page === 'proyectos')
-
   const navBg = dark ? 'bg-[#0D1117] border-b border-white/10' : white ? 'bg-white shadow-[0_2px_8px_rgba(0,0,0,0.08)]' : 'bg-transparent'
   const textColor = dark ? 'text-white' : 'text-dark'
   const linkActive = 'text-samred'
   const linkIdle = dark ? 'text-white/70 hover:text-white' : 'text-dark hover:text-samred'
 
+  // ── Animated logo ──────────────────────────────────────────────────────────
+  // Ease in-out cubic
+  const t = Math.min(Math.max(logoProgress, 0), 1)
+  const eased = t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2, 3)/2
+
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+  const HERO_H   = isMobile ? 170 : 280   // logo height when in hero
+  const NAV_H    = 170                     // logo height when at navbar (slightly bigger than original)
+  const currentH = HERO_H + (NAV_H - HERO_H) * eased
+
+  // Hero: center logo at 42% of viewport height
+  // Navbar: center logo at 48px (middle of h-24=96px navbar)
+  const vph = typeof window !== 'undefined' ? window.innerHeight : 800
+  const heroCY = vph * 0.42
+  const navCY  = 48
+  const currentCY = heroCY + (navCY - heroCY) * eased
+  const currentTop = currentCY - currentH / 2
+
+  // Left: match container padding + max-w-7xl centering
+  const vpw = typeof window !== 'undefined' ? window.innerWidth : 1280
+  const containerPad = vpw >= 768 ? 32 : 16
+  const centerOffset = Math.max(0, (vpw - 1280) / 2)
+  const leftPx = centerOffset + containerPad
+
+  // Logo filter: white over dark hero → original colors at navbar
+  const logoInvert = dark || eased < 0.65
+  // ──────────────────────────────────────────────────────────────────────────
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navBg}`}>
+
+      {/* ── Animated floating logo (scroll-driven) ── */}
+      <button
+        onClick={() => { setPage('inicio'); setOpen(false) }}
+        aria-label="Inicio"
+        style={{
+          position: 'fixed',
+          zIndex: 55,
+          top: Math.round(currentTop),
+          left: Math.round(leftPx),
+          height: Math.round(currentH),
+          width: 'auto',
+          background: 'none',
+          border: 'none',
+          padding: 0,
+          cursor: 'pointer',
+          lineHeight: 0,
+          transition: eased >= 0.98 ? 'filter 0.25s ease' : 'none',
+        }}
+      >
+        <img
+          src="/logo.png"
+          alt="SAMFOR"
+          style={{
+            height: '100%',
+            width: 'auto',
+            filter: logoInvert ? 'brightness(0) invert(1)' : 'none',
+            transition: 'filter 0.3s ease',
+          }}
+        />
+      </button>
+
       <div className="max-w-7xl mx-auto px-4 md:px-8 h-24 flex items-center justify-between">
-        <button onClick={() => { setPage('inicio'); setOpen(false) }} className="flex items-center">
-          <img src="/logo.png" alt="SAMFOR" style={{ height: '150px' }} className={`w-auto transition-all duration-300 ${dark ? 'brightness-0 invert' : ''}`} />
-        </button>
+        {/* Invisible placeholder to preserve flex layout space */}
+        <div aria-hidden="true" style={{ height: '170px', width: '220px', flexShrink: 0 }} />
+
         <div className="hidden md:flex items-center gap-7">
           {links.map(l => (
             <button key={l.id} onClick={() => setPage(l.id)}
@@ -2407,18 +2464,24 @@ function PageContacto() {
 export default function App() {
   const [page, setPage] = useState('inicio')
   const [scrolled, setScrolled] = useState(false)
+  const [rawScrollY, setRawScrollY] = useState(0)
   const [projectOpen, setProjectOpen] = useState(false)
   const [initialDivision, setInitialDivision] = useState('Todos')
   const [initialService, setInitialService] = useState(null)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50)
+    const onScroll = () => {
+      const y = window.scrollY
+      setScrolled(y > 50)
+      setRawScrollY(y)
+    }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   useEffect(() => {
     setProjectOpen(false)
+    setRawScrollY(0)
     window.scrollTo({ top: 0, behavior: 'instant' })
   }, [page])
 
@@ -2432,6 +2495,10 @@ export default function App() {
     setPage('servicios')
   }
 
+  // Logo progress: 0 = hero (large), 1 = navbar (final). Only animates on inicio page.
+  const LOGO_SCROLL_END = 320
+  const logoProgress = page === 'inicio' ? Math.min(rawScrollY / LOGO_SCROLL_END, 1) : 1
+
   const pages = {
     inicio: <PageInicio setPage={setPage} navigateToServicios={navigateToServicios} />,
     servicios: <PageServicios initialService={initialService} />,
@@ -2442,7 +2509,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col font-body">
-      <Navbar page={page} setPage={setPage} scrolled={scrolled} forceDark={projectOpen} />
+      <Navbar page={page} setPage={setPage} scrolled={scrolled} forceDark={projectOpen} logoProgress={logoProgress} />
       <main className="flex-1">{pages[page] || pages['inicio']}</main>
       <Footer setPage={setPage} />
     </div>

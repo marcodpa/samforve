@@ -145,7 +145,7 @@ const SERVICES_DETAIL = {
 
 const METRICS = [
   { value: 60, suffix: '', label: 'Años de experiencia' },
-  { value: 100, suffix: '+', label: 'Proyectos ejecutados' },
+  { value: 250, suffix: '+', label: 'Proyectos ejecutados' },
   { value: 20, suffix: '+', label: 'Clientes internacionales' },
   { value: 6, suffix: '', label: 'Líneas de servicio' },
 ]

@@ -603,14 +603,18 @@ function Navbar({ page, setPage, scrolled, forceDark, logoProgress = 1 }) {
 
   const containerPad = vpw >= 768 ? 32 : 16
   const centerOffset = Math.max(0, (vpw - 1280) / 2)
-  const leftPx       = centerOffset + containerPad
 
   const navCY  = 48
   const navTop = navCY - NAV_H / 2
 
-  const heroTop    = 20
-  const currentH   = HERO_H + (NAV_H - HERO_H) * eased
-  const currentTop = heroTop + (navTop - heroTop) * eased
+  // Flush top-left in hero, slides into normal navbar position
+  const heroLeft  = 8
+  const heroTop   = 4
+  const navLeft   = centerOffset + containerPad
+
+  const currentLeft = heroLeft + (navLeft - heroLeft) * eased
+  const currentTop  = heroTop + (navTop - heroTop) * eased
+  const currentH    = HERO_H + (NAV_H - HERO_H) * eased
   // ──────────────────────────────────────────────────────────────────────────
 
   return (
@@ -625,7 +629,7 @@ function Navbar({ page, setPage, scrolled, forceDark, logoProgress = 1 }) {
             position: 'fixed',
             zIndex: 55,
             top: currentTop,
-            left: leftPx,
+            left: currentLeft,
             height: currentH,
             width: 'auto',
             background: 'none',
@@ -633,7 +637,7 @@ function Navbar({ page, setPage, scrolled, forceDark, logoProgress = 1 }) {
             padding: 0,
             cursor: 'pointer',
             lineHeight: 0,
-            willChange: 'top, height',
+            willChange: 'top, height, left',
           }}
         >
           <img src="/logo.png" alt="SAMFOR" style={{ height: '100%', width: 'auto', display: 'block' }} />

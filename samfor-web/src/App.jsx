@@ -1514,9 +1514,8 @@ function PageInicio({ setPage, navigateToServicios }) {
       </section>
 
       {/* FEATURED PROJECTS */}
-      <section className="bg-white px-6 md:px-14 lg:px-20 flex flex-col justify-center" style={{ minHeight: 'auto' }} data-lg-min="100dvh">
+      <section className="bg-white px-6 md:px-14 lg:px-20">
         <style>{`
-          @media(min-width:1024px){section[data-lg-min]{min-height:100dvh!important}}
           @media(max-width:1023px){.featured-card{height:56vw!important;min-height:180px!important;max-height:260px!important;flex:none!important}}
         `}</style>
         <div className="max-w-7xl mx-auto w-full py-16">

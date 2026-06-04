@@ -2007,10 +2007,10 @@ function PageQuienesSomos({ setPage }) {
         </div>
       </section>
 
-      {/* ── HISTORIA — timeline rediseñado ── */}
+      {/* ── HISTORIA — foto + timeline lateral ── */}
       <section className="bg-white py-12 md:py-24 px-5 md:px-16">
         <div className="max-w-6xl mx-auto">
-          {/* HEADER */}
+          {/* HEADER — full width */}
           <div className="scroll-reveal mb-10 md:mb-14">
             <div className="flex items-center gap-3 mb-4">
               <span className="h-[3px] w-10 bg-samred" />
@@ -2019,71 +2019,76 @@ function PageQuienesSomos({ setPage }) {
             <h2 className="font-display text-[clamp(2.5rem,5vw,4rem)] text-dark leading-none">NUESTRA<br />TRAYECTORIA</h2>
           </div>
 
-          {/* ── FOTO HISTÓRICA GRANDE ── */}
-          <div className="scroll-reveal relative w-full rounded-2xl overflow-hidden mb-8 md:mb-14 shadow-xl">
-            {/* La foto ocupa todo el ancho con altura generosa */}
-            <div className="relative w-full" style={{ minHeight: 'clamp(280px,50vw,560px)' }}>
-              <img src="/projects/samfor-inicios.jpg" alt="Inicios de SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
-              {/* Gradiente sutil solo abajo para texto */}
-              <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/10 to-transparent" />
-              {/* Barra roja inferior */}
-              <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-samred" />
-              {/* Texto sobre la imagen */}
-              <div className="absolute bottom-8 left-8 md:bottom-10 md:left-12">
-                <div className="flex items-center gap-2.5 mb-2">
-                  <span className="w-2 h-2 rounded-full bg-samred" />
-                  <span className="font-mono text-[0.7rem] md:text-[0.8rem] uppercase tracking-[0.25em] text-white/50">Archivo histórico</span>
+          {/* ── MOBILE: foto arriba, timeline abajo (apilado) ── */}
+          <div className="md:hidden">
+            {/* Foto */}
+            <div className="scroll-reveal relative w-full rounded-2xl overflow-hidden mb-8 shadow-xl">
+              <div className="relative w-full" style={{ minHeight: 'clamp(280px,50vw,420px)' }}>
+                <img src="/projects/samfor-inicios.jpg" alt="Inicios de SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/10 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-samred" />
+                <div className="absolute bottom-8 left-8 md:bottom-10 md:left-12">
+                  <div className="flex items-center gap-2.5 mb-2">
+                    <span className="w-2 h-2 rounded-full bg-samred" />
+                    <span className="font-mono text-[0.7rem] uppercase tracking-[0.25em] text-white/50">Archivo histórico</span>
+                  </div>
+                  <p className="text-white text-lg font-display tracking-wide">Inicios de SAMFOR · Maracaibo, 1966</p>
                 </div>
-                <p className="text-white text-lg md:text-2xl font-display tracking-wide">Inicios de SAMFOR · Maracaibo, 1966</p>
               </div>
+            </div>
+            {/* Timeline mobile */}
+            <div className="flex flex-col gap-5">
+              {TIMELINE.map((item, i) => (
+                <div key={i} className="scroll-reveal relative group" style={{ transitionDelay: `${i * 60}ms` }}>
+                  {i < TIMELINE.length - 1 && (
+                    <div className="absolute left-[1.1rem] top-10 bottom-0 w-[2px] bg-gradient-to-b from-samred via-samred/30 to-transparent" />
+                  )}
+                  <div className="flex gap-4">
+                    <div className="flex-shrink-0 relative z-10 mt-1">
+                      <div className={`w-[1.375rem] h-[1.375rem] rounded-full border-2 flex items-center justify-center transition-all duration-300 ${i === 0 ? 'bg-samred border-samred shadow-[0_0_0_4px_rgba(200,16,46,0.15)]' : 'bg-white border-samred/40 group-hover:border-samred group-hover:shadow-[0_0_0_4px_rgba(200,16,46,0.1)]'}`}>
+                        <div className={`w-1.5 h-1.5 rounded-full ${i === 0 ? 'bg-white' : 'bg-samred/60 group-hover:bg-samred'}`} />
+                      </div>
+                    </div>
+                    <div className={`flex-1 rounded-xl border p-4 transition-all duration-300 ${i === 0 ? 'bg-samred/5 border-samred/20' : 'bg-white border-gray-200 hover:border-samred/30 hover:shadow-md'}`}>
+                      <span className={`font-display text-lg leading-none mb-2 block ${i === 0 ? 'text-samred' : 'text-dark/30'}`}>{item.year}</span>
+                      <h3 className={`font-sub font-bold text-sm uppercase tracking-wide mb-1.5 ${i === 0 ? 'text-samred' : 'text-dark'}`}>{item.title}</h3>
+                      <p className="text-secondary text-[0.88rem] leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* ── TIMELINE ── */}
-          {/* MOBILE */}
-          <div className="md:hidden flex flex-col gap-5">
-            {TIMELINE.map((item, i) => (
-              <div key={i} className="scroll-reveal relative group" style={{ transitionDelay: `${i * 60}ms` }}>
-                {/* Línea conectora vertical */}
-                {i < TIMELINE.length - 1 && (
-                  <div className="absolute left-[1.1rem] top-10 bottom-0 w-[2px] bg-gradient-to-b from-samred via-samred/30 to-transparent" />
-                )}
-                <div className="flex gap-4">
-                  {/* Círculo indicador */}
-                  <div className="flex-shrink-0 relative z-10 mt-1">
-                    <div className={`w-[1.375rem] h-[1.375rem] rounded-full border-2 flex items-center justify-center transition-all duration-300 ${i === 0 ? 'bg-samred border-samred shadow-[0_0_0_4px_rgba(200,16,46,0.15)]' : 'bg-white border-samred/40 group-hover:border-samred group-hover:shadow-[0_0_0_4px_rgba(200,16,46,0.1)]'}`}>
-                      <div className={`w-1.5 h-1.5 rounded-full ${i === 0 ? 'bg-white' : 'bg-samred/60 group-hover:bg-samred'}`} />
-                    </div>
+          {/* ── DESKTOP: split lateral — foto sticky izq + timeline der ── */}
+          <div className="hidden md:grid md:grid-cols-[1fr_1.8fr] md:gap-12 lg:gap-16 items-start">
+            {/* LEFT — foto sticky */}
+            <div className="sticky top-32">
+              <div className="scroll-reveal relative rounded-2xl overflow-hidden shadow-xl" style={{ height: 'clamp(400px,42vw,600px)' }}>
+                <img src="/projects/samfor-inicios.jpg" alt="Inicios de SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+                {/* Gradiente oscuro de esquina */}
+                <div className="absolute inset-0 bg-gradient-to-t from-dark/85 via-dark/10 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-samred" />
+                {/* Texto */}
+                <div className="absolute bottom-7 left-7">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="w-2 h-2 rounded-full bg-samred" />
+                    <span className="font-mono text-[0.65rem] uppercase tracking-[0.3em] text-white/45">Archivo histórico</span>
                   </div>
-                  {/* Card */}
-                  <div className={`flex-1 rounded-xl border p-4 transition-all duration-300 ${i === 0 ? 'bg-samred/5 border-samred/20' : 'bg-white border-gray-200 hover:border-samred/30 hover:shadow-md'}`}>
-                    <span className={`font-display text-lg leading-none mb-2 block ${i === 0 ? 'text-samred' : 'text-dark/30'}`}>{item.year}</span>
-                    <h3 className={`font-sub font-bold text-sm uppercase tracking-wide mb-1.5 ${i === 0 ? 'text-samred' : 'text-dark'}`}>{item.title}</h3>
-                    <p className="text-secondary text-[0.88rem] leading-relaxed">{item.desc}</p>
-                  </div>
+                  <p className="text-white text-xl font-display tracking-wide">Inicios de SAMFOR<br />Maracaibo, 1966</p>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
 
-          {/* DESKTOP — timeline alternado izquierda/derecha */}
-          <div className="hidden md:block relative px-4">
-            {/* Línea central vertical */}
-            <div className="absolute left-1/2 top-0 bottom-0 w-[3px] -translate-x-1/2 bg-gradient-to-b from-samred via-samred/30 to-samred/10 rounded-full" />
+            {/* RIGHT — timeline */}
+            <div className="relative pl-8 lg:pl-12">
+              {/* Línea vertical conectora */}
+              <div className="absolute left-0 top-2 bottom-2 w-[3px] bg-gradient-to-b from-samred via-samred/30 to-samred/10 rounded-full" />
 
-            {TIMELINE.map((item, i) => {
-              const isLeft = i % 2 === 0
-              return (
-                <div key={i} className="scroll-reveal relative flex items-start" style={{ padding: '3rem 0', transitionDelay: `${i * 80}ms` }}>
-                  {/* Lado del año (opuesto a la card) */}
-                  <div className={`w-1/2 ${isLeft ? 'pr-14 text-right' : 'pl-14'}`}>
-                    <span className={`font-display text-[3rem] leading-none tracking-tight block ${i === 0 ? 'text-samred' : 'text-dark/12'}`}>
-                      {item.year}
-                    </span>
-                  </div>
-
-                  {/* Punto central */}
-                  <div className="absolute left-1/2 -translate-x-1/2 z-10">
+              {TIMELINE.map((item, i) => (
+                <div key={i} className="scroll-reveal relative pb-12 last:pb-0" style={{ paddingLeft: '2rem', transitionDelay: `${i * 80}ms` }}>
+                  {/* Punto en la línea */}
+                  <div className="absolute left-[-7.5px] top-1 z-10">
                     <div className={`w-[18px] h-[18px] rounded-full border-[3px] transition-all duration-300 ${
                       i === 0
                         ? 'bg-samred border-samred shadow-[0_0_0_8px_rgba(200,16,46,0.12)]'
@@ -2091,27 +2096,34 @@ function PageQuienesSomos({ setPage }) {
                     }`} />
                   </div>
 
-                  {/* Lado de la card (opuesto al año) */}
-                  <div className={`w-1/2 ${isLeft ? 'pl-14' : 'pr-14'}`}>
-                    <div className={`relative rounded-xl border-2 p-6 transition-all duration-300 ${
-                      i === 0
-                        ? 'border-samred bg-gradient-to-br from-samred/[0.03] to-white shadow-lg'
-                        : 'border-gray-100 bg-white hover:border-samred/20 hover:shadow-lg'
-                    }`}>
-                      {/* Barra superior decorativa */}
-                      <div className={`absolute top-0 left-0 right-0 h-[3px] rounded-t-xl ${i === 0 ? 'bg-samred' : 'bg-gradient-to-r from-samred/50 via-samred/20 to-transparent'}`} />
+                  {/* Año decorativo */}
+                  <span className={`font-display text-[2.2rem] lg:text-[2.8rem] leading-none tracking-tight block mb-3 ${
+                    i === 0 ? 'text-samred' : 'text-dark/10'
+                  }`}>
+                    {item.year}
+                  </span>
 
-                      <h3 className={`font-sub font-bold text-base uppercase tracking-wide mb-2 ${
-                        i === 0 ? 'text-samred' : 'text-dark'
-                      }`}>
-                        {item.title}
-                      </h3>
-                      <p className="text-secondary text-[0.95rem] leading-relaxed">{item.desc}</p>
-                    </div>
+                  {/* Card */}
+                  <div className={`relative rounded-xl border-2 p-5 lg:p-6 transition-all duration-300 ${
+                    i === 0
+                      ? 'border-samred/20 bg-gradient-to-br from-samred/[0.03] to-white shadow-lg'
+                      : 'border-gray-100 bg-white hover:border-samred/20 hover:shadow-lg'
+                  }`}>
+                    {/* Barra decorativa superior */}
+                    <div className={`absolute top-0 left-0 right-0 h-[3px] rounded-t-xl ${
+                      i === 0 ? 'bg-samred' : 'bg-gradient-to-r from-samred/50 via-samred/20 to-transparent'
+                    }`} />
+
+                    <h3 className={`font-sub font-bold text-base uppercase tracking-wide mb-2 ${
+                      i === 0 ? 'text-samred' : 'text-dark'
+                    }`}>
+                      {item.title}
+                    </h3>
+                    <p className="text-secondary text-[0.95rem] leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
-              )
-            })}
+              ))}
+            </div>
           </div>
         </div>
       </section>

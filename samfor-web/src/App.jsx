@@ -209,7 +209,7 @@ const SECTOR_COLORS = {
   Acuicultura: 'bg-teal-50 text-teal-700',
 }
 
-// ─── ALL PROJECTS ─────────────────────────────────────────────────────────────
+// ─── ALL PROJECTS (curated sample) ────────────────────────────────────────────
 // division: 'Civiles' | 'Mecánicos' | 'Eléctricos' | 'Transporte' | 'Ambientales' | 'Otras'
 const ALL_PROJECTS = [
   // ── ELÉCTRICOS ──
@@ -220,22 +220,6 @@ const ALL_PROJECTS = [
     img: IMG(28),
     desc: 'Operación y mantenimiento integral: sistemas de agua, contra incendios, combustible, electricidad, turbogeneradores, SCADA y comunicaciones.',
     detail: 'Mantenimiento predictivo, preventivo y correctivo con operación 24/7. Objetivo: mejorar eficiencia operativa y garantizar la continuidad del suministro eléctrico a Campo Boscán.',
-  },
-  {
-    id: 6, status: 'active', division: 'Eléctricos',
-    client: 'Chevron Global Technology Service Company',
-    title: 'Tendido Líneas Eléctricas 24 KV Campo Boscán',
-    img: IMG(62),
-    desc: 'Construcción de instalaciones eléctricas de superficie para suministro eléctrico a pozos productores de crudo.',
-    detail: 'Tendido de líneas aéreas 24 KV (postes, herrajes y accesorios), instalación de bancos de transformadores, cableados, acometidas, puesta a tierra y conexión de motores.',
-  },
-  {
-    id: 4, status: 'active', division: 'Eléctricos',
-    client: 'Chevron Global Technology Service Company',
-    title: 'Mantenimiento Generadores de Emergencia Petro Boscán',
-    img: IMG(50),
-    desc: 'Inspección, limpieza, reparación y mantenimiento preventivo/correctivo de generadores de emergencia. Configuración de software y pruebas en sitio.',
-    detail: 'Puesta en marcha con garantía de buen funcionamiento. Traslado de equipos entre instalaciones y talleres. Campo Boscán, Venezuela.',
   },
   {
     id: 101, status: 'completed', division: 'Eléctricos',
@@ -253,38 +237,6 @@ const ALL_PROJECTS = [
     desc: 'Suministro, traslado, instalación y puesta en servicio de autotransformador de potencia monofásico 400/230/34.5 KV, 150 MVA.',
     detail: 'Instalación completa con pruebas de funcionamiento. Subestación El Tablazo, Venezuela.',
   },
-  {
-    id: 107, status: 'completed', division: 'Eléctricos',
-    client: 'ENELCO – Energía Eléctrica de la Costa Oriental',
-    title: 'Subestación Cabimas 230/115 KV',
-    img: IMG(4),
-    desc: 'Montaje electromecánico y ampliación de subestación Cabimas 230/115 KV. Construcción línea de transmisión entrada y salida.',
-    detail: 'Ampliación y montaje electromecánico completo con construcción de la línea de transmisión 230 KV.',
-  },
-  {
-    id: 111, status: 'completed', division: 'Eléctricos',
-    client: 'PEQUIVEN – Petroquímica de Venezuela, S.A.',
-    title: 'Tendido Eléctrico Planta Cloro Soda',
-    img: IMG(56),
-    desc: 'Tendido de alimentaciones eléctricas en bandeja portacables a motores 480V. Planta Cloro Soda, Complejo Petroquímico Ana María Campos.',
-    detail: 'Bandejas portacables, cables de potencia 480V, conexiones a motores eléctricos. Complejo Petroquímico Ana María Campos, Zulia.',
-  },
-  {
-    id: 117, status: 'completed', division: 'Eléctricos',
-    client: 'Maraven, S.A.',
-    title: 'Subestaciones Eléctricas Lagunillas',
-    img: IMG(4),
-    desc: 'Acometida eléctrica El Polvorín Lagunillas. Subestación 42 Campo Las Delicias. Mejoras eléctricas en drenajes.',
-    detail: 'Tres contratos para Maraven en Lagunillas. Infraestructura eléctrica para operaciones de producción en el Lago de Maracaibo.',
-  },
-  {
-    id: 119, status: 'completed', division: 'Eléctricos',
-    client: 'Gobernación del Estado Falcón',
-    title: 'Subestación Eléctrica La Sabanita – Falcón',
-    img: IMG(56),
-    desc: 'Consolidación de la subestación eléctrica La Sabanita, Municipio Petit, Estado Falcón.',
-    detail: 'Consolidación y puesta en servicio completa para la Gobernación del Estado Falcón, mejorando la distribución eléctrica regional.',
-  },
 
   // ── MECÁNICOS ──
   {
@@ -296,14 +248,6 @@ const ALL_PROJECTS = [
     detail: 'Reparación de motores y componentes, suministro de repuestos. Optimizar la eficiencia operativa y prolongar la vida útil de los equipos de generación.',
   },
   {
-    id: 3, status: 'active', division: 'Mecánicos',
-    client: 'Chevron Global Technology Service Company',
-    title: 'Mantenimiento Planta Agua Desmineralizada Bajo Grande',
-    img: IMG(38),
-    desc: 'Mantenimiento correctivo de la Planta de Agua Desmineralizada. Subsistemas críticos, mejoras civiles y actualización de sistemas.',
-    detail: 'Mantenimiento mayor, intermedio y menor de subsistemas. Reparación de motores eléctricos, válvulas y bombas. Garantiza la continuidad del suministro de agua para generación.',
-  },
-  {
     id: 7, status: 'active', division: 'Mecánicos',
     client: 'PDVSA Petróleo, S.A.',
     title: 'Mantenimiento General Llenadero Productos Blancos Cardón',
@@ -312,28 +256,12 @@ const ALL_PROJECTS = [
     detail: 'Mantenimiento integral de equipos mecánicos, instalaciones eléctricas, estructuras civiles y sistemas de seguridad. Refinería Cardón, Venezuela.',
   },
   {
-    id: 102, status: 'completed', division: 'Mecánicos',
-    client: 'PDVSA Petróleo, S.A.',
-    title: 'Puntos GNV Carabobo, Yaracuy y Aragua',
-    img: IMG(96),
-    desc: 'Ingeniería de detalle y construcción de puntos de expendio de gas natural vehicular en estaciones de servicio existentes.',
-    detail: 'Acometidas alta y baja tensión, módulos de medición, tableros, transformadores, cableado, puesta a tierra e iluminación exterior. Disciplinas: civil, mecánica e instrumentación.',
-  },
-  {
     id: 103, status: 'completed', division: 'Mecánicos',
     client: 'PDVSA Petróleo, S.A.',
     title: 'Gasoducto Anaco–Barquisimeto Ø36" y Ø30"',
     img: IMG(103),
     desc: 'Reemplazo de tubería Ø36" API 5L X60 y Ø30" API 5L X52. Subsistemas EPA-N50 y EPA-N5.',
     detail: 'Adecuación del gasoducto LANA Ø36" y NURGAS Ø30" mediante reclasificación de área, garantizando operatividad y cumplimiento de estándares vigentes.',
-  },
-  {
-    id: 121, status: 'completed', division: 'Mecánicos',
-    client: 'PDVSA Petróleo, S.A.',
-    title: 'Mantenimiento Campos Bachaquero y Barua Motatan',
-    img: IMG(85),
-    desc: 'Mantenimiento operacional de facilidades de producción tierra costa este, Campos Bachaquero y Barua Motatan.',
-    detail: 'Facilidades civiles, eléctricas y mecánicas a pozos, localizaciones, vías de acceso e instalaciones campos Barua, Motatan y Tomoporo.',
   },
 
   // ── CIVILES ──
@@ -361,22 +289,6 @@ const ALL_PROJECTS = [
     desc: 'Dique Escollera para la interconexión entre las Islas de los Monjes del Sur y la plataforma en la Isla Pequeña, Archipiélago Los Monjes.',
     detail: 'Movilización de equipos, instalación de estructuras provisionales, preparación y voladura de rocas, construcción de terrazas y rompeolas.',
   },
-  {
-    id: 108, status: 'completed', division: 'Civiles',
-    client: 'VENESHRIMP',
-    title: 'Proyecto Acuícola Mitare',
-    img: IMG(111),
-    desc: 'Ingeniería, Procura y Construcción del Proyecto Acuícola Mitare. Movimiento de tierras, lagunas, muros, diques e infraestructura camaronera.',
-    detail: 'Lagunas de cultivo, sistemas de distribución de agua, estructuras civiles e instalaciones eléctricas. Proyecto IPC completo.',
-  },
-  {
-    id: 118, status: 'completed', division: 'Civiles',
-    client: 'Ministerio de Infraestructura',
-    title: 'Carretera Los Filuos – Cojoro – Castillete',
-    img: IMG(111),
-    desc: 'Construcción y pavimentación de carretera Los Filuos – Cojoro – Castillete.',
-    detail: 'Movimiento de tierras, base, sub-base, pavimentación asfáltica y obras complementarias.',
-  },
 
   // ── AMBIENTALES ──
   {
@@ -394,38 +306,6 @@ const ALL_PROJECTS = [
     img: IMG(130),
     desc: 'Remoción, extracción y limpieza de gabarras. Transporte de lodos y ripios. Almacenamiento temporal y tratamiento.',
     detail: 'Técnicas de esparcimiento y biorremediación. Recolección, transporte, almacenamiento y tratamiento de sólidos y líquidos.',
-  },
-  {
-    id: 115, status: 'completed', division: 'Ambientales',
-    client: 'Consorcio Petrobras Energía – Williams',
-    title: 'Saneamiento Ambiental Bachaquero / Puerto Miranda',
-    img: IMG(127),
-    desc: 'Manejo de agua en fosa, tratamiento de sedimentos y suelos impactados, confinamiento y conformación de superficie.',
-    detail: 'Obras temporales, tratamiento de sedimentos, suministro de material de préstamo. Bachaquero y Puerto Miranda.',
-  },
-  {
-    id: 120, status: 'completed', division: 'Ambientales',
-    client: 'Suelopetrol',
-    title: 'Manejo Arenas Petrolizadas',
-    img: IMG(130),
-    desc: 'Transporte en volquetas y disposición final de arenas petrolizadas conforme a normativas ambientales.',
-    detail: 'Servicio ambiental certificado para manejo de residuos industriales peligrosos.',
-  },
-  {
-    id: 122, status: 'completed', division: 'Ambientales',
-    client: 'Petrex',
-    title: 'Recolección Desechos Taladros PTX',
-    img: IMG(128),
-    desc: 'Recolección de desechos sólidos y líquidos para taladros PTX-5802, PTX-5920, PTX-5954, PTX-5955 y base Ojeda.',
-    detail: 'Servicio integral de gestión ambiental para operaciones de perforación.',
-  },
-  {
-    id: 130, status: 'completed', division: 'Ambientales',
-    client: 'Petroquímica de Venezuela, S.A. (PEQUIVEN)',
-    title: 'Manejo Desechos Ana María Campos',
-    img: IMG(127),
-    desc: 'Manejo y disposición de desechos industriales del Complejo Petroquímico Ana María Campos.',
-    detail: 'Recolección, transporte y disposición final de materiales peligrosos del complejo petroquímico.',
   },
 
   // ── TRANSPORTE ──
@@ -445,14 +325,6 @@ const ALL_PROJECTS = [
     desc: 'Procura y entrega de camas y colchones a poblaciones rurales. Kits de salud personal en San Cristóbal, Estado Táchira.',
     detail: 'Distribución logística nacional para UNHCR y Consejo Noruego para Refugiados.',
   },
-  {
-    id: 116, status: 'completed', division: 'Transporte',
-    client: 'Schlumberger, Weatherford, MI SWACO',
-    title: 'Transporte Lodos y Ripios de Perforación',
-    img: IMG(121),
-    desc: 'Lodos y ripios base agua y aceite, efluentes líquidos, salmueras contaminadas y química descartada.',
-    detail: 'Unidades vacuum y bateas. Clientes: Schlumberger, Weatherford, Tucker Energy, Dresser Rand, MI Swaco.',
-  },
 
   // ── OTRAS (Marítimo / Lacustre) ──
   {
@@ -463,14 +335,7 @@ const ALL_PROJECTS = [
     desc: 'Embarcación NO estándar, NO DP para operaciones marítimas en Campo Perla. Transporte de materiales, equipos y personal.',
     detail: 'Cardón IV (CM 4600001208 / CM 4700022511). Embarcaciones especializadas offshore en Campo Perla, Golfo de Venezuela.',
   },
-  {
-    id: 200, status: 'completed', division: 'Otras',
-    client: 'PDVSA Petróleo, S.A.',
-    title: 'Servicios Marítimos Lago de Maracaibo',
-    img: IMG(5),
-    desc: 'Operaciones marítimas y lacustres en el Lago de Maracaibo y costas de Venezuela. Transporte de personal y equipos.',
-    detail: 'Más de 60 años de operaciones vinculadas con las costas venezolanas, el Lago de Maracaibo y el Archipiélago Los Monjes.',
-  },
+
   // ── AUTOMATIZACIÓN Y CONTROL ──
   {
     id: 301, status: 'active', division: 'Automatización',
@@ -487,14 +352,6 @@ const ALL_PROJECTS = [
     img: IMG(62),
     desc: 'Automatización integral del sistema de distribución y tratamiento de agua para Campo Boscán. PLCs, instrumentación de campo y telemetría.',
     detail: 'Instalación de sensores de flujo, presión y nivel. Programación de PLC Siemens S7-300. Interfaz HMI local y remota con reportes automáticos de operación.',
-  },
-  {
-    id: 303, status: 'completed', division: 'Automatización',
-    client: 'CORPOELEC',
-    title: 'Sistema de Control y Protección Subestación 155 KV',
-    img: IMG(23),
-    desc: 'Sistema de protección de relés digitales y control automatizado para la nueva subestación 155 KV en la Costa Oriental del Lago.',
-    detail: 'Relés de protección SEL-700G y SEL-451. Sistema de control distribuido con comunicación IEC 61850. Panel de supervisión local y enlace SCADA a centro de control.',
   },
 ]
 
@@ -1132,7 +989,7 @@ function ServicioDetalle({ title, onBack }) {
                 </div>
                 <h3 className="font-display text-[clamp(1.75rem,3vw,2.5rem)] text-white leading-none">PROYECTOS RELACIONADOS</h3>
               </div>
-              <span className="font-mono text-xs text-white/25 hidden md:block">{relatedProjects.length} proyectos</span>
+              <span className="font-mono text-xs text-white/25 hidden md:block">250+ proyectos</span>
             </div>
           </div>
           <div className="overflow-hidden">
@@ -1212,7 +1069,7 @@ function PageServicios({ initialService }) {
               Más de 60 años ejecutando obras y servicios de alta complejidad para la industria petrolera, petroquímica y civil en Venezuela.
             </p>
             <div className="flex flex-wrap gap-8">
-              {[['60', 'Años de trayectoria'], ['+100', 'Proyectos ejecutados'], [String(SERVICES.length), 'Divisiones activas']].map(([n, l]) => (
+              {[['60', 'Años de trayectoria'], ['+250', 'Proyectos ejecutados'], [String(SERVICES.length), 'Divisiones activas']].map(([n, l]) => (
                 <div key={l}>
                   <div className="font-display text-[2rem] text-samred leading-none">{n}</div>
                   <div className="font-sub text-[0.88rem] uppercase tracking-widest text-white/45 mt-1 max-w-[8rem] leading-snug">{l}</div>
@@ -1413,7 +1270,7 @@ function PageInicio({ setPage, navigateToServicios }) {
             {/* pillars */}
             <div className="scroll-reveal grid grid-cols-3 gap-4 mb-10">
               {[
-                { n: '+100', l: 'Proyectos\nejecutados' },
+                { n: '+250', l: 'Proyectos\nejecutados' },
                 { n: '7',    l: 'Divisiones\nespecializadas' },
                 { n: '50+',  l: 'Clientes\nhistóricos' },
               ].map(({ n, l }) => (
@@ -1678,7 +1535,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
 
           {/* Bottom stats */}
           <div className="flex gap-5 md:gap-10 border-t border-white/10 pt-5">
-            {[['100+','Proyectos'], ['6','Divisiones'], ['60','Años']].map(([v,l]) => (
+            {[['250+','Proyectos'], ['6','Divisiones'], ['60','Años']].map(([v,l]) => (
               <div key={l}>
                 <p className="font-display text-xl md:text-3xl text-samred leading-none">{v}</p>
                 <p className="font-sub text-[0.82rem] md:text-[0.9rem] uppercase tracking-widest text-white/35 mt-0.5">{l}</p>
@@ -1700,7 +1557,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
             <h2 className="font-display text-[2rem] md:text-[2.5rem] text-white leading-none">DIVISIONES</h2>
           </div>
           <span className="font-mono text-xs text-white/25 hidden md:block">
-            {activeDivision === 'Todos' ? `${ALL_PROJECTS.length} proyectos totales` : `${counts[activeDivision]||0} proyectos`}
+            {activeDivision === 'Todos' ? `250+ proyectos totales` : `${counts[activeDivision]||0} proyectos`}
           </span>
         </div>
 
@@ -1767,7 +1624,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
               <h3 className="font-display text-[1.5rem] md:text-[1.75rem] text-white leading-none">
                 {activeDivision === 'Todos' ? 'TODOS LOS PROYECTOS' : DIVISION_META[activeDivision]?.label?.toUpperCase()}
               </h3>
-              <span className="font-mono text-xs text-white/30 ml-1">{filtered.length}</span>
+              <span className="font-mono text-xs text-white/30 ml-1"></span>
             </div>
             <div className="flex items-center gap-3 flex-wrap">
               {/* Status filter */}
@@ -1942,7 +1799,7 @@ function PageQuienesSomos({ setPage }) {
             </p>
             {/* Stats — 2×2 grid on mobile, row on desktop */}
             <div className="grid grid-cols-2 md:flex md:flex-wrap gap-5 md:gap-8">
-              {[['60', 'Años'], ['+100', 'Proyectos'], ['6', 'Divisiones'], ['1999', 'Cert. Ambiental']].map(([n, l]) => (
+              {[['60', 'Años'], ['+250', 'Proyectos'], ['6', 'Divisiones'], ['1999', 'Cert. Ambiental']].map(([n, l]) => (
                 <div key={l} className="bg-white/8 backdrop-blur-sm border border-white/15 rounded-lg px-4 py-3 md:bg-transparent md:border-none md:p-0">
                   <div className="font-display text-[2.2rem] md:text-[2rem] text-samred leading-none">{n}</div>
                   <div className="font-sub text-[0.75rem] md:text-[0.88rem] uppercase tracking-widest text-white/50 mt-1">{l}</div>

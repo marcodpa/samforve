@@ -464,9 +464,9 @@ function Navbar({ page, setPage, scrolled, forceDark, logoProgress = 1 }) {
   const navCY  = 48
   const navTop = navCY - NAV_H / 2
 
-  // Absolute top-left flush in hero (more arriba a la izquierda), animates into navbar spot
+  // Absolute top-left in hero (higher up), animates into navbar spot
   const heroLeft  = 0
-  const heroTop   = 0
+  const heroTop   = -80
   const navLeft   = centerOffset + containerPad
 
   const currentLeft = heroLeft + (navLeft - heroLeft) * eased

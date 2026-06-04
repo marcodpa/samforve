@@ -2009,7 +2009,7 @@ function PageQuienesSomos({ setPage }) {
 
       {/* ── HISTORIA — timeline rediseñado ── */}
       <section className="bg-white py-12 md:py-24 px-5 md:px-16">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           {/* HEADER */}
           <div className="scroll-reveal mb-10 md:mb-14">
             <div className="flex items-center gap-3 mb-4">
@@ -2019,30 +2019,37 @@ function PageQuienesSomos({ setPage }) {
             <h2 className="font-display text-[clamp(2.5rem,5vw,4rem)] text-dark leading-none">NUESTRA<br />TRAYECTORIA</h2>
           </div>
 
-          {/* ── IMAGEN HISTÓRICA HERO ── */}
-          <div className="scroll-reveal relative rounded-xl md:rounded-2xl overflow-hidden mb-10 md:mb-16 shadow-lg" style={{ height: 'clamp(220px,38vw,420px)' }}>
-            <img src="/projects/samfor-inicios.jpg" alt="Inicios de SAMFOR" className="w-full h-full object-cover" loading="lazy" />
-            <div className="absolute inset-0 bg-gradient-to-t from-dark/85 via-dark/20 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-samred" />
-            <div className="absolute bottom-5 left-5 md:bottom-7 md:left-8">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="w-2 h-2 rounded-full bg-samred animate-pulse" />
-                <span className="font-mono text-[0.65rem] md:text-[0.72rem] uppercase tracking-[0.2em] text-white/40">Archivo histórico</span>
+          {/* ── FOTO HISTÓRICA GRANDE ── */}
+          <div className="scroll-reveal relative w-full rounded-2xl overflow-hidden mb-8 md:mb-14 shadow-xl">
+            {/* La foto ocupa todo el ancho con altura generosa */}
+            <div className="relative w-full" style={{ minHeight: 'clamp(280px,50vw,560px)' }}>
+              <img src="/projects/samfor-inicios.jpg" alt="Inicios de SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+              {/* Gradiente sutil solo abajo para texto */}
+              <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/10 to-transparent" />
+              {/* Barra roja inferior */}
+              <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-samred" />
+              {/* Texto sobre la imagen */}
+              <div className="absolute bottom-8 left-8 md:bottom-10 md:left-12">
+                <div className="flex items-center gap-2.5 mb-2">
+                  <span className="w-2 h-2 rounded-full bg-samred" />
+                  <span className="font-mono text-[0.7rem] md:text-[0.8rem] uppercase tracking-[0.25em] text-white/50">Archivo histórico</span>
+                </div>
+                <p className="text-white text-lg md:text-2xl font-display tracking-wide">Inicios de SAMFOR · Maracaibo, 1966</p>
               </div>
-              <p className="text-white text-sm md:text-base font-display tracking-wide">Inicios de SAMFOR · Maracaibo, 1966</p>
             </div>
           </div>
 
-          {/* ── MOBILE TIMELINE ── */}
+          {/* ── TIMELINE ── */}
+          {/* MOBILE */}
           <div className="md:hidden flex flex-col gap-5">
             {TIMELINE.map((item, i) => (
               <div key={i} className="scroll-reveal relative group" style={{ transitionDelay: `${i * 60}ms` }}>
-                {/* Línea vertical conectora */}
+                {/* Línea conectora vertical */}
                 {i < TIMELINE.length - 1 && (
                   <div className="absolute left-[1.1rem] top-10 bottom-0 w-[2px] bg-gradient-to-b from-samred via-samred/30 to-transparent" />
                 )}
                 <div className="flex gap-4">
-                  {/* Indicador circular */}
+                  {/* Círculo indicador */}
                   <div className="flex-shrink-0 relative z-10 mt-1">
                     <div className={`w-[1.375rem] h-[1.375rem] rounded-full border-2 flex items-center justify-center transition-all duration-300 ${i === 0 ? 'bg-samred border-samred shadow-[0_0_0_4px_rgba(200,16,46,0.15)]' : 'bg-white border-samred/40 group-hover:border-samred group-hover:shadow-[0_0_0_4px_rgba(200,16,46,0.1)]'}`}>
                       <div className={`w-1.5 h-1.5 rounded-full ${i === 0 ? 'bg-white' : 'bg-samred/60 group-hover:bg-samred'}`} />
@@ -2059,58 +2066,43 @@ function PageQuienesSomos({ setPage }) {
             ))}
           </div>
 
-          {/* ── DESKTOP TIMELINE ── */}
-          <div className="hidden md:block relative">
-            {/* Línea central */}
-            <div className="absolute left-1/2 top-0 bottom-0 w-[3px] -translate-x-1/2 bg-gradient-to-b from-samred via-samred/40 to-samred/5 rounded-full" />
+          {/* DESKTOP — timeline alternado izquierda/derecha */}
+          <div className="hidden md:block relative px-4">
+            {/* Línea central vertical */}
+            <div className="absolute left-1/2 top-0 bottom-0 w-[3px] -translate-x-1/2 bg-gradient-to-b from-samred via-samred/30 to-samred/10 rounded-full" />
 
             {TIMELINE.map((item, i) => {
               const isLeft = i % 2 === 0
               return (
-                <div key={i} className="scroll-reveal relative flex items-start" style={{ padding: '2.5rem 0', transitionDelay: `${i * 80}ms` }}>
-                  {/* Lado izquierdo */}
-                  <div className={`w-[calc(50%-2rem)] ${isLeft ? 'pr-10 text-right' : 'pl-10'}`}>
-                    <div className={`inline-block ${isLeft ? '' : ''}`}>
-                      <span className={`font-display text-[2.5rem] leading-none block ${i === 0 ? 'text-samred' : 'text-dark/15'}`}>
-                        {item.year}
-                      </span>
-                    </div>
+                <div key={i} className="scroll-reveal relative flex items-start" style={{ padding: '3rem 0', transitionDelay: `${i * 80}ms` }}>
+                  {/* Lado del año (opuesto a la card) */}
+                  <div className={`w-1/2 ${isLeft ? 'pr-14 text-right' : 'pl-14'}`}>
+                    <span className={`font-display text-[3rem] leading-none tracking-tight block ${i === 0 ? 'text-samred' : 'text-dark/12'}`}>
+                      {item.year}
+                    </span>
                   </div>
 
                   {/* Punto central */}
-                  <div className="absolute left-1/2 -translate-x-1/2 z-10 flex flex-col items-center">
-                    <div className={`w-5 h-5 rounded-full border-[3px] transition-all duration-300 ${
+                  <div className="absolute left-1/2 -translate-x-1/2 z-10">
+                    <div className={`w-[18px] h-[18px] rounded-full border-[3px] transition-all duration-300 ${
                       i === 0
-                        ? 'bg-samred border-samred shadow-[0_0_0_6px_rgba(200,16,46,0.15)] scale-110'
-                        : 'bg-white border-samred/30 group-hover:border-samred'
+                        ? 'bg-samred border-samred shadow-[0_0_0_8px_rgba(200,16,46,0.12)]'
+                        : 'bg-white border-samred/30'
                     }`} />
-                    <div className={`absolute top-6 w-[2px] h-6 ${i === TIMELINE.length - 1 ? 'hidden' : ''}`}>
-                    </div>
                   </div>
 
-                  {/* Lado derecho — contenido */}
-                  <div className={`w-[calc(50%-2rem)] ${isLeft ? 'pl-10' : 'pr-10'}`}>
-                    <div className={`relative group rounded-xl border-2 p-6 transition-all duration-300 ${
+                  {/* Lado de la card (opuesto al año) */}
+                  <div className={`w-1/2 ${isLeft ? 'pl-14' : 'pr-14'}`}>
+                    <div className={`relative rounded-xl border-2 p-6 transition-all duration-300 ${
                       i === 0
-                        ? 'border-samred/20 bg-gradient-to-br from-samred/[0.04] to-white shadow-lg shadow-samred/5'
-                        : 'border-gray-100 bg-white hover:border-samred/20 hover:shadow-lg hover:shadow-samred/5'
+                        ? 'border-samred bg-gradient-to-br from-samred/[0.03] to-white shadow-lg'
+                        : 'border-gray-100 bg-white hover:border-samred/20 hover:shadow-lg'
                     }`}>
-                      {/* Decoración: barra superior */}
-                      <div className={`absolute top-0 left-0 right-0 h-[3px] rounded-t-xl ${i === 0 ? 'bg-samred' : 'bg-gradient-to-r from-samred/60 via-samred/30 to-transparent group-hover:from-samred group-hover:via-samred/60 transition-all duration-300'}`} />
-
-                      <div className="flex items-start gap-3 mb-3">
-                        <div className={`flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center text-sm font-bold ${
-                          i === 0 ? 'bg-samred text-white' : 'bg-samred/10 text-samred group-hover:bg-samred group-hover:text-white transition-all duration-300'
-                        }`}>
-                          {String(i + 1).padStart(2, '0')}
-                        </div>
-                        <div>
-                          <span className={`font-display text-xl leading-none ${i === 0 ? 'text-samred' : 'text-dark/20'}`}>{item.year}</span>
-                        </div>
-                      </div>
+                      {/* Barra superior decorativa */}
+                      <div className={`absolute top-0 left-0 right-0 h-[3px] rounded-t-xl ${i === 0 ? 'bg-samred' : 'bg-gradient-to-r from-samred/50 via-samred/20 to-transparent'}`} />
 
                       <h3 className={`font-sub font-bold text-base uppercase tracking-wide mb-2 ${
-                        i === 0 ? 'text-samred' : 'text-dark group-hover:text-samred transition-colors duration-300'
+                        i === 0 ? 'text-samred' : 'text-dark'
                       }`}>
                         {item.title}
                       </h3>

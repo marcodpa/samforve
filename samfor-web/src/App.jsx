@@ -466,7 +466,7 @@ function Navbar({ page, setPage, scrolled, forceDark, logoProgress = 1 }) {
 
   // Absolute top-left in hero (higher up), animates into navbar spot
   const heroLeft  = 0
-  const heroTop   = -80
+  const heroTop   = -160
   const navLeft   = centerOffset + containerPad
 
   const currentLeft = heroLeft + (navLeft - heroLeft) * eased

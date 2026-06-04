@@ -2017,6 +2017,14 @@ function PageQuienesSomos({ setPage }) {
             </div>
             <h2 className="font-display text-[clamp(2.5rem,5vw,4rem)] text-dark leading-none">NUESTRA<br />TRAYECTORIA</h2>
           </div>
+          {/* Imagen histórica */}
+          <div className="scroll-reveal relative rounded-2xl overflow-hidden mb-8 md:hidden" style={{ height: 'clamp(200px,40vw,320px)' }}>
+            <img src="/projects/samfor-inicios.jpg" alt="Inicios de SAMFOR" className="w-full h-full object-cover" loading="lazy" />
+            <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/10 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-samred" />
+            <p className="absolute bottom-4 left-4 text-white/60 text-xs font-mono uppercase tracking-widest">Inicios de SAMFOR · Archivo histórico</p>
+          </div>
+
           {/* Mobile: cards con año grande como fondo */}
           <div className="md:hidden flex flex-col gap-4">
             {TIMELINE.map((item, i) => (
@@ -2032,6 +2040,14 @@ function PageQuienesSomos({ setPage }) {
               </div>
             ))}
           </div>
+          {/* Imagen histórica */}
+          <div className="scroll-reveal hidden md:block relative rounded-xl overflow-hidden mb-10" style={{ height: 'clamp(280px,30vw,400px)' }}>
+            <img src="/projects/samfor-inicios.jpg" alt="Inicios de SAMFOR" className="w-full h-full object-cover" loading="lazy" />
+            <div className="absolute inset-0 bg-gradient-to-t from-dark/70 via-dark/10 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-samred" />
+            <p className="absolute bottom-5 left-6 text-white/50 text-sm font-mono uppercase tracking-widest">Inicios de SAMFOR · Archivo histórico</p>
+          </div>
+
           {/* Desktop: timeline original */}
           <div className="hidden md:block relative">
             <div className="absolute left-[7.5rem] top-2 bottom-2 w-[2px] bg-gradient-to-b from-samred via-samred/40 to-transparent" />

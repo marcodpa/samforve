@@ -2055,7 +2055,7 @@ function PageQuienesSomos({ setPage }) {
               Empresa venezolana fundada en 1966 en Maracaibo, dedicada a construcción civil, eléctrica, mecánica, telecomunicaciones, transporte y servicios ambientales para la industria petrolera y petroquímica.
             </p>
             <p className="text-white/50 text-[0.95rem] leading-relaxed mb-8">
-              Con 60 a\u00f1os de operación continua, contamos con la infraestructura, capital humano y estándares certificados para proyectos de alta complejidad en todo el territorio nacional.
+              Con 60 años de operación continua, contamos con la infraestructura, capital humano y estándares certificados para proyectos de alta complejidad en todo el territorio nacional.
             </p>
             {/* 3D Cube mobile */}
             <div ref={cubeRef} className="flex justify-center mb-8" style={{ opacity: 0 }}>

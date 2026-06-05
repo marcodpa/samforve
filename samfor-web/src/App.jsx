@@ -1223,6 +1223,9 @@ function PageInicio({ setPage, navigateToServicios }) {
         </div>
       </section>
 
+      {/* ── BEFORE / AFTER REVEAL ── */}
+      <BeforeAfterReveal setPage={setPage} />
+
       {/* QUIÉNES SOMOS — home snippet */}
       <section className="bg-white overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-2 min-h-[480px] md:min-h-[560px] lg:min-h-[640px]">
@@ -1774,7 +1777,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
 
 // ─── PAGE: QUIÉNES SOMOS ──────────────────────────────────────────────────────
 // ─── BEFORE / AFTER REVEAL (GSAP) ──────────────────────────────────────────
-function BeforeAfterReveal() {
+function BeforeAfterReveal({ setPage }) {
   const sectionRef = useRef(null)
   const afterRef = useRef(null)
   const lineRef = useRef(null)
@@ -1782,6 +1785,7 @@ function BeforeAfterReveal() {
   const label2Ref = useRef(null)
   const label3Ref = useRef(null)
   const progressRef = useRef(null)
+  const trackLineRef = useRef(null)
   const playedRef = useRef(false)
 
   useEffect(() => {
@@ -1794,126 +1798,222 @@ function BeforeAfterReveal() {
 
           const tl = gsap.timeline({ defaults: { ease: 'power2.inOut' } })
 
-          tl.to(afterRef.current,   { clipPath: 'inset(0 0% 0 0)', duration: 2.4 }, 0)
-          tl.to(lineRef.current,    { left: '100%',              duration: 2.4 }, 0)
-          tl.to(progressRef.current, { width: '100%',             duration: 2.4 }, 0)
+          // Animate the clip reveal, line position, and progress bar together
+          tl.to(afterRef.current,   { clipPath: 'inset(0 0% 0 0)', duration: 2.8 }, 0)
+          tl.to(lineRef.current,    { left: '100%',              duration: 2.8 }, 0)
+          tl.to(progressRef.current, { width: '100%',             duration: 2.8 }, 0)
+          tl.to(trackLineRef.current, { scaleX: 1, duration: 2.8 }, 0)
 
-          tl.to(label1Ref.current,  { opacity: 1, scale: 1, duration: 0.35 }, 0.6)
-          tl.to(label2Ref.current,  { opacity: 1, scale: 1, duration: 0.35 }, 1.2)
-          tl.to(label3Ref.current,  { opacity: 1, scale: 1, duration: 0.35 }, 1.8)
+          // Month labels fade in at key milestones
+          tl.to(label1Ref.current,  { opacity: 1, y: 0, duration: 0.4, ease: 'back.out(2)' }, 0.7)
+          tl.to(label2Ref.current,  { opacity: 1, y: 0, duration: 0.4, ease: 'back.out(2)' }, 1.4)
+          tl.to(label3Ref.current,  { opacity: 1, y: 0, duration: 0.4, ease: 'back.out(2)' }, 2.1)
         }
       },
-      { threshold: 0.25 },
+      { threshold: 0.2 },
     )
     io.observe(el)
     return () => io.disconnect()
   }, [])
 
   return (
-    <section ref={sectionRef} className="bg-white py-12 md:py-24 px-5 md:px-16 lg:px-24">
-      <div className="max-w-7xl mx-auto">
-        {/* ── HEADER ── */}
-        <div className="scroll-reveal mb-8 md:mb-12">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="h-[3px] w-10 bg-samred" />
-            <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Proyecto Destacado</span>
-          </div>
-          <h2 className="font-display text-[clamp(2rem,4.5vw,3.5rem)] text-dark leading-none max-w-4xl">
-            DE LA OBRA <span className="text-samred">A LA REALIDAD</span>
-          </h2>
-          <p className="text-secondary text-base md:text-lg mt-3 max-w-2xl leading-relaxed">
-            Un vistazo a la transformación de nuestros proyectos. La línea muestra la evolución mes a mes desde el inicio hasta la entrega final.
-          </p>
-        </div>
+    <section ref={sectionRef} className="relative bg-dark overflow-hidden">
+      {/* Gradiente de transición desde la sección blanca anterior */}
+      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white to-transparent z-10 pointer-events-none" />
 
-        {/* ── COMPARATOR ── */}
-        <div className="relative w-full overflow-hidden rounded-2xl shadow-2xl border border-gray-100"
-             style={{ aspectRatio: '16/9', maxHeight: '75vh' }}>
-
-          {/* BEFORE image (base layer) */}
-          <div className="absolute inset-0">
-            <img src="/proyectos/gasap-vieja.jpg" alt="Proyecto en etapa inicial"
-                 className="w-full h-full object-cover" loading="lazy" />
-            {/* Unified warm filter — same for both images */}
-            <div className="absolute inset-0 pointer-events-none"
-                 style={{ background: 'rgba(200,16,46,0.07)', mixBlendMode: 'multiply' }} />
-            <div className="absolute inset-0 pointer-events-none"
-                 style={{ background: 'linear-gradient(135deg, rgba(200,16,46,0.04) 0%, transparent 50%, rgba(200,16,46,0.04) 100%)' }} />
-          </div>
-
-          {/* AFTER image (clipped, revealed by line) */}
-          <div ref={afterRef}
-               className="absolute inset-0 overflow-hidden"
-               style={{ clipPath: 'inset(0 100% 0 0)' }}>
-            <img src="/proyectos/gasap-nueva.jpg" alt="Proyecto terminado"
-                 className="w-full h-full object-cover" loading="lazy" />
-            {/* Same unified warm filter */}
-            <div className="absolute inset-0 pointer-events-none"
-                 style={{ background: 'rgba(200,16,46,0.07)', mixBlendMode: 'multiply' }} />
-            <div className="absolute inset-0 pointer-events-none"
-                 style={{ background: 'linear-gradient(135deg, rgba(200,16,46,0.04) 0%, transparent 50%, rgba(200,16,46,0.04) 100%)' }} />
-          </div>
-
-          {/* ── SLIDER LINE ── */}
-          <div ref={lineRef}
-               className="absolute top-0 bottom-0 z-20 pointer-events-none"
-               style={{ left: '0%', width: '3px' }}>
-            {/* Glow line */}
-            <div className="absolute inset-0 bg-samred shadow-[0_0_14px_rgba(200,16,46,0.7)]" />
-            {/* Handle circle */}
-            <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-white border-[3px] border-samred shadow-xl flex items-center justify-center">
-              <div className="flex gap-0.5">
-                <div className="w-[3px] h-3 rounded-full bg-samred/60" />
-                <div className="w-[3px] h-3 rounded-full bg-samred/60 ml-[2px]" />
+      {/* ── HEADER ── */}
+      <div className="relative z-10 pt-20 md:pt-28 pb-10 md:pb-14 px-5 md:px-16 lg:px-24">
+        <div className="max-w-7xl mx-auto">
+          <div className="scroll-reveal">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="h-[3px] w-10 bg-samred" />
+              <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Proyecto Destacado</span>
+            </div>
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+              <div>
+                <h2 className="font-display text-[clamp(2.2rem,5vw,4rem)] text-white leading-none max-w-3xl">
+                  DE LA OBRA <span className="text-samred">A LA REALIDAD</span>
+                </h2>
+                <p className="text-white/45 text-base md:text-lg mt-3 max-w-xl leading-relaxed">
+                  Observa la transformación de nuestros proyectos. La línea divisoria revela el avance mes a mes, desde los cimientos hasta la entrega final.
+                </p>
+              </div>
+              {/* Stats pill */}
+              <div className="flex items-center gap-5 md:gap-8 flex-shrink-0">
+                {[
+                  { n: '60+', l: 'Años' },
+                  { n: '250+', l: 'Proyectos' },
+                ].map(s => (
+                  <div key={s.l} className="text-center">
+                    <span className="font-display text-[1.8rem] md:text-[2.2rem] text-samred leading-none block">{s.n}</span>
+                    <span className="font-sub text-[0.65rem] uppercase tracking-[0.2em] text-white/35">{s.l}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
+        </div>
+      </div>
 
-          {/* ── MONTH LABELS (appear as line passes) ── */}
-          <div ref={label1Ref}
-               className="absolute bottom-[18%] left-[25%] -translate-x-1/2 z-10 opacity-0"
-               style={{ transform: 'translateX(-50%) scale(0.8)' }}>
-            <div className="bg-dark/80 backdrop-blur-md border border-white/15 rounded-lg px-3.5 py-2 shadow-lg">
-              <span className="text-white/40 font-mono text-[0.65rem] uppercase tracking-[0.2em]">Mes</span>
-              <span className="text-white font-display text-xl ml-1.5">1</span>
+      {/* ── COMPARATOR ── */}
+      <div className="relative z-10 px-5 md:px-16 lg:px-24 pb-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="relative w-full overflow-hidden rounded-xl shadow-2xl border border-white/10"
+               style={{ aspectRatio: '16/9', maxHeight: '75vh' }}>
+
+            {/* ── BEFORE image (base layer) ── */}
+            <div className="absolute inset-0 bg-[#0a0c10]">
+              <img src="/proyectos/gasap-vieja.jpg" alt="Proyecto en etapa inicial"
+                   className="w-full h-full object-cover opacity-90" loading="lazy" />
+              {/* Unified color filter — warm tone sobre ambas imágenes */}
+              <div className="absolute inset-0 pointer-events-none"
+                   style={{ background: 'linear-gradient(135deg, rgba(200,16,46,0.10) 0%, rgba(200,16,46,0.04) 50%, rgba(200,16,46,0.08) 100%)' }} />
+              <div className="absolute inset-0 pointer-events-none"
+                   style={{ background: 'rgba(200,16,46,0.06)', mixBlendMode: 'multiply' }} />
+              {/* Vignette oscuro en bordes */}
+              <div className="absolute inset-0 pointer-events-none"
+                   style={{ boxShadow: 'inset 0 0 80px rgba(0,0,0,0.3)' }} />
+              {/* Sello "BEFORE" sobre la imagen */}
+              <div className="absolute top-5 left-5 z-10 bg-dark/70 backdrop-blur-sm border border-white/12 rounded-lg px-3.5 py-2">
+                <div className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
+                  <span className="font-sub font-bold text-[0.6rem] uppercase tracking-[0.25em] text-white/45">Antes</span>
+                </div>
+              </div>
             </div>
-          </div>
-          <div ref={label2Ref}
-               className="absolute bottom-[18%] left-[50%] -translate-x-1/2 z-10 opacity-0"
-               style={{ transform: 'translateX(-50%) scale(0.8)' }}>
-            <div className="bg-dark/80 backdrop-blur-md border border-white/15 rounded-lg px-3.5 py-2 shadow-lg">
-              <span className="text-white/40 font-mono text-[0.65rem] uppercase tracking-[0.2em]">Mes</span>
-              <span className="text-white font-display text-xl ml-1.5">2</span>
+
+            {/* ── AFTER image (clipped, revelado por la línea) ── */}
+            <div ref={afterRef}
+                 className="absolute inset-0 overflow-hidden bg-[#0a0c10]"
+                 style={{ clipPath: 'inset(0 100% 0 0)' }}>
+              <img src="/proyectos/gasap-nueva.jpg" alt="Proyecto terminado"
+                   className="w-full h-full object-cover opacity-90" loading="lazy" />
+              {/* Mismo filtro unificado */}
+              <div className="absolute inset-0 pointer-events-none"
+                   style={{ background: 'linear-gradient(135deg, rgba(200,16,46,0.10) 0%, rgba(200,16,46,0.04) 50%, rgba(200,16,46,0.08) 100%)' }} />
+              <div className="absolute inset-0 pointer-events-none"
+                   style={{ background: 'rgba(200,16,46,0.06)', mixBlendMode: 'multiply' }} />
+              <div className="absolute inset-0 pointer-events-none"
+                   style={{ boxShadow: 'inset 0 0 80px rgba(0,0,0,0.3)' }} />
+              {/* Sello "AFTER" sobre la imagen */}
+              <div className="absolute top-5 right-5 z-10 bg-dark/70 backdrop-blur-sm border border-white/12 rounded-lg px-3.5 py-2">
+                <div className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-samred dot-pulse" />
+                  <span className="font-sub font-bold text-[0.6rem] uppercase tracking-[0.25em] text-samred">Después</span>
+                </div>
+              </div>
             </div>
-          </div>
-          <div ref={label3Ref}
-               className="absolute bottom-[18%] left-[75%] -translate-x-1/2 z-10 opacity-0"
-               style={{ transform: 'translateX(-50%) scale(0.8)' }}>
-            <div className="bg-dark/80 backdrop-blur-md border border-white/15 rounded-lg px-3.5 py-2 shadow-lg">
-              <span className="text-white/40 font-mono text-[0.65rem] uppercase tracking-[0.2em]">Mes</span>
-              <span className="text-white font-display text-xl ml-1.5">3</span>
+
+            {/* ── PROJECT INFO OVERLAY (bottom-left) ── */}
+            <div className="absolute bottom-5 left-5 z-10">
+              <div className="bg-dark/70 backdrop-blur-md border border-white/10 rounded-lg px-4 py-2.5">
+                <span className="font-mono text-[0.6rem] uppercase tracking-[0.25em] text-white/30 block mb-0.5">GASAP · Proyecto de Infraestructura</span>
+                <span className="font-sub font-bold text-sm uppercase tracking-wide text-white/80">Transformación Integral</span>
+              </div>
             </div>
+
+            {/* ── SLIDER LINE ── */}
+            <div ref={lineRef}
+                 className="absolute top-0 bottom-0 z-20 pointer-events-none"
+                 style={{ left: '0%', width: '3px' }}>
+              {/* Línea central con glow */}
+              <div className="absolute inset-0 bg-samred shadow-[0_0_20px_rgba(200,16,46,0.8)]" />
+              {/* Handle circular */}
+              <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-white border-[3px] border-samred shadow-2xl flex items-center justify-center">
+                <div className="flex items-center gap-0.5">
+                  <div className="w-[3px] h-3.5 rounded-full bg-samred/50" />
+                  <div className="w-[3px] h-3.5 rounded-full bg-samred/50 ml-[2px]" />
+                  <div className="w-[3px] h-3.5 rounded-full bg-samred/50 ml-[2px]" />
+                </div>
+              </div>
+              {/* Flecha pequeña decorativa */}
+              <div className="absolute top-1/2 -translate-y-1/2 left-[-34px] opacity-50 hidden md:block">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M12 7H2M6 3l-4 4 4 4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+              <div className="absolute top-1/2 -translate-y-1/2 right-[-34px] opacity-50 hidden md:block">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M2 7h10M8 3l4 4-4 4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+            </div>
+
+            {/* ── TIMELINE TRACK (horizontal line at bottom with dots) ── */}
+            <div className="absolute bottom-0 left-0 right-0 z-10 px-6 pb-0">
+              {/* Track background */}
+              <div className="relative h-0">
+                <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-white/10 rounded-full">
+                  <div ref={trackLineRef}
+                       className="h-full bg-samred rounded-full origin-left"
+                       style={{ transform: 'scaleX(0)' }} />
+                </div>
+                {/* Dot markers at 25%, 50%, 75% */}
+                {[25, 50, 75].map(pct => (
+                  <div key={pct}
+                       className="absolute bottom-[-5px] w-[13px] h-[13px] rounded-full border-2 border-white/20 bg-dark/60 backdrop-blur-sm"
+                       style={{ left: `${pct}%`, transform: 'translateX(-50%)' }} />
+                ))}
+                {/* Final dot at 100% */}
+                <div className="absolute bottom-[-5px] right-0 w-[13px] h-[13px] rounded-full border-2 border-white/20 bg-dark/60 backdrop-blur-sm" />
+              </div>
+            </div>
+
+            {/* ── MONTH LABELS (appear along the track) ── */}
+            <div ref={label1Ref}
+                 className="absolute bottom-[10%] left-[25%] -translate-x-1/2 z-10 opacity-0"
+                 style={{ transform: 'translateX(-50%) translateY(10px)' }}>
+              <div className="flex flex-col items-center gap-1.5">
+                <div className="bg-samred/90 backdrop-blur-md rounded-full px-4 py-1.5 shadow-lg shadow-samred/20">
+                  <span className="font-sub font-bold text-[0.85rem] text-white tracking-wide">Mes 1</span>
+                </div>
+                <span className="text-white/30 font-mono text-[0.55rem] uppercase tracking-[0.3em]">Cimientos</span>
+              </div>
+            </div>
+            <div ref={label2Ref}
+                 className="absolute bottom-[10%] left-[50%] -translate-x-1/2 z-10 opacity-0"
+                 style={{ transform: 'translateX(-50%) translateY(10px)' }}>
+              <div className="flex flex-col items-center gap-1.5">
+                <div className="bg-samred/90 backdrop-blur-md rounded-full px-4 py-1.5 shadow-lg shadow-samred/20">
+                  <span className="font-sub font-bold text-[0.85rem] text-white tracking-wide">Mes 2</span>
+                </div>
+                <span className="text-white/30 font-mono text-[0.55rem] uppercase tracking-[0.3em]">Estructura</span>
+              </div>
+            </div>
+            <div ref={label3Ref}
+                 className="absolute bottom-[10%] left-[75%] -translate-x-1/2 z-10 opacity-0"
+                 style={{ transform: 'translateX(-50%) translateY(10px)' }}>
+              <div className="flex flex-col items-center gap-1.5">
+                <div className="bg-samred/90 backdrop-blur-md rounded-full px-4 py-1.5 shadow-lg shadow-samred/20">
+                  <span className="font-sub font-bold text-[0.85rem] text-white tracking-wide">Mes 3</span>
+                </div>
+                <span className="text-white/30 font-mono text-[0.55rem] uppercase tracking-[0.3em]">Finalización</span>
+              </div>
+            </div>
+
+            {/* ── PROGRESS BAR (bottom edge) ── */}
+            <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-white/5 z-10">
+              <div ref={progressRef}
+                   className="h-full bg-samred"
+                   style={{ width: '0%' }} />
+            </div>
+
           </div>
 
-          {/* ── STATIC LABELS: Antes / Después ── */}
-          <div className="absolute top-5 left-5 z-10 bg-dark/60 backdrop-blur-sm border border-white/10 rounded-lg px-3 py-1.5">
-            <span className="font-sub font-bold text-[0.65rem] uppercase tracking-[0.2em] text-white/40">Antes</span>
-          </div>
-          <div className="absolute top-5 right-5 z-10 bg-dark/60 backdrop-blur-sm border border-white/10 rounded-lg px-3 py-1.5">
-            <span className="font-sub font-bold text-[0.65rem] uppercase tracking-[0.2em] text-white/40">Después</span>
-          </div>
-
-          {/* ── PROGRESS BAR ── */}
-          <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-dark/10 z-10">
-            <div ref={progressRef}
-                 className="h-full bg-samred"
-                 style={{ width: '0%' }} />
+          {/* ── FOOTER INFO ── */}
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mt-5">
+            <p className="text-white/30 text-[0.78rem] font-mono tracking-wider">
+              Proyecto GASAP · Evolución constructiva mes a mes
+            </p>
+            <button
+              onClick={() => setPage('proyectos')}
+              className="group inline-flex items-center gap-2 text-[0.72rem] font-sub font-bold uppercase tracking-[0.2em] text-samred hover:text-white transition-colors duration-200 self-start md:self-auto"
+            >
+              Ver más proyectos
+              <ArrowRight size={12} className="transition-transform group-hover:translate-x-1" />
+            </button>
           </div>
         </div>
-
-        <p className="text-center text-secondary/70 text-[0.82rem] mt-5 font-mono tracking-wider">
-          Transformación del proyecto — de la fase inicial a la entrega final
-        </p>
       </div>
     </section>
   )
@@ -2153,9 +2253,6 @@ function PageQuienesSomos({ setPage }) {
           </div>
         </div>
       </section>
-
-      {/* ── GSAP BEFORE/AFTER REVEAL ── */}
-      <BeforeAfterReveal />
 
       {/* ── HISTORIA — foto + timeline lateral ── */}
       <section className="bg-white py-12 md:py-24 px-5 md:px-16">

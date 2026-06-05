@@ -1844,39 +1844,185 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
   )
 }
 
+function useGsapReveal(ref, delay = 0) {
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          gsap.to(el, {
+            opacity: 1,
+            y: 0,
+            duration: 0.9,
+            delay,
+            ease: 'power3.out',
+          })
+          io.unobserve(el)
+        }
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' },
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [ref, delay])
+}
+
 function PageQuienesSomos({ setPage }) {
   useScrollReveal()
+  const heroRef = useRef(null)
+  const cubeRef = useRef(null)
+  const aboutTextRef = useRef(null)
+  const missionRef = useRef(null)
+  const ventajasRef = useRef(null)
+  const timelineRef = useRef(null)
+
+  // Hero stagger
+  useEffect(() => {
+    const els = heroRef.current?.querySelectorAll('.hero-item')
+    if (!els) return
+    gsap.fromTo(els, { opacity: 0, y: 40 }, {
+      opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
+      stagger: 0.12, delay: 0.3,
+    })
+  }, [])
+
+  // Cube entrance animation
+  useEffect(() => {
+    const el = cubeRef.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          gsap.fromTo(el, { scale: 0.3, opacity: 0, rotateX: 45 }, {
+            scale: 1, opacity: 1, rotateX: 0,
+            duration: 1.2, ease: 'back.out(1.7)',
+          })
+          io.unobserve(el)
+        }
+      },
+      { threshold: 0.2 },
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
+  // About text stagger
+  useEffect(() => {
+    const els = aboutTextRef.current?.querySelectorAll('.about-item')
+    if (!els) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          gsap.to(els, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.1 })
+          io.unobserve(entry.target)
+        }
+      },
+      { threshold: 0.15 },
+    )
+    if (aboutTextRef.current) io.observe(aboutTextRef.current)
+    return () => io.disconnect()
+  }, [])
+
+  // Mission/Vision stagger
+  useEffect(() => {
+    const els = missionRef.current?.querySelectorAll('.mission-card')
+    if (!els) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          gsap.to(els, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.12 })
+          io.unobserve(entry.target)
+        }
+      },
+      { threshold: 0.1 },
+    )
+    if (missionRef.current) io.observe(missionRef.current)
+    return () => io.disconnect()
+  }, [])
+
+  // Ventajas stagger
+  useEffect(() => {
+    const els = ventajasRef.current?.querySelectorAll('.ventaja-item')
+    if (!els) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          gsap.to(els, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.08 })
+          io.unobserve(entry.target)
+        }
+      },
+      { threshold: 0.1 },
+    )
+    if (ventajasRef.current) io.observe(ventajasRef.current)
+    return () => io.disconnect()
+  }, [])
+
+  // Timeline stagger
+  useEffect(() => {
+    const els = timelineRef.current?.querySelectorAll('.timeline-item')
+    if (!els) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          gsap.fromTo(els,
+            { opacity: 0, x: -20 },
+            { opacity: 1, x: 0, duration: 0.7, ease: 'power3.out', stagger: 0.1 },
+          )
+          io.unobserve(entry.target)
+        }
+      },
+      { threshold: 0.05 },
+    )
+    if (timelineRef.current) io.observe(timelineRef.current)
+    return () => io.disconnect()
+  }, [])
+
+  const CUBE_FACES = [
+    { icon: '\u{1F3D7}\uFE0F', number: '60', label: 'A\u00f1os de Trayectoria', face: 'cube-face__front' },
+    { icon: '\u{1F4CB}', number: '+250', label: 'Proyectos Ejecutados', face: 'cube-face__right' },
+    { icon: '\u2699\uFE0F', number: '6', label: 'Divisiones', face: 'cube-face__back' },
+    { icon: '\u{1F33F}', number: '1999', label: 'Cert. Ambiental', face: 'cube-face__left' },
+    { icon: '\u{1F3E2}', number: 'SAMFOR', label: 'Desde 1966', face: 'cube-face__top' },
+    { icon: '\u2B50', number: 'S.A.', label: 'Venezuela', face: 'cube-face__bottom' },
+  ]
 
   return (
     <div className="pt-24">
 
-      {/* ── HERO ── */}
-      <section className="relative overflow-hidden" style={{ height: '100dvh' }}>
-        <img src="/qs-hero.webp" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
-        <div className="absolute inset-0 bg-gradient-to-r from-dark/85 via-dark/55 to-dark/10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent" />
+      {/* ── HERO — con GSAP stagger ── */}
+      <section ref={heroRef} className="relative overflow-hidden" style={{ height: '100dvh' }}>
+        <div className="absolute inset-0">
+          <img src="/qs-hero.webp" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
+          <div className="absolute inset-0" style={{
+            background: 'linear-gradient(135deg, rgba(13,17,23,0.92) 0%, rgba(13,17,23,0.50) 50%, rgba(200,16,46,0.15) 100%)',
+          }} />
+        </div>
         <div className="relative h-full flex flex-col justify-end px-5 sm:px-8 md:px-16 lg:px-24 pb-10 md:pb-16 lg:pb-20">
           <div className="max-w-3xl">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="h-[3px] w-10 bg-samred" />
-              <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.25em] text-white/55">Nuestra empresa · Desde 1966</span>
+            <div className="hero-item" style={{ opacity: 0 }}>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="h-[3px] w-10 bg-samred" />
+                <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.25em] text-white/55">Nuestra empresa &middot; Desde 1966</span>
+              </div>
             </div>
-            <h1 className="font-display text-[clamp(2.2rem,6vw,6rem)] text-white leading-none tracking-wide mb-5">
+            <h1 className="hero-item font-display text-[clamp(2.2rem,6vw,6rem)] text-white leading-none tracking-wide mb-5" style={{ opacity: 0 }}>
               UNA EMPRESA.<br />
               <span className="text-samred">SEIS DÉCADAS.</span><br />
               UN ESTÁNDAR.
             </h1>
-            <p className="text-white/65 text-base md:text-lg max-w-xl leading-relaxed mb-8">
+            <p className="hero-item text-white/65 text-base md:text-lg max-w-xl leading-relaxed mb-8" style={{ opacity: 0 }}>
               Construyendo Venezuela con excelencia técnica, responsabilidad ambiental y el más alto compromiso con la seguridad industrial.
             </p>
-            {/* Stats — 2×2 grid on mobile, row on desktop */}
-            <div className="grid grid-cols-2 md:flex md:flex-wrap gap-5 md:gap-8">
-              {[['60', 'Años'], ['+250', 'Proyectos'], ['6', 'Divisiones'], ['1999', 'Cert. Ambiental']].map(([n, l]) => (
-                <div key={l} className="bg-white/8 backdrop-blur-sm border border-white/15 rounded-lg px-4 py-3 md:bg-transparent md:border-none md:p-0">
-                  <div className="font-display text-[2.2rem] md:text-[2rem] text-samred leading-none">{n}</div>
-                  <div className="font-sub text-[0.75rem] md:text-[0.88rem] uppercase tracking-widest text-white/50 mt-1">{l}</div>
-                </div>
-              ))}
+            <div className="hero-item" style={{ opacity: 0 }}>
+              <div className="flex flex-wrap gap-5 md:gap-8">
+                {[['60', 'A\u00f1os'], ['+250', 'Proyectos'], ['6', 'Divisiones'], ['1999', 'Cert. Ambiental']].map(([n, l]) => (
+                  <div key={l} className="bg-white/8 backdrop-blur-sm border border-white/15 rounded-lg px-4 py-3 md:bg-white/5 md:border-white/10">
+                    <div className="font-display text-[2.2rem] md:text-[2rem] text-samred leading-none">{n}</div>
+                    <div className="font-sub text-[0.75rem] md:text-[0.88rem] uppercase tracking-widest text-white/50 mt-1">{l}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -1886,125 +2032,181 @@ function PageQuienesSomos({ setPage }) {
         </div>
       </section>
 
-      {/* ── QUIÉNES SOMOS — foto inmersiva + texto superpuesto en mobile ── */}
+      {/* ── QUIÉNES SOMOS — modern split con 3D cube ── */}
       <section className="relative overflow-hidden bg-dark">
-        {/* Mobile: full-bleed foto con contenido encima */}
-        <div className="md:hidden relative" style={{ minHeight: '420px' }}>
-          <img src="/qs-welding.webp" alt="Soldadores SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(13,17,23,0.3) 0%, rgba(13,17,23,0.75) 60%, #0D1117 100%)' }} />
-          <div className="relative px-5 pt-12 pb-10 flex flex-col justify-end h-full">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="h-[2px] w-6 bg-samred" />
-              <span className="font-sub font-semibold text-[0.75rem] uppercase tracking-[0.25em] text-samred">Quiénes Somos</span>
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-samred/30 to-transparent" />
+
+        {/* Mobile: stacked */}
+        <div className="md:hidden">
+          <div className="relative" style={{ minHeight: '360px' }}>
+            <img src="/qs-welding.webp" alt="Soldadores SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+            <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(13,17,23,0.15) 0%, rgba(13,17,23,0.70) 50%, #0D1117 100%)' }} />
+            <div className="relative px-5 pt-16 pb-10 flex flex-col justify-end h-full">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="h-[2px] w-6 bg-samred" />
+                <span className="font-sub font-semibold text-[0.75rem] uppercase tracking-[0.25em] text-samred">Quiénes Somos</span>
+              </div>
+              <h2 className="font-display text-[3rem] text-white leading-none mb-2">SAMFOR</h2>
+              <span className="text-samred font-display text-[1.8rem] leading-none">S.A.</span>
             </div>
-            <h2 className="font-display text-[2.8rem] text-white leading-none mb-4">SAMFOR<br /><span className="text-samred text-[1.8rem]">S.A.</span></h2>
           </div>
-        </div>
-        {/* Mobile: texto debajo con fondo oscuro */}
-        <div className="md:hidden bg-dark px-5 pb-12">
-          <p className="text-white/70 text-[1rem] leading-relaxed mb-5">
-            Empresa venezolana fundada en 1966 en Maracaibo, dedicada a construcción civil, eléctrica, mecánica, telecomunicaciones, transporte y servicios ambientales para la industria petrolera y petroquímica.
-          </p>
-          <p className="text-white/50 text-[0.95rem] leading-relaxed mb-8">
-            Con 60 años de operación continua, contamos con la infraestructura, capital humano y estándares certificados para proyectos de alta complejidad en todo el territorio nacional.
-          </p>
-          {/* Valores como tarjetas horizontales */}
-          <div className="flex flex-col gap-3">
-            {[
-              { label: 'Lealtad', desc: 'Compromiso con clientes, colaboradores y el país.', n: '01' },
-              { label: 'Responsabilidad', desc: 'Cumplimiento técnico, ambiental y de seguridad.', n: '02' },
-              { label: 'Respeto', desc: 'Cada persona tratada con máxima dignidad.', n: '03' },
-            ].map(v => (
-              <div key={v.label} className="flex items-center gap-4 bg-white/5 border border-white/10 rounded-xl px-4 py-4">
-                <span className="font-display text-[1.6rem] text-samred/30 leading-none w-10 flex-shrink-0">{v.n}</span>
-                <div>
-                  <span className="font-sub font-bold text-[0.82rem] uppercase tracking-widest text-white block mb-0.5">{v.label}</span>
-                  <span className="text-white/45 text-[0.85rem]">{v.desc}</span>
+          <div className="bg-dark px-5 pb-12">
+            <p className="text-white/70 text-[1rem] leading-relaxed mb-5">
+              Empresa venezolana fundada en 1966 en Maracaibo, dedicada a construcción civil, eléctrica, mecánica, telecomunicaciones, transporte y servicios ambientales para la industria petrolera y petroquímica.
+            </p>
+            <p className="text-white/50 text-[0.95rem] leading-relaxed mb-8">
+              Con 60 a\u00f1os de operación continua, contamos con la infraestructura, capital humano y estándares certificados para proyectos de alta complejidad en todo el territorio nacional.
+            </p>
+            {/* 3D Cube mobile */}
+            <div ref={cubeRef} className="flex justify-center mb-8" style={{ opacity: 0 }}>
+              <div className="cube-scene" style={{ width: '160px', height: '160px' }}>
+                <div className="cube-wrapper" style={{ width: '160px', height: '160px', animationDuration: '20s' }}>
+                  {CUBE_FACES.map(f => (
+                    <div key={f.face} className={`cube-face ${f.face}`} style={{ width: '160px', height: '160px' }}>
+                      <span className="cube-icon">{f.icon}</span>
+                      <span className="cube-number text-[2rem]">{f.number}</span>
+                      <span className="cube-label">{f.label}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
-            ))}
+            </div>
+            {/* Valores con borde izquierdo */}
+            <div className="flex flex-col gap-3">
+              {[
+                { label: 'Lealtad', desc: 'Compromiso con clientes, colaboradores y el pa\u00eds.', n: '01' },
+                { label: 'Responsabilidad', desc: 'Cumplimiento técnico, ambiental y de seguridad.', n: '02' },
+                { label: 'Respeto', desc: 'Cada persona tratada con máxima dignidad.', n: '03' },
+              ].map(v => (
+                <div key={v.label} className="flex items-center gap-4 bg-white/[0.03] border-l-2 border-samred rounded-r-xl px-4 py-4">
+                  <span className="font-display text-[1.6rem] text-samred/30 leading-none w-10 flex-shrink-0">{v.n}</span>
+                  <div>
+                    <span className="font-sub font-bold text-[0.82rem] uppercase tracking-widest text-white block mb-0.5">{v.label}</span>
+                    <span className="text-white/45 text-[0.85rem]">{v.desc}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-        {/* Desktop: split original */}
-        <div className="hidden md:grid md:grid-cols-2 lg:min-h-[80vh]">
+
+        {/* Desktop: modern split con 3D cube */}
+        <div className="hidden md:grid md:grid-cols-2 lg:min-h-[85vh]">
+          {/* Left: Texto */}
           <div className="bg-white flex items-center px-8 md:px-12 lg:px-16 py-12 md:py-16 lg:py-20">
-            <div className="max-w-lg">
-              <div className="flex items-center gap-3 mb-6">
+            <div ref={aboutTextRef} className="max-w-lg">
+              <div className="about-item flex items-center gap-3 mb-6" style={{ opacity: 0 }}>
                 <span className="h-[3px] w-10 bg-samred" />
                 <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Quiénes Somos</span>
               </div>
-              <h2 className="font-display text-[clamp(2.5rem,4vw,3.75rem)] text-dark leading-none mb-8">SAMFOR,<br />S.A.</h2>
-              <p className="text-secondary text-base leading-relaxed mb-6">Somos una empresa venezolana fundada en 1966 en Maracaibo, dedicada a la prestación de servicios de construcción civil, eléctrica, mecánica, telecomunicaciones, transporte y servicios ambientales para la industria petrolera, petroquímica, carbonífera y civil.</p>
-              <p className="text-secondary text-base leading-relaxed mb-10">Con casi seis décadas de operación continua, contamos con la infraestructura, el capital humano y los estándares certificados para ejecutar proyectos de alta complejidad en cualquier punto del territorio nacional.</p>
-              <div className="flex flex-col gap-4">
+              <h2 className="about-item font-display text-[clamp(2.5rem,4vw,3.75rem)] text-dark leading-none mb-8" style={{ opacity: 0 }}>
+                SAMFOR,<br />S.A.
+              </h2>
+              <p className="about-item text-secondary text-base leading-relaxed mb-6" style={{ opacity: 0 }}>
+                Somos una empresa venezolana fundada en <span className="text-dark font-semibold">1966 en Maracaibo</span>, dedicada a la prestación de servicios de construcción civil, eléctrica, mecánica, telecomunicaciones, transporte y servicios ambientales para la industria petrolera, petroquímica, carbonífera y civil.
+              </p>
+              <p className="about-item text-secondary text-base leading-relaxed mb-10" style={{ opacity: 0 }}>
+                Con casi seis décadas de operación continua, contamos con la infraestructura, el capital humano y los estándares certificados para ejecutar proyectos de alta complejidad en cualquier punto del territorio nacional.
+              </p>
+              <div className="about-item flex flex-col gap-4" style={{ opacity: 0 }}>
                 {[
-                  { label: 'Lealtad', desc: 'Compromiso con clientes, colaboradores y el país.' },
+                  { label: 'Lealtad', desc: 'Compromiso con clientes, colaboradores y el pa\u00eds.' },
                   { label: 'Responsabilidad', desc: 'Cumplimiento técnico, ambiental y de seguridad.' },
                   { label: 'Respeto', desc: 'Cada persona tratada con máxima dignidad.' },
-                ].map(v => (
-                  <div key={v.label} className="flex items-start gap-4">
-                    <span className="flex-shrink-0 w-[3px] h-full self-stretch bg-samred rounded" />
+                ].map((v) => (
+                  <div key={v.label} className="group flex items-start gap-4 cursor-default">
+                    <span className="flex-shrink-0 w-[3px] h-8 self-stretch bg-samred rounded" />
                     <div>
-                      <span className="font-sub font-bold text-sm uppercase tracking-widest text-dark">{v.label} — </span>
-                      <span className="text-secondary text-sm">{v.desc}</span>
+                      <span className="font-sub font-bold text-sm uppercase tracking-widest text-dark">{v.label}</span>
+                      <span className="text-secondary text-sm ml-2">{v.desc}</span>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
           </div>
+
+          {/* Right: Imagen + 3D Cube */}
           <div className="relative overflow-hidden">
             <img src="/qs-welding.webp" alt="Soldadores SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
-            <div className="absolute inset-0 bg-gradient-to-l from-transparent to-dark/20" />
+            <div className="absolute inset-0" style={{
+              background: 'linear-gradient(112deg, rgba(13,17,23,0.60) 0%, rgba(13,17,23,0.25) 50%, rgba(200,16,46,0.12) 100%)',
+            }} />
+            <div className="absolute inset-0 bg-gradient-to-t from-dark/70 via-transparent to-transparent" />
+            {/* 3D Cube center */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div ref={cubeRef} className="cube-scene" style={{ opacity: 0 }}>
+                <div className="cube-wrapper">
+                  {CUBE_FACES.map(f => (
+                    <div key={f.face} className={`cube-face ${f.face}`}>
+                      <span className="cube-icon">{f.icon}</span>
+                      <span className="cube-number">{f.number}</span>
+                      <span className="cube-label">{f.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
             <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-samred" />
+            <div className="absolute top-8 right-8 bg-dark/60 backdrop-blur-md border border-white/10 rounded-full px-5 py-2">
+              <span className="font-sub font-bold text-xs uppercase tracking-widest text-samred">Fundada 1966</span>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── MISIÓN / VISIÓN — móvil: stack vertical dramático ── */}
-      <section className="bg-dark py-12 md:py-24 px-5 md:px-16 lg:px-24">
-        <div className="max-w-7xl mx-auto">
+      {/* ── MISIÓN / VISIÓN — tarjetas con gradiente ── */}
+      <section className="relative bg-dark py-12 md:py-24 px-5 md:px-16 lg:px-24 overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)',
+          backgroundSize: '40px 40px',
+        }} />
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="scroll-reveal flex items-center gap-3 mb-10 md:mb-16">
             <span className="h-[3px] w-10 bg-samred" />
             <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Identidad corporativa</span>
           </div>
-          {/* Mobile: full-width stacked cards with big numbers */}
-          <div className="md:hidden flex flex-col gap-0 border border-white/10 rounded-2xl overflow-hidden">
+
+          {/* Mobile */}
+          <div ref={missionRef} className="md:hidden flex flex-col gap-4">
             {[
-              { num: '01', title: 'MISIÓN', body: 'Ejecutar de manera rentable y eficiente, en armonía con el ambiente, obras y servicios de construcción civil, eléctrica, telecomunicación, transporte y servicios ambientales, asegurando la satisfacción del cliente y el desarrollo del talento humano.' },
+              { num: '01', title: 'MISIÓN', body: 'Ejecutar de manera rentable y eficiente, en armon\u00eda con el ambiente, obras y servicios de construcción civil, eléctrica, telecomunicación, transporte y servicios ambientales, asegurando la satisfacción del cliente y el desarrollo del talento humano.' },
               { num: '02', title: 'VISIÓN', body: 'Ser una empresa líder en Construcción, Transporte y Servicios Ambientales, reconocida por su excelencia, calidad de servicios, solidez del equipo humano y compromiso con el desarrollo sostenible de Venezuela.' },
-              { num: '03', title: 'VALORES', body: 'Lealtad, Responsabilidad y Respeto a la Dignidad Humana son los pilares que guían cada decisión, cada proyecto y cada relación con nuestros clientes, colaboradores y comunidades.' },
+              { num: '03', title: 'VALORES', body: 'Lealtad, Responsabilidad y Respeto a la Dignidad Humana son los pilares que gu\u00edan cada decisión, cada proyecto y cada relación con nuestros clientes, colaboradores y comunidades.' },
             ].map((c, i) => (
-              <div key={c.num} className="scroll-reveal relative px-6 py-8 border-b border-white/10 last:border-0 overflow-hidden" style={{ transitionDelay: `${i * 80}ms` }}>
-                {/* Big ghost number */}
-                <span className="absolute right-4 top-2 font-display text-[5rem] text-white/4 leading-none select-none">{c.num}</span>
-                <div className="h-[2px] w-8 bg-samred mb-5" />
-                <h3 className="font-display text-[2.2rem] text-white mb-4 leading-none">{c.title}</h3>
-                <p className="text-white/55 text-[0.95rem] leading-relaxed">{c.body}</p>
+              <div key={c.num} className="mission-card relative group overflow-hidden rounded-2xl border border-white/[0.06] bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-6" style={{ opacity: 0 }}>
+                <div className="absolute -right-6 -top-6 font-display text-[6rem] text-white/[0.03] leading-none select-none">{c.num}</div>
+                <div className="flex items-center gap-3 mb-4">
+                  <span className={`w-8 h-8 rounded-lg flex items-center justify-center font-display text-sm ${i === 0 ? 'bg-samred text-white' : 'bg-white/10 text-samred'}`}>{c.num}</span>
+                  <h3 className="font-display text-2xl text-white tracking-wide">{c.title}</h3>
+                </div>
+                <p className="text-white/55 text-[0.95rem] leading-relaxed pl-11">{c.body}</p>
               </div>
             ))}
           </div>
-          {/* Desktop: grid original */}
-          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-0 border border-white/10 rounded overflow-hidden">
+
+          {/* Desktop: 3 columnas */}
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
             {[
-              { num: '01', title: 'MISIÓN', body: 'Ejecutar de manera rentable y eficiente, en armonía con el ambiente, obras y servicios de construcción civil, eléctrica, telecomunicación, transporte y servicios ambientales, asegurando la satisfacción del cliente y el desarrollo del talento humano.' },
+              { num: '01', title: 'MISIÓN', body: 'Ejecutar de manera rentable y eficiente, en armon\u00eda con el ambiente, obras y servicios de construcción civil, eléctrica, telecomunicación, transporte y servicios ambientales, asegurando la satisfacción del cliente y el desarrollo del talento humano.' },
               { num: '02', title: 'VISIÓN', body: 'Ser una empresa líder en Construcción, Transporte y Servicios Ambientales, reconocida por su excelencia, calidad de servicios, solidez del equipo humano y compromiso con el desarrollo sostenible de Venezuela.' },
-              { num: '03', title: 'VALORES', body: 'Lealtad, Responsabilidad y Respeto a la Dignidad Humana son los pilares que guían cada decisión, cada proyecto y cada relación con nuestros clientes, colaboradores y comunidades.' },
+              { num: '03', title: 'VALORES', body: 'Lealtad, Responsabilidad y Respeto a la Dignidad Humana son los pilares que gu\u00edan cada decisión, cada proyecto y cada relación con nuestros clientes, colaboradores y comunidades.' },
             ].map((c, i) => (
-              <div key={c.num} className="scroll-reveal p-10 border-r border-white/10 last:border-0" style={{ transitionDelay: `${i * 100}ms` }}>
-                <div className="font-mono text-[0.8rem] text-samred/60 tracking-widest mb-4">{c.num}</div>
-                <div className="h-[2px] w-8 bg-samred mb-6" />
-                <h3 className="font-display text-3xl text-white mb-5">{c.title}</h3>
-                <p className="text-white/50 text-base leading-relaxed">{c.body}</p>
+              <div key={c.num} className="mission-card relative group rounded-2xl border border-white/[0.06] bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-8 hover-card" style={{ opacity: 0 }}>
+                <div className="absolute inset-0 bg-gradient-to-br from-samred/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+                <span className="block font-mono text-[0.8rem] text-samred/50 tracking-widest mb-4 relative z-10">{c.num}</span>
+                <div className="h-[2px] w-8 bg-samred mb-6 relative z-10" />
+                <h3 className="font-display text-3xl text-white mb-5 relative z-10">{c.title}</h3>
+                <p className="text-white/50 text-base leading-relaxed relative z-10">{c.body}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── VENTAJAS — móvil: foto hero + lista compacta ── */}
+      {/* ── VENTAJAS COMPETITIVAS ── */}
       <section className="bg-surface">
-        {/* Mobile: foto header + lista en blanco */}
+        {/* Mobile */}
         <div className="md:hidden">
           <div className="relative overflow-hidden" style={{ height: 'clamp(110px,18vw,260px)' }}>
             <img src="/qs-electrical.webp" alt="Técnicos eléctricos SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
@@ -2012,10 +2214,10 @@ function PageQuienesSomos({ setPage }) {
             <div className="absolute bottom-0 left-0 right-0 h-1 bg-samred" />
             <div className="absolute bottom-6 left-5">
               <div className="font-sub font-bold text-[0.72rem] uppercase tracking-widest text-samred mb-0.5">Certificación</div>
-              <div className="text-white text-sm font-medium">Manejadora de Desechos Peligrosos · 1999</div>
+              <div className="text-white text-sm font-medium">Manejadora de Desechos Peligrosos &middot; 1999</div>
             </div>
           </div>
-          <div className="px-5 py-10">
+          <div ref={ventajasRef} className="px-5 py-10">
             <div className="flex items-center gap-3 mb-5">
               <span className="h-[3px] w-8 bg-samred" />
               <span className="font-sub font-semibold text-[0.78rem] uppercase tracking-[0.2em] text-samred">Por qué elegirnos</span>
@@ -2023,13 +2225,13 @@ function PageQuienesSomos({ setPage }) {
             <h2 className="font-display text-[2.5rem] text-dark leading-none mb-8">VENTAJAS<br /><span className="text-samred">COMPETITIVAS</span></h2>
             <div className="flex flex-col gap-0">
               {[
-                { icon: <Target size={22}/>, title: 'Capacidad Operativa', desc: 'Flota de vehículos, equipos pesados, maquinaria y aeronave.' },
-                { icon: <CheckCircle size={22}/>, title: 'Calidad Certificada', desc: 'Estándares IPC internacionales. Cert. Desechos Peligrosos 1999.' },
-                { icon: <Users size={22}/>, title: 'Capital Humano', desc: 'Ingenieros en eléctrica, civil, mecánica, instrumentación y ambiental.' },
-                { icon: <Shield size={22}/>, title: 'HSE / Seguridad', desc: 'Cultura HSE arraigada. Normativas COVENIN en entornos de riesgo.' },
+                { icon: Target, title: 'Capacidad Operativa', desc: 'Flota de veh\u00edculos, equipos pesados, maquinaria y aeronave.' },
+                { icon: CheckCircle, title: 'Calidad Certificada', desc: 'Estándares IPC internacionales. Cert. Desechos Peligrosos 1999.' },
+                { icon: Users, title: 'Capital Humano', desc: 'Ingenieros en eléctrica, civil, mec\u00e1nica, instrumentación y ambiental.' },
+                { icon: Shield, title: 'HSE / Seguridad', desc: 'Cultura HSE arraigada. Normativas COVENIN en entornos de riesgo.' },
               ].map((a, i) => (
-                <div key={i} className="scroll-reveal flex items-start gap-4 py-5 border-b border-border last:border-0" style={{ transitionDelay: `${i * 60}ms` }}>
-                  <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-samred/10 flex items-center justify-center text-samred">{a.icon}</div>
+                <div key={i} className="ventaja-item flex items-start gap-4 py-5 border-b border-border last:border-0" style={{ opacity: 0 }}>
+                  <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-samred/10 flex items-center justify-center text-samred"><a.icon size={22} /></div>
                   <div>
                     <h3 className="font-sub font-bold text-[0.92rem] uppercase tracking-wide text-dark mb-1">{a.title}</h3>
                     <p className="text-secondary text-[0.9rem] leading-relaxed">{a.desc}</p>
@@ -2039,7 +2241,7 @@ function PageQuienesSomos({ setPage }) {
             </div>
           </div>
         </div>
-        {/* Desktop: split original */}
+        {/* Desktop */}
         <div className="hidden md:grid md:grid-cols-2 lg:min-h-[75vh]">
           <div className="relative overflow-hidden order-2 lg:order-1" style={{ minHeight: '300px' }}>
             <img src="/qs-electrical.webp" alt="Técnicos eléctricos SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
@@ -2048,11 +2250,11 @@ function PageQuienesSomos({ setPage }) {
             <div className="absolute bottom-8 left-8 bg-dark/75 backdrop-blur-sm border border-white/10 px-5 py-3 rounded">
               <div className="font-sub font-bold text-xs uppercase tracking-widest text-samred mb-0.5">Certificación</div>
               <div className="text-white text-sm font-medium">Manejadora de Desechos Peligrosos</div>
-              <div className="text-white/40 text-xs font-mono mt-0.5">Ministerio del Ecosistema · 1999</div>
+              <div className="text-white/40 text-xs font-mono mt-0.5">Ministerio del Ecosistema &middot; 1999</div>
             </div>
           </div>
           <div className="bg-surface flex items-center px-8 md:px-12 lg:px-16 py-12 md:py-16 lg:py-20 order-1 lg:order-2">
-            <div className="w-full max-w-lg">
+            <div ref={ventajasRef} className="w-full max-w-lg">
               <div className="flex items-center gap-3 mb-6">
                 <span className="h-[3px] w-10 bg-samred" />
                 <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Por qué elegirnos</span>
@@ -2060,13 +2262,13 @@ function PageQuienesSomos({ setPage }) {
               <h2 className="font-display text-[clamp(2rem,3.5vw,3rem)] text-dark leading-none mb-10">VENTAJAS<br />COMPETITIVAS</h2>
               <div className="flex flex-col gap-0 divide-y divide-border">
                 {[
-                  { icon: <Target size={20}/>, title: 'Capacidad Operativa', desc: 'Flota completa de vehículos, equipos pesados, maquinaria y aeronave para proyectos en todo el territorio.' },
-                  { icon: <CheckCircle size={20}/>, title: 'Calidad Certificada', desc: 'Procesos IPC bajo estándares internacionales. Certificación como Manejadora de Desechos Peligrosos desde 1999.' },
-                  { icon: <Users size={20}/>, title: 'Capital Humano', desc: 'Ingenieros y técnicos en eléctrica, civil, mecánica, instrumentación, telecomunicaciones y ambiental.' },
-                  { icon: <Shield size={20}/>, title: 'HSE / Seguridad', desc: 'Cultura HSE arraigada. Operaciones en entornos de alto riesgo con cumplimiento de normativas COVENIN.' },
+                  { icon: Target, title: 'Capacidad Operativa', desc: 'Flota completa de veh\u00edculos, equipos pesados, maquinaria y aeronave para proyectos en todo el territorio.' },
+                  { icon: CheckCircle, title: 'Calidad Certificada', desc: 'Procesos IPC bajo estándares internacionales. Certificación como Manejadora de Desechos Peligrosos desde 1999.' },
+                  { icon: Users, title: 'Capital Humano', desc: 'Ingenieros y técnicos en eléctrica, civil, mec\u00e1nica, instrumentación, telecomunicaciones y ambiental.' },
+                  { icon: Shield, title: 'HSE / Seguridad', desc: 'Cultura HSE arraigada. Operaciones en entornos de alto riesgo con cumplimiento de normativas COVENIN.' },
                 ].map((a, i) => (
-                  <div key={i} className="scroll-reveal flex gap-5 py-6 group" style={{ transitionDelay: `${i * 80}ms` }}>
-                    <div className="flex-shrink-0 w-10 h-10 rounded bg-white border border-border flex items-center justify-center text-samred group-hover:bg-samred group-hover:text-white group-hover:border-samred transition-all duration-300">{a.icon}</div>
+                  <div key={i} className="ventaja-item flex gap-5 py-6 group" style={{ opacity: 0 }}>
+                    <div className="flex-shrink-0 w-10 h-10 rounded bg-white border border-border flex items-center justify-center text-samred group-hover:bg-samred group-hover:text-white group-hover:border-samred transition-all duration-300"><a.icon size={20} /></div>
                     <div>
                       <h3 className="font-sub font-bold text-base uppercase tracking-wide text-dark mb-1">{a.title}</h3>
                       <p className="text-secondary text-base leading-relaxed">{a.desc}</p>
@@ -2079,10 +2281,9 @@ function PageQuienesSomos({ setPage }) {
         </div>
       </section>
 
-      {/* ── HISTORIA — foto + timeline lateral ── */}
+      {/* ── HISTORIA — timeline lateral ── */}
       <section className="bg-white py-12 md:py-24 px-5 md:px-16">
         <div className="max-w-6xl mx-auto">
-          {/* HEADER — full width */}
           <div className="scroll-reveal mb-10 md:mb-14">
             <div className="flex items-center gap-3 mb-4">
               <span className="h-[3px] w-10 bg-samred" />
@@ -2091,9 +2292,8 @@ function PageQuienesSomos({ setPage }) {
             <h2 className="font-display text-[clamp(2.5rem,5vw,4rem)] text-dark leading-none">NUESTRA<br />TRAYECTORIA</h2>
           </div>
 
-          {/* ── MOBILE: foto arriba, timeline abajo (apilado) ── */}
+          {/* Mobile */}
           <div className="md:hidden">
-            {/* Foto */}
             <div className="scroll-reveal relative w-full rounded-2xl overflow-hidden mb-8 shadow-xl">
               <div className="relative w-full" style={{ minHeight: 'clamp(280px,50vw,420px)' }}>
                 <img src="/projects/samfor-inicios.jpg" alt="Inicios de SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
@@ -2104,14 +2304,13 @@ function PageQuienesSomos({ setPage }) {
                     <span className="w-2 h-2 rounded-full bg-samred" />
                     <span className="font-mono text-[0.7rem] uppercase tracking-[0.25em] text-white/50">Archivo histórico</span>
                   </div>
-                  <p className="text-white text-lg font-display tracking-wide">Inicios de SAMFOR · Maracaibo, 1966</p>
+                  <p className="text-white text-lg font-display tracking-wide">Inicios de SAMFOR &middot; Maracaibo, 1966</p>
                 </div>
               </div>
             </div>
-            {/* Timeline mobile */}
-            <div className="flex flex-col gap-5">
+            <div ref={timelineRef} className="flex flex-col gap-5">
               {TIMELINE.map((item, i) => (
-                <div key={i} className="scroll-reveal relative group" style={{ transitionDelay: `${i * 60}ms` }}>
+                <div key={i} className="timeline-item relative group" style={{ opacity: 0 }}>
                   {i < TIMELINE.length - 1 && (
                     <div className="absolute left-[1.1rem] top-10 bottom-0 w-[2px] bg-gradient-to-b from-samred via-samred/30 to-transparent" />
                   )}
@@ -2132,16 +2331,13 @@ function PageQuienesSomos({ setPage }) {
             </div>
           </div>
 
-          {/* ── DESKTOP: split lateral — foto sticky izq + timeline der ── */}
+          {/* Desktop: split - foto sticky + timeline */}
           <div className="hidden md:grid md:grid-cols-[1fr_1.8fr] md:gap-12 lg:gap-16 items-start">
-            {/* LEFT — foto sticky */}
             <div className="sticky top-32">
-              <div className="scroll-reveal relative rounded-2xl overflow-hidden shadow-xl" style={{ height: 'clamp(400px,42vw,600px)' }}>
+              <div className="scroll-reveal relative rounded-2xl overflow-hidden shadow-xl hover-card" style={{ height: 'clamp(400px,42vw,600px)' }}>
                 <img src="/projects/samfor-inicios.jpg" alt="Inicios de SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
-                {/* Gradiente oscuro de esquina */}
                 <div className="absolute inset-0 bg-gradient-to-t from-dark/85 via-dark/10 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-samred" />
-                {/* Texto */}
                 <div className="absolute bottom-7 left-7">
                   <div className="flex items-center gap-2 mb-2">
                     <span className="w-2 h-2 rounded-full bg-samred" />
@@ -2152,14 +2348,11 @@ function PageQuienesSomos({ setPage }) {
               </div>
             </div>
 
-            {/* RIGHT — timeline */}
-            <div className="relative pl-8 lg:pl-12">
-              {/* Línea vertical conectora */}
+            <div ref={timelineRef} className="relative pl-8 lg:pl-12">
               <div className="absolute left-0 top-2 bottom-2 w-[3px] bg-gradient-to-b from-samred via-samred/30 to-samred/10 rounded-full" />
 
               {TIMELINE.map((item, i) => (
-                <div key={i} className="scroll-reveal relative pb-12 last:pb-0" style={{ paddingLeft: '2rem', transitionDelay: `${i * 80}ms` }}>
-                  {/* Punto en la línea */}
+                <div key={i} className="timeline-item relative pb-12 last:pb-0" style={{ paddingLeft: '2rem', opacity: 0 }}>
                   <div className="absolute left-[-7.5px] top-1 z-10">
                     <div className={`w-[18px] h-[18px] rounded-full border-[3px] transition-all duration-300 ${
                       i === 0
@@ -2168,20 +2361,17 @@ function PageQuienesSomos({ setPage }) {
                     }`} />
                   </div>
 
-                  {/* Año decorativo */}
                   <span className={`font-display text-[2.2rem] lg:text-[2.8rem] leading-none tracking-tight block mb-3 ${
                     i === 0 ? 'text-samred' : 'text-dark/10'
                   }`}>
                     {item.year}
                   </span>
 
-                  {/* Card */}
-                  <div className={`relative rounded-xl border-2 p-5 lg:p-6 transition-all duration-300 ${
+                  <div className={`relative rounded-xl border-2 p-5 lg:p-6 transition-all duration-300 hover-card ${
                     i === 0
                       ? 'border-samred/20 bg-gradient-to-br from-samred/[0.03] to-white shadow-lg'
                       : 'border-gray-100 bg-white hover:border-samred/20 hover:shadow-lg'
                   }`}>
-                    {/* Barra decorativa superior */}
                     <div className={`absolute top-0 left-0 right-0 h-[3px] rounded-t-xl ${
                       i === 0 ? 'bg-samred' : 'bg-gradient-to-r from-samred/50 via-samred/20 to-transparent'
                     }`} />
@@ -2199,377 +2389,9 @@ function PageQuienesSomos({ setPage }) {
           </div>
         </div>
       </section>
-
-      {/* ── FICHA + CONTACTO ── */}
-      <section className="bg-dark py-12 md:py-20 px-5 md:px-16 lg:px-24">
-        <div className="max-w-7xl mx-auto">
-          <div className="scroll-reveal flex items-center gap-3 mb-10 md:mb-12">
-            <span className="h-[3px] w-10 bg-samred" />
-            <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Datos corporativos</span>
-          </div>
-          {/* Mobile: compact stacked */}
-          <div className="md:hidden flex flex-col gap-4">
-            <div className="border border-white/10 rounded-2xl overflow-hidden">
-              <div className="bg-white/5 border-b border-white/10 px-5 py-3">
-                <span className="font-sub font-bold text-xs uppercase tracking-widest text-white/50">Ficha de Empresa</span>
-              </div>
-              <div className="divide-y divide-white/8">
-                {[
-                  ['Fundación', '1966 — Maracaibo, VE'],
-                  ['Trayectoria', '60 años de operación continua'],
-                  ['Sector', 'Petrolero · Petroquímico · Civil'],
-                  ['Servicios', '7 líneas especializadas'],
-                  ['Certificación', 'Desechos Peligrosos (1999)'],
-                  ['Cobertura', 'Venezuela · Internacional'],
-                ].map(([k, v]) => (
-                  <div key={k} className="flex items-center px-5 py-3.5 gap-3">
-                    <span className="flex-shrink-0 font-mono text-[0.72rem] uppercase tracking-widest text-white/30 w-24">{k}</span>
-                    <span className="text-white/75 text-[0.9rem]">{v}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="border border-white/10 rounded-2xl overflow-hidden">
-              <div className="bg-white/5 border-b border-white/10 px-5 py-3">
-                <span className="font-sub font-bold text-xs uppercase tracking-widest text-white/50">Contacto</span>
-              </div>
-              <div className="p-5 flex flex-col gap-5">
-                {[
-                  { icon: <MapPin size={15} className="text-samred flex-shrink-0 mt-0.5" />, label: 'Dirección', value: 'Av. 3H entre Calles 68-70, Maracaibo, Venezuela' },
-                  { icon: <Mail size={15} className="text-samred flex-shrink-0 mt-0.5" />, label: 'Email', value: 'samfor@samfor.com' },
-                  { icon: <Phone size={15} className="text-samred flex-shrink-0 mt-0.5" />, label: 'Tel', value: '+58 261 814 4444' },
-                ].map(item => (
-                  <div key={item.label} className="flex items-start gap-3">
-                    {item.icon}
-                    <div>
-                      <div className="font-mono text-[0.7rem] uppercase tracking-widest text-white/30 mb-0.5">{item.label}</div>
-                      <div className="text-white/75 text-[0.9rem]">{item.value}</div>
-                    </div>
-                  </div>
-                ))}
-                <button onClick={() => setPage('contacto')} className="btn-primary self-start mt-2">Contáctanos</button>
-              </div>
-            </div>
-          </div>
-          {/* Desktop: original grid */}
-          <div className="hidden md:grid md:grid-cols-2 gap-6">
-            <div className="border border-white/10 rounded overflow-hidden">
-              <div className="bg-white/5 border-b border-white/10 px-7 py-4">
-                <span className="font-sub font-bold text-xs uppercase tracking-widest text-white/60">Ficha de Empresa</span>
-              </div>
-              <div className="divide-y divide-white/8">
-                {[
-                  ['Razón Social', 'SAMFOR, S.A.'],
-                  ['Fundación', '1966 — Maracaibo, Venezuela'],
-                  ['Trayectoria', '60 años de operación continua'],
-                  ['Sector', 'Petrolero, Petroquímico, Carbonífero, Civil'],
-                  ['Servicios', '6 líneas de negocio especializadas'],
-                  ['Certificación', 'Manejadora de Desechos Peligrosos (desde 1999)'],
-                  ['Cobertura', 'Venezuela y operaciones internacionales'],
-                ].map(([k, v]) => (
-                  <div key={k} className="flex px-7 py-4 gap-6">
-                    <span className="flex-shrink-0 w-28 font-mono text-[0.88rem] uppercase tracking-widest text-white/30">{k}</span>
-                    <span className="text-white/80 text-base">{v}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="border border-white/10 rounded overflow-hidden">
-              <div className="bg-white/5 border-b border-white/10 px-7 py-4">
-                <span className="font-sub font-bold text-xs uppercase tracking-widest text-white/60">Contacto y Dirección</span>
-              </div>
-              <div className="p-7 flex flex-col gap-6">
-                {[
-                  { icon: <MapPin size={15} className="text-samred flex-shrink-0 mt-0.5" />, label: 'Dirección', value: 'Av. 3H entre Calles 68-70 N.69-61, Maracaibo, Venezuela' },
-                  { icon: <Mail size={15} className="text-samred flex-shrink-0 mt-0.5" />, label: 'Email', value: 'samfor@samfor.com' },
-                  { icon: <Phone size={15} className="text-samred flex-shrink-0 mt-0.5" />, label: 'Teléfonos', value: '+58 261 814 4444 / +58 414-615.8000' },
-                  { icon: <Globe size={15} className="text-samred flex-shrink-0 mt-0.5" />, label: 'Web', value: 'www.samfor.com' },
-                ].map(item => (
-                  <div key={item.label} className="flex items-start gap-4">
-                    {item.icon}
-                    <div>
-                      <div className="font-mono text-[0.82rem] uppercase tracking-widest text-white/30 mb-0.5">{item.label}</div>
-                      <div className="text-white/80 text-base">{item.value}</div>
-                    </div>
-                  </div>
-                ))}
-                <button onClick={() => setPage('contacto')} className="btn-primary mt-4 self-start">Contáctanos</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── CLIENTES ── */}
-      <section className="bg-dark py-12 md:py-24 px-5 md:px-16 lg:px-24">
-        <div className="max-w-7xl mx-auto">
-          <div className="scroll-reveal flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 md:mb-12">
-            <div>
-              <div className="flex items-center gap-3 mb-3">
-                <span className="h-[3px] w-10 bg-samred" />
-                <span className="font-sub font-semibold text-[0.82rem] uppercase tracking-widest text-samred">Historial de clientes</span>
-              </div>
-              <h2 className="font-display text-[2.25rem] md:text-[3rem] text-white leading-none">NUESTROS<br />CLIENTES</h2>
-            </div>
-            <p className="text-white/40 text-base max-w-xs leading-relaxed md:text-right">
-              Más de 50 empresas e instituciones del sector público, privado e internacional a lo largo de 60 años.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-            {CLIENT_GRID.map((c, i) => (
-              <div key={i} className="scroll-reveal flex flex-col items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-4 py-5 hover:border-samred/40 hover:bg-white/8 transition-all duration-200" style={{ transitionDelay: `${(i % 12) * 40}ms` }}>
-                <div className="w-14 h-14 md:w-16 md:h-16 rounded-md flex items-center justify-center overflow-hidden flex-shrink-0 bg-white p-1.5">
-                  {c.img ? <img src={c.img} alt={c.name} className="max-h-full max-w-full object-contain" onError={e => { e.target.style.display='none'; e.target.nextSibling.style.display='flex' }} /> : null}
-                  <span className={`${c.img ? 'hidden' : 'flex'} w-full h-full items-center justify-center font-display font-bold text-sm rounded`} style={{ background: c.bg || '#1a2233', color: c.accent || '#fff' }}>
-                    {c.name.split(/[\s/]+/).slice(0,2).map(w=>w[0]).join('').toUpperCase()}
-                  </span>
-                </div>
-                <div className="text-center">
-                  <p className="font-sub font-bold text-[0.82rem] uppercase tracking-wide text-white/75 leading-tight">{c.name}</p>
-                  <p className="text-white/30 text-[0.72rem] font-mono uppercase tracking-widest mt-0.5">{c.sector}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
     </div>
   )
 }
-
-// ─── PAGE: CONTACTO ────────────────────────────────────────────────────────────
-function PageContacto() {
-  useScrollReveal()
-  const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', type: '', message: '' })
-  const [jobForm, setJobForm] = useState({ name: '', email: '', phone: '', area: '', exp: '', cv: null, letter: '' })
-  const [sending, setSending] = useState(false)
-  const [sent, setSent] = useState(false)
-  const [jobSending, setJobSending] = useState(false)
-  const [jobSent, setJobSent] = useState(false)
-  const [drag, setDrag] = useState(false)
-
-  const handleSubmit = async e => { e.preventDefault(); setSending(true); await new Promise(r => setTimeout(r, 1500)); setSending(false); setSent(true) }
-  const handleJobSubmit = async e => { e.preventDefault(); setJobSending(true); await new Promise(r => setTimeout(r, 1500)); setJobSending(false); setJobSent(true) }
-
-  return (
-    <div className="pt-24">
-
-      {/* ── HERO ── */}
-      <section className="relative overflow-hidden" style={{ height: '100dvh' }}>
-        <img src="/ct-hero.webp" alt="SAMFOR operaciones" className="absolute inset-0 w-full h-full object-cover object-[30%_center] lg:object-center" loading="eager" />
-        <div className="absolute inset-0 bg-gradient-to-r from-dark/90 via-dark/60 to-dark/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-dark/50 via-transparent to-transparent" />
-        <div className="relative h-full flex flex-col justify-end px-5 sm:px-8 md:px-16 lg:px-24 pb-10 md:pb-16 lg:pb-20">
-          <div className="max-w-2xl">
-            <div className="flex items-center gap-3 mb-5">
-              <span className="h-[3px] w-10 bg-samred" />
-              <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.25em] text-white/50">Contacto</span>
-            </div>
-            <h1 className="font-display text-[clamp(3.5rem,8vw,7rem)] text-white leading-none tracking-wide mb-6">
-              HABLEMOS<br /><span className="text-samred">.</span>
-            </h1>
-            <p className="text-white/60 text-lg max-w-md leading-relaxed mb-10">
-              Cuéntanos tu proyecto. Un especialista de SAMFOR evaluará tu consulta y te responderá a la brevedad.
-            </p>
-            <div className="flex flex-wrap gap-6">
-              {[
-                { icon: <Mail size={14}/>, val: 'samfor@samfor.com' },
-                { icon: <Phone size={14}/>, val: '+58 261 814 4444' },
-                { icon: <MapPin size={14}/>, val: 'Maracaibo, Venezuela' },
-              ].map(c => (
-                <div key={c.val} className="flex items-center gap-2 text-white/55 text-sm">
-                  <span className="text-samred">{c.icon}</span>{c.val}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── FORMULARIO PRINCIPAL — split: info izq, form der ── */}
-      <section className="grid grid-cols-1 md:grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1.2fr]">
-
-        {/* Left — info + foto decorativa */}
-        <div className="bg-dark flex flex-col justify-between px-5 md:px-14 py-12 md:py-16">
-          <div>
-            <div className="flex items-center gap-3 mb-8">
-              <span className="h-[3px] w-10 bg-samred" />
-              <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Información de Contacto</span>
-            </div>
-            <h2 className="font-display text-[clamp(2.5rem,4vw,3.5rem)] text-white leading-none mb-10">ESTAMOS<br />LISTOS<br />PARA TI</h2>
-            <div className="flex flex-col gap-6 mb-12">
-              {[
-                { icon: <Mail size={16}/>, label: 'Email', val: 'samfor@samfor.com' },
-                { icon: <Phone size={16}/>, label: 'Teléfonos', val: '+58 261 814 4444\n+58 414-615.8000' },
-                { icon: <Globe size={16}/>, label: 'Web', val: 'www.samfor.com' },
-                { icon: <MapPin size={16}/>, label: 'Dirección', val: 'Av. 3H entre Calles 68-70 N.69-61\nMaracaibo, Venezuela' },
-              ].map(item => (
-                <div key={item.label} className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded border border-white/10 flex items-center justify-center text-samred">{item.icon}</div>
-                  <div>
-                    <div className="font-mono text-[0.82rem] uppercase tracking-widest text-white/30 mb-0.5">{item.label}</div>
-                    <div className="text-white/75 text-base whitespace-pre-line">{item.val}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          {/* Decorative photo — turbina */}
-          <div className="relative rounded overflow-hidden" style={{ height: '220px' }}>
-            <img src="/ct-turbina2.webp" alt="Técnico SAMFOR en campo" className="w-full h-full object-cover object-center" loading="lazy" />
-            <div className="absolute inset-0 bg-gradient-to-t from-dark/60 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-samred" />
-            <div className="absolute bottom-4 left-5">
-              <span className="font-sub font-bold text-[0.75rem] uppercase tracking-widest text-white/50">Proyecto · Reemplazo Turbina BG-2</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Right — form */}
-        <div className="bg-white px-5 md:px-14 py-12 md:py-16">
-          {sent ? (
-            <div className="flex flex-col items-center justify-center h-full py-20 text-center">
-              <div className="w-16 h-16 rounded-full bg-green-50 border border-green-200 flex items-center justify-center mb-5">
-                <CheckCircle size={30} className="text-green-500" />
-              </div>
-              <h3 className="font-display text-4xl text-dark mb-3">MENSAJE ENVIADO</h3>
-              <p className="text-secondary text-sm max-w-xs leading-relaxed mb-8">Un especialista revisará tu consulta y se pondrá en contacto a la brevedad.</p>
-              <button onClick={() => { setSent(false); setForm({ name:'',company:'',email:'',phone:'',type:'',message:'' }) }} className="btn-primary">Enviar otro mensaje</button>
-            </div>
-          ) : (
-            <div>
-              <div className="flex items-center gap-3 mb-8">
-                <span className="h-[3px] w-10 bg-samred" />
-                <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Envía tu consulta</span>
-              </div>
-              <h2 className="font-display text-[clamp(2rem,3vw,2.75rem)] text-dark leading-none mb-10">¿TIENES UN<br />PROYECTO?</h2>
-              <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.82rem] font-mono text-secondary uppercase tracking-widest">Nombre *</label>
-                    <input className="form-input" required value={form.name} onChange={e=>setForm(f=>({...f,name:e.target.value}))} placeholder="Carlos Rodríguez" />
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.82rem] font-mono text-secondary uppercase tracking-widest">Empresa</label>
-                    <input className="form-input" value={form.company} onChange={e=>setForm(f=>({...f,company:e.target.value}))} placeholder="PDVSA, Chevron..." />
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.82rem] font-mono text-secondary uppercase tracking-widest">Email *</label>
-                    <input className="form-input" type="email" required value={form.email} onChange={e=>setForm(f=>({...f,email:e.target.value}))} placeholder="correo@empresa.com" />
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.82rem] font-mono text-secondary uppercase tracking-widest">Teléfono</label>
-                    <input className="form-input" type="tel" value={form.phone} onChange={e=>setForm(f=>({...f,phone:e.target.value}))} placeholder="+58 261 000 0000" />
-                  </div>
-                </div>
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-[0.82rem] font-mono text-secondary uppercase tracking-widest">Tipo de consulta</label>
-                  <select className="form-input" value={form.type} onChange={e=>setForm(f=>({...f,type:e.target.value}))}>
-                    <option value="">Seleccionar...</option>
-                    {['Propuesta de proyecto','Consulta técnica','Alianza comercial','Otro'].map(o=><option key={o}>{o}</option>)}
-                  </select>
-                </div>
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-[0.82rem] font-mono text-secondary uppercase tracking-widest">Mensaje *</label>
-                  <textarea className="form-input min-h-[120px] resize-none" required value={form.message} onChange={e=>setForm(f=>({...f,message:e.target.value}))} placeholder="Describe tu proyecto o consulta..." />
-                </div>
-                <button type="submit" className="btn-primary flex items-center justify-center gap-2 mt-2" disabled={sending}>
-                  {sending
-                    ? <><svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeDasharray="40 60"/></svg>Enviando...</>
-                    : <>Enviar Mensaje <ArrowRight size={15}/></>}
-                </button>
-              </form>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* ── ÚNETE A SAMFOR — dark + foto equipo ── */}
-      <section className="relative overflow-hidden" style={{ minHeight: '520px' }}>
-        <img src="/ct-jobs2.webp" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
-        <div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/90 to-dark/40" />
-        <div className="relative px-5 md:px-16 lg:px-24 py-12 md:py-20 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center max-w-7xl mx-auto">
-
-          {/* Left — text */}
-          <div>
-            <div className="flex items-center gap-3 mb-6">
-              <span className="h-[3px] w-10 bg-samred" />
-              <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Trabaja con Nosotros</span>
-            </div>
-            <h2 className="font-display text-[clamp(2.5rem,5vw,4rem)] text-white leading-none mb-6" style={{ textShadow: '0 2px 16px rgba(0,0,0,0.6)' }}>ÚNETE<br />A SAMFOR</h2>
-            <p className="text-white text-base leading-relaxed max-w-md mb-0" style={{ textShadow: '0 1px 8px rgba(0,0,0,0.8)' }}>
-              Forma parte del equipo que construye la infraestructura energética e industrial de Venezuela. Buscamos profesionales comprometidos con la excelencia técnica y la seguridad.
-            </p>
-          </div>
-
-          {/* Right — postulation form */}
-          <div className="bg-white/15 backdrop-blur-sm border border-white/25 rounded p-8">
-            {jobSent ? (
-              <div className="flex flex-col items-center py-8 text-center">
-                <CheckCircle size={36} className="text-green-400 mb-4" />
-                <h3 className="font-display text-2xl text-white mb-2">POSTULACIÓN RECIBIDA</h3>
-                <p className="text-white text-sm mb-6 max-w-xs">Revisaremos tu perfil y nos pondremos en contacto si hay oportunidad.</p>
-                <button onClick={()=>{ setJobSent(false); setJobForm({name:'',email:'',phone:'',area:'',exp:'',cv:null,letter:''}) }} className="btn-primary">Nueva Postulación</button>
-              </div>
-            ) : (
-              <form onSubmit={handleJobSubmit} noValidate className="flex flex-col gap-4">
-                <h3 className="font-display text-xl text-white mb-2">FORMULARIO DE POSTULACIÓN</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.82rem] font-mono text-white uppercase tracking-widest">Nombre *</label>
-                    <input className="form-input bg-white/15 border-white/30 text-white placeholder:text-white/50 focus:border-samred" required value={jobForm.name} onChange={e=>setJobForm(f=>({...f,name:e.target.value}))} placeholder="Nombre completo" />
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.82rem] font-mono text-white uppercase tracking-widest">Email *</label>
-                    <input className="form-input bg-white/15 border-white/30 text-white placeholder:text-white/50 focus:border-samred" type="email" required value={jobForm.email} onChange={e=>setJobForm(f=>({...f,email:e.target.value}))} placeholder="tu@email.com" />
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.82rem] font-mono text-white uppercase tracking-widest">Área</label>
-                    <select className="form-input bg-white/15 border-white/30 text-white focus:border-samred" value={jobForm.area} onChange={e=>setJobForm(f=>({...f,area:e.target.value}))}>
-                      <option value="" className="bg-dark">Seleccionar...</option>
-                      {['Ing. Eléctrica','Ing. Civil','Ing. Mecánica','Instrumentación','Telecomunicaciones','Ambiental','Transporte','Administración','Otra'].map(a=><option key={a} className="bg-dark">{a}</option>)}
-                    </select>
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-[0.82rem] font-mono text-white uppercase tracking-widest">Experiencia</label>
-                    <select className="form-input bg-white/15 border-white/30 text-white focus:border-samred" value={jobForm.exp} onChange={e=>setJobForm(f=>({...f,exp:e.target.value}))}>
-                      <option value="" className="bg-dark">Seleccionar...</option>
-                      {['0-2 años','3-5 años','6-10 años','10+ años'].map(x=><option key={x} className="bg-dark">{x}</option>)}
-                    </select>
-                  </div>
-                </div>
-                <div>
-                  <label className="text-[0.82rem] font-mono text-white uppercase tracking-widest block mb-1.5">CV / Hoja de Vida</label>
-                  <div className={`upload-zone border-white/30 bg-white/10 text-white hover:border-samred/60 ${drag?'border-samred/60':''}`}
-                    onDragOver={e=>{e.preventDefault();setDrag(true)}} onDragLeave={()=>setDrag(false)}
-                    onDrop={e=>{e.preventDefault();setDrag(false);const f=e.dataTransfer.files[0];if(f)setJobForm(jf=>({...jf,cv:f}))}}
-                    onClick={()=>document.getElementById('cv-input').click()}>
-                    <input id="cv-input" type="file" accept=".pdf,.doc,.docx" className="hidden" onChange={e=>{const f=e.target.files[0];if(f)setJobForm(jf=>({...jf,cv:f}))}} />
-                    {jobForm.cv
-                      ? <div className="flex items-center gap-2 justify-center text-samred"><CheckCircle size={14}/><span className="text-sm">{jobForm.cv.name}</span></div>
-                      : <div className="text-sm"><Upload size={16} className="mx-auto mb-1.5 opacity-40"/><span>Arrastra tu CV o <span className="text-white/70 font-semibold">haz clic</span></span></div>}
-                  </div>
-                </div>
-                <button type="submit" className="btn-primary flex items-center justify-center gap-2 mt-1" disabled={jobSending}>
-                  {jobSending
-                    ? <><svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" strokeDasharray="40 60"/></svg>Enviando...</>
-                    : <>Postularme <ArrowRight size={15}/></>}
-                </button>
-              </form>
-            )}
-          </div>
-        </div>
-      </section>
-
-    </div>
-  )
-}
-
 // ─── ROOT ─────────────────────────────────────────────────────────────────────
 export default function App() {
   const [page, setPage] = useState('inicio')

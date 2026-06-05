@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import gsap from 'gsap'
 import {
   Zap, Building2, Settings, Truck, Leaf, Ship, Cpu,
   ChevronRight, Menu, X, ArrowRight, MapPin, Phone, Mail, Globe,
@@ -1772,6 +1773,152 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
 }
 
 // ─── PAGE: QUIÉNES SOMOS ──────────────────────────────────────────────────────
+// ─── BEFORE / AFTER REVEAL (GSAP) ──────────────────────────────────────────
+function BeforeAfterReveal() {
+  const sectionRef = useRef(null)
+  const afterRef = useRef(null)
+  const lineRef = useRef(null)
+  const label1Ref = useRef(null)
+  const label2Ref = useRef(null)
+  const label3Ref = useRef(null)
+  const progressRef = useRef(null)
+  const playedRef = useRef(false)
+
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !playedRef.current) {
+          playedRef.current = true
+
+          const tl = gsap.timeline({ defaults: { ease: 'power2.inOut' } })
+
+          tl.to(afterRef.current,   { clipPath: 'inset(0 0% 0 0)', duration: 2.4 }, 0)
+          tl.to(lineRef.current,    { left: '100%',              duration: 2.4 }, 0)
+          tl.to(progressRef.current, { width: '100%',             duration: 2.4 }, 0)
+
+          tl.to(label1Ref.current,  { opacity: 1, scale: 1, duration: 0.35 }, 0.6)
+          tl.to(label2Ref.current,  { opacity: 1, scale: 1, duration: 0.35 }, 1.2)
+          tl.to(label3Ref.current,  { opacity: 1, scale: 1, duration: 0.35 }, 1.8)
+        }
+      },
+      { threshold: 0.25 },
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
+  return (
+    <section ref={sectionRef} className="bg-white py-12 md:py-24 px-5 md:px-16 lg:px-24">
+      <div className="max-w-7xl mx-auto">
+        {/* ── HEADER ── */}
+        <div className="scroll-reveal mb-8 md:mb-12">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="h-[3px] w-10 bg-samred" />
+            <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Proyecto Destacado</span>
+          </div>
+          <h2 className="font-display text-[clamp(2rem,4.5vw,3.5rem)] text-dark leading-none max-w-4xl">
+            DE LA OBRA <span className="text-samred">A LA REALIDAD</span>
+          </h2>
+          <p className="text-secondary text-base md:text-lg mt-3 max-w-2xl leading-relaxed">
+            Un vistazo a la transformación de nuestros proyectos. La línea muestra la evolución mes a mes desde el inicio hasta la entrega final.
+          </p>
+        </div>
+
+        {/* ── COMPARATOR ── */}
+        <div className="relative w-full overflow-hidden rounded-2xl shadow-2xl border border-gray-100"
+             style={{ aspectRatio: '16/9', maxHeight: '75vh' }}>
+
+          {/* BEFORE image (base layer) */}
+          <div className="absolute inset-0">
+            <img src="/proyectos/gasap-vieja.jpg" alt="Proyecto en etapa inicial"
+                 className="w-full h-full object-cover" loading="lazy" />
+            {/* Unified warm filter — same for both images */}
+            <div className="absolute inset-0 pointer-events-none"
+                 style={{ background: 'rgba(200,16,46,0.07)', mixBlendMode: 'multiply' }} />
+            <div className="absolute inset-0 pointer-events-none"
+                 style={{ background: 'linear-gradient(135deg, rgba(200,16,46,0.04) 0%, transparent 50%, rgba(200,16,46,0.04) 100%)' }} />
+          </div>
+
+          {/* AFTER image (clipped, revealed by line) */}
+          <div ref={afterRef}
+               className="absolute inset-0 overflow-hidden"
+               style={{ clipPath: 'inset(0 100% 0 0)' }}>
+            <img src="/proyectos/gasap-nueva.jpg" alt="Proyecto terminado"
+                 className="w-full h-full object-cover" loading="lazy" />
+            {/* Same unified warm filter */}
+            <div className="absolute inset-0 pointer-events-none"
+                 style={{ background: 'rgba(200,16,46,0.07)', mixBlendMode: 'multiply' }} />
+            <div className="absolute inset-0 pointer-events-none"
+                 style={{ background: 'linear-gradient(135deg, rgba(200,16,46,0.04) 0%, transparent 50%, rgba(200,16,46,0.04) 100%)' }} />
+          </div>
+
+          {/* ── SLIDER LINE ── */}
+          <div ref={lineRef}
+               className="absolute top-0 bottom-0 z-20 pointer-events-none"
+               style={{ left: '0%', width: '3px' }}>
+            {/* Glow line */}
+            <div className="absolute inset-0 bg-samred shadow-[0_0_14px_rgba(200,16,46,0.7)]" />
+            {/* Handle circle */}
+            <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-white border-[3px] border-samred shadow-xl flex items-center justify-center">
+              <div className="flex gap-0.5">
+                <div className="w-[3px] h-3 rounded-full bg-samred/60" />
+                <div className="w-[3px] h-3 rounded-full bg-samred/60 ml-[2px]" />
+              </div>
+            </div>
+          </div>
+
+          {/* ── MONTH LABELS (appear as line passes) ── */}
+          <div ref={label1Ref}
+               className="absolute bottom-[18%] left-[25%] -translate-x-1/2 z-10 opacity-0"
+               style={{ transform: 'translateX(-50%) scale(0.8)' }}>
+            <div className="bg-dark/80 backdrop-blur-md border border-white/15 rounded-lg px-3.5 py-2 shadow-lg">
+              <span className="text-white/40 font-mono text-[0.65rem] uppercase tracking-[0.2em]">Mes</span>
+              <span className="text-white font-display text-xl ml-1.5">1</span>
+            </div>
+          </div>
+          <div ref={label2Ref}
+               className="absolute bottom-[18%] left-[50%] -translate-x-1/2 z-10 opacity-0"
+               style={{ transform: 'translateX(-50%) scale(0.8)' }}>
+            <div className="bg-dark/80 backdrop-blur-md border border-white/15 rounded-lg px-3.5 py-2 shadow-lg">
+              <span className="text-white/40 font-mono text-[0.65rem] uppercase tracking-[0.2em]">Mes</span>
+              <span className="text-white font-display text-xl ml-1.5">2</span>
+            </div>
+          </div>
+          <div ref={label3Ref}
+               className="absolute bottom-[18%] left-[75%] -translate-x-1/2 z-10 opacity-0"
+               style={{ transform: 'translateX(-50%) scale(0.8)' }}>
+            <div className="bg-dark/80 backdrop-blur-md border border-white/15 rounded-lg px-3.5 py-2 shadow-lg">
+              <span className="text-white/40 font-mono text-[0.65rem] uppercase tracking-[0.2em]">Mes</span>
+              <span className="text-white font-display text-xl ml-1.5">3</span>
+            </div>
+          </div>
+
+          {/* ── STATIC LABELS: Antes / Después ── */}
+          <div className="absolute top-5 left-5 z-10 bg-dark/60 backdrop-blur-sm border border-white/10 rounded-lg px-3 py-1.5">
+            <span className="font-sub font-bold text-[0.65rem] uppercase tracking-[0.2em] text-white/40">Antes</span>
+          </div>
+          <div className="absolute top-5 right-5 z-10 bg-dark/60 backdrop-blur-sm border border-white/10 rounded-lg px-3 py-1.5">
+            <span className="font-sub font-bold text-[0.65rem] uppercase tracking-[0.2em] text-white/40">Después</span>
+          </div>
+
+          {/* ── PROGRESS BAR ── */}
+          <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-dark/10 z-10">
+            <div ref={progressRef}
+                 className="h-full bg-samred"
+                 style={{ width: '0%' }} />
+          </div>
+        </div>
+
+        <p className="text-center text-secondary/70 text-[0.82rem] mt-5 font-mono tracking-wider">
+          Transformación del proyecto — de la fase inicial a la entrega final
+        </p>
+      </div>
+    </section>
+  )
+}
+
 function PageQuienesSomos({ setPage }) {
   useScrollReveal()
 
@@ -2006,6 +2153,9 @@ function PageQuienesSomos({ setPage }) {
           </div>
         </div>
       </section>
+
+      {/* ── GSAP BEFORE/AFTER REVEAL ── */}
+      <BeforeAfterReveal />
 
       {/* ── HISTORIA — foto + timeline lateral ── */}
       <section className="bg-white py-12 md:py-24 px-5 md:px-16">

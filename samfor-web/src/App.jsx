@@ -1932,6 +1932,8 @@ function useGsapReveal(ref, delay = 0) {
 function PageQuienesSomos({ setPage }) {
   useScrollReveal()
   const heroRef = useRef(null)
+  const sectionRef = useRef(null)
+  const afterClipRef = useRef(null)
   const cubeRef = useRef(null)
   const aboutTextRef = useRef(null)
   const missionRef = useRef(null)
@@ -1946,6 +1948,29 @@ function PageQuienesSomos({ setPage }) {
       opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
       stagger: 0.12, delay: 0.3,
     })
+  }, [])
+
+  // Scroll-driven construction transition
+  useEffect(() => {
+    const clip = afterClipRef.current
+    const section = sectionRef.current
+    if (!clip || !section) return
+    let ticking = false
+    const update = () => {
+      const rect = section.getBoundingClientRect()
+      const wh = window.innerHeight
+      const sh = rect.height
+      const totalDist = wh + sh
+      const scrolled = wh - rect.top
+      let p = Math.max(0, Math.min(1, scrolled / totalDist))
+      const hidden = 100 - p * 100
+      clip.style.clipPath = `inset(0 ${hidden}% 0 0)`
+      ticking = false
+    }
+    const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update) } }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    update()
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   // Cube entrance animation
@@ -2051,15 +2076,36 @@ function PageQuienesSomos({ setPage }) {
   return (
     <div className="pt-24">
 
-      {/* ── HERO — con GSAP stagger ── */}
-      <section ref={heroRef} className="relative overflow-hidden" style={{ height: '100dvh' }}>
+      {/* ── HERO — construcción: antes / después (scroll-driven clip-path) ── */}
+      <section ref={sectionRef} className="relative overflow-hidden" style={{ height: '100dvh' }}>
+        {/* Before — old construction */}
         <div className="absolute inset-0">
-          <img src="/qs-hero.webp" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
-          <div className="absolute inset-0" style={{
-            background: 'linear-gradient(135deg, rgba(13,17,23,0.92) 0%, rgba(13,17,23,0.50) 50%, rgba(200,16,46,0.15) 100%)',
-          }} />
+          <img src="/proyectos/gasap-vieja.jpg" alt="Antes"
+               className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
         </div>
-        <div className="relative h-full flex flex-col justify-end px-5 sm:px-8 md:px-16 lg:px-24 pb-10 md:pb-16 lg:pb-20">
+        {/* After — new construction (clip-path driven by scroll) */}
+        <div ref={afterClipRef} className="absolute inset-0 overflow-hidden"
+             style={{ clipPath: 'inset(0 100% 0 0)' }}>
+          <img src="/proyectos/gasap-nueva.jpg" alt="Después"
+               className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
+        </div>
+        {/* Dark gradient overlay */}
+        <div className="absolute inset-0" style={{
+          background: 'linear-gradient(135deg, rgba(13,17,23,0.92) 0%, rgba(13,17,23,0.55) 50%, rgba(200,16,46,0.10) 100%)',
+        }} />
+
+        {/* Before / After badges */}
+        <div className="absolute top-6 right-6 z-10 flex gap-2">
+          <div className="bg-dark/60 backdrop-blur-sm border border-white/10 rounded px-2.5 py-1">
+            <span className="font-sub font-bold text-[0.55rem] uppercase tracking-[0.2em] text-white/40">Antes</span>
+          </div>
+          <div className="bg-dark/60 backdrop-blur-sm border border-white/10 rounded px-2.5 py-1">
+            <span className="font-sub font-bold text-[0.55rem] uppercase tracking-[0.2em] text-samred">Después</span>
+          </div>
+        </div>
+
+        {/* Content — with GSAP stagger entrance */}
+        <div ref={heroRef} className="relative h-full flex flex-col justify-end px-5 sm:px-8 md:px-16 lg:px-24 pb-10 md:pb-16 lg:pb-20">
           <div className="max-w-3xl">
             <div className="hero-item" style={{ opacity: 0 }}>
               <div className="flex items-center gap-3 mb-4">
@@ -2072,21 +2118,13 @@ function PageQuienesSomos({ setPage }) {
               <span className="text-samred">SEIS DÉCADAS.</span><br />
               UN ESTÁNDAR.
             </h1>
-            <p className="hero-item text-white/65 text-base md:text-lg max-w-xl leading-relaxed mb-8" style={{ opacity: 0 }}>
+            <p className="hero-item text-white/80 text-lg md:text-xl max-w-2xl leading-relaxed mb-8" style={{ opacity: 0 }}>
               Construyendo Venezuela con excelencia técnica, responsabilidad ambiental y el más alto compromiso con la seguridad industrial.
             </p>
-            <div className="hero-item" style={{ opacity: 0 }}>
-              <div className="flex flex-wrap gap-5 md:gap-8">
-                {[['60', 'A\u00f1os'], ['+250', 'Proyectos'], ['6', 'Divisiones'], ['1999', 'Cert. Ambiental']].map(([n, l]) => (
-                  <div key={l} className="bg-white/8 backdrop-blur-sm border border-white/15 rounded-lg px-4 py-3 md:bg-white/5 md:border-white/10">
-                    <div className="font-display text-[2.2rem] md:text-[2rem] text-samred leading-none">{n}</div>
-                    <div className="font-sub text-[0.75rem] md:text-[0.88rem] uppercase tracking-widest text-white/50 mt-1">{l}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
+
+        {/* Scroll indicator */}
         <div className="absolute bottom-7 right-8 flex flex-col items-center gap-1.5 opacity-30">
           <div className="w-[1px] h-10 bg-white animate-pulse" />
           <span className="font-mono text-[0.65rem] uppercase tracking-widest text-white rotate-90 translate-x-3">scroll</span>
@@ -2112,10 +2150,10 @@ function PageQuienesSomos({ setPage }) {
             </div>
           </div>
           <div className="bg-dark px-5 pb-12">
-            <p className="text-white/70 text-[1rem] leading-relaxed mb-5">
+            <p className="text-white/75 text-[1.1rem] leading-relaxed mb-5">
               Empresa venezolana fundada en 1966 en Maracaibo, dedicada a construcción civil, eléctrica, mecánica, telecomunicaciones, transporte y servicios ambientales para la industria petrolera y petroquímica.
             </p>
-            <p className="text-white/50 text-[0.95rem] leading-relaxed mb-8">
+            <p className="text-white/55 text-[1rem] leading-relaxed mb-8">
               Con 60 años de operación continua, contamos con la infraestructura, capital humano y estándares certificados para proyectos de alta complejidad en todo el territorio nacional.
             </p>
             {/* 3D Cube mobile */}
@@ -2163,10 +2201,10 @@ function PageQuienesSomos({ setPage }) {
               <h2 className="about-item font-display text-[clamp(2.5rem,4vw,3.75rem)] text-dark leading-none mb-8" style={{ opacity: 0 }}>
                 SAMFOR,<br />S.A.
               </h2>
-              <p className="about-item text-secondary text-base leading-relaxed mb-6" style={{ opacity: 0 }}>
+              <p className="about-item text-dark/70 text-[1.1rem] leading-relaxed mb-6" style={{ opacity: 0 }}>
                 Somos una empresa venezolana fundada en <span className="text-dark font-semibold">1966 en Maracaibo</span>, dedicada a la prestación de servicios de construcción civil, eléctrica, mecánica, telecomunicaciones, transporte y servicios ambientales para la industria petrolera, petroquímica, carbonífera y civil.
               </p>
-              <p className="about-item text-secondary text-base leading-relaxed mb-10" style={{ opacity: 0 }}>
+              <p className="about-item text-dark/55 text-[1.05rem] leading-relaxed mb-10" style={{ opacity: 0 }}>
                 Con casi seis décadas de operación continua, contamos con la infraestructura, el capital humano y los estándares certificados para ejecutar proyectos de alta complejidad en cualquier punto del territorio nacional.
               </p>
               <div className="about-item flex flex-col gap-4" style={{ opacity: 0 }}>

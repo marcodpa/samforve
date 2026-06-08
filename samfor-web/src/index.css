@@ -393,3 +393,28 @@ body {
   }
   .cube-wrapper { animation: none !important; transform: rotateX(-8deg) rotateY(0deg) !important; }
 }
+
+/* ─── Rectangular framed image — pan animation ───────────────────────────── */
+.frame-image-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+.frame-image-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(200,16,46,0.15);
+  pointer-events: none;
+  z-index: 2;
+}
+.frame-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: framePan 12s ease-in-out infinite;
+}
+@keyframes framePan {
+  0%   { transform: scale(1) translateX(0); }
+  50%  { transform: scale(1.08) translateX(-6%); }
+  100% { transform: scale(1) translateX(0); }
+}

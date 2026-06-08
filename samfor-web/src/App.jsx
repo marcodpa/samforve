@@ -1315,8 +1315,35 @@ function PageInicio({ setPage, navigateToServicios }) {
       <section className="bg-white overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-2 min-h-[480px] md:min-h-[560px] lg:min-h-[640px]">
 
-          {/* LEFT — before / after comparator */}
-          <HomeBeforeAfter />
+          {/* LEFT — rectangular framed image with continuous pan */}
+          <div className="relative order-1 md:order-none overflow-hidden bg-[#0a0c10] flex items-center justify-center">
+            {/* External frame border (mimics a physical picture frame) */}
+            <div className="relative w-full h-full md:m-8 lg:m-12 overflow-hidden shadow-[0_0_40px_rgba(200,16,46,0.08)]">
+              {/* Top-left corner accent */}
+              <div className="absolute top-0 left-0 w-12 h-12 z-10 pointer-events-none">
+                <div className="absolute top-0 left-0 w-6 h-[2px] bg-samred/50" />
+                <div className="absolute top-0 left-0 w-[2px] h-6 bg-samred/50" />
+              </div>
+              {/* Bottom-right corner accent */}
+              <div className="absolute bottom-0 right-0 w-12 h-12 z-10 pointer-events-none">
+                <div className="absolute bottom-0 right-0 w-6 h-[2px] bg-samred/50" />
+                <div className="absolute bottom-0 right-0 w-[2px] h-6 bg-samred/50" />
+              </div>
+              {/* Image with continuous pan animation */}
+              <div className="frame-image-wrapper w-full h-full" style={{ minHeight: 'clamp(300px, 50vh, 480px)' }}>
+                <img src="/proyectos/gasap-nueva.jpg" alt="SAMFOR" loading="lazy" />
+              </div>
+              {/* Subtle overlay */}
+              <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(200,16,46,0.06), transparent 40%, rgba(200,16,46,0.04))' }} />
+              <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: 'inset 0 0 80px rgba(0,0,0,0.15)' }} />
+              {/* Badge */}
+              <div className="absolute bottom-5 left-5 z-10">
+                <div className="bg-white/90 backdrop-blur-sm px-3.5 py-2 rounded shadow-lg">
+                  <span className="font-sub font-bold text-[0.55rem] uppercase tracking-[0.2em] text-samred">Desde 1966</span>
+                </div>
+              </div>
+            </div>
+          </div>
 
           {/* RIGHT — content */}
           <div className="flex flex-col justify-center px-8 md:px-14 lg:px-16 py-14 lg:py-20">

@@ -1256,7 +1256,7 @@ function PageInicio({ setPage, navigateToServicios }) {
     return () => clearInterval(t)
   }, [])
 
-  // Scroll-driven construction transition for Quiénes Somos section
+  // Scroll-triggered reveal: construction transition (0→100%) within sticky section
   useEffect(() => {
     const clip = afterClipRef.current
     const section = sectionRef.current
@@ -1264,16 +1264,14 @@ function PageInicio({ setPage, navigateToServicios }) {
 
     let ticking = false
     const update = () => {
-      const rect = section.getBoundingClientRect()
       const wh = window.innerHeight
-      const sh = rect.height
-      // progress: 0 when bottom enters viewport → "before", 1 when top leaves → "after"
-      const totalDist = wh + sh
-      const scrolled = wh - rect.top
-      let p = Math.max(0, Math.min(1, scrolled / totalDist))
-      // clip from right: 100% hidden (before) → 0% hidden (after)
-      const hidden = 100 - p * 100
-      clip.style.clipPath = `inset(0 ${hidden}% 0 0)`
+      const sh = section.offsetHeight
+      const scrollable = sh - wh               // extra scroll room (100dvh)
+      const rect = section.getBoundingClientRect()
+      const scrolled = wh - rect.top           // pixels scrolled into section
+      let p = Math.max(0, Math.min(1, scrolled / scrollable))
+      // clip: 100% hidden (before) → 0% hidden (after)
+      clip.style.clipPath = `inset(0 ${100 - p * 100}% 0 0)`
       ticking = false
     }
 
@@ -1339,96 +1337,92 @@ function PageInicio({ setPage, navigateToServicios }) {
           </div>
         </div>
       </section>
+      {/* QUIÉNES SOMOS — sticky scroll-reveal: construcción antes/después */}
+      <section ref={sectionRef} className="relative" style={{ height: '200dvh' }}>
 
-      {/* QUIÉNES SOMOS — unified hero: before/after construction + text overlaid */}
-      <section ref={sectionRef} className="relative bg-[#0a0c10] overflow-hidden" style={{ minHeight: '100dvh' }}>
+        {/* Sticky content — fills screen while scrolling through 200dvh */}
+        <div className="sticky top-0 h-screen overflow-hidden bg-[#0a0c10]">
 
-        {/* ─── Background layers (before → after construction) ─── */}
-        {/* Before image (base — old construction) */}
-        <div className="absolute inset-0">
-          <img src="/proyectos/gasap-vieja.jpg" alt="Antes"
-               className="w-full h-full object-cover" loading="lazy" />
-        </div>
-        {/* After image (overlaid — new construction, clip-path driven by scroll) */}
-        <div ref={afterClipRef} className="absolute inset-0 overflow-hidden"
-             style={{ clipPath: 'inset(0 100% 0 0)' }}>
-          <img src="/proyectos/gasap-nueva.jpg" alt="Después"
-               className="w-full h-full object-cover" loading="lazy" />
-        </div>
-        {/* Dark gradient overlay for text readability */}
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #0D1117 0%, rgba(13,17,23,0.82) 30%, rgba(13,17,23,0.55) 60%, rgba(13,17,23,0.3) 100%)' }} />
-
-        {/* Corner frame accents — over the images */}
-        <div className="absolute top-6 left-6 md:top-10 md:left-10 w-16 h-16 z-10 pointer-events-none">
-          <div className="absolute top-0 left-0 w-10 h-[1px] bg-samred/30" />
-          <div className="absolute top-0 left-0 w-[1px] h-10 bg-samred/30" />
-        </div>
-        <div className="absolute bottom-6 right-6 md:bottom-10 md:right-10 w-16 h-16 z-10 pointer-events-none">
-          <div className="absolute bottom-0 right-0 w-10 h-[1px] bg-samred/30" />
-          <div className="absolute bottom-0 right-0 w-[1px] h-10 bg-samred/30" />
-        </div>
-
-        {/* Before / After badges */}
-        <div className="absolute top-6 right-6 md:top-10 md:right-10 z-10 flex gap-2">
-          <div className="bg-dark/60 backdrop-blur-sm border border-white/10 rounded px-2.5 py-1">
-            <span className="font-sub font-bold text-[0.55rem] uppercase tracking-[0.2em] text-white/40">Antes</span>
-          </div>
-          <div className="bg-dark/60 backdrop-blur-sm border border-white/10 rounded px-2.5 py-1">
-            <span className="font-sub font-bold text-[0.55rem] uppercase tracking-[0.2em] text-samred">Después</span>
-          </div>
-        </div>
-
-        {/* ─── Content overlaid ─── */}
-        <div className="relative z-10 flex flex-col justify-center min-h-screen px-6 md:px-14 lg:px-20 max-w-4xl">
-
-          {/* Eyebrow */}
-          <div className="scroll-reveal flex items-center gap-3 mb-4">
-            <span className="h-[2px] w-10 bg-samred flex-shrink-0" />
-            <span className="font-sub font-semibold text-[0.78rem] tracking-[0.28em] uppercase text-samred">Quiénes somos</span>
+          {/* Before — old construction */}
+          <div className="absolute inset-0">
+            <img src="/proyectos/gasap-vieja.jpg" alt="Antes"
+                 className="w-full h-full object-cover" loading="lazy" />
           </div>
 
-          <h2 className="scroll-reveal font-display text-[3rem] md:text-[4.5rem] lg:text-[5.5rem] text-white leading-[0.92] mb-8 tracking-wide">
-            INGENIERÍA<br />
-            <span className="text-samred">SIN LÍMITES.</span>
-          </h2>
-
-          <div className="scroll-reveal max-w-2xl mb-10">
-            <p className="text-white/75 text-base md:text-[1.1rem] leading-relaxed mb-4">
-              SAMFOR es una empresa venezolana de contratación industrial con 60 años de trayectoria continua. Ejecutamos proyectos de alta complejidad para la industria petrolera, petroquímica, civil, ambiental y de servicios públicos en todo el territorio nacional.
-            </p>
-            <p className="text-white/50 text-sm md:text-base leading-relaxed">
-              Fundada en 1966, contamos con equipos multidisciplinarios, maquinaria pesada propia y más de 50 clientes institucionales entre empresas públicas y privadas nacionales e internacionales.
-            </p>
+          {/* After — new construction (clip-path: 100%→0% as you scroll) */}
+          <div ref={afterClipRef} className="absolute inset-0 overflow-hidden"
+               style={{ clipPath: 'inset(0 100% 0 0)' }}>
+            <img src="/proyectos/gasap-nueva.jpg" alt="Después"
+                 className="w-full h-full object-cover" loading="lazy" />
           </div>
 
-          {/* Stats */}
-          <div className="scroll-reveal flex flex-wrap gap-8 md:gap-12 mb-12">
-            {[
-              { n: '+250', l: 'Proyectos\nejecutados' },
-              { n: '7',    l: 'Divisiones\nespecializadas' },
-              { n: '50+',  l: 'Clientes\nacionales' },
-            ].map(({ n, l }) => (
-              <div key={n}>
-                <span className="font-display text-[2.5rem] md:text-[3.2rem] text-white leading-none">{n}</span>
-                <span className="block font-sub text-[0.78rem] tracking-[0.22em] uppercase text-white/40 mt-1 whitespace-pre-line">{l}</span>
-              </div>
-            ))}
+          {/* Gradient overlay */}
+          <div className="absolute inset-0" style={{
+            background: 'linear-gradient(135deg, #0D1117 0%, rgba(13,17,23,0.80) 30%, rgba(13,17,23,0.50) 60%, rgba(13,17,23,0.2) 100%)',
+          }} />
+
+          {/* Before / After badges */}
+          <div className="absolute top-6 right-6 z-10 flex gap-2">
+            <div className="bg-dark/60 backdrop-blur-sm border border-white/10 rounded px-2.5 py-1">
+              <span className="font-sub font-bold text-[0.55rem] uppercase tracking-[0.2em] text-white/40">Antes</span>
+            </div>
+            <div className="bg-dark/60 backdrop-blur-sm border border-white/10 rounded px-2.5 py-1">
+              <span className="font-sub font-bold text-[0.55rem] uppercase tracking-[0.2em] text-samred">Después</span>
+            </div>
           </div>
 
-          {/* CTA */}
-          <div className="scroll-reveal">
-            <button
-              onClick={() => setPage('quienes-somos')}
-              className="group inline-flex items-center gap-2.5 font-sub font-bold text-[0.75rem] tracking-[0.18em] uppercase text-white border border-white/30 px-8 py-4 rounded transition-all hover:bg-samred hover:border-samred"
-            >
-              Conocer nuestra historia
-              <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
-            </button>
+          {/* Corner accents */}
+          <div className="absolute top-6 left-6 md:top-10 md:left-10 w-16 h-16 z-10 pointer-events-none">
+            <div className="absolute top-0 left-0 w-10 h-[1px] bg-samred/30" />
+            <div className="absolute top-0 left-0 w-[1px] h-10 bg-samred/30" />
           </div>
+          <div className="absolute bottom-6 right-6 md:bottom-10 md:right-10 w-16 h-16 z-10 pointer-events-none">
+            <div className="absolute bottom-0 right-0 w-10 h-[1px] bg-samred/30" />
+            <div className="absolute bottom-0 right-0 w-[1px] h-10 bg-samred/30" />
+          </div>
+
+          {/* Content — centered */}
+          <div className="relative z-10 h-full flex flex-col justify-center px-6 md:px-14 lg:px-20 max-w-4xl mx-auto">
+            <div className="scroll-reveal flex items-center gap-3 mb-4">
+              <span className="h-[2px] w-10 bg-samred flex-shrink-0" />
+              <span className="font-sub font-semibold text-[0.78rem] tracking-[0.28em] uppercase text-samred">Quiénes somos</span>
+            </div>
+
+            <h2 className="scroll-reveal font-display text-[3rem] md:text-[4.5rem] lg:text-[5.5rem] text-white leading-[0.92] mb-8 tracking-wide">
+              INGENIERÍA<br />
+              <span className="text-samred">SIN LÍMITES.</span>
+            </h2>
+
+            <div className="scroll-reveal max-w-2xl mb-12">
+              <p className="text-white/75 text-base md:text-[1.1rem] leading-relaxed mb-4">
+                SAMFOR es una empresa venezolana de contratación industrial con 60 años de trayectoria continua. Ejecutamos proyectos de alta complejidad para la industria petrolera, petroquímica, civil, ambiental y de servicios públicos.
+              </p>
+              <p className="text-white/50 text-sm md:text-base leading-relaxed">
+                Fundada en 1966, con equipos multidisciplinarios, maquinaria pesada propia y más de 50 clientes institucionales nacionales e internacionales.
+              </p>
+            </div>
+
+            <div className="scroll-reveal">
+              <button
+                onClick={() => setPage('quienes-somos')}
+                className="group inline-flex items-center gap-2.5 font-sub font-bold text-[0.75rem] tracking-[0.18em] uppercase text-white border border-white/30 px-8 py-4 rounded transition-all hover:bg-samred hover:border-samred"
+              >
+                Conocer nuestra historia
+                <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
+              </button>
+            </div>
+          </div>
+
+          {/* Scroll progress indicator */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1.5 opacity-40">
+            <div className="w-[1px] h-8 bg-white/30" />
+            <span className="font-mono text-[0.55rem] uppercase tracking-[0.3em] text-white/40">Scroll para revelar</span>
+          </div>
+
         </div>
-
       </section>
 
+      
       {/* SERVICES */}
       <section className="bg-dark overflow-hidden relative">
 
@@ -1932,8 +1926,6 @@ function useGsapReveal(ref, delay = 0) {
 function PageQuienesSomos({ setPage }) {
   useScrollReveal()
   const heroRef = useRef(null)
-  const sectionRef = useRef(null)
-  const afterClipRef = useRef(null)
   const cubeRef = useRef(null)
   const aboutTextRef = useRef(null)
   const missionRef = useRef(null)
@@ -1950,29 +1942,7 @@ function PageQuienesSomos({ setPage }) {
     })
   }, [])
 
-  // Scroll-driven construction transition
-  useEffect(() => {
-    const clip = afterClipRef.current
-    const section = sectionRef.current
-    if (!clip || !section) return
-    let ticking = false
-    const update = () => {
-      const rect = section.getBoundingClientRect()
-      const wh = window.innerHeight
-      const sh = rect.height
-      const totalDist = wh + sh
-      const scrolled = wh - rect.top
-      let p = Math.max(0, Math.min(1, scrolled / totalDist))
-      const hidden = 100 - p * 100
-      clip.style.clipPath = `inset(0 ${hidden}% 0 0)`
-      ticking = false
-    }
-    const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update) } }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    update()
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
+  
   // Cube entrance animation
   useEffect(() => {
     const el = cubeRef.current
@@ -2076,36 +2046,15 @@ function PageQuienesSomos({ setPage }) {
   return (
     <div className="pt-24">
 
-      {/* ── HERO — construcción: antes / después (scroll-driven clip-path) ── */}
-      <section ref={sectionRef} className="relative overflow-hidden" style={{ height: '100dvh' }}>
-        {/* Before — old construction */}
+      {/* ── HERO — con GSAP stagger ── */}
+      <section ref={heroRef} className="relative overflow-hidden" style={{ height: '100dvh' }}>
         <div className="absolute inset-0">
-          <img src="/proyectos/gasap-vieja.jpg" alt="Antes"
-               className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
+          <img src="/qs-hero.webp" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
+          <div className="absolute inset-0" style={{
+            background: 'linear-gradient(135deg, rgba(13,17,23,0.92) 0%, rgba(13,17,23,0.50) 50%, rgba(200,16,46,0.15) 100%)',
+          }} />
         </div>
-        {/* After — new construction (clip-path driven by scroll) */}
-        <div ref={afterClipRef} className="absolute inset-0 overflow-hidden"
-             style={{ clipPath: 'inset(0 100% 0 0)' }}>
-          <img src="/proyectos/gasap-nueva.jpg" alt="Después"
-               className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
-        </div>
-        {/* Dark gradient overlay */}
-        <div className="absolute inset-0" style={{
-          background: 'linear-gradient(135deg, rgba(13,17,23,0.92) 0%, rgba(13,17,23,0.55) 50%, rgba(200,16,46,0.10) 100%)',
-        }} />
-
-        {/* Before / After badges */}
-        <div className="absolute top-6 right-6 z-10 flex gap-2">
-          <div className="bg-dark/60 backdrop-blur-sm border border-white/10 rounded px-2.5 py-1">
-            <span className="font-sub font-bold text-[0.55rem] uppercase tracking-[0.2em] text-white/40">Antes</span>
-          </div>
-          <div className="bg-dark/60 backdrop-blur-sm border border-white/10 rounded px-2.5 py-1">
-            <span className="font-sub font-bold text-[0.55rem] uppercase tracking-[0.2em] text-samred">Después</span>
-          </div>
-        </div>
-
-        {/* Content — with GSAP stagger entrance */}
-        <div ref={heroRef} className="relative h-full flex flex-col justify-end px-5 sm:px-8 md:px-16 lg:px-24 pb-10 md:pb-16 lg:pb-20">
+        <div className="relative h-full flex flex-col justify-end px-5 sm:px-8 md:px-16 lg:px-24 pb-10 md:pb-16 lg:pb-20">
           <div className="max-w-3xl">
             <div className="hero-item" style={{ opacity: 0 }}>
               <div className="flex items-center gap-3 mb-4">
@@ -2118,13 +2067,21 @@ function PageQuienesSomos({ setPage }) {
               <span className="text-samred">SEIS DÉCADAS.</span><br />
               UN ESTÁNDAR.
             </h1>
-            <p className="hero-item text-white/80 text-lg md:text-xl max-w-2xl leading-relaxed mb-8" style={{ opacity: 0 }}>
+            <p className="hero-item text-white/65 text-base md:text-lg max-w-xl leading-relaxed mb-8" style={{ opacity: 0 }}>
               Construyendo Venezuela con excelencia técnica, responsabilidad ambiental y el más alto compromiso con la seguridad industrial.
             </p>
+            <div className="hero-item" style={{ opacity: 0 }}>
+              <div className="flex flex-wrap gap-5 md:gap-8">
+                {[['60', 'A\u00f1os'], ['+250', 'Proyectos'], ['6', 'Divisiones'], ['1999', 'Cert. Ambiental']].map(([n, l]) => (
+                  <div key={l} className="bg-white/8 backdrop-blur-sm border border-white/15 rounded-lg px-4 py-3 md:bg-white/5 md:border-white/10">
+                    <div className="font-display text-[2.2rem] md:text-[2rem] text-samred leading-none">{n}</div>
+                    <div className="font-sub text-[0.75rem] md:text-[0.88rem] uppercase tracking-widest text-white/50 mt-1">{l}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-
-        {/* Scroll indicator */}
         <div className="absolute bottom-7 right-8 flex flex-col items-center gap-1.5 opacity-30">
           <div className="w-[1px] h-10 bg-white animate-pulse" />
           <span className="font-mono text-[0.65rem] uppercase tracking-widest text-white rotate-90 translate-x-3">scroll</span>

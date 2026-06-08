@@ -1268,8 +1268,9 @@ function PageInicio({ setPage, navigateToServicios }) {
       const sh = section.offsetHeight
       const scrollable = sh - wh               // extra scroll room (100dvh)
       const rect = section.getBoundingClientRect()
-      const scrolled = wh - rect.top           // pixels scrolled into section
-      let p = Math.max(0, Math.min(1, scrolled / scrollable))
+      // Transition starts when sticky locks (rect.top = 0) and finishes at end of sticky
+      const scrolledIntoSticky = -rect.top     // 0 when sticky locks, positive through sticky
+      let p = Math.max(0, Math.min(1, scrolledIntoSticky / scrollable))
       // clip: 100% hidden (before) → 0% hidden (after)
       clip.style.clipPath = `inset(0 ${100 - p * 100}% 0 0)`
       ticking = false

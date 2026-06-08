@@ -1343,86 +1343,89 @@ function PageInicio({ setPage, navigateToServicios }) {
 
       {/* QUIÉNES SOMOS — home snippet */}
       <section ref={sectionRef} className="bg-white overflow-hidden">
-        <div className="grid grid-cols-1 md:grid-cols-2 min-h-[480px] md:min-h-[560px] lg:min-h-[640px]">
 
-          {/* LEFT — rectangular framed image with continuous pan */}
-          <div className="relative order-1 md:order-none overflow-hidden bg-[#0a0c10] flex items-center justify-center">
-            {/* External frame border (mimics a physical picture frame) */}
-            <div className="relative w-full h-full md:m-8 lg:m-12 overflow-hidden shadow-[0_0_40px_rgba(200,16,46,0.08)]">
-              {/* Top-left corner accent */}
-              <div className="absolute top-0 left-0 w-12 h-12 z-10 pointer-events-none">
-                <div className="absolute top-0 left-0 w-6 h-[2px] bg-samred/50" />
-                <div className="absolute top-0 left-0 w-[2px] h-6 bg-samred/50" />
-              </div>
-              {/* Bottom-right corner accent */}
-              <div className="absolute bottom-0 right-0 w-12 h-12 z-10 pointer-events-none">
-                <div className="absolute bottom-0 right-0 w-6 h-[2px] bg-samred/50" />
-                <div className="absolute bottom-0 right-0 w-[2px] h-6 bg-samred/50" />
-              </div>
-              {/* Image with continuous pan animation */}
-              <div className="frame-image-wrapper w-full h-full" style={{ minHeight: 'clamp(300px, 50vh, 480px)' }}>
-                <img ref={aboutImgRef} src="/proyectos/gasap-nueva.jpg" alt="SAMFOR" loading="lazy" />
-              </div>
-              {/* Subtle overlay */}
-              <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(200,16,46,0.06), transparent 40%, rgba(200,16,46,0.04))' }} />
-              <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: 'inset 0 0 80px rgba(0,0,0,0.15)' }} />
-              {/* Badge */}
-              <div className="absolute bottom-5 left-5 z-10">
-                <div className="bg-white/90 backdrop-blur-sm px-3.5 py-2 rounded shadow-lg">
-                  <span className="font-sub font-bold text-[0.55rem] uppercase tracking-[0.2em] text-samred">Desde 1966</span>
-                </div>
+        {/* ─── Horizontal rectangular image ─── */}
+        <div className="relative w-full bg-[#0a0c10] overflow-hidden">
+          {/* Frame container */}
+          <div className="relative mx-4 md:mx-8 lg:mx-16 my-6 md:my-10 lg:my-14 overflow-hidden shadow-[0_0_50px_rgba(200,16,46,0.08)]">
+            {/* Corner accents */}
+            <div className="absolute top-0 left-0 w-14 h-14 z-10 pointer-events-none">
+              <div className="absolute top-0 left-0 w-8 h-[2px] bg-samred/40" />
+              <div className="absolute top-0 left-0 w-[2px] h-8 bg-samred/40" />
+            </div>
+            <div className="absolute bottom-0 right-0 w-14 h-14 z-10 pointer-events-none">
+              <div className="absolute bottom-0 right-0 w-8 h-[2px] bg-samred/40" />
+              <div className="absolute bottom-0 right-0 w-[2px] h-8 bg-samred/40" />
+            </div>
+            {/* Image — horizontal rectangle (21:9 aspect ratio) */}
+            <div className="frame-image-wrapper w-full" style={{ aspectRatio: '21 / 9', minHeight: '200px' }}>
+              <img ref={aboutImgRef} src="/proyectos/gasap-nueva.jpg" alt="SAMFOR" loading="lazy" />
+            </div>
+            {/* Overlays */}
+            <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(200,16,46,0.08), transparent 40%, rgba(200,16,46,0.04))' }} />
+            <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: 'inset 0 0 80px rgba(0,0,0,0.20)' }} />
+            {/* Badge */}
+            <div className="absolute bottom-4 left-4 z-10">
+              <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded shadow-lg">
+                <span className="font-sub font-bold text-[0.55rem] uppercase tracking-[0.2em] text-samred">Desde 1966</span>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* RIGHT — content */}
-          <div className="flex flex-col justify-center px-8 md:px-14 lg:px-16 py-14 lg:py-20">
+        {/* ─── Content — redesigned ─── */}
+        <div className="max-w-6xl mx-auto px-6 md:px-14 lg:px-20 py-12 md:py-16 lg:py-20">
 
-            {/* eyebrow */}
-            <div className="scroll-reveal flex items-center gap-3 mb-5">
-              <span className="h-[2px] w-8 bg-samred flex-shrink-0" />
-              <span className="font-sub font-semibold text-[0.8rem] tracking-[0.28em] uppercase text-samred">Quiénes somos</span>
-            </div>
+          {/* Header row */}
+          <div className="scroll-reveal flex items-center gap-3 mb-4">
+            <span className="h-[2px] w-8 bg-samred flex-shrink-0" />
+            <span className="font-sub font-semibold text-[0.8rem] tracking-[0.28em] uppercase text-samred">Quiénes somos</span>
+          </div>
 
-            <h2 className="scroll-reveal font-display text-[2.4rem] md:text-[3rem] lg:text-[3.4rem] text-dark leading-none mb-6 tracking-wide">
-              INGENIERÍA<br />
-              <span className="text-samred">SIN LÍMITES.</span>
-            </h2>
+          <h2 className="scroll-reveal font-display text-[2.8rem] md:text-[3.5rem] lg:text-[4rem] text-dark leading-none mb-8 tracking-wide">
+            INGENIERÍA<br />
+            <span className="text-samred">SIN LÍMITES.</span>
+          </h2>
 
-            <p className="scroll-reveal text-dark/65 text-base md:text-[1.0625rem] leading-relaxed mb-5 max-w-lg">
+          {/* Info grid — 2 columns on desktop */}
+          <div className="scroll-reveal grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mb-10">
+            <p className="text-dark/65 text-base md:text-[1.0625rem] leading-relaxed">
               SAMFOR es una empresa venezolana de contratación industrial con 60 años de trayectoria continua. Ejecutamos proyectos de alta complejidad para la industria petrolera, petroquímica, civil, ambiental y de servicios públicos en todo el territorio nacional.
             </p>
-
-            <p className="scroll-reveal text-dark/50 text-sm md:text-base leading-relaxed mb-10 max-w-lg">
+            <p className="text-dark/50 text-sm md:text-base leading-relaxed">
               Fundada en 1966, contamos con equipos multidisciplinarios, maquinaria pesada propia y más de 50 clientes institucionales entre empresas públicas y privadas nacionales e internacionales — incluyendo Chevron, PDVSA, Repsol y agencias de Naciones Unidas.
             </p>
-
-            {/* pillars */}
-            <div className="scroll-reveal grid grid-cols-3 gap-4 mb-10">
-              {[
-                { n: '+250', l: 'Proyectos\nejecutados' },
-                { n: '7',    l: 'Divisiones\nespecializadas' },
-                { n: '50+',  l: 'Clientes\nhistóricos' },
-              ].map(({ n, l }) => (
-                <div key={n} className="border-l-2 border-samred pl-3">
-                  <span className="font-display text-[1.75rem] text-dark leading-none">{n}</span>
-                  <span className="block font-sub text-[0.82rem] tracking-widest uppercase text-dark/45 mt-1 whitespace-pre-line">{l}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="scroll-reveal">
-              <button
-                onClick={() => setPage('quienes-somos')}
-                className="group inline-flex items-center gap-2 font-sub font-bold text-[0.75rem] tracking-[0.18em] uppercase text-samred border border-samred px-7 py-3.5 rounded transition-all hover:bg-samred hover:text-white"
-              >
-                Conocer nuestra historia
-                <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
-              </button>
-            </div>
           </div>
 
+          {/* Divider */}
+          <div className="scroll-reveal w-full h-[1px] bg-dark/10 mb-8" />
+
+          {/* Stats row */}
+          <div className="scroll-reveal grid grid-cols-3 gap-6 md:gap-8 mb-10 max-w-2xl">
+            {[
+              { n: '+250', l: 'Proyectos\nejecutados' },
+              { n: '7',    l: 'Divisiones\nespecializadas' },
+              { n: '50+',  l: 'Clientes\nhistóricos' },
+            ].map(({ n, l }) => (
+              <div key={n}>
+                <span className="font-display text-[2.2rem] md:text-[2.8rem] text-dark leading-none">{n}</span>
+                <span className="block font-sub text-[0.82rem] tracking-widest uppercase text-dark/40 mt-1.5 whitespace-pre-line">{l}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <div className="scroll-reveal">
+            <button
+              onClick={() => setPage('quienes-somos')}
+              className="group inline-flex items-center gap-2.5 font-sub font-bold text-[0.75rem] tracking-[0.18em] uppercase text-samred border border-samred px-8 py-4 rounded transition-all hover:bg-samred hover:text-white"
+            >
+              Conocer nuestra historia
+              <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
+            </button>
+          </div>
         </div>
+
       </section>
 
       {/* SERVICES */}

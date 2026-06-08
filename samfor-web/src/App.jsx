@@ -1239,6 +1239,8 @@ function HomeBeforeAfter() {
 // ─── PAGE: INICIO ─────────────────────────────────────────────────────────────
 function PageInicio({ setPage, navigateToServicios }) {
   useScrollReveal()
+  const aboutImgRef = useRef(null)
+  const sectionRef = useRef(null)
   const featured = [
     ALL_PROJECTS.find(p => p.id === 1),   // Termoeléctrica Bajo Grande (active)
     ALL_PROJECTS.find(p => p.id === 101), // Subestación 155KV
@@ -1252,6 +1254,34 @@ function PageInicio({ setPage, navigateToServicios }) {
   useEffect(() => {
     const t = setInterval(() => setHeroIdx(i => (i + 1) % 3), 5000)
     return () => clearInterval(t)
+  }, [])
+
+  // Scroll-driven image pan for Quiénes Somos section
+  useEffect(() => {
+    const img = aboutImgRef.current
+    const section = sectionRef.current
+    if (!img || !section) return
+
+    let ticking = false
+    const update = () => {
+      const rect = section.getBoundingClientRect()
+      const wh = window.innerHeight
+      const sh = rect.height
+      // progress: 0 when bottom of section enters viewport, 1 when top leaves
+      const totalDist = wh + sh
+      const scrolled = wh - rect.top
+      let p = Math.max(0, Math.min(1, scrolled / totalDist))
+      // map to scale(1→1.08), translateX(0→-6%)
+      const scale = 1 + 0.08 * p
+      const tx = -6 * p
+      img.style.transform = `scale(${scale}) translateX(${tx}%)`
+      ticking = false
+    }
+
+    const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update) } }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    update()
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   return (
@@ -1312,7 +1342,7 @@ function PageInicio({ setPage, navigateToServicios }) {
       </section>
 
       {/* QUIÉNES SOMOS — home snippet */}
-      <section className="bg-white overflow-hidden">
+      <section ref={sectionRef} className="bg-white overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-2 min-h-[480px] md:min-h-[560px] lg:min-h-[640px]">
 
           {/* LEFT — rectangular framed image with continuous pan */}
@@ -1331,7 +1361,7 @@ function PageInicio({ setPage, navigateToServicios }) {
               </div>
               {/* Image with continuous pan animation */}
               <div className="frame-image-wrapper w-full h-full" style={{ minHeight: 'clamp(300px, 50vh, 480px)' }}>
-                <img src="/proyectos/gasap-nueva.jpg" alt="SAMFOR" loading="lazy" />
+                <img ref={aboutImgRef} src="/proyectos/gasap-nueva.jpg" alt="SAMFOR" loading="lazy" />
               </div>
               {/* Subtle overlay */}
               <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(200,16,46,0.06), transparent 40%, rgba(200,16,46,0.04))' }} />

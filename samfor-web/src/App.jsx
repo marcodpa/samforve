@@ -2392,6 +2392,49 @@ function PageQuienesSomos({ setPage }) {
     </div>
   )
 }
+// ─── CONTACTO ─────────────────────────────────────────────────────────────────
+function PageContacto() {
+  const [form, setForm] = useState({ nombre: '', email: '', asunto: '', mensaje: '' })
+  const [sent, setSent] = useState(false)
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
+  const handleSubmit = (e) => { e.preventDefault(); setSent(true) }
+  return (
+    <section className="relative min-h-screen bg-black pt-28 pb-20 px-4 overflow-hidden">
+      {/* bg texture */}
+      <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 25% 25%, #991b1b 0%, transparent 70%)' }} />
+      <div className="relative max-w-6xl mx-auto">
+        <h2 className="font-display text-5xl md:text-7xl text-white tracking-tight mb-2">
+          <span className="text-red-500">Contáct</span>anos
+        </h2>
+        <p className="text-zinc-400 text-lg mb-12 max-w-xl">
+          Estamos listos para tu próximo proyecto. Hablemos.
+        </p>
+        {sent ? (
+          <div className="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-12 text-center max-w-lg">
+            <div className="text-5xl mb-4">✓</div>
+            <h3 className="text-white text-2xl font-display mb-2">Mensaje Enviado</h3>
+            <p className="text-zinc-400">Gracias por contactarnos. Te responderemos a la brevedad.</p>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl">
+            <input name="nombre" placeholder="Nombre" value={form.nombre} onChange={handleChange} required
+              className="col-span-1 bg-zinc-900/60 border border-zinc-800 rounded-xl px-5 py-4 text-white placeholder-zinc-500 focus:outline-none focus:border-red-500/50 transition-colors" />
+            <input name="email" type="email" placeholder="Email" value={form.email} onChange={handleChange} required
+              className="col-span-1 bg-zinc-900/60 border border-zinc-800 rounded-xl px-5 py-4 text-white placeholder-zinc-500 focus:outline-none focus:border-red-500/50 transition-colors" />
+            <input name="asunto" placeholder="Asunto" value={form.asunto} onChange={handleChange} required
+              className="md:col-span-2 bg-zinc-900/60 border border-zinc-800 rounded-xl px-5 py-4 text-white placeholder-zinc-500 focus:outline-none focus:border-red-500/50 transition-colors" />
+            <textarea name="mensaje" placeholder="Mensaje" rows={5} value={form.mensaje} onChange={handleChange} required
+              className="md:col-span-2 bg-zinc-900/60 border border-zinc-800 rounded-xl px-5 py-4 text-white placeholder-zinc-500 focus:outline-none focus:border-red-500/50 transition-colors resize-none" />
+            <button type="submit" className="md:col-span-2 bg-red-600 hover:bg-red-500 text-white font-semibold rounded-xl px-8 py-4 transition-colors text-lg">
+              Enviar Mensaje
+            </button>
+          </form>
+        )}
+      </div>
+    </section>
+  )
+}
+
 // ─── ROOT ─────────────────────────────────────────────────────────────────────
 export default function App() {
   const [page, setPage] = useState('inicio')

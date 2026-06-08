@@ -1431,10 +1431,10 @@ function PageInicio({ setPage, navigateToServicios }) {
         <img src="/services-photo.webp" alt="" className="md:hidden absolute inset-0 w-full h-full object-cover object-right" loading="lazy" aria-hidden="true" />
         <div className="md:hidden absolute inset-0" style={{ background: 'linear-gradient(to right, #0D1117 0%, rgba(13,17,23,0.88) 30%, rgba(13,17,23,0.6) 55%, rgba(13,17,23,0.2) 80%, transparent 100%)' }} />
 
-        <div className="relative grid grid-cols-1 md:grid-cols-2">
+        <div className="relative flex flex-col md:flex-row">
 
           {/* LEFT — list */}
-          <div className="px-6 md:px-14 lg:px-16 flex flex-col justify-center py-14 lg:py-20">
+          <div className="w-full md:w-1/2 px-6 md:px-14 lg:px-16 flex flex-col justify-center py-14 lg:py-20">
 
             {/* Header */}
             <div className="scroll-reveal mb-6">
@@ -1478,8 +1478,8 @@ function PageInicio({ setPage, navigateToServicios }) {
           </div>
 
           {/* RIGHT — photo, sticky so it stays visible while scrolling through the list */}
-          <div className="relative hidden md:block" style={{ minHeight: '100%' }}>
-            <div className="sticky top-0 h-screen">
+          <div className="relative hidden md:block md:w-1/2">
+            <div className="sticky top-0 h-screen overflow-hidden">
               <img
                 src="/services-photo.webp"
                 alt="Equipo SAMFOR en obra"

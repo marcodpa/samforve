@@ -4,7 +4,8 @@ import {
   Zap, Building2, Settings, Truck, Leaf, Ship, Cpu,
   ChevronRight, Menu, X, ArrowRight, MapPin, Phone, Mail, Globe,
   Upload, CheckCircle, Award, Target, Plus,
-  Shield, Star, ChevronDown, Users, Wrench, LayoutGrid, List
+  Shield, Star, ChevronDown, Users, Wrench, LayoutGrid, List,
+  Briefcase, FileText, Clock
 } from 'lucide-react'
 
 // ─── IMAGE MAP ────────────────────────────────────────────────────────────────
@@ -2453,42 +2454,229 @@ function PageQuienesSomos({ setPage }) {
 function PageContacto() {
   const [form, setForm] = useState({ nombre: '', email: '', asunto: '', mensaje: '' })
   const [sent, setSent] = useState(false)
+  const [cvFile, setCvFile] = useState(null)
+  const [cvSent, setCvSent] = useState(false)
+  const [cvForm, setCvForm] = useState({ nombre: '', email: '', telefono: '', cargo: '' })
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
   const handleSubmit = (e) => { e.preventDefault(); setSent(true) }
+  const handleCvChange = (e) => setCvForm({ ...cvForm, [e.target.name]: e.target.value })
+  const handleCvSubmit = (e) => { e.preventDefault(); setCvSent(true) }
+
+  const CONTACT_INFO = [
+    { icon: <MapPin size={18} />, label: 'Dirección', value: 'Av. 3H entre Calles 68-70 N.69-61, Maracaibo, Venezuela' },
+    { icon: <Phone size={18} />, label: 'Teléfono', value: '+58 261-1234567' },
+    { icon: <Mail size={18} />, label: 'Email', value: 'samfor@samfor.com' },
+    { icon: <Clock size={18} />, label: 'Horario', value: 'Lun–Vie 7:00 AM – 4:30 PM' },
+  ]
+
   return (
-    <section className="relative min-h-screen bg-black pt-28 pb-20 px-4 overflow-hidden">
-      {/* bg texture */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 25% 25%, #991b1b 0%, transparent 70%)' }} />
-      <div className="relative max-w-6xl mx-auto">
-        <h2 className="font-display text-5xl md:text-7xl text-white tracking-tight mb-2">
-          <span className="text-red-500">Contáct</span>anos
-        </h2>
-        <p className="text-zinc-400 text-lg mb-12 max-w-xl">
-          Estamos listos para tu próximo proyecto. Hablemos.
-        </p>
-        {sent ? (
-          <div className="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-12 text-center max-w-lg">
-            <div className="text-5xl mb-4">✓</div>
-            <h3 className="text-white text-2xl font-display mb-2">Mensaje Enviado</h3>
-            <p className="text-zinc-400">Gracias por contactarnos. Te responderemos a la brevedad.</p>
+    <div className="bg-black pt-24">
+
+      {/* ── HERO ── */}
+      <section className="relative h-[55vh] min-h-[340px] overflow-hidden">
+        <img src="/ct-hero.webp" alt="Contacto SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+        <div className="relative h-full flex flex-col justify-center px-6 md:px-16 lg:px-24">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="h-[3px] w-10 bg-samred" />
+            <span className="font-sub font-semibold text-[0.8rem] uppercase tracking-[0.25em] text-white/55">Comunícate con nosotros</span>
           </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl">
-            <input name="nombre" placeholder="Nombre" value={form.nombre} onChange={handleChange} required
-              className="col-span-1 bg-zinc-900/60 border border-zinc-800 rounded-xl px-5 py-4 text-white placeholder-zinc-500 focus:outline-none focus:border-red-500/50 transition-colors" />
-            <input name="email" type="email" placeholder="Email" value={form.email} onChange={handleChange} required
-              className="col-span-1 bg-zinc-900/60 border border-zinc-800 rounded-xl px-5 py-4 text-white placeholder-zinc-500 focus:outline-none focus:border-red-500/50 transition-colors" />
-            <input name="asunto" placeholder="Asunto" value={form.asunto} onChange={handleChange} required
-              className="md:col-span-2 bg-zinc-900/60 border border-zinc-800 rounded-xl px-5 py-4 text-white placeholder-zinc-500 focus:outline-none focus:border-red-500/50 transition-colors" />
-            <textarea name="mensaje" placeholder="Mensaje" rows={5} value={form.mensaje} onChange={handleChange} required
-              className="md:col-span-2 bg-zinc-900/60 border border-zinc-800 rounded-xl px-5 py-4 text-white placeholder-zinc-500 focus:outline-none focus:border-red-500/50 transition-colors resize-none" />
-            <button type="submit" className="md:col-span-2 bg-red-600 hover:bg-red-500 text-white font-semibold rounded-xl px-8 py-4 transition-colors text-lg">
-              Enviar Mensaje
-            </button>
-          </form>
-        )}
-      </div>
-    </section>
+          <h1 className="font-display text-[clamp(2.8rem,7vw,6rem)] text-white leading-none tracking-wide">
+            <span className="text-samred">Contáct</span>anos
+          </h1>
+          <p className="text-white/60 text-base md:text-lg max-w-lg mt-4 leading-relaxed">
+            Estamos listos para tu próximo proyecto. Hablemos.
+          </p>
+        </div>
+      </section>
+
+      {/* ── CONTACT INFO + FORM ── */}
+      <section className="relative py-20 px-6 md:px-16 lg:px-24">
+        {/* bg subtle texture */}
+        <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(circle at 30% 40%, #991b1b 0%, transparent 60%)' }} />
+        <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+
+          {/* LEFT — info */}
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="h-[2px] w-8 bg-samred" />
+              <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.25em] text-samred">Información</span>
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl text-white mb-3 tracking-tight">Hablemos de tu <span className="text-samred">proyecto</span></h2>
+            <p className="text-zinc-400 text-base max-w-md mb-10 leading-relaxed">
+              Cuéntanos sobre tu proyecto y uno de nuestros especialistas te contactará en las próximas 24 horas.
+            </p>
+
+            {/* Info cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+              {CONTACT_INFO.map((item) => (
+                <div key={item.label} className="bg-white/[0.03] border border-white/[0.07] rounded-xl p-5 hover:border-samred/30 transition-colors group">
+                  <div className="text-samred mb-3 group-hover:scale-110 transition-transform duration-300">{item.icon}</div>
+                  <div className="font-sub text-[0.65rem] uppercase tracking-[0.2em] text-zinc-500 mb-1">{item.label}</div>
+                  <div className="text-white text-sm leading-relaxed">{item.value}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Image + separator */}
+            <div className="relative rounded-2xl overflow-hidden h-52 md:h-60">
+              <img src="/ct-team.jpg" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <div className="flex items-center gap-2 text-white/80 text-sm">
+                  <MapPin size={14} className="text-samred" />
+                  <span>Maracaibo, Venezuela</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Social / extra links */}
+            <div className="mt-6 flex items-center gap-4">
+              <span className="font-sub text-[0.65rem] uppercase tracking-[0.2em] text-zinc-500">Síguenos</span>
+              <div className="flex gap-3">
+                {[
+                  <svg key="li" viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>,
+                  <Globe key="gl" size={15} />,
+                ].map((icon, i) => (
+                  <a key={i} href="#" className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-zinc-400 hover:text-samred hover:border-samred/50 transition-all duration-300">
+                    <Icon size={15} />
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT — form */}
+          <div>
+            {sent ? (
+              <div className="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-12 text-center">
+                <div className="w-16 h-16 rounded-full bg-samred/20 flex items-center justify-center mx-auto mb-5">
+                  <CheckCircle size={32} className="text-samred" />
+                </div>
+                <h3 className="text-white text-2xl font-display mb-2">Mensaje Enviado</h3>
+                <p className="text-zinc-400 max-w-sm mx-auto">Gracias por contactarnos. Te responderemos a la brevedad posible.</p>
+              </div>
+            ) : (
+              <div className="bg-white/[0.02] border border-white/[0.07] rounded-2xl p-8 md:p-10">
+                <h3 className="font-display text-xl text-white mb-6">Envíanos un mensaje</h3>
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <input name="nombre" placeholder="Nombre completo" value={form.nombre} onChange={handleChange} required
+                      className="bg-zinc-900/60 border border-zinc-800 rounded-xl px-5 py-3.5 text-white placeholder-zinc-500 focus:outline-none focus:border-samred/50 transition-colors text-sm" />
+                    <input name="email" type="email" placeholder="Correo electrónico" value={form.email} onChange={handleChange} required
+                      className="bg-zinc-900/60 border border-zinc-800 rounded-xl px-5 py-3.5 text-white placeholder-zinc-500 focus:outline-none focus:border-samred/50 transition-colors text-sm" />
+                  </div>
+                  <input name="asunto" placeholder="Asunto" value={form.asunto} onChange={handleChange} required
+                    className="w-full bg-zinc-900/60 border border-zinc-800 rounded-xl px-5 py-3.5 text-white placeholder-zinc-500 focus:outline-none focus:border-samred/50 transition-colors text-sm" />
+                  <textarea name="mensaje" placeholder="Cuéntanos sobre tu proyecto..." rows={5} value={form.mensaje} onChange={handleChange} required
+                    className="w-full bg-zinc-900/60 border border-zinc-800 rounded-xl px-5 py-3.5 text-white placeholder-zinc-500 focus:outline-none focus:border-samred/50 transition-colors text-sm resize-none" />
+                  <button type="submit" className="w-full bg-samred hover:bg-red-500 text-white font-semibold rounded-xl px-8 py-3.5 transition-all text-base tracking-wide active:scale-[0.98]">
+                    Enviar Mensaje
+                  </button>
+                </form>
+              </div>
+            )}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ── TRABAJA CON NOSOTROS — Postula tu CV ── */}
+      <section className="relative py-20 md:py-28 overflow-hidden">
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <img src="/ct-jobs2.webp" alt="Trabaja en SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/92 via-black/75 to-black/80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40" />
+        </div>
+        {/* Red accent glow */}
+        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-samred/5 blur-[120px]" />
+
+        <div className="relative max-w-7xl mx-auto px-6 md:px-16 lg:px-24 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* LEFT — text + form */}
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="h-[2px] w-8 bg-samred" />
+              <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.25em] text-samred">Talento</span>
+            </div>
+            <h2 className="font-display text-3xl md:text-5xl text-white mb-4 tracking-tight leading-tight">
+              Trabaja con <span className="text-samred">Nosotros</span>
+            </h2>
+            <p className="text-zinc-300 text-base max-w-lg mb-8 leading-relaxed">
+              En SAMFOR buscamos profesionales comprometidos con la excelencia. Si quieres formar parte de nuestro equipo, postula tu CV y nos pondremos en contacto contigo.
+            </p>
+
+            {cvSent ? (
+              <div className="bg-white/[0.05] border border-white/[0.1] rounded-2xl p-10 text-center max-w-md">
+                <div className="w-14 h-14 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle size={28} className="text-green-400" />
+                </div>
+                <h3 className="text-white text-xl font-display mb-2">CV Recibido</h3>
+                <p className="text-zinc-400 text-sm">Gracias por tu interés. Revisaremos tu perfil y te contactaremos si hay una oportunidad que se ajuste a tus habilidades.</p>
+              </div>
+            ) : (
+              <form onSubmit={handleCvSubmit} className="space-y-4 max-w-lg">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <input name="nombre" placeholder="Nombre completo" value={cvForm.nombre} onChange={handleCvChange} required
+                    className="bg-black/50 border border-white/[0.12] rounded-xl px-5 py-3.5 text-white placeholder-zinc-500 focus:outline-none focus:border-samred/50 transition-colors text-sm backdrop-blur-sm" />
+                  <input name="email" type="email" placeholder="Correo electrónico" value={cvForm.email} onChange={handleCvChange} required
+                    className="bg-black/50 border border-white/[0.12] rounded-xl px-5 py-3.5 text-white placeholder-zinc-500 focus:outline-none focus:border-samred/50 transition-colors text-sm backdrop-blur-sm" />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <input name="telefono" placeholder="Teléfono" value={cvForm.telefono} onChange={handleCvChange} required
+                    className="bg-black/50 border border-white/[0.12] rounded-xl px-5 py-3.5 text-white placeholder-zinc-500 focus:outline-none focus:border-samred/50 transition-colors text-sm backdrop-blur-sm" />
+                  <input name="cargo" placeholder="Cargo de interés" value={cvForm.cargo} onChange={handleCvChange}
+                    className="bg-black/50 border border-white/[0.12] rounded-xl px-5 py-3.5 text-white placeholder-zinc-500 focus:outline-none focus:border-samred/50 transition-colors text-sm backdrop-blur-sm" />
+                </div>
+                {/* File upload */}
+                <div className="border border-dashed border-white/[0.15] rounded-xl p-6 text-center hover:border-samred/40 transition-colors cursor-pointer"
+                  onClick={() => document.getElementById('cv-upload')?.click()}>
+                  <input id="cv-upload" type="file" accept=".pdf,.doc,.docx" className="hidden" onChange={(e) => setCvFile(e.target.files[0])} />
+                  <Upload size={24} className="mx-auto mb-2 text-zinc-400" />
+                  <div className="text-zinc-400 text-sm">
+                    {cvFile ? (
+                      <span className="text-samred font-medium">{cvFile.name}</span>
+                    ) : (
+                      <span>Haz clic para subir tu CV <span className="text-zinc-600">(PDF, DOC)</span></span>
+                    )}
+                  </div>
+                </div>
+                <button type="submit" className="w-full bg-samred hover:bg-red-500 text-white font-semibold rounded-xl px-8 py-3.5 transition-all text-base tracking-wide active:scale-[0.98] flex items-center justify-center gap-2">
+                  <Briefcase size={16} />
+                  Enviar Postulación
+                </button>
+              </form>
+            )}
+          </div>
+
+          {/* RIGHT — decorative image + benefits */}
+          <div className="hidden lg:block">
+            <div className="relative rounded-2xl overflow-hidden h-[500px]">
+              <img src="/ct-turbina2.webp" alt="Instalaciones SAMFOR" className="absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-8">
+                <h4 className="font-display text-white text-xl mb-4">¿Por qué trabajar en SAMFOR?</h4>
+                <div className="space-y-3">
+                  {[
+                    { icon: <Shield size={14} />, text: 'Estabilidad laboral y crecimiento profesional' },
+                    { icon: <Award size={14} />, text: 'Capacitación continua y certificaciones' },
+                    { icon: <Users size={14} />, text: 'Equipo multidisciplinario de primer nivel' },
+                    { icon: <Star size={14} />, text: 'Proyectos de gran envergadura nacional' },
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-3 text-white/70 text-sm">
+                      <span className="text-samred">{item.icon}</span>
+                      <span>{item.text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
   )
 }
 

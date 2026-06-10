@@ -1428,14 +1428,14 @@ function PageInicio({ setPage, navigateToServicios }) {
       {/* SERVICES */}
       <section className="bg-dark overflow-hidden relative">
 
-        {/* MÓVIL — foto fondo de toda la sección */}
-        <img src="/services-photo.webp" alt="" className="md:hidden absolute inset-0 w-full h-full object-cover object-right" loading="lazy" aria-hidden="true" />
-        <div className="md:hidden absolute inset-0" style={{ background: 'linear-gradient(to right, #0D1117 0%, rgba(13,17,23,0.88) 30%, rgba(13,17,23,0.6) 55%, rgba(13,17,23,0.2) 80%, transparent 100%)' }} />
+        {/* Foto de fondo para toda la sección */}
+        <img src="/services-photo.webp" alt="" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" aria-hidden="true" />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, #0D1117 0%, rgba(13,17,23,0.88) 30%, rgba(13,17,23,0.6) 55%, rgba(13,17,23,0.2) 80%, transparent 100%)' }} />
 
         <div className="relative flex flex-col md:flex-row">
 
           {/* LEFT — list */}
-          <div className="w-full md:w-1/2 px-6 md:px-14 lg:px-16 flex flex-col justify-center py-14 lg:py-20">
+          <div className="w-full px-6 md:px-14 lg:px-16 flex flex-col justify-center py-14 lg:py-20">
 
             {/* Header */}
             <div className="scroll-reveal mb-6">
@@ -1478,24 +1478,8 @@ function PageInicio({ setPage, navigateToServicios }) {
             </div>
           </div>
 
-          {/* RIGHT — photo, sticky so it stays visible while scrolling through the list */}
-          <div className="relative hidden md:block md:w-1/2">
-            <div className="sticky top-0 h-screen overflow-hidden">
-              <img
-                src="/services-photo.webp"
-                alt="Equipo SAMFOR en obra"
-                className="absolute inset-0 w-full h-full object-cover object-center"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/20 to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-t from-dark/70 via-transparent to-transparent" />
-              <div className="absolute bottom-10 right-10 text-right">
-                <p className="font-display text-xl text-white leading-tight mb-1">PROFESIONALES<br />EN CADA OBRA</p>
-                <p className="text-white/40 text-[0.88rem] font-sub uppercase tracking-widest">Campo Boscán — Venezuela</p>
-              </div>
-              <div className="absolute top-0 right-0 w-[3px] h-full bg-samred" />
-            </div>
-          </div>
+          {/* RIGHT — empty spacer for desktop layout balance */}
+          <div className="hidden md:block md:w-1/2" />
 
         </div>
       </section>

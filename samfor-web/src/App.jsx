@@ -1429,7 +1429,7 @@ function PageInicio({ setPage, navigateToServicios }) {
       <section className="bg-dark overflow-hidden relative">
 
         {/* Foto de fondo para toda la sección */}
-        <img src="/services-photo.webp" alt="" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" aria-hidden="true" />
+        <img src="/services-photo.webp" alt="" className="absolute inset-0 w-full h-full object-cover object-[65%_center]" loading="lazy" aria-hidden="true" />
         <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, #0D1117 0%, rgba(13,17,23,0.88) 30%, rgba(13,17,23,0.6) 55%, rgba(13,17,23,0.2) 80%, transparent 100%)' }} />
 
         <div className="relative flex flex-col md:flex-row">

@@ -1428,14 +1428,14 @@ function PageInicio({ setPage, navigateToServicios }) {
       {/* SERVICES */}
       <section className="bg-dark overflow-hidden relative">
 
-        {/* Foto de fondo para toda la sección */}
-        <img src="/services-photo.webp" alt="" className="absolute inset-0 w-full h-full object-cover object-[65%_center]" loading="lazy" aria-hidden="true" />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, #0D1117 0%, rgba(13,17,23,0.88) 30%, rgba(13,17,23,0.6) 55%, rgba(13,17,23,0.2) 80%, transparent 100%)' }} />
+        {/* Foto — 70% del ancho, alineada a la derecha */}
+        <img src="/services-photo.webp" alt="" className="absolute right-0 top-0 w-[70%] h-full object-cover object-left" loading="lazy" aria-hidden="true" />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, #0D1117 0%, rgba(13,17,23,0.92) 25%, rgba(13,17,23,0.5) 50%, rgba(13,17,23,0.1) 70%, transparent 100%)' }} />
 
         <div className="relative flex flex-col md:flex-row">
 
           {/* LEFT — list */}
-          <div className="w-full px-6 md:px-14 lg:px-16 flex flex-col justify-center py-14 lg:py-20">
+          <div className="w-full md:w-1/2 px-6 md:px-14 lg:px-16 flex flex-col justify-center py-14 lg:py-20">
 
             {/* Header */}
             <div className="scroll-reveal mb-6">

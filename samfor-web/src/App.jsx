@@ -444,9 +444,9 @@ function Navbar({ page, setPage, scrolled, forceDark, logoProgress = 1 }) {
   const dark = forceDark
   const white = !dark && (scrolled || page === 'proyectos')
   const navBg = dark ? 'bg-[#0D1117] border-b border-white/10' : white ? 'bg-white shadow-[0_2px_8px_rgba(0,0,0,0.08)]' : 'bg-transparent'
-  const textColor = dark ? 'text-white' : white ? 'text-dark' : 'text-white'
+  const textColor = dark ? 'text-white' : white ? 'text-dark' : page === 'inicio' ? 'text-white' : 'text-dark'
   const linkActive = 'text-samred'
-  const linkIdle = dark ? 'text-white/70 hover:text-white' : white ? 'text-dark/70 hover:text-samred' : 'text-white/70 hover:text-white'
+  const linkIdle = dark ? 'text-white/70 hover:text-white' : white ? 'text-dark/70 hover:text-samred' : page === 'inicio' ? 'text-white/70 hover:text-white' : 'text-dark/70 hover:text-samred'
 
   // ── Animated logo ──────────────────────────────────────────────────────────
   const vpw = typeof window !== 'undefined' ? window.innerWidth : 1280

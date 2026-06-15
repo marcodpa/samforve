@@ -457,13 +457,14 @@ function Navbar({ page, setPage, scrolled, forceDark, logoProgress = 1 }) {
   const t      = Math.min(Math.max(logoProgress, 0), 1)
   const eased  = 1 - Math.pow(1 - t, 4)   // ease-out quart
 
-  const HERO_H = 640
-  const NAV_H  = 200
+  const HERO_H = 520
+  const NAV_H  = 170
 
   const containerPad = vpw >= 768 ? 32 : 16
   const centerOffset = Math.max(0, (vpw - 1280) / 2)
 
-  const navCY  = 48
+  const baseFont = Math.min(Math.max(16, vpw * 0.02), 22)
+  const navCY  = baseFont * 3  // h-24 = 6rem, center = 3rem
   const navTop = navCY - NAV_H / 2
 
   // Absolute top-left in hero (higher up), animates into navbar spot
@@ -510,7 +511,7 @@ function Navbar({ page, setPage, scrolled, forceDark, logoProgress = 1 }) {
             <img src="/logo.png" alt="SAMFOR" style={{ height: '140px' }} className={`w-auto ${dark ? 'brightness-0 invert' : ''}`} />
           </button>
         ) : (
-          <div aria-hidden="true" style={{ height: '200px', width: 'clamp(200px,22vw,320px)', flexShrink: 0 }} />
+          <div aria-hidden="true" style={{ height: '170px', width: 'clamp(170px,20vw,280px)', flexShrink: 0 }} />
         )}
 
         <div className="hidden md:flex items-center gap-7">

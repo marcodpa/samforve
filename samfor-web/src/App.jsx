@@ -2360,15 +2360,15 @@ function PageQuienesSomos({ setPage }) {
       </section>
 
       {/* ── CLIENTES ── */}
-      <section className="bg-surface py-16 md:py-24 px-5 md:px-16">
+      <section className="bg-dark py-16 md:py-24 px-5 md:px-16">
         <div className="max-w-6xl mx-auto">
           <div className="scroll-reveal mb-10 md:mb-14 text-center md:text-left">
             <div className="flex items-center gap-3 mb-4 justify-center md:justify-start">
               <span className="h-[3px] w-10 bg-samred" />
               <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Clientes</span>
             </div>
-            <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] text-dark leading-none">HAN CONFIADO EN <span className="text-samred">NOSOTROS</span></h2>
-            <p className="text-secondary text-base mt-3 max-w-lg mx-auto md:mx-0">Más de 50 clientes institucionales nacionales e internacionales avalan nuestra trayectoria.</p>
+            <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] text-white leading-none">HAN CONFIADO EN <span className="text-samred">NOSOTROS</span></h2>
+            <p className="text-zinc-400 text-base mt-3 max-w-lg mx-auto md:mx-0">Más de 50 clientes institucionales nacionales e internacionales avalan nuestra trayectoria.</p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-4">
             {CLIENT_GRID.map((c, i) => (

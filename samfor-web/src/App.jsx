@@ -458,7 +458,7 @@ function Navbar({ page, setPage, scrolled, forceDark, logoProgress = 1 }) {
   const eased  = 1 - Math.pow(1 - t, 4)   // ease-out quart
 
   const HERO_H = 520
-  const NAV_H  = 170
+  const NAV_H  = 210
 
   const containerPad = vpw >= 768 ? 32 : 16
   const centerOffset = Math.max(0, (vpw - 1280) / 2)
@@ -511,7 +511,7 @@ function Navbar({ page, setPage, scrolled, forceDark, logoProgress = 1 }) {
             <img src="/logo.png" alt="SAMFOR" style={{ height: '140px' }} className={`w-auto ${dark ? 'brightness-0 invert' : ''}`} />
           </button>
         ) : (
-          <div aria-hidden="true" style={{ height: '170px', width: 'clamp(170px,20vw,280px)', flexShrink: 0 }} />
+          <div aria-hidden="true" style={{ height: '210px', width: 'clamp(210px,22vw,320px)', flexShrink: 0 }} />
         )}
 
         <div className="hidden md:flex items-center gap-7">

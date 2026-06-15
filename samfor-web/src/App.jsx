@@ -1431,7 +1431,7 @@ function PageInicio({ setPage, navigateToServicios }) {
         {/* Foto — 62% del ancho, alineada a la derecha, borde izquierdo desvanecido */}
         <div className="absolute right-0 top-0 w-[62%] h-full overflow-hidden">
           <img src="/services-photo.webp" alt="" className="absolute inset-0 w-full h-full object-cover object-left" loading="lazy" aria-hidden="true"
-            style={{ maskImage: 'linear-gradient(to right, transparent 0%, #000 40%, #000 100%)', WebkitMaskImage: 'linear-gradient(to right, transparent 0%, #000 40%, #000 100%)' }} />
+            style={{ maskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.05) 15%, rgba(0,0,0,0.3) 30%, #000 55%, #000 100%)', WebkitMaskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.05) 15%, rgba(0,0,0,0.3) 30%, #000 55%, #000 100%)' }} />
         </div>
 
         <div className="relative flex flex-col md:flex-row">

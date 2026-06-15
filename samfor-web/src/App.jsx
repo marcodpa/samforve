@@ -2371,7 +2371,7 @@ function PageQuienesSomos({ setPage }) {
             <p className="text-secondary text-base mt-3 max-w-lg mx-auto md:mx-0">Más de 50 clientes institucionales nacionales e internacionales avalan nuestra trayectoria.</p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-4">
-            {CLIENTS.map((c, i) => (
+            {CLIENT_GRID.map((c, i) => (
               <ClientCard key={c.name + i} c={c} />
             ))}
           </div>

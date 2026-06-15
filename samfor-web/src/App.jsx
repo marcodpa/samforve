@@ -1915,7 +1915,6 @@ function PageQuienesSomos({ setPage }) {
   useScrollReveal()
   const heroRef = useRef(null)
   const aboutTextRef = useRef(null)
-  const missionRef = useRef(null)
   const ventajasRef = useRef(null)
   const timelineRef = useRef(null)
 
@@ -1944,23 +1943,6 @@ function PageQuienesSomos({ setPage }) {
       { threshold: 0.15 },
     )
     if (aboutTextRef.current) io.observe(aboutTextRef.current)
-    return () => io.disconnect()
-  }, [])
-
-  // Mission/Vision stagger
-  useEffect(() => {
-    const els = missionRef.current?.querySelectorAll('.mission-card')
-    if (!els) return
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          gsap.to(els, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.12 })
-          io.unobserve(entry.target)
-        }
-      },
-      { threshold: 0.1 },
-    )
-    if (missionRef.current) io.observe(missionRef.current)
     return () => io.disconnect()
   }, [])
 
@@ -2155,13 +2137,13 @@ function PageQuienesSomos({ setPage }) {
           </div>
 
           {/* Mobile */}
-          <div ref={missionRef} className="md:hidden flex flex-col gap-4">
+          <div className="md:hidden flex flex-col gap-4">
             {[
               { num: '01', title: 'MISIÓN', body: 'Ejecutar de manera rentable y eficiente, en armon\u00eda con el ambiente, obras y servicios de construcción civil, eléctrica, telecomunicación, transporte y servicios ambientales, asegurando la satisfacción del cliente y el desarrollo del talento humano.' },
               { num: '02', title: 'VISIÓN', body: 'Ser una empresa líder en Construcción, Transporte y Servicios Ambientales, reconocida por su excelencia, calidad de servicios, solidez del equipo humano y compromiso con el desarrollo sostenible de Venezuela.' },
               { num: '03', title: 'VALORES', body: 'Lealtad, Responsabilidad y Respeto a la Dignidad Humana son los pilares que gu\u00edan cada decisión, cada proyecto y cada relación con nuestros clientes, colaboradores y comunidades.' },
             ].map((c, i) => (
-              <div key={c.num} className="mission-card relative group overflow-hidden rounded-2xl border border-white/[0.06] bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-6" style={{ opacity: 0 }}>
+              <div key={c.num} className="mission-card relative group overflow-hidden rounded-2xl border border-white/[0.06] bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-6">
                 <div className="absolute -right-6 -top-6 font-display text-[6rem] text-white/[0.03] leading-none select-none">{c.num}</div>
                 <div className="flex items-center gap-3 mb-4">
                   <span className={`w-8 h-8 rounded-lg flex items-center justify-center font-display text-sm ${i === 0 ? 'bg-samred text-white' : 'bg-white/10 text-samred'}`}>{c.num}</span>
@@ -2179,7 +2161,7 @@ function PageQuienesSomos({ setPage }) {
               { num: '02', title: 'VISIÓN', body: 'Ser una empresa líder en Construcción, Transporte y Servicios Ambientales, reconocida por su excelencia, calidad de servicios, solidez del equipo humano y compromiso con el desarrollo sostenible de Venezuela.' },
               { num: '03', title: 'VALORES', body: 'Lealtad, Responsabilidad y Respeto a la Dignidad Humana son los pilares que gu\u00edan cada decisión, cada proyecto y cada relación con nuestros clientes, colaboradores y comunidades.' },
             ].map((c, i) => (
-              <div key={c.num} className="mission-card relative group rounded-2xl border border-white/[0.06] bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-8 hover-card" style={{ opacity: 0 }}>
+              <div key={c.num} className="mission-card relative group rounded-2xl border border-white/[0.06] bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-8 hover-card">
                 <div className="absolute inset-0 bg-gradient-to-br from-samred/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
                 <span className="block font-mono text-[0.8rem] text-samred/50 tracking-widest mb-4 relative z-10">{c.num}</span>
                 <div className="h-[2px] w-8 bg-samred mb-6 relative z-10" />

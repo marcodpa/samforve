@@ -1428,9 +1428,9 @@ function PageInicio({ setPage, navigateToServicios }) {
       {/* SERVICES */}
       <section className="bg-dark overflow-hidden relative">
 
-        {/* Foto — 70% del ancho, alineada a la derecha */}
-        <img src="/services-photo.webp" alt="" className="absolute right-0 top-0 w-[70%] h-full object-cover object-left" loading="lazy" aria-hidden="true" />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, #0D1117 0%, rgba(13,17,23,0.92) 25%, rgba(13,17,23,0.5) 50%, rgba(13,17,23,0.1) 70%, transparent 100%)' }} />
+        {/* Foto — 65% del ancho, alineada a la derecha con degradado */}
+        <img src="/services-photo.webp" alt="" className="absolute right-0 top-0 w-[65%] h-full object-cover object-left" loading="lazy" aria-hidden="true" />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, #0D1117 0%, rgba(13,17,23,0.92) 20%, rgba(13,17,23,0.6) 40%, rgba(13,17,23,0.15) 58%, transparent 65%)' }} />
 
         <div className="relative flex flex-col md:flex-row">
 

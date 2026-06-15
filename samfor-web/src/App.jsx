@@ -770,12 +770,13 @@ function ClientLogo({ c }) {
   const [imgOk, setImgOk] = useState(true)
   const initials = c.name.split(/[\s/]+/).slice(0, 2).map(w => w[0]).join('').toUpperCase()
   const showImg = c.img && imgOk
-  const bgColor = c.bg === '#000' ? '#111' : (c.bg || '#1a2233')
+  // Fondo oscuro para que el logo blanco contraste en la sección oscura
+  const bgColor = '#1a1a2e'
   return (
     <div className="w-12 h-12 rounded flex items-center justify-center overflow-hidden flex-shrink-0" style={{ background: bgColor }}>
       {showImg
-        ? <img src={c.img} alt={c.name} className="max-h-9 max-w-[2.5rem] object-contain" onError={() => setImgOk(false)} />
-        : <span className="font-display font-bold text-xs leading-none" style={{ color: c.accent || bgColor === '#111' ? '#fff' : '#fff' }}>{initials}</span>
+        ? <img src={c.img} alt={c.name} className="max-h-9 max-w-[2.5rem] object-contain p-1" onError={() => setImgOk(false)} />
+        : <span className="font-display font-bold text-xs leading-none text-white">{initials}</span>
       }
     </div>
   )

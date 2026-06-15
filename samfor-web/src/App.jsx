@@ -1634,7 +1634,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
 
           {/* Center title */}
           <div>
-            <h1 className="font-display text-[clamp(3rem,10vw,9rem)] text-white leading-none mb-6 w-full">NUESTROS<br />PROYECTOS</h1>
+            <h1 className="font-display text-[clamp(3rem,10vw,9rem)] text-white leading-none mb-6 w-full">ALGUNOS DE<br />NUESTROS PROYECTOS</h1>
             {/* Division chips row */}
             <div className="flex flex-wrap gap-2">
               {Object.entries(DIVISION_META).map(([key, m]) => (
@@ -1739,7 +1739,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
             <div className="flex items-center gap-3">
               {activeDivision !== 'Todos' && <div className="h-6 w-[3px] rounded-full flex-shrink-0" style={{ background: DIVISION_META[activeDivision]?.dot }} />}
               <h3 className="font-display text-[1.5rem] md:text-[1.75rem] text-white leading-none">
-                {activeDivision === 'Todos' ? 'TODOS LOS PROYECTOS' : DIVISION_META[activeDivision]?.label?.toUpperCase()}
+                {activeDivision === 'Todos' ? 'ALGUNOS DE NUESTROS PROYECTOS' : DIVISION_META[activeDivision]?.label?.toUpperCase()}
               </h3>
               <span className="font-mono text-xs text-white/30 ml-1"></span>
             </div>

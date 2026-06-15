@@ -1914,7 +1914,6 @@ function useGsapReveal(ref, delay = 0) {
 function PageQuienesSomos({ setPage }) {
   useScrollReveal()
   const heroRef = useRef(null)
-  const cubeRef = useRef(null)
   const aboutTextRef = useRef(null)
   const missionRef = useRef(null)
   const ventajasRef = useRef(null)
@@ -1931,26 +1930,6 @@ function PageQuienesSomos({ setPage }) {
   }, [])
 
   
-  // Cube entrance animation
-  useEffect(() => {
-    const el = cubeRef.current
-    if (!el) return
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          gsap.fromTo(el, { scale: 0.3, opacity: 0, rotateX: 45 }, {
-            scale: 1, opacity: 1, rotateX: 0,
-            duration: 1.2, ease: 'back.out(1.7)',
-          })
-          io.unobserve(el)
-        }
-      },
-      { threshold: 0.2 },
-    )
-    io.observe(el)
-    return () => io.disconnect()
-  }, [])
-
   // About text stagger
   useEffect(() => {
     const els = aboutTextRef.current?.querySelectorAll('.about-item')
@@ -2022,15 +2001,6 @@ function PageQuienesSomos({ setPage }) {
     return () => io.disconnect()
   }, [])
 
-  const CUBE_FACES = [
-    { icon: '\u{1F3D7}\uFE0F', number: '60', label: 'A\u00f1os de Trayectoria', face: 'cube-face__front' },
-    { icon: '\u{1F4CB}', number: '+250', label: 'Proyectos Ejecutados', face: 'cube-face__right' },
-    { icon: '\u2699\uFE0F', number: '6', label: 'Divisiones', face: 'cube-face__back' },
-    { icon: '\u{1F33F}', number: '1999', label: 'Cert. Ambiental', face: 'cube-face__left' },
-    { icon: '\u{1F3E2}', number: 'SAMFOR', label: 'Desde 1966', face: 'cube-face__top' },
-    { icon: '\u2B50', number: 'S.A.', label: 'Venezuela', face: 'cube-face__bottom' },
-  ]
-
   return (
     <div className="pt-24">
 
@@ -2076,7 +2046,7 @@ function PageQuienesSomos({ setPage }) {
         </div>
       </section>
 
-      {/* ── QUIÉNES SOMOS — modern split con 3D cube ── */}
+      {/* ── QUIÉNES SOMOS ── */}
       <section className="relative overflow-hidden bg-dark">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-samred/30 to-transparent" />
 
@@ -2101,20 +2071,6 @@ function PageQuienesSomos({ setPage }) {
             <p className="text-white/55 text-[1rem] leading-relaxed mb-8">
               Con 60 años de operación continua, contamos con la infraestructura, capital humano y estándares certificados para proyectos de alta complejidad en todo el territorio nacional.
             </p>
-            {/* 3D Cube mobile */}
-            <div ref={cubeRef} className="flex justify-center mb-8" style={{ opacity: 0 }}>
-              <div className="cube-scene" style={{ width: '160px', height: '160px' }}>
-                <div className="cube-wrapper" style={{ width: '160px', height: '160px', animationDuration: '20s' }}>
-                  {CUBE_FACES.map(f => (
-                    <div key={f.face} className={`cube-face ${f.face}`} style={{ width: '160px', height: '160px' }}>
-                      <span className="cube-icon">{f.icon}</span>
-                      <span className="cube-number text-[2rem]">{f.number}</span>
-                      <span className="cube-label">{f.label}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
             {/* Valores con borde izquierdo */}
             <div className="flex flex-col gap-3">
               {[
@@ -2134,7 +2090,7 @@ function PageQuienesSomos({ setPage }) {
           </div>
         </div>
 
-        {/* Desktop: modern split con 3D cube */}
+        {/* Desktop: modern split */}
         <div className="hidden md:grid md:grid-cols-2 lg:min-h-[85vh]">
           {/* Left: Texto */}
           <div className="bg-white flex items-center px-8 md:px-12 lg:px-16 py-12 md:py-16 lg:py-20">
@@ -2177,20 +2133,7 @@ function PageQuienesSomos({ setPage }) {
               background: 'linear-gradient(112deg, rgba(13,17,23,0.60) 0%, rgba(13,17,23,0.25) 50%, rgba(200,16,46,0.12) 100%)',
             }} />
             <div className="absolute inset-0 bg-gradient-to-t from-dark/70 via-transparent to-transparent" />
-            {/* 3D Cube center */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div ref={cubeRef} className="cube-scene" style={{ opacity: 0 }}>
-                <div className="cube-wrapper">
-                  {CUBE_FACES.map(f => (
-                    <div key={f.face} className={`cube-face ${f.face}`}>
-                      <span className="cube-icon">{f.icon}</span>
-                      <span className="cube-number">{f.number}</span>
-                      <span className="cube-label">{f.label}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            {/* Desktop: modern split */}
             <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-samred" />
             <div className="absolute top-8 right-8 bg-dark/60 backdrop-blur-md border border-white/10 rounded-full px-5 py-2">
               <span className="font-sub font-bold text-xs uppercase tracking-widest text-samred">Fundada 1966</span>

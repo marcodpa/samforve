@@ -457,8 +457,8 @@ function Navbar({ page, setPage, scrolled, forceDark, logoProgress = 1 }) {
   const t      = Math.min(Math.max(logoProgress, 0), 1)
   const eased  = 1 - Math.pow(1 - t, 4)   // ease-out quart
 
-  const HERO_H = 540
-  const NAV_H  = 175
+  const HERO_H = 640
+  const NAV_H  = 200
 
   const containerPad = vpw >= 768 ? 32 : 16
   const centerOffset = Math.max(0, (vpw - 1280) / 2)
@@ -507,10 +507,10 @@ function Navbar({ page, setPage, scrolled, forceDark, logoProgress = 1 }) {
         {/* Mobile: real logo button in navbar flow. Desktop: invisible placeholder for layout space */}
         {isMobile ? (
           <button onClick={() => { setPage('inicio'); setOpen(false) }} className="flex items-center">
-            <img src="/logo.png" alt="SAMFOR" style={{ height: '120px' }} className={`w-auto ${dark ? 'brightness-0 invert' : ''}`} />
+            <img src="/logo.png" alt="SAMFOR" style={{ height: '140px' }} className={`w-auto ${dark ? 'brightness-0 invert' : ''}`} />
           </button>
         ) : (
-          <div aria-hidden="true" style={{ height: '175px', width: 'clamp(180px,20vw,280px)', flexShrink: 0 }} />
+          <div aria-hidden="true" style={{ height: '200px', width: 'clamp(200px,22vw,320px)', flexShrink: 0 }} />
         )}
 
         <div className="hidden md:flex items-center gap-7">
@@ -547,7 +547,7 @@ function Footer({ setPage }) {
       <div className="px-6 md:px-14 lg:px-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-white/10">
           <div>
-            <div className="mb-4"><img src="/logo.png" alt="SAMFOR" style={{ height: '100px' }} className="w-auto brightness-0 invert" /></div>
+            <div className="mb-4"><img src="/logo.png" alt="SAMFOR" style={{ height: '120px' }} className="w-auto brightness-0 invert" /></div>
             <p className="text-white/55 text-base leading-relaxed mb-5 max-w-xs">Construyendo Venezuela desde 1966. Empresa líder en construcción industrial, servicios petroleros y ambientales.</p>
           </div>
           <div>

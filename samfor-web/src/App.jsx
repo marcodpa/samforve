@@ -2611,7 +2611,7 @@ function PageContacto() {
                   <Globe key="gl" size={15} />,
                 ].map((icon, i) => (
                   <a key={i} href="#" className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-zinc-400 hover:text-samred hover:border-samred/50 transition-all duration-300">
-                    <Icon size={15} />
+                    {icon}
                   </a>
                 ))}
               </div>

@@ -37,8 +37,8 @@ const SERVICES = [
 
 const SERVICES_DETAIL = {
   'Obras Eléctricas': {
-    heroImg: '/sv-electrica.webp',
-    descImg: '/sv-electrica-desc.webp',
+    heroImg: '/sv-electrica-hero.jpg',
+    descImg: '/sv-electrica-desc.jpg',
     tagline: 'Energía y potencia para la industria',
     longDesc: 'SAMFOR diseña, construye y mantiene instalaciones eléctricas de alta complejidad para la industria petrolera, petroquímica y de servicios públicos. Con más de 60 años de experiencia, nuestro equipo ejecuta proyectos desde subestaciones de transmisión hasta sistemas de automatización industrial, garantizando continuidad operativa y estándares internacionales.',
     capabilities: [
@@ -98,7 +98,7 @@ const SERVICES_DETAIL = {
     division: 'Transporte',
   },
   'Transporte Marítimo': {
-    heroImg: '/sv-transporte2.webp',
+    heroImg: '/sv-maritimo-hero.jpg',
     tagline: 'Logística marítima y lacustre',
     longDesc: 'Operamos embarcaciones especializadas para el transporte marítimo y lacustre en el Lago de Maracaibo, costas venezolanas y Archipiélago Los Monjes. Brindamos servicios de transporte de personal, carga general, combustibles y suministros hacia plataformas offshore, muelles e instalaciones costeras con altos estándares de seguridad.',
     capabilities: [
@@ -113,7 +113,8 @@ const SERVICES_DETAIL = {
     division: 'Transporte',
   },
   'Transporte Aéreo': {
-    heroImg: '/sv-transporte2.webp',
+    heroImg: '/sv-aereo-hero.jpg',
+    descImg: '/sv-aereo-desc.jpg',
     tagline: 'Movilización aérea industrial',
     longDesc: 'SAMFOR gestiona soluciones de transporte aéreo para la industria petrolera, facilitando la movilización rápida de personal técnico, equipos de respuesta inmediata y cargas críticas hacia locaciones remotas y de difícil acceso. Con una red de operadores aéreos certificados, garantizamos desplazamientos seguros y eficientes en todo el país.',
     capabilities: [

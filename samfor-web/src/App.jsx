@@ -193,16 +193,12 @@ const CLIENT_GRID = [
   { img: '/clients/eni.webp',             name: 'Eni',                sector: 'Energía',        bg: '#fff' },
   { img: '/clients/cnpc.webp',            name: 'CNPC',               sector: 'Energía',        bg: '#fff' },
   { img: '/clients/halliburton.webp',     name: 'Halliburton',        sector: 'Energía',        bg: '#fff' },
-  { img: '/clients/slb.webp',             name: 'SLB',                sector: 'Energía',        bg: '#fff' },
   { img: '/clients/weatherford.webp',     name: 'Weatherford',        sector: 'Energía',        bg: '#fff' },
-  { img: '/clients/gazprom.webp',         name: 'Gazprom',            sector: 'Energía',        bg: '#fff' },
-  { img: '/clients/petrex.webp',           name: 'Petrex',             sector: 'Energía',        bg: '#fff' },
   // ── Petroquímica ──
   { img: IMG(171),                       name: 'Pequiven',           sector: 'Petroquímica',   bg: '#fff' },
   { img: '/clients/cardon-iv.webp',       name: 'Cardón IV',          sector: 'Petroquímica',   bg: '#fff' },
   // ── Servicios Oilfield ──
   { img: '/clients/baker-hughes.webp',    name: 'Baker Hughes',       sector: 'Servicios',      bg: '#fff' },
-  { img: '/clients/mi-swaco.webp',        name: 'Mi-SWACO',           sector: 'Servicios',      bg: '#fff' },
   // ── CAF / Instituciones financieras ──
   { img: '/clients/caf.webp',             name: 'CAF',                sector: 'Finanzas',       bg: '#fff' },
   { img: '/clients/bnc.webp',             name: 'BNC',                sector: 'Finanzas',       bg: '#fff' },
@@ -219,15 +215,8 @@ const CLIENT_GRID = [
   { img: '/clients/pepsi.webp',           name: 'Pepsi-Cola',         sector: 'Industria',      bg: '#fff' },
   { img: '/clients/polar.webp',           name: 'Empresas Polar',     sector: 'Industria',      bg: '#fff' },
   { img: '/clients/regional.webp',        name: 'C. Regional',        sector: 'Industria',      bg: '#fff' },
-  { img: '/clients/carbones-guasare.webp', name: 'Carbones del Guasare', sector: 'Minería',    bg: '#fff' },
   // ── Gobierno / Municipios ──
-  { img: '/clients/gob-falcon.webp',      name: 'Gob. Falcón',        sector: 'Gobierno',       bg: '#fff' },
-  { img: '/clients/alcaldia-miranda.webp', name: 'Alcaldía Miranda',  sector: 'Gobierno',       bg: '#fff' },
-  { img: '/clients/alcaldia-lagunillas.webp', name: 'Alcaldía Lagunillas', sector: 'Gobierno',  bg: '#fff' },
-  { img: '/clients/minec.webp',           name: 'Min. Ambiente',      sector: 'Gobierno',       bg: '#fff' },
-  { img: '/clients/mppop.webp',           name: 'MPPOP',              sector: 'Gobierno',       bg: '#fff' },
-  { img: '/clients/min-agricultura.webp', name: 'Min. Agricultura',   sector: 'Gobierno',       bg: '#fff' },
-  { img: '/clients/min-aguas.webp',       name: 'Min. Aguas',         sector: 'Gobierno',       bg: '#fff' },
+  { img: '/clients/alcaldia-zulia.webp',  name: 'Alcaldía del Zulia', sector: 'Gobierno',       bg: '#fff' },
   // ── Otros ──
   { img: '/clients/lukiven.webp',         name: 'Lukiven S.A.',       sector: 'Industrial',     bg: '#fff' },
   { img: '/clients/farmatodo.webp',       name: 'Farmatodo',          sector: 'Retail',         bg: '#fff' },

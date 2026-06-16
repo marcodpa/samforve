@@ -466,7 +466,7 @@ function Navbar({ page, setPage, scrolled, forceDark, logoProgress = 1 }) {
   ]
 
   const dark = forceDark
-  const white = !dark && (scrolled || page === 'proyectos')
+  const white = !dark && (scrolled || page === 'proyectos' || page === 'contacto')
   const navBg = dark ? 'bg-[#0D1117] border-b border-white/10' : white ? 'bg-white shadow-[0_2px_8px_rgba(0,0,0,0.08)]' : 'bg-transparent'
   const textColor = dark ? 'text-white' : white ? 'text-dark' : page === 'inicio' ? 'text-white' : 'text-dark'
   const linkActive = 'text-samred'
@@ -2543,74 +2543,81 @@ function PageContacto() {
   return (
     <div className="bg-black pt-24">
 
-      {/* ── HERO ── */}
-      <section className="relative h-[55vh] min-h-[340px] overflow-hidden">
+      {/* ── HERO — full screen ── */}
+      <section className="relative h-screen min-h-[500px] overflow-hidden">
         <img src="/ct-hero.webp" alt="Contacto SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-black/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/20" />
         <div className="relative h-full flex flex-col justify-center px-6 md:px-16 lg:px-24">
-          <div className="flex items-center gap-3 mb-4">
+          <div className="flex items-center gap-3 mb-5">
             <span className="h-[3px] w-10 bg-samred" />
             <span className="font-sub font-semibold text-[0.8rem] uppercase tracking-[0.25em] text-white/55">Comunícate con nosotros</span>
           </div>
-          <h1 className="font-display text-[clamp(2.8rem,7vw,6rem)] text-white leading-none tracking-wide">
+          <h1 className="font-display text-[clamp(3.2rem,8vw,7rem)] text-white leading-none tracking-wide">
             <span className="text-samred">Contáct</span>anos
           </h1>
-          <p className="text-white/60 text-base md:text-lg max-w-lg mt-4 leading-relaxed">
+          <p className="text-white/60 text-base md:text-lg max-w-lg mt-5 leading-relaxed">
             Estamos listos para tu próximo proyecto. Hablemos.
           </p>
         </div>
       </section>
 
       {/* ── CONTACT INFO + FORM ── */}
-      <section className="relative py-20 px-6 md:px-16 lg:px-24">
+      <section className="relative py-20 md:py-28 px-6 md:px-16 lg:px-24">
         {/* bg subtle texture */}
-        <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(circle at 30% 40%, #991b1b 0%, transparent 60%)' }} />
-        <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 30% 40%, #991b1b 0%, transparent 60%)' }} />
+        <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-start">
 
-          {/* LEFT — info */}
+          {/* LEFT — redesigned info */}
           <div>
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center gap-3 mb-5">
               <span className="h-[2px] w-8 bg-samred" />
               <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.25em] text-samred">Información</span>
             </div>
-            <h2 className="font-display text-3xl md:text-4xl text-white mb-3 tracking-tight">Hablemos de tu <span className="text-samred">proyecto</span></h2>
-            <p className="text-zinc-400 text-base max-w-md mb-10 leading-relaxed">
+            <h2 className="font-display text-3xl md:text-5xl text-white mb-4 tracking-tight leading-tight">Hablemos de tu <span className="text-samred">proyecto</span></h2>
+            <p className="text-zinc-400 text-base md:text-lg max-w-md mb-12 leading-relaxed">
               Cuéntanos sobre tu proyecto y uno de nuestros especialistas te contactará en las próximas 24 horas.
             </p>
 
-            {/* Info cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+            {/* Info cards — redesigned */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-12">
               {CONTACT_INFO.map((item) => (
-                <div key={item.label} className="bg-white/[0.03] border border-white/[0.07] rounded-xl p-5 hover:border-samred/30 transition-colors group">
-                  <div className="text-samred mb-3 group-hover:scale-110 transition-transform duration-300">{item.icon}</div>
-                  <div className="font-sub text-[0.65rem] uppercase tracking-[0.2em] text-zinc-500 mb-1">{item.label}</div>
-                  <div className="text-white text-sm leading-relaxed">{item.value}</div>
+                <div key={item.label} className="group relative overflow-hidden rounded-xl p-5 transition-all duration-300 hover:-translate-y-0.5"
+                  style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)', border: '1px solid rgba(255,255,255,0.06)' }}>
+                  <div className="absolute top-0 left-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{ background: 'linear-gradient(135deg, rgba(153,27,27,0.08) 0%, transparent 60%)' }} />
+                  <div className="relative">
+                    <div className="w-10 h-10 rounded-lg bg-samred/15 flex items-center justify-center text-samred mb-4 group-hover:bg-samred/25 group-hover:scale-105 transition-all duration-300">
+                      {item.icon}
+                    </div>
+                    <div className="font-sub text-[0.65rem] uppercase tracking-[0.2em] text-zinc-400 mb-1.5">{item.label}</div>
+                    <div className="text-white text-sm leading-relaxed font-medium">{item.value}</div>
+                  </div>
                 </div>
               ))}
             </div>
 
-            {/* Image + separator */}
-            <div className="relative rounded-2xl overflow-hidden h-52 md:h-60">
-              <img src="/ct-team.jpg" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover" />
+            {/* Replacement image — industrial aesthetic */}
+            <div className="relative rounded-2xl overflow-hidden h-56 md:h-64 mb-6">
+              <img src="/ct-turbina2.webp" alt="Instalaciones SAMFOR" className="absolute inset-0 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <div className="flex items-center gap-2 text-white/80 text-sm">
                   <MapPin size={14} className="text-samred" />
-                  <span>Maracaibo, Venezuela</span>
+                  <span>Maracaibo, Venezuela — Desde 1966</span>
                 </div>
               </div>
             </div>
 
             {/* Social / extra links */}
-            <div className="mt-6 flex items-center gap-4">
+            <div className="flex items-center gap-4">
               <span className="font-sub text-[0.65rem] uppercase tracking-[0.2em] text-zinc-500">Síguenos</span>
               <div className="flex gap-3">
                 {[
-                  <svg key="li" viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>,
-                  <Globe key="gl" size={15} />,
+                  <svg key="li" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>,
+                  <Globe key="gl" size={16} />,
                 ].map((icon, i) => (
-                  <a key={i} href="#" className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-zinc-400 hover:text-samred hover:border-samred/50 transition-all duration-300">
+                  <a key={i} href="#" className="w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-zinc-400 hover:text-samred hover:border-samred/50 hover:bg-samred/10 transition-all duration-300">
                     {icon}
                   </a>
                 ))}
@@ -2619,7 +2626,7 @@ function PageContacto() {
           </div>
 
           {/* RIGHT — form */}
-          <div>
+          <div className="lg:sticky lg:top-28">
             {sent ? (
               <div className="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-12 text-center">
                 <div className="w-16 h-16 rounded-full bg-samred/20 flex items-center justify-center mx-auto mb-5">

@@ -2525,13 +2525,8 @@ function PageQuienesSomos({ setPage }) {
 function PageContacto() {
   const [form, setForm] = useState({ nombre: '', email: '', asunto: '', mensaje: '' })
   const [sent, setSent] = useState(false)
-  const [cvFile, setCvFile] = useState(null)
-  const [cvSent, setCvSent] = useState(false)
-  const [cvForm, setCvForm] = useState({ nombre: '', email: '', telefono: '', cargo: '' })
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
   const handleSubmit = (e) => { e.preventDefault(); setSent(true) }
-  const handleCvChange = (e) => setCvForm({ ...cvForm, [e.target.name]: e.target.value })
-  const handleCvSubmit = (e) => { e.preventDefault(); setCvSent(true) }
 
   const CONTACT_INFO = [
     { icon: <MapPin size={18} />, label: 'Dirección', value: 'Av. 3H entre Calles 68-70 N.69-61, Maracaibo, Venezuela' },
@@ -2657,100 +2652,6 @@ function PageContacto() {
             )}
           </div>
 
-        </div>
-      </section>
-
-      {/* ── TRABAJA CON NOSOTROS — Postula tu CV ── */}
-      <section className="relative py-20 md:py-28 overflow-hidden">
-        {/* Background image */}
-        <div className="absolute inset-0">
-          <img src="/ct-jobs2.webp" alt="Trabaja en SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/92 via-black/75 to-black/80" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40" />
-        </div>
-        {/* Red accent glow */}
-        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-samred/5 blur-[120px]" />
-
-        <div className="relative max-w-7xl mx-auto px-6 md:px-16 lg:px-24 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* LEFT — text + form */}
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="h-[2px] w-8 bg-samred" />
-              <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.25em] text-samred">Talento</span>
-            </div>
-            <h2 className="font-display text-3xl md:text-5xl text-white mb-4 tracking-tight leading-tight">
-              Trabaja con <span className="text-samred">Nosotros</span>
-            </h2>
-            <p className="text-zinc-300 text-base max-w-lg mb-8 leading-relaxed">
-              En SAMFOR buscamos profesionales comprometidos con la excelencia. Si quieres formar parte de nuestro equipo, postula tu CV y nos pondremos en contacto contigo.
-            </p>
-
-            {cvSent ? (
-              <div className="bg-white/[0.05] border border-white/[0.1] rounded-2xl p-10 text-center max-w-md">
-                <div className="w-14 h-14 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4">
-                  <CheckCircle size={28} className="text-green-400" />
-                </div>
-                <h3 className="text-white text-xl font-display mb-2">CV Recibido</h3>
-                <p className="text-zinc-400 text-sm">Gracias por tu interés. Revisaremos tu perfil y te contactaremos si hay una oportunidad que se ajuste a tus habilidades.</p>
-              </div>
-            ) : (
-              <form onSubmit={handleCvSubmit} className="space-y-4 max-w-lg">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <input name="nombre" placeholder="Nombre completo" value={cvForm.nombre} onChange={handleCvChange} required
-                    className="bg-black/50 border border-white/[0.12] rounded-xl px-5 py-3.5 text-white placeholder-zinc-500 focus:outline-none focus:border-samred/50 transition-colors text-sm backdrop-blur-sm" />
-                  <input name="email" type="email" placeholder="Correo electrónico" value={cvForm.email} onChange={handleCvChange} required
-                    className="bg-black/50 border border-white/[0.12] rounded-xl px-5 py-3.5 text-white placeholder-zinc-500 focus:outline-none focus:border-samred/50 transition-colors text-sm backdrop-blur-sm" />
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <input name="telefono" placeholder="Teléfono" value={cvForm.telefono} onChange={handleCvChange} required
-                    className="bg-black/50 border border-white/[0.12] rounded-xl px-5 py-3.5 text-white placeholder-zinc-500 focus:outline-none focus:border-samred/50 transition-colors text-sm backdrop-blur-sm" />
-                  <input name="cargo" placeholder="Cargo de interés" value={cvForm.cargo} onChange={handleCvChange}
-                    className="bg-black/50 border border-white/[0.12] rounded-xl px-5 py-3.5 text-white placeholder-zinc-500 focus:outline-none focus:border-samred/50 transition-colors text-sm backdrop-blur-sm" />
-                </div>
-                {/* File upload */}
-                <div className="border border-dashed border-white/[0.15] rounded-xl p-6 text-center hover:border-samred/40 transition-colors cursor-pointer"
-                  onClick={() => document.getElementById('cv-upload')?.click()}>
-                  <input id="cv-upload" type="file" accept=".pdf,.doc,.docx" className="hidden" onChange={(e) => setCvFile(e.target.files[0])} />
-                  <Upload size={24} className="mx-auto mb-2 text-zinc-400" />
-                  <div className="text-zinc-400 text-sm">
-                    {cvFile ? (
-                      <span className="text-samred font-medium">{cvFile.name}</span>
-                    ) : (
-                      <span>Haz clic para subir tu CV <span className="text-zinc-600">(PDF, DOC)</span></span>
-                    )}
-                  </div>
-                </div>
-                <button type="submit" className="w-full bg-samred hover:bg-red-500 text-white font-semibold rounded-xl px-8 py-3.5 transition-all text-base tracking-wide active:scale-[0.98] flex items-center justify-center gap-2">
-                  <Briefcase size={16} />
-                  Enviar Postulación
-                </button>
-              </form>
-            )}
-          </div>
-
-          {/* RIGHT — decorative image + benefits */}
-          <div className="hidden lg:block">
-            <div className="relative rounded-2xl overflow-hidden h-[500px]">
-              <img src="/ct-turbina2.webp" alt="Instalaciones SAMFOR" className="absolute inset-0 w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-8">
-                <h4 className="font-display text-white text-xl mb-4">¿Por qué trabajar en SAMFOR?</h4>
-                <div className="space-y-3">
-                  {[
-                    { icon: <Shield size={14} />, text: 'Estabilidad laboral y crecimiento profesional' },
-                    { icon: <Award size={14} />, text: 'Capacitación continua y certificaciones' },
-                    { icon: <Users size={14} />, text: 'Equipo multidisciplinario de primer nivel' },
-                    { icon: <Star size={14} />, text: 'Proyectos de gran envergadura nacional' },
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-center gap-3 text-white/70 text-sm">
-                      <span className="text-samred">{item.icon}</span>
-                      <span>{item.text}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 

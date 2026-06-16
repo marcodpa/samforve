@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import {
-  Zap, Building2, Settings, Truck, Leaf, Ship, Cpu,
+  Zap, Building2, Settings, Truck, Leaf, Ship, Cpu, Plane,
   ChevronRight, Menu, X, ArrowRight, MapPin, Phone, Mail, Globe,
   Upload, CheckCircle, Award, Target, Plus,
   Shield, Star, ChevronDown, Users, Wrench, LayoutGrid, List,
@@ -29,7 +29,9 @@ const SERVICES = [
   { icon: <Zap size={28}/>, title: 'Obras Eléctricas', division: 'Eléctricos', desc: 'Diseño y construcción de plantas eléctricas, subestaciones, tendido de alta tensión, automatización industrial y sistemas SCADA.' },
   { icon: <Building2 size={28}/>, title: 'Obras Civiles', division: 'Civiles', desc: 'Movimiento de tierras, edificaciones, carreteras, puentes, muelles y construcción en plataformas petroleras y petroquímicas.' },
   { icon: <Settings size={28}/>, title: 'Obras Mecánicas', division: 'Mecánicos', desc: 'Oleoductos, acueductos, tanques, estaciones de bombeo, instalación de tuberías y mantenimiento de facilidades de producción.' },
-  { icon: <Truck size={28}/>, title: 'Transporte', division: 'Transporte', desc: 'Transporte especializado de hidrocarburos, equipos industriales y personal. Cobertura terrestre, aérea y marítima en todo Venezuela.' },
+  { icon: <Truck size={28}/>, title: 'Transporte Terrestre', division: 'Transporte', desc: 'Transporte de hidrocarburos, equipos industriales y personal por vía terrestre con flota certificada y operadores especializados.' },
+  { icon: <Ship size={28}/>, title: 'Transporte Marítimo', division: 'Transporte', desc: 'Transporte lacustre y marítimo hacia plataformas offshore, instalaciones en el Lago de Maracaibo y costas venezolanas.' },
+  { icon: <Plane size={28}/>, title: 'Transporte Aéreo', division: 'Transporte', desc: 'Transporte aéreo de personal, equipos y cargas especializadas para operaciones industriales y remotas en todo el territorio nacional.' },
   { icon: <Leaf size={28}/>, title: 'Servicios Ambientales', division: 'Ambientales', desc: 'Manejadora de Desechos Peligrosos autorizada desde 1999. Recolección, transporte, tratamiento y disposición final conforme a normativas.' },
   { icon: <Ship size={28}/>, title: 'Servicios Marítimos/Lacustres', division: 'Otras', desc: 'Operaciones en el Lago de Maracaibo, costas venezolanas y Archipiélago Los Monjes. Transporte hacia plataformas offshore con embarcaciones especializadas.' },
   { icon: <Cpu size={28}/>, title: 'Automatización y Control', division: 'Automatización', desc: 'Sistemas PLC/DCS, instrumentación industrial, SCADA, control de procesos y redes industriales para facilidades petroleras y petroquímicas.' },
@@ -82,18 +84,48 @@ const SERVICES_DETAIL = {
     ],
     division: 'Mecánicos',
   },
-  'Transporte': {
+  'Transporte Terrestre': {
     heroImg: '/sv-transporte2.webp',
-    tagline: 'Logística especializada en todo Venezuela',
-    longDesc: 'Contamos con una flota de vehículos especializados y embarcaciones para el transporte seguro de hidrocarburos, equipos industriales y personal. Operamos en todo el territorio venezolano con cobertura terrestre, marítima y lacustre, cumpliendo las más estrictas normas de seguridad industrial y transporte de materiales peligrosos.',
+    tagline: 'Flota terrestre certificada',
+    longDesc: 'SAMFOR dispone de una flota de vehículos especializados para el transporte terrestre de hidrocarburos, equipos industriales de alto tonelaje y materiales peligrosos. Contamos con operadores certificados, vehículos con mantenimiento preventivo riguroso y cumplimiento estricto de las normas de seguridad vial y ambiental en todo el territorio venezolano.',
     capabilities: [
-      'Transporte terrestre de hidrocarburos',
-      'Transporte de equipos y materiales industriales',
-      'Transporte de personal operativo',
-      'Logística y cadena de suministro',
-      'Vehículos especializados certificados',
-      'Operadores con licencias especiales',
+      'Transporte de hidrocarburos y derivados',
+      'Transporte de equipos y maquinaria industrial',
+      'Transporte de materiales peligrosos',
+      'Flota de camiones cisterna y plataformas',
+      'Logística de carga pesada y sobredimensionada',
+      'Operadores con licencias especiales (AVB, MPP)',
       'Gestión de manifiestos y documentación legal',
+    ],
+    division: 'Transporte',
+  },
+  'Transporte Marítimo': {
+    heroImg: '/sv-transporte2.webp',
+    tagline: 'Logística marítima y lacustre',
+    longDesc: 'Operamos embarcaciones especializadas para el transporte marítimo y lacustre en el Lago de Maracaibo, costas venezolanas y Archipiélago Los Monjes. Brindamos servicios de transporte de personal, carga general, combustibles y suministros hacia plataformas offshore, muelles e instalaciones costeras con altos estándares de seguridad.',
+    capabilities: [
+      'Transporte de personal a plataformas offshore',
+      'Transporte de combustibles y suministros',
+      'Embarcaciones de apoyo lacustre y marítimo',
+      'Operaciones en el Lago de Maracaibo',
+      'Logística hacia el Archipiélago Los Monjes',
+      'Cumplimiento de normativas COVENIN y OMI',
+      'Coordinación de muelles y atraques',
+    ],
+    division: 'Transporte',
+  },
+  'Transporte Aéreo': {
+    heroImg: '/sv-transporte2.webp',
+    tagline: 'Movilización aérea industrial',
+    longDesc: 'SAMFOR gestiona soluciones de transporte aéreo para la industria petrolera, facilitando la movilización rápida de personal técnico, equipos de respuesta inmediata y cargas críticas hacia locaciones remotas y de difícil acceso. Con una red de operadores aéreos certificados, garantizamos desplazamientos seguros y eficientes en todo el país.',
+    capabilities: [
+      'Transporte de personal a locaciones remotas',
+      'Movilización de equipos de emergencia',
+      'Carga aérea de repuestos e instrumentos',
+      'Coordinación de vuelos chárter industriales',
+      'Logística aérea para operaciones costa afuera',
+      'Cumplimiento de normativas INAC y OACI',
+      'Respuesta rápida para contingencias operativas',
     ],
     division: 'Transporte',
   },
@@ -873,7 +905,9 @@ const SV_CARD_PHOTOS = {
   'Obras Eléctricas':          '/sv-electrica.webp',
   'Obras Civiles':             '/sv-civil.webp',
   'Obras Mecánicas':           '/sv-mecanica.webp',
-  'Transporte':                '/sv-transporte.webp',
+  'Transporte Terrestre':      '/sv-transporte.webp',
+  'Transporte Marítimo':       '/sv-transporte.webp',
+  'Transporte Aéreo':          '/sv-transporte.webp',
   'Servicios Ambientales':     '/qs-hero.webp',
   'Servicios Marítimos/Lacustres': '/projects/img-005.jpg',
   'Automatización y Control':  '/sv-photo3.webp',
@@ -1120,9 +1154,9 @@ function PageServicios({ initialService }) {
               </button>
             ))}
           </div>
-          {/* Fila 2 — 4 cards más compactas */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            {SERVICES.slice(3).map((s,i) => (
+          {/* Fila 2 — 3 cards medianas (Transporte) */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-4">
+            {SERVICES.slice(3,6).map((s,i) => (
               <button key={s.title} onClick={() => handleSelect(s.title)}
                 className="scroll-reveal group relative overflow-hidden rounded cursor-pointer text-left"
                 style={{ height:'clamp(170px,18vw,260px)', transitionDelay:`${(i+3)*60}ms` }}>
@@ -1133,6 +1167,28 @@ function PageServicios({ initialService }) {
                 <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left" />
                 <div className="absolute inset-0 p-5 flex flex-col justify-end">
                   <span className="font-mono text-[0.72rem] text-white/30 tracking-widest mb-2">{String(i+4).padStart(2,'0')}</span>
+                  <div className="text-white/50 group-hover:text-samred mb-2 transition-colors duration-300">{s.icon}</div>
+                  <h3 className="font-display text-[1rem] text-white leading-tight">{s.title.toUpperCase()}</h3>
+                  <div className="flex items-center gap-1.5 mt-3 text-samred text-[0.75rem] font-sub font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:translate-y-0 transition-all duration-300">
+                    Ver servicio <ArrowRight size={10} />
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+          {/* Fila 3 — 3 cards compactas (restantes) */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {SERVICES.slice(6).map((s,i) => (
+              <button key={s.title} onClick={() => handleSelect(s.title)}
+                className="scroll-reveal group relative overflow-hidden rounded cursor-pointer text-left"
+                style={{ height:'clamp(170px,18vw,260px)', transitionDelay:`${(i+6)*60}ms` }}>
+                <img src={SV_CARD_PHOTOS[s.title]} alt={s.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/55 to-dark/10" />
+                <div className="absolute inset-0 bg-samred/0 group-hover:bg-samred/12 transition-all duration-500" />
+                <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left" />
+                <div className="absolute inset-0 p-5 flex flex-col justify-end">
+                  <span className="font-mono text-[0.72rem] text-white/30 tracking-widest mb-2">{String(i+7).padStart(2,'0')}</span>
                   <div className="text-white/50 group-hover:text-samred mb-2 transition-colors duration-300">{s.icon}</div>
                   <h3 className="font-display text-[1rem] text-white leading-tight">{s.title.toUpperCase()}</h3>
                   <div className="flex items-center gap-1.5 mt-3 text-samred text-[0.75rem] font-sub font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:translate-y-0 transition-all duration-300">

@@ -1381,6 +1381,13 @@ function PageInicio({ setPage, navigateToServicios }) {
   useScrollReveal()
   const afterClipRef = useRef(null)
   const sectionRef = useRef(null)
+  const [scrollH, setScrollH] = useState('200dvh')
+  useEffect(() => {
+    const check = () => setScrollH(window.innerWidth < 768 ? '150dvh' : '200dvh')
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
   const featured = [
     ALL_PROJECTS.find(p => p.id === 1),   // Termoeléctrica Bajo Grande (active)
     ALL_PROJECTS.find(p => p.id === 101), // Subestación 155KV
@@ -1479,7 +1486,7 @@ function PageInicio({ setPage, navigateToServicios }) {
         </div>
       </section>
       {/* QUIÉNES SOMOS — sticky scroll-reveal: construcción antes/después */}
-      <section ref={sectionRef} className="relative" style={{ height: '200dvh' }}>
+      <section ref={sectionRef} className="relative" style={{ height: scrollH }}>
 
         {/* Sticky content — fills screen while scrolling through 200dvh */}
         <div className="sticky top-0 h-screen overflow-hidden bg-[#0a0c10]">
@@ -1503,12 +1510,12 @@ function PageInicio({ setPage, navigateToServicios }) {
           }} />
 
           {/* Before / After badges */}
-          <div className="absolute top-6 right-6 z-10 flex gap-2">
-            <div className="bg-dark/60 backdrop-blur-sm border border-white/10 rounded px-2.5 py-1">
-              <span className="font-sub font-bold text-[0.55rem] uppercase tracking-[0.2em] text-white/40">Antes</span>
+          <div className="absolute top-4 md:top-6 left-4 md:right-6 z-10 flex gap-2">
+            <div className="bg-dark/70 backdrop-blur-sm border border-white/10 rounded px-2 py-0.5 md:px-2.5 md:py-1">
+              <span className="font-sub font-bold text-[0.5rem] md:text-[0.55rem] uppercase tracking-[0.2em] text-white/40">Antes</span>
             </div>
-            <div className="bg-dark/60 backdrop-blur-sm border border-white/10 rounded px-2.5 py-1">
-              <span className="font-sub font-bold text-[0.55rem] uppercase tracking-[0.2em] text-samred">Después</span>
+            <div className="bg-dark/70 backdrop-blur-sm border border-white/10 rounded px-2 py-0.5 md:px-2.5 md:py-1">
+              <span className="font-sub font-bold text-[0.5rem] md:text-[0.55rem] uppercase tracking-[0.2em] text-samred">Después</span>
             </div>
           </div>
 
@@ -1523,22 +1530,22 @@ function PageInicio({ setPage, navigateToServicios }) {
           </div>
 
           {/* Content — centered */}
-          <div className="relative z-10 h-full flex flex-col justify-start pt-28 md:pt-36 px-6 md:px-14 lg:px-20 max-w-4xl mr-auto">
-            <div className="scroll-reveal flex items-center gap-3 mb-4">
-              <span className="h-[2px] w-10 bg-samred flex-shrink-0" />
-              <span className="font-sub font-semibold text-[0.78rem] tracking-[0.28em] uppercase text-samred">Quiénes somos</span>
+          <div className="relative z-10 h-full flex flex-col justify-start pt-14 md:pt-36 px-5 md:px-14 lg:px-20 max-w-4xl mr-auto">
+            <div className="scroll-reveal flex items-center gap-3 mb-3 md:mb-4">
+              <span className="h-[2px] w-8 md:w-10 bg-samred flex-shrink-0" />
+              <span className="font-sub font-semibold text-[0.65rem] md:text-[0.78rem] tracking-[0.28em] uppercase text-samred">Quiénes somos</span>
             </div>
 
-            <h2 className="scroll-reveal font-display text-[3rem] md:text-[4.5rem] lg:text-[5.5rem] text-white leading-[0.92] mb-8 tracking-wide">
+            <h2 className="scroll-reveal font-display text-[2rem] md:text-[4.5rem] lg:text-[5.5rem] text-white leading-[0.92] mb-4 md:mb-8 tracking-wide">
               INGENIERÍA<br />
               <span className="text-samred">SIN LÍMITES.</span>
             </h2>
 
-            <div className="scroll-reveal max-w-2xl mb-12">
-              <p className="text-white/75 text-base md:text-[1.1rem] leading-relaxed mb-4">
+            <div className="scroll-reveal max-w-2xl mb-4 md:mb-12">
+              <p className="text-white/75 text-sm md:text-[1.1rem] leading-relaxed mb-2 md:mb-4">
                 SAMFOR es una empresa venezolana de contratación industrial con 60 años de trayectoria continua. Ejecutamos proyectos de alta complejidad para la industria petrolera, petroquímica, civil, ambiental y de servicios públicos.
               </p>
-              <p className="text-white/50 text-sm md:text-base leading-relaxed">
+              <p className="text-white/50 text-xs md:text-base leading-relaxed">
                 Fundada en 1966, con equipos multidisciplinarios, maquinaria pesada propia y más de 50 clientes institucionales nacionales e internacionales.
               </p>
             </div>
@@ -1546,18 +1553,18 @@ function PageInicio({ setPage, navigateToServicios }) {
             <div className="scroll-reveal">
               <button
                 onClick={() => setPage('quienes-somos')}
-                className="group inline-flex items-center gap-2.5 font-sub font-bold text-[0.75rem] tracking-[0.18em] uppercase text-white border border-white/30 px-8 py-4 rounded transition-all hover:bg-samred hover:border-samred"
+                className="group inline-flex items-center gap-2 font-sub font-bold text-[0.65rem] md:text-[0.75rem] tracking-[0.18em] uppercase text-white border border-white/30 px-5 py-3 md:px-8 md:py-4 rounded transition-all hover:bg-samred hover:border-samred"
               >
                 Conocer nuestra historia
-                <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
+                <ArrowRight size={11} className="transition-transform group-hover:translate-x-1 md:w-[13px]" />
               </button>
             </div>
           </div>
 
           {/* Scroll progress indicator */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1.5 opacity-40">
-            <div className="w-[1px] h-8 bg-white/30" />
-            <span className="font-mono text-[0.55rem] uppercase tracking-[0.3em] text-white/40">Scroll para revelar</span>
+          <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 opacity-40">
+            <div className="w-[1px] h-5 md:h-8 bg-white/30" />
+            <span className="font-mono text-[0.45rem] md:text-[0.55rem] uppercase tracking-[0.3em] text-white/40">Scroll para revelar</span>
           </div>
 
         </div>

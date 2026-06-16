@@ -900,7 +900,7 @@ const SV_CARD_PHOTOS = {
   'Transporte':                '/sv-transporte.webp',
   'Transporte Terrestre':      '/sv-transporte.webp',
   'Transporte Marítimo':       '/sv-transporte.webp',
-  'Transporte Aéreo':          '/sv-transporte.webp',
+  'Transporte Aéreo':          '/sv-aereo-hero.jpg',
   'Servicios Ambientales':     '/qs-hero.webp',
   'Servicios Marítimos/Lacustres': '/projects/img-005.jpg',
   'Automatización y Control':  '/sv-photo3.webp',
@@ -1068,9 +1068,9 @@ function TransporteSubmenu({ subServices, onSelect, onBack }) {
   useScrollReveal()
 
   const SUBS = [
-    { title: 'Transporte Terrestre', icon: <Truck size={40}/>, tagline: 'Flota terrestre certificada', desc: 'Transporte de hidrocarburos, equipos industriales y personal por vía terrestre con flota certificada y operadores especializados.' },
-    { title: 'Transporte Marítimo', icon: <Ship size={40}/>, tagline: 'Logística marítima y lacustre', desc: 'Transporte lacustre y marítimo hacia plataformas offshore, instalaciones en el Lago de Maracaibo y costas venezolanas.' },
-    { title: 'Transporte Aéreo', icon: <Plane size={40}/>, tagline: 'Movilización aérea industrial', desc: 'Transporte aéreo de personal, equipos y cargas especializadas para operaciones industriales y remotas en todo el territorio nacional.' },
+    { title: 'Transporte Terrestre', img: '/sv-transporte.webp', icon: <Truck size={40}/>, tagline: 'Flota terrestre certificada', desc: 'Transporte de hidrocarburos, equipos industriales y personal por vía terrestre con flota certificada y operadores especializados.' },
+    { title: 'Transporte Marítimo', img: '/sv-maritimo-hero.jpg', icon: <Ship size={40}/>, tagline: 'Logística marítima y lacustre', desc: 'Transporte lacustre y marítimo hacia plataformas offshore, instalaciones en el Lago de Maracaibo y costas venezolanas.' },
+    { title: 'Transporte Aéreo', img: '/sv-aereo-hero.jpg', icon: <Plane size={40}/>, tagline: 'Movilización aérea industrial', desc: 'Transporte aéreo de personal, equipos y cargas especializadas para operaciones industriales y remotas en todo el territorio nacional.' },
   ]
 
   return (
@@ -1109,7 +1109,7 @@ function TransporteSubmenu({ subServices, onSelect, onBack }) {
               <button key={sub.title} onClick={() => onSelect(sub.title)}
                 className="scroll-reveal group relative overflow-hidden rounded cursor-pointer text-left"
                 style={{ height: 'clamp(300px, 30vw, 420px)', transitionDelay: `${i * 100}ms` }}>
-                <img src="/sv-transporte.webp" alt={sub.title}
+                <img src={sub.img} alt={sub.title}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/50 to-dark/10" />
                 <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left" />

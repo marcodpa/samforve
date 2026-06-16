@@ -187,6 +187,8 @@ const CB = (domain) => `https://logo.clearbit.com/${domain}`
 const CLIENT_GRID = [
   // ── Energía / Petróleo internacional ──
   { img: '/clients/pdvsa.webp',           name: 'PDVSA',              sector: 'Energía',        bg: '#fff' },
+  { img: '/clients/pdvsa-gas.png',       name: 'PDVSA Gas',          sector: 'Energía',        bg: '#fff' },
+  { img: '/clients/pdvsa-petroboscan.png', name: 'PDVSA Petroboscán', sector: 'Energía',        bg: '#fff' },
   { img: '/clients/chevron.webp',         name: 'Chevron',            sector: 'Energía',        bg: '#fff' },
   { img: '/clients/shell.webp',           name: 'Shell',              sector: 'Energía',        bg: '#fff' },
   { img: '/clients/repsol.webp',          name: 'Repsol',             sector: 'Energía',        bg: '#fff' },
@@ -217,6 +219,8 @@ const CLIENT_GRID = [
   { img: '/clients/regional.webp',        name: 'C. Regional',        sector: 'Industria',      bg: '#fff' },
   // ── Gobierno / Municipios ──
   { img: '/clients/alcaldia-zulia.webp',  name: 'Alcaldía del Zulia', sector: 'Gobierno',       bg: '#fff' },
+  { img: '/clients/alcaldia-maracaibo.png', name: 'Alcaldía de Maracaibo', sector: 'Gobierno',  bg: '#fff' },
+  { img: '/clients/gob-zulia.png',       name: 'Gobernación del Zulia', sector: 'Gobierno',     bg: '#fff' },
   // ── Otros ──
   { img: '/clients/lukiven.webp',         name: 'Lukiven S.A.',       sector: 'Industrial',     bg: '#fff' },
   { img: '/clients/farmatodo.webp',       name: 'Farmatodo',          sector: 'Retail',         bg: '#fff' },

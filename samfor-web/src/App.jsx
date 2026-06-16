@@ -29,9 +29,7 @@ const SERVICES = [
   { icon: <Zap size={28}/>, title: 'Obras Eléctricas', division: 'Eléctricos', desc: 'Diseño y construcción de plantas eléctricas, subestaciones, tendido de alta tensión, automatización industrial y sistemas SCADA.' },
   { icon: <Building2 size={28}/>, title: 'Obras Civiles', division: 'Civiles', desc: 'Movimiento de tierras, edificaciones, carreteras, puentes, muelles y construcción en plataformas petroleras y petroquímicas.' },
   { icon: <Settings size={28}/>, title: 'Obras Mecánicas', division: 'Mecánicos', desc: 'Oleoductos, acueductos, tanques, estaciones de bombeo, instalación de tuberías y mantenimiento de facilidades de producción.' },
-  { icon: <Truck size={28}/>, title: 'Transporte Terrestre', division: 'Transporte', desc: 'Transporte de hidrocarburos, equipos industriales y personal por vía terrestre con flota certificada y operadores especializados.' },
-  { icon: <Ship size={28}/>, title: 'Transporte Marítimo', division: 'Transporte', desc: 'Transporte lacustre y marítimo hacia plataformas offshore, instalaciones en el Lago de Maracaibo y costas venezolanas.' },
-  { icon: <Plane size={28}/>, title: 'Transporte Aéreo', division: 'Transporte', desc: 'Transporte aéreo de personal, equipos y cargas especializadas para operaciones industriales y remotas en todo el territorio nacional.' },
+  { icon: <Truck size={28}/>, title: 'Transporte', division: 'Transporte', desc: 'Transporte especializado de hidrocarburos, equipos industriales y personal. Cobertura terrestre, aérea y marítima en todo Venezuela.', subServices: ['Transporte Terrestre', 'Transporte Marítimo', 'Transporte Aéreo'] },
   { icon: <Leaf size={28}/>, title: 'Servicios Ambientales', division: 'Ambientales', desc: 'Manejadora de Desechos Peligrosos autorizada desde 1999. Recolección, transporte, tratamiento y disposición final conforme a normativas.' },
   { icon: <Ship size={28}/>, title: 'Servicios Marítimos/Lacustres', division: 'Otras', desc: 'Operaciones en el Lago de Maracaibo, costas venezolanas y Archipiélago Los Monjes. Transporte hacia plataformas offshore con embarcaciones especializadas.' },
   { icon: <Cpu size={28}/>, title: 'Automatización y Control', division: 'Automatización', desc: 'Sistemas PLC/DCS, instrumentación industrial, SCADA, control de procesos y redes industriales para facilidades petroleras y petroquímicas.' },
@@ -905,6 +903,7 @@ const SV_CARD_PHOTOS = {
   'Obras Eléctricas':          '/sv-electrica.webp',
   'Obras Civiles':             '/sv-civil.webp',
   'Obras Mecánicas':           '/sv-mecanica.webp',
+  'Transporte':                '/sv-transporte.webp',
   'Transporte Terrestre':      '/sv-transporte.webp',
   'Transporte Marítimo':       '/sv-transporte.webp',
   'Transporte Aéreo':          '/sv-transporte.webp',
@@ -913,10 +912,18 @@ const SV_CARD_PHOTOS = {
   'Automatización y Control':  '/sv-photo3.webp',
 }
 
+const SUB_SERVICE_ICONS = {
+  'Transporte Terrestre': <Truck size={28} />,
+  'Transporte Marítimo': <Ship size={28} />,
+  'Transporte Aéreo': <Plane size={28} />,
+}
+
 function ServicioDetalle({ title, onBack }) {
   useScrollReveal()
   const detail = SERVICES_DETAIL[title]
   const activeIdx = SERVICES.findIndex(s => s.title === title)
+  const inMainList = activeIdx >= 0
+  const srvIcon = inMainList ? SERVICES[activeIdx]?.icon : SUB_SERVICE_ICONS[title]
   const relatedProjects = ALL_PROJECTS.filter(p => p.division === detail.division).slice(0, 8)
 
   return (
@@ -958,18 +965,18 @@ function ServicioDetalle({ title, onBack }) {
               <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Descripción del servicio</span>
             </div>
             <div className="flex items-center gap-4 mb-6">
-              <span className="text-samred">{SERVICES[activeIdx]?.icon}</span>
+              <span className="text-samred">{srvIcon}</span>
               <h2 className="font-display text-[clamp(1.75rem,3.5vw,3rem)] text-dark leading-none">{title.toUpperCase()}</h2>
             </div>
             <p className="text-secondary text-base leading-relaxed mb-10">{detail.longDesc}</p>
             <div className="flex items-center gap-3">
-              {activeIdx > 0 && (
+              {inMainList && activeIdx > 0 && (
                 <button onClick={() => onBack('prev', activeIdx - 1)}
                   className="flex items-center gap-2 text-xs font-sub font-bold uppercase tracking-widest text-secondary border border-border px-4 py-2 rounded hover:border-dark hover:text-dark transition-all">
                   ← Anterior
                 </button>
               )}
-              {activeIdx < SERVICES.length - 1 && (
+              {inMainList && activeIdx < SERVICES.length - 1 && (
                 <button onClick={() => onBack('next', activeIdx + 1)}
                   className="flex items-center gap-2 text-xs font-sub font-bold uppercase tracking-widest text-white bg-samred border border-samred px-4 py-2 rounded hover:bg-red-700 transition-all ml-auto">
                   Siguiente →
@@ -1062,20 +1069,117 @@ function ServicioDetalle({ title, onBack }) {
   )
 }
 
+// ─── SUBMENÚ DE TRANSPORTE ──────────────────────────────────────────────
+function TransporteSubmenu({ subServices, onSelect, onBack }) {
+  useScrollReveal()
+
+  const SUBS = [
+    { title: 'Transporte Terrestre', icon: <Truck size={40}/>, tagline: 'Flota terrestre certificada', desc: 'Transporte de hidrocarburos, equipos industriales y personal por vía terrestre con flota certificada y operadores especializados.' },
+    { title: 'Transporte Marítimo', icon: <Ship size={40}/>, tagline: 'Logística marítima y lacustre', desc: 'Transporte lacustre y marítimo hacia plataformas offshore, instalaciones en el Lago de Maracaibo y costas venezolanas.' },
+    { title: 'Transporte Aéreo', icon: <Plane size={40}/>, tagline: 'Movilización aérea industrial', desc: 'Transporte aéreo de personal, equipos y cargas especializadas para operaciones industriales y remotas en todo el territorio nacional.' },
+  ]
+
+  return (
+    <div>
+      {/* HERO */}
+      <section className="relative overflow-hidden" style={{ height: '100dvh' }}>
+        <img src="/sv-transporte2.webp" alt="Transporte SAMFOR"
+          className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
+        <div className="absolute inset-0 bg-gradient-to-r from-dark/90 via-dark/60 to-dark/15" />
+        <div className="absolute inset-0 bg-gradient-to-t from-dark/70 via-transparent to-transparent" />
+        <div className="relative h-full flex flex-col justify-end px-5 sm:px-8 md:px-16 lg:px-24 pb-10 md:pb-16 lg:pb-20">
+          <div className="max-w-3xl">
+            <button onClick={onBack} className="flex items-center gap-2 text-white/50 hover:text-white text-xs font-sub font-bold uppercase tracking-widest mb-8 transition-colors group">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="transition-transform group-hover:-translate-x-1"><path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              Todos los servicios
+            </button>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="h-[3px] w-10 bg-samred" />
+              <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.25em] text-white/55">Transporte · 3 modalidades</span>
+            </div>
+            <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-white leading-none tracking-wide mb-4">TRANSPORTE</h1>
+            <p className="text-samred font-sub font-semibold text-sm uppercase tracking-widest">Selecciona una modalidad</p>
+          </div>
+        </div>
+      </section>
+
+      {/* SUB-SERVICE CARDS */}
+      <section className="bg-dark py-14 md:py-20 px-5 md:px-16 lg:px-24">
+        <div className="max-w-7xl mx-auto">
+          <div className="scroll-reveal flex items-center gap-3 mb-12">
+            <span className="h-[3px] w-10 bg-samred" />
+            <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.2em] text-samred">Modalidades de transporte</span>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {SUBS.map((sub, i) => (
+              <button key={sub.title} onClick={() => onSelect(sub.title)}
+                className="scroll-reveal group relative overflow-hidden rounded cursor-pointer text-left"
+                style={{ height: 'clamp(300px, 30vw, 420px)', transitionDelay: `${i * 100}ms` }}>
+                <img src="/sv-transporte.webp" alt={sub.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/50 to-dark/10" />
+                <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left" />
+                <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end">
+                  <span className="font-mono text-[0.72rem] text-white/30 tracking-widest mb-3">{String(i + 1).padStart(2, '0')}</span>
+                  <div className="text-samred mb-3">{sub.icon}</div>
+                  <h3 className="font-display text-[1.5rem] text-white leading-tight mb-2">{sub.title.toUpperCase()}</h3>
+                  <p className="text-samred font-sub font-semibold text-[0.72rem] uppercase tracking-widest mb-2">{sub.tagline}</p>
+                  <p className="text-white/45 text-[0.85rem] leading-relaxed line-clamp-2 group-hover:text-white/65 transition-colors duration-300">{sub.desc}</p>
+                  <div className="flex items-center gap-2 mt-5 text-samred text-[0.8rem] font-sub font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:translate-y-0 transition-all duration-300">
+                    Ver detalle <ArrowRight size={11} />
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
+
 function PageServicios({ initialService }) {
   useScrollReveal()
   const [selected, setSelected] = useState(initialService || null)
+  const [subSelected, setSubSelected] = useState(null)
 
   const handleSelect = (title) => {
     setSelected(title)
+    setSubSelected(null)
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }
+  const handleSubSelect = (subTitle) => {
+    setSubSelected(subTitle)
     window.scrollTo({ top: 0, behavior: 'instant' })
   }
   const handleBack = (dir, idx) => {
-    if (dir === 'prev' || dir === 'next') { setSelected(SERVICES[idx].title); window.scrollTo({ top: 0, behavior: 'instant' }) }
-    else { setSelected(null); window.scrollTo({ top: 0, behavior: 'instant' }) }
+    if (subSelected) {
+      setSubSelected(null)
+    } else if (dir === 'prev' || dir === 'next') {
+      setSelected(SERVICES[idx].title)
+    } else {
+      setSelected(null)
+    }
+    window.scrollTo({ top: 0, behavior: 'instant' })
   }
 
-  if (selected) return <div className="pt-24"><ServicioDetalle title={selected} onBack={handleBack} /></div>
+  // Sub-service detail view
+  if (subSelected) {
+    const handleSubBack = () => {
+      setSubSelected(null)
+      window.scrollTo({ top: 0, behavior: 'instant' })
+    }
+    return <div className="pt-24"><ServicioDetalle title={subSelected} onBack={handleSubBack} /></div>
+  }
+
+  // Service with sub-services → show submenu
+  if (selected) {
+    const srv = SERVICES.find(s => s.title === selected)
+    if (srv && srv.subServices) {
+      return <TransporteSubmenu subServices={srv.subServices} onSelect={handleSubSelect} onBack={() => { setSelected(null); window.scrollTo({ top: 0, behavior: 'instant' }) }} />
+    }
+    return <div className="pt-24"><ServicioDetalle title={selected} onBack={handleBack} /></div>
+  }
 
   // ── LOBBY ──
   const active = null
@@ -1154,9 +1258,9 @@ function PageServicios({ initialService }) {
               </button>
             ))}
           </div>
-          {/* Fila 2 — 3 cards medianas (Transporte) */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-4">
-            {SERVICES.slice(3,6).map((s,i) => (
+          {/* Fila 2 — 4 cards más compactas */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            {SERVICES.slice(3).map((s,i) => (
               <button key={s.title} onClick={() => handleSelect(s.title)}
                 className="scroll-reveal group relative overflow-hidden rounded cursor-pointer text-left"
                 style={{ height:'clamp(170px,18vw,260px)', transitionDelay:`${(i+3)*60}ms` }}>
@@ -1167,28 +1271,6 @@ function PageServicios({ initialService }) {
                 <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left" />
                 <div className="absolute inset-0 p-5 flex flex-col justify-end">
                   <span className="font-mono text-[0.72rem] text-white/30 tracking-widest mb-2">{String(i+4).padStart(2,'0')}</span>
-                  <div className="text-white/50 group-hover:text-samred mb-2 transition-colors duration-300">{s.icon}</div>
-                  <h3 className="font-display text-[1rem] text-white leading-tight">{s.title.toUpperCase()}</h3>
-                  <div className="flex items-center gap-1.5 mt-3 text-samred text-[0.75rem] font-sub font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:translate-y-0 transition-all duration-300">
-                    Ver servicio <ArrowRight size={10} />
-                  </div>
-                </div>
-              </button>
-            ))}
-          </div>
-          {/* Fila 3 — 3 cards compactas (restantes) */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {SERVICES.slice(6).map((s,i) => (
-              <button key={s.title} onClick={() => handleSelect(s.title)}
-                className="scroll-reveal group relative overflow-hidden rounded cursor-pointer text-left"
-                style={{ height:'clamp(170px,18vw,260px)', transitionDelay:`${(i+6)*60}ms` }}>
-                <img src={SV_CARD_PHOTOS[s.title]} alt={s.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/55 to-dark/10" />
-                <div className="absolute inset-0 bg-samred/0 group-hover:bg-samred/12 transition-all duration-500" />
-                <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left" />
-                <div className="absolute inset-0 p-5 flex flex-col justify-end">
-                  <span className="font-mono text-[0.72rem] text-white/30 tracking-widest mb-2">{String(i+7).padStart(2,'0')}</span>
                   <div className="text-white/50 group-hover:text-samred mb-2 transition-colors duration-300">{s.icon}</div>
                   <h3 className="font-display text-[1rem] text-white leading-tight">{s.title.toUpperCase()}</h3>
                   <div className="flex items-center gap-1.5 mt-3 text-samred text-[0.75rem] font-sub font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:translate-y-0 transition-all duration-300">

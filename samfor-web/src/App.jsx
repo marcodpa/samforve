@@ -325,7 +325,7 @@ const ALL_PROJECTS = [
     id: 109, status: 'completed', division: 'Ambientales',
     client: 'Chevron / Texaco Petroleum Co.',
     title: 'Sistema de Remediación Petroboscán',
-    img: IMG(132),
+    img: IMG(133),
     desc: 'Sub Estación Eléctrica Refinería Bajo Grande. Sistema de remediación, transporte de efluentes líquidos y desechos sólidos.',
     detail: 'Unidades tipo Vacuum y de plataforma. Tratamiento de efluentes. Disposición final de desechos sólidos y procesamiento de materiales peligrosos.',
   },

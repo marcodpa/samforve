@@ -1775,25 +1775,13 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
             <span className="font-sub font-semibold text-[0.82rem] uppercase tracking-widest text-samred">Portafolio</span>
           </div>
 
-          {/* Center title */}
-          <div>
-            <h1 className="font-display text-[clamp(2rem,5vw,4.5rem)] text-white leading-none mb-6 w-full">ALGUNOS DE<br />NUESTROS PROYECTOS</h1>
-            {/* Division chips row */}
-            <div className="flex flex-wrap gap-2">
-              {Object.entries(DIVISION_META).map(([key, m]) => (
-                <button key={key}
-                  onClick={() => { setActiveDivision(key); document.getElementById('proyectos-lista')?.scrollIntoView({ behavior: 'smooth' }) }}
-                  className="group flex items-center gap-2 bg-white/8 border border-white/15 hover:border-samred/60 hover:bg-white/12 transition-all duration-200 px-3 py-1.5 rounded"
-                >
-                  <span className="text-white/50 group-hover:text-samred transition-colors">{m.icon}</span>
-                  <span className="font-sub font-semibold text-xs uppercase tracking-wide text-white/70 group-hover:text-white transition-colors">{m.label}</span>
-                </button>
-              ))}
-            </div>
-          </div>
+          {/* Spacer */}
+          <div />
 
-          {/* Bottom stats */}
-          <div className="flex gap-5 md:gap-10 border-t border-white/10 pt-5">
+          {/* Bottom: title left + stats */}
+          <div className="flex flex-col gap-6">
+            <h1 className="font-display text-[clamp(2rem,5vw,4.5rem)] text-white leading-none w-full">ALGUNOS DE<br />NUESTROS PROYECTOS</h1>
+            <div className="flex gap-5 md:gap-10 border-t border-white/10 pt-5">
             {[['250+','Proyectos'], ['6','Divisiones'], ['60','Años']].map(([v,l]) => (
               <div key={l}>
                 <p className="font-display text-xl md:text-3xl text-samred leading-none">{v}</p>

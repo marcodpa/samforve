@@ -84,6 +84,7 @@ const SERVICES_DETAIL = {
   },
   'Transporte Terrestre': {
     heroImg: '/sv-transporte2.webp',
+    descImg: '/sv-transporte-desc.jpg',
     tagline: 'Flota terrestre certificada',
     longDesc: 'SAMFOR dispone de una flota de vehículos especializados para el transporte terrestre de hidrocarburos, equipos industriales de alto tonelaje y materiales peligrosos. Contamos con operadores certificados, vehículos con mantenimiento preventivo riguroso y cumplimiento estricto de las normas de seguridad vial y ambiental en todo el territorio venezolano.',
     capabilities: [

@@ -2179,7 +2179,7 @@ function PageQuienesSomos({ setPage }) {
         {/* Mobile: stacked */}
         <div className="md:hidden">
           <div className="relative" style={{ minHeight: '300px' }}>
-            <img src="/qs-team-img.jpg" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-contain object-center" loading="lazy" />
+            <img src="/qs-team-img2.jpg" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-contain object-center" loading="lazy" />
             <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(13,17,23,0.10) 0%, rgba(13,17,23,0.60) 50%, #0D1117 100%)' }} />
             <div className="relative px-5 pt-14 pb-8 flex flex-col justify-end h-full">
               <div className="flex items-center gap-3 mb-3">
@@ -2254,7 +2254,7 @@ function PageQuienesSomos({ setPage }) {
 
           {/* Right: Imagen + 3D Cube */}
           <div className="relative overflow-hidden">
-            <img src="/qs-team-img.jpg" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-contain object-center" loading="lazy" />
+            <img src="/qs-team-img2.jpg" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-contain object-center" loading="lazy" />
             <div className="absolute inset-0" style={{
               background: 'linear-gradient(112deg, rgba(13,17,23,0.60) 0%, rgba(13,17,23,0.25) 50%, rgba(200,16,46,0.12) 100%)',
             }} />

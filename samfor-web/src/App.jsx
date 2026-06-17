@@ -54,6 +54,7 @@ const SERVICES_DETAIL = {
   },
   'Obras Civiles': {
     heroImg: '/sv-civil.webp',
+    descImg: '/sv-civil-desc.jpg',
     tagline: 'Infraestructura que soporta la industria',
     longDesc: 'Ejecutamos obras civiles de gran envergadura para el sector energético, petroquímico y de infraestructura pública. Desde movimiento de tierras y fundaciones hasta edificaciones completas, carreteras industriales y estructuras costeras, SAMFOR aporta ingeniería, equipos propios y personal altamente calificado.',
     capabilities: [

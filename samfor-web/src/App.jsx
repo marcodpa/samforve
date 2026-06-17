@@ -2175,7 +2175,7 @@ function PageQuienesSomos({ setPage }) {
         {/* Mobile: stacked */}
         <div className="md:hidden">
           <div className="relative" style={{ minHeight: '360px' }}>
-            <img src="/qs-welding.jpg" alt="Soldadores SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+            <img src="/qs-worker.png" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
             <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(13,17,23,0.15) 0%, rgba(13,17,23,0.70) 50%, #0D1117 100%)' }} />
             <div className="relative px-5 pt-16 pb-10 flex flex-col justify-end h-full">
               <div className="flex items-center gap-3 mb-4">
@@ -2250,7 +2250,7 @@ function PageQuienesSomos({ setPage }) {
 
           {/* Right: Imagen + 3D Cube */}
           <div className="relative overflow-hidden">
-            <img src="/qs-welding.jpg" alt="Soldadores SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+            <img src="/qs-worker.png" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
             <div className="absolute inset-0" style={{
               background: 'linear-gradient(112deg, rgba(13,17,23,0.60) 0%, rgba(13,17,23,0.25) 50%, rgba(200,16,46,0.12) 100%)',
             }} />

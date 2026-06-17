@@ -1791,6 +1791,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
           </div>
         </div>
       </div>
+      </div>
 
       {/* ── CATEGORÍAS FOTO-FILTRO ── */}
       <div id="proyectos-lista" className="bg-dark border-b border-white/10">

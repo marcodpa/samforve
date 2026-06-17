@@ -2177,37 +2177,37 @@ function PageQuienesSomos({ setPage }) {
 
         {/* Mobile: stacked */}
         <div className="md:hidden">
-          <div className="relative" style={{ minHeight: '360px' }}>
+          <div className="relative" style={{ minHeight: '300px' }}>
             <img src="/qs-team-img.jpg" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
-            <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(13,17,23,0.15) 0%, rgba(13,17,23,0.70) 50%, #0D1117 100%)' }} />
-            <div className="relative px-5 pt-16 pb-10 flex flex-col justify-end h-full">
-              <div className="flex items-center gap-3 mb-4">
+            <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(13,17,23,0.10) 0%, rgba(13,17,23,0.60) 50%, #0D1117 100%)' }} />
+            <div className="relative px-5 pt-14 pb-8 flex flex-col justify-end h-full">
+              <div className="flex items-center gap-3 mb-3">
                 <span className="h-[2px] w-6 bg-samred" />
-                <span className="font-sub font-semibold text-[0.75rem] uppercase tracking-[0.25em] text-samred">Quiénes Somos</span>
+                <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.25em] text-samred">Quiénes Somos</span>
               </div>
-              <h2 className="font-display text-[3rem] text-white leading-none mb-2">SAMFOR</h2>
-              <span className="text-samred font-display text-[1.8rem] leading-none">S.A.</span>
+              <h2 className="font-display text-[2.6rem] text-white leading-none mb-1">SAMFOR</h2>
+              <span className="text-samred font-display text-[1.5rem] leading-none">S.A.</span>
             </div>
           </div>
-          <div className="bg-dark px-5 pb-12">
-            <p className="text-white/75 text-[1.1rem] leading-relaxed mb-5">
-              Empresa venezolana fundada en 1966 en Maracaibo, dedicada a construcción civil, eléctrica, mecánica, telecomunicaciones, transporte y servicios ambientales para la industria petrolera y petroquímica.
+          <div className="bg-white px-5 py-10">
+            <p className="text-dark/70 text-[1.05rem] leading-relaxed mb-5">
+              Somos una empresa venezolana fundada en <span className="text-dark font-semibold">1966 en Maracaibo</span>, dedicada a la prestación de servicios de construcción civil, eléctrica, mecánica, telecomunicaciones, transporte y servicios ambientales para la industria petrolera, petroquímica, carbonífera y civil.
             </p>
-            <p className="text-white/55 text-[1rem] leading-relaxed mb-8">
-              Con 60 años de operación continua, contamos con la infraestructura, capital humano y estándares certificados para proyectos de alta complejidad en todo el territorio nacional.
+            <p className="text-dark/55 text-[1rem] leading-relaxed mb-8">
+              Con casi seis décadas de operación continua, contamos con la infraestructura, el capital humano y los estándares certificados para ejecutar proyectos de alta complejidad en cualquier punto del territorio nacional.
             </p>
-            {/* Valores con borde izquierdo */}
-            <div className="flex flex-col gap-3">
+            {/* Valores con borde izquierdo — like desktop */}
+            <div className="flex flex-col gap-4">
               {[
-                { label: 'Lealtad', desc: 'Compromiso con clientes, colaboradores y el pa\u00eds.', n: '01' },
-                { label: 'Responsabilidad', desc: 'Cumplimiento técnico, ambiental y de seguridad.', n: '02' },
-                { label: 'Respeto', desc: 'Cada persona tratada con máxima dignidad.', n: '03' },
-              ].map(v => (
-                <div key={v.label} className="flex items-center gap-4 bg-white/[0.03] border-l-2 border-samred rounded-r-xl px-4 py-4">
-                  <span className="font-display text-[1.6rem] text-samred/30 leading-none w-10 flex-shrink-0">{v.n}</span>
+                { label: 'Lealtad', desc: 'Compromiso con clientes, colaboradores y el pa\u00eds.' },
+                { label: 'Responsabilidad', desc: 'Cumplimiento técnico, ambiental y de seguridad.' },
+                { label: 'Respeto', desc: 'Cada persona tratada con máxima dignidad.' },
+              ].map((v) => (
+                <div key={v.label} className="flex items-start gap-4">
+                  <span className="flex-shrink-0 w-[3px] h-8 self-stretch bg-samred rounded" />
                   <div>
-                    <span className="font-sub font-bold text-[0.82rem] uppercase tracking-widest text-white block mb-0.5">{v.label}</span>
-                    <span className="text-white/45 text-[0.85rem]">{v.desc}</span>
+                    <span className="font-sub font-bold text-sm uppercase tracking-widest text-dark">{v.label}</span>
+                    <span className="text-secondary text-sm ml-2">{v.desc}</span>
                   </div>
                 </div>
               ))}

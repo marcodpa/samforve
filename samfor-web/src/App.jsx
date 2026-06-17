@@ -1668,7 +1668,6 @@ function PageInicio({ setPage, navigateToServicios }) {
                 <div className="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/30 to-transparent" />
                 <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot || '#C8102E' }} />
                 <div className="absolute inset-0 p-5 flex flex-col justify-end">
-                  <div className="mb-2"><DivisionBadge division={p.division} /></div>
                   <h3 className="font-sub font-bold text-[0.9375rem] uppercase tracking-wide text-white leading-snug mb-1">{p.title}</h3>
                   <p className="text-white/40 text-[0.88rem] font-sub uppercase tracking-widest">{p.client}</p>
                 </div>
@@ -2177,7 +2176,7 @@ function PageQuienesSomos({ setPage }) {
         {/* Mobile: stacked */}
         <div className="md:hidden">
           <div className="relative" style={{ minHeight: '360px' }}>
-            <img src="/qs-equipo-westwarehouse.jpg" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+            <img src="/qs-team-img.jpg" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
             <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(13,17,23,0.15) 0%, rgba(13,17,23,0.70) 50%, #0D1117 100%)' }} />
             <div className="relative px-5 pt-16 pb-10 flex flex-col justify-end h-full">
               <div className="flex items-center gap-3 mb-4">
@@ -2252,7 +2251,7 @@ function PageQuienesSomos({ setPage }) {
 
           {/* Right: Imagen + 3D Cube */}
           <div className="relative overflow-hidden">
-            <img src="/qs-equipo-westwarehouse.jpg" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+            <img src="/qs-team-img.jpg" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
             <div className="absolute inset-0" style={{
               background: 'linear-gradient(112deg, rgba(13,17,23,0.60) 0%, rgba(13,17,23,0.25) 50%, rgba(200,16,46,0.12) 100%)',
             }} />

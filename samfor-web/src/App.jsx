@@ -1787,7 +1787,6 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
                 >
                   <span className="text-white/50 group-hover:text-samred transition-colors">{m.icon}</span>
                   <span className="font-sub font-semibold text-xs uppercase tracking-wide text-white/70 group-hover:text-white transition-colors">{m.label}</span>
-                  <span className="font-mono text-[0.75rem] text-white/30 ml-0.5">{counts[key]||0}</span>
                 </button>
               ))}
             </div>

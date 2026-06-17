@@ -901,7 +901,7 @@ const SV_CARD_PHOTOS = {
   'Obras Eléctricas':          '/sv-electrica.webp',
   'Obras Civiles':             '/sv-civil.webp',
   'Obras Mecánicas':           '/sv-mecanica.webp',
-  'Transporte':                '/sv-transporte.webp',
+  'Transporte':                '/sv-transporte-card.jpg',
   'Transporte Terrestre':      '/sv-transporte.webp',
   'Transporte Marítimo':       '/sv-maritimo-hero.jpg',
   'Transporte Aéreo':          '/sv-aereo-hero.jpg',

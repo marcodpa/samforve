@@ -1777,7 +1777,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
 
           {/* Center title */}
           <div>
-            <h1 className="font-display text-[clamp(3rem,10vw,9rem)] text-white leading-none mb-6 w-full">ALGUNOS DE<br />NUESTROS PROYECTOS</h1>
+            <h1 className="font-display text-[clamp(2rem,5vw,4.5rem)] text-white leading-none mb-6 w-full">ALGUNOS DE<br />NUESTROS PROYECTOS</h1>
             {/* Division chips row */}
             <div className="flex flex-wrap gap-2">
               {Object.entries(DIVISION_META).map(([key, m]) => (

@@ -14,13 +14,13 @@ const IMG = (n) => `/projects/img-${String(n).padStart(3,'0')}.jpg`
 // ─── CLASSIFICATION ───────────────────────────────────────────────────────────
 // Matches the reference: Civiles / Mecánicos / Eléctricos / Transporte / Ambientales / Otras Divisiones
 const DIVISION_META = {
-  'Civiles':         { label: 'Proyectos Civiles',     icon: <Building2 size={16}/>,  color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E' },
-  'Mecánicos':       { label: 'Proyectos Mecánicos',   icon: <Wrench size={16}/>,     color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E' },
-  'Eléctricos':      { label: 'Proyectos Eléctricos',  icon: <Zap size={16}/>,        color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E' },
-  'Transporte':      { label: 'División Transporte',   icon: <Truck size={16}/>,      color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E' },
-  'Ambientales':     { label: 'Servicios Ambientales', icon: <Leaf size={16}/>,       color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E' },
-  'Otras':           { label: 'Servicios Marítimos',   icon: <Ship size={16}/>,       color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E' },
-  'Automatización':  { label: 'Automatización y Control', icon: <Cpu size={16}/>,    color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E' },
+  'Civiles':         { label: 'Proyectos Civiles',     icon: <Building2 size={16}/>,  color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E', img: IMG(72) },
+  'Mecánicos':       { label: 'Proyectos Mecánicos',   icon: <Wrench size={16}/>,     color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E', img: IMG(103) },
+  'Eléctricos':      { label: 'Proyectos Eléctricos',  icon: <Zap size={16}/>,        color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E', img: IMG(23) },
+  'Transporte':      { label: 'División Transporte',   icon: <Truck size={16}/>,      color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E', img: IMG(129) },
+  'Ambientales':     { label: 'Servicios Ambientales', icon: <Leaf size={16}/>,       color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E', img: '/division/ambientales.jpg' },
+  'Otras':           { label: 'Servicios Marítimos',   icon: <Ship size={16}/>,       color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E', img: IMG(136) },
+  'Automatización':  { label: 'Automatización y Control', icon: <Cpu size={16}/>,    color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E', img: IMG(28) },
 }
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
@@ -325,7 +325,7 @@ const ALL_PROJECTS = [
     id: 109, status: 'completed', division: 'Ambientales',
     client: 'Chevron / Texaco Petroleum Co.',
     title: 'Sistema de Remediación Petroboscán',
-    img: IMG(133),
+    img: IMG(128),
     desc: 'Sub Estación Eléctrica Refinería Bajo Grande. Sistema de remediación, transporte de efluentes líquidos y desechos sólidos.',
     detail: 'Unidades tipo Vacuum y de plataforma. Tratamiento de efluentes. Disposición final de desechos sólidos y procesamiento de materiales peligrosos.',
   },
@@ -1831,7 +1831,6 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
 
           {/* Cada división */}
           {Object.entries(DIVISION_META).map(([key, m], i) => {
-            const sample = ALL_PROJECTS.find(p => p.division === key)
             const isActive = activeDivision === key
             return (
               <button key={key}
@@ -1839,7 +1838,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
                 className={`group relative overflow-hidden transition-all duration-300 ${isActive ? 'opacity-100' : 'opacity-55 hover:opacity-90'}`}
                 style={{ height: 'clamp(110px,18vw,260px)' }}
               >
-                {sample && <img src={sample.img} alt={key} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />}
+                <img src={m.img} alt={key} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
                 <div className={`absolute inset-0 transition-all duration-300 ${isActive ? 'bg-dark/40' : 'bg-dark/75 group-hover:bg-dark/50'}`} />
                 {/* Top accent when active */}
                 {isActive && <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred" />}

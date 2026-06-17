@@ -70,6 +70,7 @@ const SERVICES_DETAIL = {
   },
   'Obras Mecánicas': {
     heroImg: '/sv-mecanica.webp',
+    descImg: '/sv-mecanica-desc.jpg',
     tagline: 'Ingeniería mecánica de alto desempeño',
     longDesc: 'Especialistas en la construcción y mantenimiento de facilidades de producción, sistemas de tuberías y equipos mecánicos rotativos. SAMFOR garantiza la integridad mecánica de plantas y campos a través de procedimientos rigurosos de inspección, soldadura certificada y montaje de equipos.',
     capabilities: [

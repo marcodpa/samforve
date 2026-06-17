@@ -133,6 +133,7 @@ const SERVICES_DETAIL = {
   },
   'Servicios Ambientales': {
     heroImg: '/qs-hero.webp',
+    descImg: '/sv-ambiental-desc.jpg',
     tagline: 'Gestión ambiental responsable desde 1999',
     longDesc: 'SAMFOR es una Manejadora de Desechos Peligrosos autorizada por el Ministerio del Ecosistema desde 1999. Ofrecemos soluciones integrales para el manejo, tratamiento y disposición final de residuos industriales, garantizando cumplimiento de normativas ambientales venezolanas e internacionales.',
     capabilities: [

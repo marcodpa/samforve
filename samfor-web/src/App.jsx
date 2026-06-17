@@ -146,6 +146,7 @@ const SERVICES_DETAIL = {
   },
   'Servicios Marítimos/Lacustres': {
     heroImg: '/hero2.webp',
+    descImg: '/sv-maritimo-lacustre.jpg',
     tagline: 'Operaciones en el Lago y costas venezolanas',
     longDesc: 'Con décadas de presencia en el Lago de Maracaibo y las costas venezolanas, SAMFOR opera embarcaciones especializadas para el transporte de personal, equipos y materiales hacia plataformas offshore. Nuestras operaciones cubren desde el Lago de Maracaibo hasta el Archipiélago Los Monjes y el Golfo de Venezuela.',
     capabilities: [

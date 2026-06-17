@@ -223,7 +223,6 @@ const CLIENT_GRID = [
   { img: '/clients/polar.webp',           name: 'Empresas Polar',     sector: 'Industria',      bg: '#fff' },
   { img: '/clients/regional.webp',        name: 'C. Regional',        sector: 'Industria',      bg: '#fff' },
   // ── Gobierno / Municipios ──
-  { img: '/clients/alcaldia-zulia.webp',  name: 'Alcaldía del Zulia', sector: 'Gobierno',       bg: '#fff' },
   { img: '/clients/alcaldia-maracaibo.png', name: 'Alcaldía de Maracaibo', sector: 'Gobierno',  bg: '#fff' },
   { img: '/clients/gob-zulia.png',       name: 'Gobernación del Zulia', sector: 'Gobierno',     bg: '#fff' },
   // ── Otros ──

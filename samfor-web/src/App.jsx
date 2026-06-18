@@ -879,14 +879,7 @@ function ClientsSection({ setPage }) {
 
         {/* BOTTOM — stat bar */}
         <div className="border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 px-6 md:px-14 lg:px-20 py-5">
-          <div className="flex items-center gap-4 md:gap-8">
-            {[['50+', 'Clientes históricos'], ['60', 'Años de confianza'], ['9', 'Sectores atendidos']].map(([val, lbl]) => (
-              <div key={lbl} className="flex items-baseline gap-1.5">
-                <span className="font-display text-xl md:text-3xl text-samred">{val}</span>
-                <span className="font-sub text-[0.8rem] md:text-sm uppercase tracking-widest text-white/40 leading-tight max-w-[4rem] md:max-w-none">{lbl}</span>
-              </div>
-            ))}
-          </div>
+          <div />
           <button onClick={() => setPage('contacto')} className="flex-shrink-0 btn-primary whitespace-nowrap">Ser parte de nuestros clientes</button>
         </div>
 
@@ -1207,14 +1200,6 @@ function PageServicios({ initialService }) {
             <p className="text-white/65 text-lg max-w-xl leading-relaxed mb-10">
               Más de 60 años ejecutando obras y servicios de alta complejidad para la industria petrolera, petroquímica y civil en Venezuela.
             </p>
-            <div className="flex flex-wrap gap-8">
-              {[['60', 'Años de trayectoria'], ['+250', 'Proyectos ejecutados'], [String(SERVICES.length), 'Divisiones activas']].map(([n, l]) => (
-                <div key={l}>
-                  <div className="font-display text-[2rem] text-samred leading-none">{n}</div>
-                  <div className="font-sub text-[0.88rem] uppercase tracking-widest text-white/45 mt-1 max-w-[8rem] leading-snug">{l}</div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
         <div className="absolute bottom-7 right-10 flex flex-col items-center gap-1.5 opacity-40">
@@ -2140,16 +2125,6 @@ function PageQuienesSomos({ setPage }) {
             <p className="hero-item text-white/65 text-base md:text-lg max-w-xl leading-relaxed mb-8" style={{ opacity: 0 }}>
               Construyendo Venezuela con excelencia técnica, responsabilidad ambiental y el más alto compromiso con la seguridad industrial.
             </p>
-            <div className="hero-item" style={{ opacity: 0 }}>
-              <div className="flex flex-wrap gap-5 md:gap-8">
-                {[['60', 'A\u00f1os'], ['+250', 'Proyectos'], ['6', 'Divisiones'], ['1999', 'Cert. Ambiental']].map(([n, l]) => (
-                  <div key={l} className="bg-white/8 backdrop-blur-sm border border-white/15 rounded-lg px-4 py-3 md:bg-white/5 md:border-white/10">
-                    <div className="font-display text-[2.2rem] md:text-[2rem] text-samred leading-none">{n}</div>
-                    <div className="font-sub text-[0.75rem] md:text-[0.88rem] uppercase tracking-widest text-white/50 mt-1">{l}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
         <div className="absolute bottom-7 right-8 flex flex-col items-center gap-1.5 opacity-30">

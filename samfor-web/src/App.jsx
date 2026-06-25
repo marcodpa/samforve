@@ -2506,13 +2506,13 @@ function PageContacto() {
   ]
 
   return (
-    <div className="bg-[#0a1628] pt-24">
+    <div className="bg-[#0D1117] pt-24">
 
       {/* ── HERO — full screen ── */}
       <section className="relative h-screen min-h-[500px] overflow-hidden">
         <img src="/ct-hero.webp" alt="Contacto SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0a1628]/70 via-[#0a1628]/30 to-[#0a1628]/10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628]/50 via-transparent to-[#0a1628]/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0D1117]/70 via-[#0D1117]/30 to-[#0D1117]/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0D1117]/50 via-transparent to-[#0D1117]/20" />
         <div className="relative h-full flex flex-col justify-center px-6 md:px-16 lg:px-24">
           <div className="flex items-center gap-3 mb-5">
             <span className="h-[3px] w-10 bg-samred" />
@@ -2565,7 +2565,7 @@ function PageContacto() {
             {/* Replacement image — industrial aesthetic */}
             <div className="relative rounded-2xl overflow-hidden h-56 md:h-64 mb-6">
               <img src="/ct-turbina2.webp" alt="Instalaciones SAMFOR" className="absolute inset-0 w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628]/70 via-[#0a1628]/10 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0D1117]/70 via-[#0D1117]/10 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <div className="flex items-center gap-2 text-white/80 text-sm">
                   <MapPin size={14} className="text-samred" />
@@ -2629,8 +2629,8 @@ function PageContacto() {
       <section className="relative py-20 md:py-28 overflow-hidden">
         <div className="absolute inset-0">
           <img src="/ct-jobs2.webp" alt="Trabaja en SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a1628]/92 via-[#0a1628]/75 to-[#0a1628]/80" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628]/60 via-transparent to-[#0a1628]/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0D1117]/92 via-[#0D1117]/75 to-[#0D1117]/80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0D1117]/60 via-transparent to-[#0D1117]/40" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-6 md:px-16 lg:px-24">
@@ -2658,13 +2658,13 @@ function PageContacto() {
               <form onSubmit={handleCvSubmit} className="space-y-4 max-w-lg">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <input name="nombre" placeholder="Nombre completo" value={cvForm.nombre} onChange={handleCvChange} required
-                    className="bg-[#0a1628]/50 border border-white/[0.12] rounded-xl px-5 py-3.5 text-white placeholder-zinc-500 focus:outline-none focus:border-samred/50 transition-colors text-sm backdrop-blur-sm" />
+                    className="bg-[#0D1117]/50 border border-white/[0.12] rounded-xl px-5 py-3.5 text-white placeholder-zinc-500 focus:outline-none focus:border-samred/50 transition-colors text-sm backdrop-blur-sm" />
                   <input name="email" type="email" placeholder="Correo electrónico" value={cvForm.email} onChange={handleCvChange} required
-                    className="bg-[#0a1628]/50 border border-white/[0.12] rounded-xl px-5 py-3.5 text-white placeholder-zinc-500 focus:outline-none focus:border-samred/50 transition-colors text-sm backdrop-blur-sm" />
+                    className="bg-[#0D1117]/50 border border-white/[0.12] rounded-xl px-5 py-3.5 text-white placeholder-zinc-500 focus:outline-none focus:border-samred/50 transition-colors text-sm backdrop-blur-sm" />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <input name="telefono" placeholder="Teléfono" value={cvForm.telefono} onChange={handleCvChange} required
-                    className="bg-[#0a1628]/50 border border-white/[0.12] rounded-xl px-5 py-3.5 text-white placeholder-zinc-500 focus:outline-none focus:border-samred/50 transition-colors text-sm backdrop-blur-sm" />
+                    className="bg-[#0D1117]/50 border border-white/[0.12] rounded-xl px-5 py-3.5 text-white placeholder-zinc-500 focus:outline-none focus:border-samred/50 transition-colors text-sm backdrop-blur-sm" />
                   <input name="cargo" placeholder="Cargo de interés" value={cvForm.cargo} onChange={handleCvChange}
                     className="bg-black/50 border border-white/[0.12] rounded-xl px-5 py-3.5 text-white placeholder-zinc-500 focus:outline-none focus:border-samred/50 transition-colors text-sm backdrop-blur-sm" />
                 </div>

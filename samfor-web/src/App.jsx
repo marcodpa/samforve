@@ -625,11 +625,11 @@ function ProjectDetailPage({ project, onClose }) {
     <div className="bg-dark min-h-screen pt-16">
 
       {/* ── HERO — full image visible ── */}
-      <div className="relative w-full bg-[#060809] flex items-center justify-center" style={{ minHeight: '72vh' }}>
+      <div className="relative w-full bg-[#060809]" style={{ minHeight: '72vh', maxHeight: '80vh' }}>
         <img
           src={project.img}
           alt={project.title}
-          className="w-full h-auto max-h-[80vh] object-contain"
+          className="absolute inset-0 w-full h-full object-cover"
           loading="lazy"
         />
         {/* Subtle dark vignette on sides only */}

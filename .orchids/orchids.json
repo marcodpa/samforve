@@ -1,0 +1,7 @@
+{
+  "startupCommands": [
+    "cd /home/user/app/samfor-web && npm install && npm run dev -- --host 0.0.0.0 --port 3000"
+  ],
+  "projectId": "d1d0a833-1f2f-4eb2-bab3-099b8decc05d",
+  "templateId": "any"
+}

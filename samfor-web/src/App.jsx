@@ -90,9 +90,7 @@ const SERVICES_DETAIL = {
     tagline: 'Flota terrestre certificada',
     longDesc: 'SAMFOR dispone de una flota de vehículos especializados para el transporte terrestre de hidrocarburos, equipos industriales de alto tonelaje y materiales peligrosos. Contamos con operadores certificados, vehículos con mantenimiento preventivo riguroso y cumplimiento estricto de las normas de seguridad vial y ambiental en todo el territorio venezolano.',
     capabilities: [
-      'Transporte de hidrocarburos y derivados',
       'Transporte de equipos y maquinaria industrial',
-      'Transporte de materiales peligrosos',
       'Flota de camiones cisterna y plataformas',
       'Logística de carga pesada y sobredimensionada',
       'Operadores con licencias especiales (AVB, MPP)',
@@ -106,7 +104,6 @@ const SERVICES_DETAIL = {
     longDesc: 'Operamos embarcaciones especializadas para el transporte marítimo y lacustre en el Lago de Maracaibo, costas venezolanas y Archipiélago Los Monjes. Brindamos servicios de transporte de personal, carga general, combustibles y suministros hacia plataformas offshore, muelles e instalaciones costeras con altos estándares de seguridad.',
     capabilities: [
       'Transporte de personal a plataformas offshore',
-      'Transporte de combustibles y suministros',
       'Embarcaciones de apoyo lacustre y marítimo',
       'Operaciones en el Lago de Maracaibo',
       'Logística hacia el Archipiélago Los Monjes',
@@ -128,6 +125,8 @@ const SERVICES_DETAIL = {
       'Logística aérea para operaciones costa afuera',
       'Cumplimiento de normativas INAC y OACI',
       'Respuesta rápida para contingencias operativas',
+      'Aéreoambulancia',
+      'Vuelos Diplomáticos',
     ],
     division: 'Transporte',
   },

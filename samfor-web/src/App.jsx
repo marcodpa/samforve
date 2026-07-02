@@ -278,14 +278,6 @@ const ALL_PROJECTS = [
     detail: 'Reparación de motores y componentes, suministro de repuestos. Optimizar la eficiencia operativa y prolongar la vida útil de los equipos de generación.',
   },
   {
-    id: 7, status: 'active', division: 'Mecánicos',
-    client: 'PDVSA Petróleo, S.A.',
-    title: 'Mantenimiento General Llenadero Productos Blancos Cardón',
-    img: IMG(90),
-    desc: 'Mantenimiento general del llenadero de productos blancos en la refinería Cardón, garantizando operatividad y seguridad.',
-    detail: 'Mantenimiento integral de equipos mecánicos, instalaciones eléctricas, estructuras civiles y sistemas de seguridad. Refinería Cardón, Venezuela.',
-  },
-  {
     id: 103, status: 'completed', division: 'Mecánicos',
     client: 'PDVSA Petróleo, S.A.',
     title: 'Gasoducto Anaco–Barquisimeto Ø36" y Ø30"',
@@ -374,14 +366,6 @@ const ALL_PROJECTS = [
     img: IMG(28),
     desc: 'Implementación y mantenimiento de sistema SCADA para supervisión y control de turbogeneradores, sistemas eléctricos y utilidades de la planta.',
     detail: 'Integración de PLCs Allen-Bradley con HMI FactoryTalk. Comunicación Ethernet/IP y ControlNet. Monitoreo en tiempo real de 1,200+ variables de proceso.',
-  },
-  {
-    id: 302, status: 'active', division: 'Automatización',
-    client: 'Chevron Global Technology Service Company',
-    title: 'Automatización Sistema de Agua Campo Boscán',
-    img: IMG(62),
-    desc: 'Automatización integral del sistema de distribución y tratamiento de agua para Campo Boscán. PLCs, instrumentación de campo y telemetría.',
-    detail: 'Instalación de sensores de flujo, presión y nivel. Programación de PLC Siemens S7-300. Interfaz HMI local y remota con reportes automáticos de operación.',
   },
 ]
 

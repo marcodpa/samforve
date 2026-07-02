@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/samfor-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="SAMFOR, S.A. — 59 años de experiencia en proyectos de construcción eléctrica, civil, mecánica e industrial para la industria petrolera y petroquímica en Venezuela." />
+    <title>SAMFOR, S.A. — Construyendo el Futuro de la Energía desde 1966</title>
+    <!-- Preload critical hero images -->
+    <link rel="preload" as="image" href="/hero.webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="/hero2.webp" />
+    <link rel="preload" as="image" href="/hero3.webp" />
+    <!-- Preload client logos -->
+    <link rel="preload" as="image" href="/clients/pdvsa.webp" />
+    <link rel="preload" as="image" href="/clients/chevron.webp" />
+    <link rel="preload" as="image" href="/clients/shell.webp" />
+    <link rel="preload" as="image" href="/clients/repsol.webp" />
+    <link rel="preload" as="image" href="/clients/eni.webp" />
+    <link rel="preload" as="image" href="/clients/cnpc.webp" />
+    <link rel="preload" as="image" href="/clients/halliburton.webp" />
+    <link rel="preload" as="image" href="/clients/slb.webp" />
+    <link rel="preload" as="image" href="/clients/weatherford.webp" />
+    <link rel="preload" as="image" href="/clients/gazprom.webp" />
+    <link rel="preload" as="image" href="/clients/petrex.webp" />
+    <link rel="preload" as="image" href="/clients/cardon-iv.webp" />
+    <link rel="preload" as="image" href="/clients/baker-hughes.webp" />
+    <link rel="preload" as="image" href="/clients/mi-swaco.webp" />
+    <link rel="preload" as="image" href="/clients/caf.webp" />
+    <link rel="preload" as="image" href="/clients/bnc.webp" />
+    <link rel="preload" as="image" href="/clients/wfp.webp" />
+    <link rel="preload" as="image" href="/clients/unhcr.webp" />
+    <link rel="preload" as="image" href="/clients/metro-maracaibo.webp" />
+    <link rel="preload" as="image" href="/clients/fontur.webp" />
+    <link rel="preload" as="image" href="/clients/corpoelec.webp" />
+    <link rel="preload" as="image" href="/clients/cvg-edelca.webp" />
+    <link rel="preload" as="image" href="/clients/pepsi.webp" />
+    <link rel="preload" as="image" href="/clients/polar.webp" />
+    <link rel="preload" as="image" href="/clients/regional.webp" />
+    <link rel="preload" as="image" href="/clients/carbones-guasare.webp" />
+    <link rel="preload" as="image" href="/clients/gob-falcon.webp" />
+    <link rel="preload" as="image" href="/clients/alcaldia-miranda.webp" />
+    <link rel="preload" as="image" href="/clients/alcaldia-lagunillas.webp" />
+    <link rel="preload" as="image" href="/clients/minec.webp" />
+    <link rel="preload" as="image" href="/clients/mppop.webp" />
+    <link rel="preload" as="image" href="/clients/min-agricultura.webp" />
+    <link rel="preload" as="image" href="/clients/min-aguas.webp" />
+    <link rel="preload" as="image" href="/clients/lukiven.webp" />
+    <link rel="preload" as="image" href="/clients/farmatodo.webp" />
+    <script type="module" crossorigin src="/assets/index-DwqoJFiH.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BnegBPNB.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

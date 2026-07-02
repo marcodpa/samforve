@@ -191,16 +191,16 @@ const METRICS = [
 const CB = (domain) => `https://logo.clearbit.com/${domain}`
 const CLIENT_GRID = [
   // ── Energía / Petróleo internacional ──
-  { img: '/clients/pdvsa.webp',           name: 'PDVSA',              sector: 'Energía',        bg: '#fff' },
-  { img: '/clients/pdvsa-gas.png',       name: 'PDVSA Gas',          sector: 'Energía',        bg: '#fff' },
-  { img: '/clients/pdvsa-petroboscan.png', name: 'PDVSA Petroboscán', sector: 'Energía',        bg: '#fff' },
-  { img: '/clients/chevron.webp',         name: 'Chevron',            sector: 'Energía',        bg: '#fff' },
-  { img: '/clients/shell.webp',           name: 'Shell',              sector: 'Energía',        bg: '#fff' },
-  { img: '/clients/repsol.webp',          name: 'Repsol',             sector: 'Energía',        bg: '#fff' },
-  { img: '/clients/eni.webp',             name: 'Eni',                sector: 'Energía',        bg: '#fff' },
-  { img: '/clients/cnpc.webp',            name: 'CNPC',               sector: 'Energía',        bg: '#fff' },
-  { img: '/clients/halliburton.webp',     name: 'Halliburton',        sector: 'Energía',        bg: '#fff' },
-  { img: '/clients/weatherford.webp',     name: 'Weatherford',        sector: 'Energía',        bg: '#fff' },
+  { img: '/clients/pdvsa.webp',           name: 'PDVSA',              sector: 'Petróleo y Gas',        bg: '#fff' },
+  { img: '/clients/pdvsa-gas.png',       name: 'PDVSA Gas',          sector: 'Petróleo y Gas',        bg: '#fff' },
+  { img: '/clients/pdvsa-petroboscan.png', name: 'PDVSA Petroboscán', sector: 'Petróleo y Gas',        bg: '#fff' },
+  { img: '/clients/chevron.webp',         name: 'Chevron',            sector: 'Petróleo y Gas',        bg: '#fff' },
+  { img: '/clients/shell.webp',           name: 'Shell',              sector: 'Petróleo y Gas',        bg: '#fff' },
+  { img: '/clients/repsol.webp',          name: 'Repsol',             sector: 'Petróleo y Gas',        bg: '#fff' },
+  { img: '/clients/eni.webp',             name: 'Eni',                sector: 'Petróleo y Gas',        bg: '#fff' },
+  { img: '/clients/cnpc.webp',            name: 'CNPC',               sector: 'Petróleo y Gas',        bg: '#fff' },
+  { img: '/clients/halliburton.webp',     name: 'Halliburton',        sector: 'Petróleo y Gas',        bg: '#fff' },
+  { img: '/clients/weatherford.webp',     name: 'Weatherford',        sector: 'Petróleo y Gas',        bg: '#fff' },
   // ── Petroquímica ──
   { img: IMG(171),                       name: 'Pequiven',           sector: 'Petroquímica',   bg: '#fff' },
   { img: '/clients/cardon-iv.webp',       name: 'Cardón IV',          sector: 'Petroquímica',   bg: '#fff' },
@@ -210,8 +210,8 @@ const CLIENT_GRID = [
   { img: '/clients/caf.webp',             name: 'CAF',                sector: 'Finanzas',       bg: '#fff' },
   { img: '/clients/bnc.webp',             name: 'BNC',                sector: 'Finanzas',       bg: '#fff' },
   // ── Internacional / ONU ──
-  { img: '/clients/wfp.webp',             name: 'WFP / ONU',          sector: 'Internacional',  bg: '#fff' },
-  { img: '/clients/unhcr.webp',           name: 'UNHCR / ACNUR',      sector: 'Internacional',  bg: '#fff' },
+  { img: '/clients/wfp.webp',             name: 'WFP / ONU',          sector: 'ONG',  bg: '#fff' },
+  { img: '/clients/unhcr.webp',           name: 'UNHCR / ACNUR',      sector: 'ONG',  bg: '#fff' },
   // ── Transporte / Infraestructura ──
   { img: '/clients/metro-maracaibo.webp', name: 'Metro Maracaibo',    sector: 'Transporte',     bg: '#fff' },
   { img: '/clients/fontur.webp',          name: 'Fontur',             sector: 'Transporte',     bg: '#fff' },
@@ -231,10 +231,10 @@ const CLIENT_GRID = [
 ]
 
 const SECTOR_COLORS = {
-  Energía: 'bg-samred/10 text-samred',
+  'Petróleo y Gas': 'bg-samred/10 text-samred',
   Petroquímica: 'bg-blue-50 text-samblue',
   Servicios: 'bg-gray-100 text-gray-600',
-  Internacional: 'bg-green-50 text-green-700',
+  ONG: 'bg-green-50 text-green-700',
   Transporte: 'bg-purple-50 text-purple-700',
   Acuicultura: 'bg-teal-50 text-teal-700',
 }

@@ -717,7 +717,7 @@ function ProjectDetailPage({ project, onClose }) {
               {related.map(p => (
                 <div key={p.id}
                   className="group cursor-pointer rounded overflow-hidden bg-white border border-gray-200 hover:border-samred hover:shadow-lg transition-all duration-300"
-                  onClick={() => onClose(p)}
+                  onClick={() => { onClose(p); }}
                 >
                   <div className="relative overflow-hidden" style={{ height: '180px' }}>
                     <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" />
@@ -892,7 +892,7 @@ const SUB_SERVICE_ICONS = {
   'Transporte Aéreo': <Plane size={28} />,
 }
 
-function ServicioDetalle({ title, onBack }) {
+function ServicioDetalle({ title, onBack, onProjectClick }) {
   useScrollReveal()
   const detail = SERVICES_DETAIL[title]
   const activeIdx = SERVICES.findIndex(s => s.title === title)
@@ -1015,8 +1015,9 @@ function ServicioDetalle({ title, onBack }) {
               style={{ width:'max-content', animation: relatedProjects.length > 3 ? `marquee ${Math.round(relatedProjects.length*300/SPEED)}s linear infinite` : 'none', willChange:'transform' }}>
               {(relatedProjects.length > 3 ? [...relatedProjects,...relatedProjects] : relatedProjects).map((p, i) => (
                 <div key={`${p.id}-${i}`}
-                  className="flex-shrink-0 group rounded overflow-hidden bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300"
-                  style={{ width:'280px' }}>
+                  className="flex-shrink-0 group rounded overflow-hidden bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300 cursor-pointer"
+                  style={{ width:'280px' }}
+                  onClick={() => onProjectClick?.(p)}>
                   <div className="relative overflow-hidden" style={{ height:'180px' }}>
                     <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
                     <div className="absolute inset-0 bg-gradient-to-t from-dark/85 to-transparent" />
@@ -1112,7 +1113,7 @@ function TransporteSubmenu({ subServices, onSelect, onBack }) {
   )
 }
 
-function PageServicios({ initialService }) {
+function PageServicios({ initialService, setPage }) {
   useScrollReveal()
   const [selected, setSelected] = useState(initialService || null)
   const [subSelected, setSubSelected] = useState(null)
@@ -1143,7 +1144,7 @@ function PageServicios({ initialService }) {
       setSubSelected(null)
       window.scrollTo({ top: 0, behavior: 'instant' })
     }
-    return <div className="pt-24"><ServicioDetalle title={subSelected} onBack={handleSubBack} /></div>
+    return <div className="pt-24"><ServicioDetalle title={subSelected} onBack={handleSubBack} onProjectClick={(p) => { setPage('proyectos'); window.scrollTo({ top: 0, behavior: 'instant' }) }} /></div>
   }
 
   // Service with sub-services → show submenu
@@ -1152,7 +1153,7 @@ function PageServicios({ initialService }) {
     if (srv && srv.subServices) {
       return <TransporteSubmenu subServices={srv.subServices} onSelect={handleSubSelect} onBack={() => { setSelected(null); window.scrollTo({ top: 0, behavior: 'instant' }) }} />
     }
-    return <div className="pt-24"><ServicioDetalle title={selected} onBack={handleBack} /></div>
+    return <div className="pt-24"><ServicioDetalle title={selected} onBack={handleBack} onProjectClick={(p) => { setPage('proyectos'); window.scrollTo({ top: 0, behavior: 'instant' }) }} /></div>
   }
 
   // ── LOBBY ──
@@ -2718,7 +2719,7 @@ export default function App() {
 
   const pages = {
     inicio: <PageInicio setPage={setPage} navigateToServicios={navigateToServicios} />,
-    servicios: <PageServicios initialService={initialService} />,
+    servicios: <PageServicios initialService={initialService} setPage={setPage} />,
     proyectos: <PageProyectos onProjectOpen={setProjectOpen} initialDivision={initialDivision} />,
     'quienes-somos': <PageQuienesSomos setPage={setPage} />,
     contacto: <PageContacto />,

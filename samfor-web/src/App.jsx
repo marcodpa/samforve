@@ -605,19 +605,18 @@ function ProjectDetailPage({ project, onClose }) {
   const related = ALL_PROJECTS.filter(p => p.division === project.division && p.id !== project.id).slice(0, 3)
 
   return (
-    <div className="bg-dark min-h-screen pt-16">
+    <div className="bg-dark min-h-screen">
 
-      {/* ── HERO — full image visible ── */}
-      <div className="relative w-full bg-[#060809]" style={{ minHeight: '72vh', maxHeight: '80vh' }}>
+      {/* ── HERO — full screen cover ── */}
+      <div className="relative w-full bg-[#060809]" style={{ height: '100dvh' }}>
         <img
           src={project.img}
           alt={project.title}
           className="absolute inset-0 w-full h-full object-cover"
-          loading="lazy"
         />
-        {/* Subtle dark vignette on sides only */}
-        <div className="absolute inset-0 bg-gradient-to-r from-dark/40 via-transparent to-dark/40 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-dark to-transparent pointer-events-none" />
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-dark/50 via-transparent to-dark/50 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent pointer-events-none" />
         {/* Back button — top left */}
         <button onClick={onClose}
           className="absolute top-6 left-6 md:left-10 flex items-center gap-2 bg-dark/60 backdrop-blur-sm border border-white/15 text-white/80 hover:text-white hover:border-white/40 transition-all px-3.5 py-2 rounded text-xs font-sub font-semibold uppercase tracking-widest z-50"
@@ -633,16 +632,16 @@ function ProjectDetailPage({ project, onClose }) {
           </div>
         )}
 
+        {/* ── TITLE OVERLAY — bottom of hero ── */}
+        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 lg:p-14 z-10">
+          <div className="max-w-5xl">
+            <div className="mb-3"><DivisionBadge division={project.division} /></div>
+            <h1 className="font-display text-[clamp(2rem,5vw,4rem)] text-white leading-none tracking-wide">{project.title}</h1>
+          </div>
+        </div>
+
         {/* Red accent bar — bottom */}
         <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-samred" />
-      </div>
-
-      {/* ── TITLE BLOCK — below image ── */}
-      <div className="px-6 md:px-14 lg:px-20 pt-10 pb-2">
-        <div className="max-w-5xl mx-auto">
-          <div className="mb-3"><DivisionBadge division={project.division} /></div>
-          <h1 className="font-display text-[clamp(2rem,5vw,4rem)] text-white leading-none tracking-wide">{project.title}</h1>
-        </div>
       </div>
 
       {/* ── CONTENT ── */}

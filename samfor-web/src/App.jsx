@@ -367,6 +367,31 @@ const ALL_PROJECTS = [
     desc: 'Implementación y mantenimiento de sistema SCADA para supervisión y control de turbogeneradores, sistemas eléctricos y utilidades de la planta.',
     detail: 'Integración de PLCs Allen-Bradley con HMI FactoryTalk. Comunicación Ethernet/IP y ControlNet. Monitoreo en tiempo real de 1,200+ variables de proceso.',
   },
+  // ── NUEVOS PROYECTOS PETROBOSCÁN ──
+  {
+    id: 302, status: 'completed', division: 'Civiles',
+    client: 'Petroboscán',
+    title: 'Ampliación de Galpón en Almacén de Petroboscán',
+    img: IMG(247),
+    desc: 'Ampliación de infraestructura de almacenamiento industrial con estructura metálica y cierres perimetrales.',
+    detail: 'Construcción y ampliación de galpón para almacén de Petroboscán, incluyendo estructura metálica, instalaciones eléctricas, sistema contra incendios y adecuación de pisos.',
+  },
+  {
+    id: 303, status: 'completed', division: 'Mecánicos',
+    client: 'Petroboscán',
+    title: 'Construcción de Cuarto Frío en Almacén EF2 de Petroboscán',
+    img: IMG(248),
+    desc: 'Construcción de cámara frigorífica industrial para almacenamiento controlado en instalaciones EF2.',
+    detail: 'Diseño y construcción de cuarto frío industrial con paneles aislantes, sistema de refrigeración, control de temperatura y humedad, instalaciones eléctricas y sanitarias.',
+  },
+  {
+    id: 304, status: 'completed', division: 'Eléctricos',
+    client: 'Petroboscán',
+    title: 'Servicio de Mantenimiento de Generadores de Emergencia Petroboscán',
+    img: IMG(249),
+    desc: 'Mantenimiento preventivo y correctivo de generadores de emergencia para garantizar continuidad operativa.',
+    detail: 'Mantenimiento integral a generadores diésel de emergencia: cambio de aceite y filtros, prueba de carga, revisión de sistemas de control, baterías y transferencia automática.',
+  },
 ]
 
 const TIMELINE = [

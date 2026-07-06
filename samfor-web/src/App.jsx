@@ -1426,12 +1426,6 @@ function PageInicio({ setPage, navigateToServicios }) {
         </div>
 
         <div className="relative text-left" style={{ zIndex: 3 }}>
-          <div className="badge-since inline-flex items-center gap-2 bg-samred text-white text-[0.5625rem] font-mono font-semibold uppercase tracking-[0.15em] px-2 py-1 rounded mb-4">
-            <span className="w-1 h-1 rounded-full bg-white" />Desde 1966
-          </div>
-          <h1 className="font-display text-[clamp(1.25rem,4vw,3.25rem)] text-white leading-[0.95] tracking-wide mb-5">
-            CONSTRUIMOS<br />EL FUTURO DE<br />LA ENERGÍA
-          </h1>
           <div className="flex flex-wrap gap-2">
             <button onClick={() => setPage('proyectos')} className="btn-primary">Ver Proyectos</button>
             <button onClick={() => setPage('quienes-somos')} className="btn-outline-white">Conócenos</button>

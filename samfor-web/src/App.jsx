@@ -1541,8 +1541,9 @@ function PageInicio({ setPage, navigateToServicios }) {
         </div>
         {/* Foto — mobile: 100% ancho con degradado de der a izq */}
         <div className="md:hidden absolute inset-0 w-full h-full overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-l from-dark/60 via-dark/20 to-transparent z-10" />
           <img src="/services-photo.webp" alt="" className="absolute inset-0 w-full h-full object-cover object-right" loading="lazy" aria-hidden="true"
-            style={{ maskImage: 'linear-gradient(to left, #000 0%, #000 40%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to left, #000 0%, #000 40%, transparent 100%)' }} />
+            style={{ maskImage: 'linear-gradient(to left, #000 0%, #000 25%, transparent 80%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to left, #000 0%, #000 25%, transparent 80%, transparent 100%)' }} />
         </div>
 
         <div className="relative flex flex-col md:flex-row">
@@ -1570,7 +1571,7 @@ function PageInicio({ setPage, navigateToServicios }) {
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="font-sub font-bold text-[0.9375rem] uppercase tracking-wider text-white/80 group-hover:text-white transition-colors duration-300 mb-0.5">{s.title}</h3>
-                    <p className="text-white/40 text-[0.9rem] leading-relaxed group-hover:text-white/55 transition-colors duration-300">{s.desc}</p>
+                    <p className="text-white/40 text-[0.9rem] leading-relaxed group-hover:text-white/55 transition-colors duration-300 hidden md:block">{s.desc}</p>
                   </div>
                   <div className="flex-shrink-0 mt-1 opacity-0 group-hover:opacity-100 translate-x-[-4px] group-hover:translate-x-0 transition-all duration-300">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 3l5 4-5 4" stroke="#C8102E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>

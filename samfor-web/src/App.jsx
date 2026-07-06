@@ -575,7 +575,7 @@ function Footer({ setPage }) {
             <div className="flex flex-col gap-3 text-base text-white/65">
               <div className="flex items-start gap-2.5"><MapPin size={13} className="mt-0.5 flex-shrink-0 text-samred" /><span>Av. 3H entre Calles 68-70 N.69-61, Maracaibo, Venezuela</span></div>
               <div className="flex items-center gap-2.5"><Mail size={13} className="flex-shrink-0 text-samred" /><span>samfor@samfor.com</span></div>
-              <div className="flex items-center gap-2.5"><Phone size={13} className="flex-shrink-0 text-samred" /><span>+58 261 814 4444</span></div>
+              <div className="flex items-center gap-2.5"><Phone size={13} className="flex-shrink-0 text-samred" /><span>+58 261 814 4444 / +58 414-615.8000</span></div>
               <div className="flex items-center gap-2.5"><Globe size={13} className="flex-shrink-0 text-samred" /><span>www.samfor.com</span></div>
             </div>
           </div>
@@ -2483,7 +2483,7 @@ function PageContacto() {
 
   const CONTACT_INFO = [
     { icon: <MapPin size={18} />, label: 'Dirección', value: 'Av. 3H entre Calles 68-70 N.69-61, Maracaibo, Venezuela' },
-    { icon: <Phone size={18} />, label: 'Teléfono', value: '+58 261-1234567' },
+    { icon: <Phone size={18} />, label: 'Teléfono', value: '+58 261 814 4444 / +58 414-615.8000' },
     { icon: <Mail size={18} />, label: 'Email', value: 'samfor@samfor.com' },
     { icon: <Clock size={18} />, label: 'Horario', value: 'Lun–Vie 7:00 AM – 4:30 PM' },
   ]

@@ -1490,7 +1490,7 @@ function PageInicio({ setPage, navigateToServicios }) {
           </div>
 
           {/* Content — centered */}
-          <div className="relative z-10 h-full flex flex-col justify-start pt-24 md:pt-36 px-6 md:px-14 lg:px-20 max-w-4xl mr-auto">
+          <div className="relative z-10 h-full flex flex-col justify-end md:justify-start pb-14 md:pt-36 px-6 md:px-14 lg:px-20 max-w-4xl mr-auto">
             <div className="scroll-reveal flex items-center gap-3 mb-4 md:mb-4">
               <span className="h-[2px] w-8 md:w-10 bg-samred flex-shrink-0" />
               <span className="font-sub font-semibold text-[0.65rem] md:text-[0.78rem] tracking-[0.28em] uppercase text-samred">Quiénes somos</span>

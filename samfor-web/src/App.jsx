@@ -1501,7 +1501,7 @@ function PageInicio({ setPage, navigateToServicios }) {
               <span className="font-sub font-semibold text-[0.65rem] md:text-[0.78rem] tracking-[0.28em] uppercase text-samred">Quiénes somos</span>
             </div>
 
-            <h2 className="scroll-reveal font-display text-[2.5rem] md:text-[4.5rem] lg:text-[5.5rem] text-white leading-[0.92] mb-4 md:mb-8 tracking-wide">
+            <h2 className="scroll-reveal font-display text-[clamp(2.5rem,6vw,5rem)] md:text-[4.5rem] lg:text-[5.5rem] text-white leading-[0.92] mb-4 md:mb-8 tracking-wide">
               INGENIERÍA<br />
               <span className="text-samred">SIN LÍMITES.</span>
             </h2>
@@ -1734,25 +1734,20 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
     <div className="pt-24">
 
       {/* ── HERO ── */}
-      <div className="relative overflow-hidden" style={{ height: 'calc(100dvh - 4rem)' }}>
+      <div className="relative overflow-hidden" style={{ height: '100dvh' }}>
         <img src="/proyectos-hero.webp" alt="SAMFOR Proyectos" className="absolute inset-0 w-full h-full object-cover object-[30%_center] lg:object-center" loading="eager" />
         <div className="absolute inset-0 bg-gradient-to-r from-dark/95 via-dark/70 to-dark/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-transparent to-transparent" />
         <div className="absolute top-0 right-0 w-[3px] h-full bg-samred" />
 
-        <div className="relative z-10 h-full flex flex-col justify-between px-6 md:px-14 lg:px-20 py-10">
-          {/* Top label */}
-          <div className="flex items-center gap-3">
-            <span className="h-[3px] w-10 bg-samred" />
-            <span className="font-sub font-semibold text-[0.82rem] uppercase tracking-widest text-samred">Portafolio</span>
-          </div>
-
-          {/* Spacer */}
-          <div />
-
-          {/* Bottom: title left + stats */}
+        <div className="relative z-10 h-full flex flex-col justify-end px-6 md:px-14 lg:px-20 pb-10 md:pb-16 lg:pb-20">
+          {/* Bottom: label + title + stats */}
           <div className="flex flex-col gap-6">
-            <h1 className="font-display text-[clamp(2rem,5vw,4.5rem)] text-white leading-none w-full">ALGUNOS DE<br />NUESTROS PROYECTOS</h1>
+            <div className="flex items-center gap-3">
+              <span className="h-[3px] w-10 bg-samred" />
+              <span className="font-sub font-semibold text-[0.82rem] uppercase tracking-widest text-samred">Portafolio</span>
+            </div>
+            <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-white leading-none w-full">ALGUNOS DE<br />NUESTROS PROYECTOS</h1>
             <div className="flex gap-5 md:gap-10 border-t border-white/10 pt-5">
             {[['250+','Proyectos'], ['6','Divisiones'], ['60','Años']].map(([v,l]) => (
               <div key={l}>
@@ -2105,7 +2100,7 @@ function PageQuienesSomos({ setPage }) {
                 <span className="font-sub font-semibold text-[0.85rem] uppercase tracking-[0.25em] text-white/55">Nuestra empresa &middot; Desde 1966</span>
               </div>
             </div>
-            <h1 className="hero-item font-display text-[clamp(2.2rem,6vw,6rem)] text-white leading-none tracking-wide mb-5" style={{ opacity: 0 }}>
+            <h1 className="hero-item font-display text-[clamp(2.5rem,6vw,5rem)] text-white leading-none tracking-wide mb-5" style={{ opacity: 0 }}>
               UNA EMPRESA.<br />
               <span className="text-samred">SEIS DÉCADAS.</span><br />
               UN ESTÁNDAR.
@@ -2497,16 +2492,16 @@ function PageContacto() {
     <div className="bg-[#0D1117] pt-24">
 
       {/* ── HERO — full screen ── */}
-      <section className="relative h-screen min-h-[500px] overflow-hidden">
+      <section className="relative overflow-hidden" style={{ height: '100dvh' }}>
         <img src="/ct-hero.webp" alt="Contacto SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0D1117]/70 via-[#0D1117]/30 to-[#0D1117]/10" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0D1117]/50 via-transparent to-[#0D1117]/20" />
-        <div className="relative h-full flex flex-col justify-center px-6 md:px-16 lg:px-24">
+        <div className="relative h-full flex flex-col justify-end px-6 md:px-16 lg:px-24 pb-10 md:pb-16 lg:pb-20">
           <div className="flex items-center gap-3 mb-5">
             <span className="h-[3px] w-10 bg-samred" />
             <span className="font-sub font-semibold text-[0.8rem] uppercase tracking-[0.25em] text-white/55">Comunícate con nosotros</span>
           </div>
-          <h1 className="font-display text-[clamp(3.2rem,8vw,7rem)] text-white leading-none tracking-wide">
+          <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-white leading-none tracking-wide">
             <span className="text-samred">Contáct</span>anos
           </h1>
           <p className="text-white/60 text-base md:text-lg max-w-lg mt-5 leading-relaxed">

@@ -633,6 +633,13 @@ function ProjectDetailPage({ project, onClose }) {
   return (
     <div className="bg-dark min-h-screen">
 
+      {/* Back button — fixed, stays visible while scrolling */}
+      <button onClick={onClose}
+        className="fixed top-6 left-6 md:left-10 flex items-center gap-2 bg-dark/60 backdrop-blur-sm border border-white/15 text-white/80 hover:text-white hover:border-white/40 transition-all px-3.5 py-2 rounded text-xs font-sub font-semibold uppercase tracking-widest z-50"
+      >
+        <ArrowRight size={12} className="rotate-180" /> Proyectos
+      </button>
+
       {/* ── HERO — full screen cover ── */}
       <div className="relative w-full bg-[#060809]" style={{ height: '100dvh' }}>
         <img
@@ -643,10 +650,6 @@ function ProjectDetailPage({ project, onClose }) {
         {/* Dark overlay for readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-dark/50 via-transparent to-dark/50 pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent pointer-events-none" />
-        {/* Back button — top left */}
-        <button onClick={onClose}
-          className="absolute top-6 left-6 md:left-10 flex items-center gap-2 bg-dark/60 backdrop-blur-sm border border-white/15 text-white/80 hover:text-white hover:border-white/40 transition-all px-3.5 py-2 rounded text-xs font-sub font-semibold uppercase tracking-widest z-50"
-        >
           <ArrowRight size={12} className="rotate-180" /> Proyectos
         </button>
 

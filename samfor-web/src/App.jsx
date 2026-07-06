@@ -1468,6 +1468,10 @@ function PageInicio({ setPage, navigateToServicios }) {
           <div className="absolute inset-0" style={{
             background: 'linear-gradient(135deg, #0D1117 0%, rgba(13,17,23,0.80) 30%, rgba(13,17,23,0.50) 60%, rgba(13,17,23,0.2) 100%)',
           }} />
+          {/* Mobile solo: overlay extra oscuro en la esquina inferior izquierda */}
+          <div className="md:hidden absolute inset-0" style={{
+            background: 'linear-gradient(to top, #0D1117 0%, rgba(13,17,23,0.85) 20%, rgba(13,17,23,0.5) 35%, transparent 50%)',
+          }} />
 
           {/* Before / After badges */}
           <div className="absolute top-4 md:top-6 left-4 md:right-6 z-10 flex gap-2">

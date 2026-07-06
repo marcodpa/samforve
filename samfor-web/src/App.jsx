@@ -18,7 +18,7 @@ const DIVISION_META = {
   'Mecánicos':       { label: 'Proyectos Mecánicos',   icon: <Wrench size={16}/>,     color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E', img: IMG(103) },
   'Eléctricos':      { label: 'Proyectos Eléctricos',  icon: <Zap size={16}/>,        color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E', img: IMG(23) },
   'Transporte':      { label: 'División Transporte',   icon: <Truck size={16}/>,      color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E', img: IMG(129) },
-  'Ambientales':     { label: 'Servicios Ambientales', icon: <Leaf size={16}/>,       color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E', img: '/division/ambientales.jpg' },
+  'Ambientales':     { label: 'Seguridad y Ambiente', icon: <Leaf size={16}/>,       color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E', img: '/division/ambientales.jpg' },
   'Otras':           { label: 'Servicios Marítimos',   icon: <Ship size={16}/>,       color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E', img: IMG(136) },
   'Automatización':  { label: 'Automatización y Control', icon: <Cpu size={16}/>,    color: 'bg-samred/10 text-samred border-samred/30',  dot: '#C8102E', img: IMG(28) },
 }
@@ -30,7 +30,7 @@ const SERVICES = [
   { icon: <Building2 size={28}/>, title: 'Obras Civiles', division: 'Civiles', desc: 'Movimiento de tierras, edificaciones, carreteras, puentes, muelles y construcción en plataformas petroleras y petroquímicas.' },
   { icon: <Settings size={28}/>, title: 'Obras Mecánicas', division: 'Mecánicos', desc: 'Oleoductos, acueductos, tanques, estaciones de bombeo, instalación de tuberías y mantenimiento de facilidades de producción.' },
   { icon: <Truck size={28}/>, title: 'Transporte', division: 'Transporte', desc: 'Transporte especializado de hidrocarburos, equipos industriales y personal. Cobertura terrestre, aérea y marítima en todo Venezuela.', subServices: ['Transporte Terrestre', 'Transporte Marítimo', 'Transporte Aéreo'] },
-  { icon: <Leaf size={28}/>, title: 'Servicios Ambientales', division: 'Ambientales', desc: 'Manejadora de Desechos Peligrosos autorizada desde 1999. Recolección, transporte, tratamiento y disposición final conforme a normativas.' },
+  { icon: <Leaf size={28}/>, title: 'Seguridad y Ambiente', division: 'Ambientales', desc: 'Seguridad industrial, protección ambiental y manejo de desechos peligrosos. Protegiendo a tu gente y al entorno con los más altos estándares.' },
   { icon: <Ship size={28}/>, title: 'Servicios Marítimos/Lacustres', division: 'Otras', desc: 'Operaciones en el Lago de Maracaibo, costas venezolanas y Archipiélago Los Monjes. Transporte hacia plataformas offshore con embarcaciones especializadas.' },
   { icon: <Cpu size={28}/>, title: 'Automatización y Control', division: 'Automatización', desc: 'Sistemas PLC/DCS, instrumentación industrial, SCADA, control de procesos y redes industriales para facilidades petroleras y petroquímicas.' },
 ]
@@ -130,19 +130,20 @@ const SERVICES_DETAIL = {
     ],
     division: 'Transporte',
   },
-  'Servicios Ambientales': {
+  'Seguridad y Ambiente': {
     heroImg: '/qs-hero.webp',
     descImg: '/sv-ambiental-desc.jpg',
-    tagline: 'Gestión ambiental responsable desde 1999',
-    longDesc: 'SAMFOR es una Manejadora de Desechos Peligrosos autorizada por el Ministerio del Ecosistema desde 1999. Ofrecemos soluciones integrales para el manejo, tratamiento y disposición final de residuos industriales, garantizando cumplimiento de normativas ambientales venezolanas e internacionales.',
+    tagline: 'Seguridad industrial y gestión ambiental integral',
+    longDesc: 'SAMFOR integra seguridad industrial, protección ambiental y manejo de desechos peligrosos en un solo servicio. Como Manejadora de Desechos Peligrosos autorizada por el Ministerio del Ecosistema desde 1999, ejecutamos programas de seguridad en campo, capacitación, auditorías y soluciones ambientales que garantizan operaciones seguras y el cumplimiento de normativas nacionales e internacionales.',
     capabilities: [
+      'Programas de seguridad industrial en campo',
       'Recolección y transporte de desechos peligrosos',
       'Tratamiento físico-químico de efluentes',
       'Disposición final en rellenos autorizados',
       'Auditorías e informes ambientales',
       'Remediación de suelos contaminados',
       'Manejo de derrames de hidrocarburos',
-      'Capacitación en gestión ambiental',
+      'Capacitación en seguridad y gestión ambiental',
     ],
     division: 'Ambientales',
   },
@@ -719,7 +720,7 @@ function ProjectDetailPage({ project, onClose }) {
                   onClick={() => { onClose(p); }}
                 >
                   <div className="relative overflow-hidden" style={{ height: '180px' }}>
-                    <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" />
+                    <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="eager" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                     <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred" />
                   </div>
@@ -751,7 +752,7 @@ function ProjectCard({ project, onClick }) {
       onKeyDown={e => e.key === 'Enter' && onClick(project)}
     >
       <div className="relative h-44 overflow-hidden">
-        <img src={project.img} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]" loading="lazy" />
+        <img src={project.img} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]" loading="eager" />
         <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent" />
         {project.status === 'active' && (
           <div className="absolute top-3 right-3 inline-flex items-center gap-1.5 text-xs font-semibold text-white bg-green-600/90 backdrop-blur-sm px-2 py-0.5 rounded">
@@ -880,7 +881,7 @@ const SV_CARD_PHOTOS = {
   'Transporte Terrestre':      '/sv-transporte.webp',
   'Transporte Marítimo':       '/sv-maritimo-hero.jpg',
   'Transporte Aéreo':          '/sv-aereo-hero.jpg',
-  'Servicios Ambientales':     '/qs-hero.webp',
+  'Seguridad y Ambiente':     '/qs-hero.webp',
   'Servicios Marítimos/Lacustres': '/projects/img-005.jpg',
   'Automatización y Control':  '/sv-photo3.webp',
 }
@@ -959,7 +960,7 @@ function ServicioDetalle({ title, onBack, onProjectClick }) {
           </div>
         </div>
         <div className="relative overflow-hidden" style={{ minHeight: '400px' }}>
-          <img src={detail.descImg || detail.heroImg} alt={title} className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+          <img src={detail.descImg || detail.heroImg} alt={title} className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
           <div className="absolute inset-0 bg-gradient-to-l from-transparent to-dark/10" />
           <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-samred" />
         </div>
@@ -984,7 +985,7 @@ function ServicioDetalle({ title, onBack, onProjectClick }) {
           </div>
         </div>
         <div className="relative hidden md:block overflow-hidden">
-          <img src="/sv-photo3.webp" alt="Ingeniería SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+          <img src="/sv-photo3.webp" alt="Ingeniería SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
           <div className="absolute inset-0 bg-gradient-to-r from-dark via-dark/20 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-samred" />
@@ -1018,7 +1019,7 @@ function ServicioDetalle({ title, onBack, onProjectClick }) {
                   style={{ width:'280px' }}
                   onClick={() => onProjectClick?.(p)}>
                   <div className="relative overflow-hidden" style={{ height:'180px' }}>
-                    <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
+                    <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="eager" />
                     <div className="absolute inset-0 bg-gradient-to-t from-dark/85 to-transparent" />
                     <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot||'#C8102E' }} />
                     {p.status==='active' && (
@@ -1090,7 +1091,7 @@ function TransporteSubmenu({ subServices, onSelect, onBack }) {
                 className="scroll-reveal group relative overflow-hidden rounded cursor-pointer text-left"
                 style={{ height: 'clamp(300px, 30vw, 420px)', transitionDelay: `${i * 100}ms` }}>
                 <img src={sub.img} alt={sub.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="eager" />
                 <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/50 to-dark/10" />
                 <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left" />
                 <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end">
@@ -1208,7 +1209,7 @@ function PageServicios({ initialService, setPage }) {
                 className="scroll-reveal group relative overflow-hidden rounded cursor-pointer text-left"
                 style={{ height:'clamp(240px,26vw,380px)', transitionDelay:`${i*60}ms` }}>
                 <img src={SV_CARD_PHOTOS[s.title]} alt={s.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="eager" />
                 <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-dark/5" />
                 <div className="absolute inset-0 bg-samred/0 group-hover:bg-samred/12 transition-all duration-500" />
                 <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left" />
@@ -1231,7 +1232,7 @@ function PageServicios({ initialService, setPage }) {
                 className="scroll-reveal group relative overflow-hidden rounded cursor-pointer text-left"
                 style={{ height:'clamp(170px,18vw,260px)', transitionDelay:`${(i+3)*60}ms` }}>
                 <img src={SV_CARD_PHOTOS[s.title]} alt={s.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="eager" />
                 <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/55 to-dark/10" />
                 <div className="absolute inset-0 bg-samred/0 group-hover:bg-samred/12 transition-all duration-500" />
                 <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left" />
@@ -1284,7 +1285,7 @@ function HomeBeforeAfter() {
       {/* BEFORE image (base) */}
       <div className="absolute inset-0">
         <img src="/proyectos/gasap-vieja.jpg" alt="Antes"
-             className="w-full h-full object-cover opacity-90" loading="lazy" />
+             className="w-full h-full object-cover opacity-90" loading="eager" />
         <div className="absolute inset-0 pointer-events-none"
              style={{ background: 'linear-gradient(135deg, rgba(200,16,46,0.10) 0%, transparent 50%, rgba(200,16,46,0.08) 100%)' }} />
         <div className="absolute inset-0 pointer-events-none"
@@ -1301,7 +1302,7 @@ function HomeBeforeAfter() {
       <div ref={afterRef} className="absolute inset-0 overflow-hidden"
            style={{ clipPath: 'inset(0 100% 0 0)' }}>
         <img src="/proyectos/gasap-nueva.jpg" alt="Después"
-             className="w-full h-full object-cover opacity-90" loading="lazy" />
+             className="w-full h-full object-cover opacity-90" loading="eager" />
         <div className="absolute inset-0 pointer-events-none"
              style={{ background: 'linear-gradient(135deg, rgba(200,16,46,0.10) 0%, transparent 50%, rgba(200,16,46,0.08) 100%)' }} />
         <div className="absolute inset-0 pointer-events-none"
@@ -1454,14 +1455,14 @@ function PageInicio({ setPage, navigateToServicios }) {
           {/* Before — old construction */}
           <div className="absolute inset-0">
             <img src="/proyectos/gasap-vieja.jpg" alt="Antes"
-                 className="w-full h-full object-cover object-center" loading="lazy" />
+                 className="w-full h-full object-cover object-center" loading="eager" />
           </div>
 
           {/* After — new construction (clip-path: 100%→0% as you scroll) */}
           <div ref={afterClipRef} className="absolute inset-0 overflow-hidden"
                style={{ clipPath: 'inset(0 100% 0 0)' }}>
             <img src="/proyectos/gasap-nueva.jpg" alt="Después"
-                 className="w-full h-full object-cover object-center" loading="lazy" />
+                 className="w-full h-full object-cover object-center" loading="eager" />
           </div>
 
           {/* Gradient overlay */}
@@ -1540,13 +1541,13 @@ function PageInicio({ setPage, navigateToServicios }) {
 
         {/* Foto — desktop */}
         <div className="hidden md:block absolute right-0 top-0 w-[62%] h-full overflow-hidden">
-          <img src="/services-photo.webp" alt="" className="absolute inset-0 w-full h-full object-cover object-left" loading="lazy" aria-hidden="true"
+          <img src="/services-photo.webp" alt="" className="absolute inset-0 w-full h-full object-cover object-left" loading="eager" aria-hidden="true"
             style={{ maskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.05) 15%, rgba(0,0,0,0.3) 30%, #000 55%, #000 100%)', WebkitMaskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.05) 15%, rgba(0,0,0,0.3) 30%, #000 55%, #000 100%)' }} />
         </div>
         {/* Foto — mobile: 100% ancho con degradado de der a izq */}
         <div className="md:hidden absolute inset-0 w-full h-full overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-l from-dark/60 via-dark/20 to-transparent z-10" />
-          <img src="/services-photo.webp" alt="" className="absolute inset-0 w-full h-full object-cover object-right" loading="lazy" aria-hidden="true"
+          <img src="/services-photo.webp" alt="" className="absolute inset-0 w-full h-full object-cover object-right" loading="eager" aria-hidden="true"
             style={{ maskImage: 'linear-gradient(to left, #000 0%, #000 25%, transparent 80%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to left, #000 0%, #000 25%, transparent 80%, transparent 100%)' }} />
         </div>
 
@@ -1663,7 +1664,7 @@ function PageInicio({ setPage, navigateToServicios }) {
           src="/cta-bg.webp"
           alt=""
           className="absolute inset-0 w-full h-full object-cover object-center"
-          loading="lazy"
+          loading="eager"
         />
         {/* Gradient: red from left, dark from right, unified overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-samred/95 via-samred/80 to-dark/90" />
@@ -1734,7 +1735,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
 
       {/* ── HERO ── */}
       <div className="relative overflow-hidden" style={{ height: 'calc(100dvh - 4rem)' }}>
-        <img src="/proyectos-hero.webp" alt="SAMFOR Proyectos" className="absolute inset-0 w-full h-full object-cover object-[30%_center] lg:object-center" loading="lazy" />
+        <img src="/proyectos-hero.webp" alt="SAMFOR Proyectos" className="absolute inset-0 w-full h-full object-cover object-[30%_center] lg:object-center" loading="eager" />
         <div className="absolute inset-0 bg-gradient-to-r from-dark/95 via-dark/70 to-dark/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-transparent to-transparent" />
         <div className="absolute top-0 right-0 w-[3px] h-full bg-samred" />
@@ -1789,7 +1790,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
             className={`group relative overflow-hidden transition-all duration-300 ${activeDivision==='Todos' ? 'opacity-100' : 'opacity-60 hover:opacity-90'}`}
             style={{ height: 'clamp(110px,18vw,260px)' }}
           >
-            <img src={IMG(28)} alt="Todos" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
+            <img src={IMG(28)} alt="Todos" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="eager" />
             <div className={`absolute inset-0 transition-all duration-300 ${activeDivision==='Todos' ? 'bg-samred/55' : 'bg-dark/75 group-hover:bg-dark/55'}`} />
             {/* Active indicator */}
             {activeDivision==='Todos' && <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred" />}
@@ -1810,7 +1811,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
                 className={`group relative overflow-hidden transition-all duration-300 ${isActive ? 'opacity-100' : 'opacity-55 hover:opacity-90'}`}
                 style={{ height: 'clamp(110px,18vw,260px)' }}
               >
-                <img src={m.img} alt={key} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
+                <img src={m.img} alt={key} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="eager" />
                 <div className={`absolute inset-0 transition-all duration-300 ${isActive ? 'bg-dark/40' : 'bg-dark/75 group-hover:bg-dark/50'}`} />
                 {/* Top accent when active */}
                 {isActive && <div className="absolute top-0 left-0 right-0 h-[3px] bg-samred" />}
@@ -1882,7 +1883,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
                 >
                   {/* Image */}
                   <div className="relative overflow-hidden" style={{ height: '220px' }}>
-                    <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" loading="lazy" />
+                    <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" loading="eager" />
                     <div className="absolute inset-0 bg-gradient-to-t from-dark/85 via-dark/10 to-transparent" />
                     <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot||'#C8102E' }} />
                     {p.status === 'active' && (
@@ -1923,7 +1924,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
                   onClick={() => openProject(p)}
                 >
                   <div className="relative overflow-hidden" style={{ height: '160px' }}>
-                    <img src={p.img} alt={p.title} className="w-full h-full object-cover" loading="lazy" />
+                    <img src={p.img} alt={p.title} className="w-full h-full object-cover" loading="eager" />
                     <div className="absolute inset-0 bg-gradient-to-t from-dark/85 via-dark/20 to-transparent" />
                     <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot||'#C8102E' }} />
                     {p.status === 'active' && (
@@ -1958,7 +1959,7 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
                   onClick={() => openProject(p)}
                 >
                   <div className="relative overflow-hidden" style={{ height: 'clamp(180px,16vw,280px)' }}>
-                    <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="lazy" />
+                    <img src={p.img} alt={p.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.06]" loading="eager" />
                     <div className="absolute inset-0 bg-gradient-to-t from-dark/85 via-dark/20 to-transparent" />
                     <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot||'#C8102E' }} />
                     {p.status === 'active' && (
@@ -2127,7 +2128,7 @@ function PageQuienesSomos({ setPage }) {
         {/* Mobile: stacked */}
         <div className="md:hidden">
           <div className="relative" style={{ minHeight: '300px' }}>
-            <img src="/qs-team-img2.jpg" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+            <img src="/qs-team-img2.jpg" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
             <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(13,17,23,0.10) 0%, rgba(13,17,23,0.60) 50%, #0D1117 100%)' }} />
             <div className="relative px-5 pt-14 pb-8 flex flex-col justify-end h-full">
               <div className="flex items-center gap-3 mb-3">
@@ -2202,7 +2203,7 @@ function PageQuienesSomos({ setPage }) {
 
           {/* Right: Imagen + 3D Cube */}
           <div className="relative overflow-hidden">
-            <img src="/qs-team-img2.jpg" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+            <img src="/qs-team-img2.jpg" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
             <div className="absolute inset-0" style={{
               background: 'linear-gradient(112deg, rgba(13,17,23,0.60) 0%, rgba(13,17,23,0.25) 50%, rgba(200,16,46,0.12) 100%)',
             }} />
@@ -2270,7 +2271,7 @@ function PageQuienesSomos({ setPage }) {
         {/* Mobile */}
         <div className="md:hidden">
           <div className="relative overflow-hidden" style={{ height: 'clamp(110px,18vw,260px)' }}>
-            <img src="/qs-electrical.webp" alt="Técnicos eléctricos SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+            <img src="/qs-electrical.webp" alt="Técnicos eléctricos SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
             <div className="absolute inset-0 bg-gradient-to-t from-dark/80 to-dark/20" />
             <div className="absolute bottom-0 left-0 right-0 h-1 bg-samred" />
             <div className="absolute bottom-6 left-5">
@@ -2305,7 +2306,7 @@ function PageQuienesSomos({ setPage }) {
         {/* Desktop */}
         <div className="hidden md:grid md:grid-cols-2 lg:min-h-[75vh]">
           <div className="relative overflow-hidden order-2 lg:order-1" style={{ minHeight: '300px' }}>
-            <img src="/qs-electrical.webp" alt="Técnicos eléctricos SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+            <img src="/qs-electrical.webp" alt="Técnicos eléctricos SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
             <div className="absolute inset-0 bg-gradient-to-r from-transparent to-dark/20" />
             <div className="absolute top-0 left-0 bottom-0 w-[4px] bg-samred" />
             <div className="absolute bottom-8 left-8 bg-dark/75 backdrop-blur-sm border border-white/10 px-5 py-3 rounded">
@@ -2357,7 +2358,7 @@ function PageQuienesSomos({ setPage }) {
           <div className="md:hidden">
             <div className="scroll-reveal relative w-full rounded-2xl overflow-hidden mb-8 shadow-xl">
               <div className="relative w-full" style={{ minHeight: 'clamp(280px,50vw,420px)' }}>
-                <img src="/projects/samfor-inicios.jpg" alt="Inicios de SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+                <img src="/projects/samfor-inicios.jpg" alt="Inicios de SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
                 <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/10 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-samred" />
                 <div className="absolute bottom-8 left-8 md:bottom-10 md:left-12">
@@ -2396,7 +2397,7 @@ function PageQuienesSomos({ setPage }) {
           <div className="hidden md:grid md:grid-cols-[1fr_1.8fr] md:gap-12 lg:gap-16 items-start">
             <div className="sticky top-32">
               <div className="scroll-reveal relative rounded-2xl overflow-hidden shadow-xl hover-card" style={{ height: 'clamp(400px,42vw,600px)' }}>
-                <img src="/projects/samfor-inicios.jpg" alt="Inicios de SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+                <img src="/projects/samfor-inicios.jpg" alt="Inicios de SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
                 <div className="absolute inset-0 bg-gradient-to-t from-dark/85 via-dark/10 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-samred" />
                 <div className="absolute bottom-7 left-7">

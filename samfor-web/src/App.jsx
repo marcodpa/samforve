@@ -1454,14 +1454,14 @@ function PageInicio({ setPage, navigateToServicios }) {
           {/* Before — old construction */}
           <div className="absolute inset-0">
             <img src="/proyectos/gasap-vieja.jpg" alt="Antes"
-                 className="w-full h-full object-cover object-right" loading="lazy" />
+                 className="w-full h-full object-cover object-left" loading="lazy" />
           </div>
 
           {/* After — new construction (clip-path: 100%→0% as you scroll) */}
           <div ref={afterClipRef} className="absolute inset-0 overflow-hidden"
                style={{ clipPath: 'inset(0 100% 0 0)' }}>
             <img src="/proyectos/gasap-nueva.jpg" alt="Después"
-                 className="w-full h-full object-cover object-right" loading="lazy" />
+                 className="w-full h-full object-cover object-left" loading="lazy" />
           </div>
 
           {/* Gradient overlay */}

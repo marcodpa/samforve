@@ -1490,13 +1490,13 @@ function PageInicio({ setPage, navigateToServicios }) {
           </div>
 
           {/* Content — centered */}
-          <div className="relative z-10 h-full flex flex-col justify-start pt-14 md:pt-36 px-5 md:px-14 lg:px-20 max-w-4xl mr-auto">
-            <div className="scroll-reveal flex items-center gap-3 mb-3 md:mb-4">
+          <div className="relative z-10 h-full flex flex-col justify-start pt-24 md:pt-36 px-6 md:px-14 lg:px-20 max-w-4xl mr-auto">
+            <div className="scroll-reveal flex items-center gap-3 mb-4 md:mb-4">
               <span className="h-[2px] w-8 md:w-10 bg-samred flex-shrink-0" />
               <span className="font-sub font-semibold text-[0.65rem] md:text-[0.78rem] tracking-[0.28em] uppercase text-samred">Quiénes somos</span>
             </div>
 
-            <h2 className="scroll-reveal font-display text-[2rem] md:text-[4.5rem] lg:text-[5.5rem] text-white leading-[0.92] mb-4 md:mb-8 tracking-wide">
+            <h2 className="scroll-reveal font-display text-[2.5rem] md:text-[4.5rem] lg:text-[5.5rem] text-white leading-[0.92] mb-4 md:mb-8 tracking-wide">
               INGENIERÍA<br />
               <span className="text-samred">SIN LÍMITES.</span>
             </h2>
@@ -1505,7 +1505,7 @@ function PageInicio({ setPage, navigateToServicios }) {
               <p className="text-white/75 text-sm md:text-[1.1rem] leading-relaxed mb-2 md:mb-4">
                 SAMFOR es una empresa venezolana de contratación industrial con 60 años de trayectoria continua. Ejecutamos proyectos de alta complejidad para la industria petrolera, petroquímica, civil, ambiental y de servicios públicos.
               </p>
-              <p className="text-white/50 text-xs md:text-base leading-relaxed">
+              <p className="text-white/50 text-xs md:text-base leading-relaxed hidden md:block">
                 Fundada en 1966, con equipos multidisciplinarios, maquinaria pesada propia y más de 50 clientes institucionales nacionales e internacionales.
               </p>
             </div>

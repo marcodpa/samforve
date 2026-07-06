@@ -1534,10 +1534,15 @@ function PageInicio({ setPage, navigateToServicios }) {
       {/* SERVICES */}
       <section className="bg-dark overflow-hidden relative">
 
-        {/* Foto — 62% del ancho, alineada a la derecha, borde izquierdo desvanecido */}
-        <div className="absolute right-0 top-0 w-[62%] h-full overflow-hidden">
+        {/* Foto — desktop */}
+        <div className="hidden md:block absolute right-0 top-0 w-[62%] h-full overflow-hidden">
           <img src="/services-photo.webp" alt="" className="absolute inset-0 w-full h-full object-cover object-left" loading="lazy" aria-hidden="true"
             style={{ maskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.05) 15%, rgba(0,0,0,0.3) 30%, #000 55%, #000 100%)', WebkitMaskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.05) 15%, rgba(0,0,0,0.3) 30%, #000 55%, #000 100%)' }} />
+        </div>
+        {/* Foto — mobile: 100% ancho con degradado de izq a der */}
+        <div className="md:hidden absolute inset-0 w-full h-full overflow-hidden">
+          <img src="/services-photo.webp" alt="" className="absolute inset-0 w-full h-full object-cover" loading="lazy" aria-hidden="true"
+            style={{ maskImage: 'linear-gradient(to right, #000 0%, #000 40%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to right, #000 0%, #000 40%, transparent 100%)' }} />
         </div>
 
         <div className="relative flex flex-col md:flex-row">

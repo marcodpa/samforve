@@ -363,7 +363,7 @@ const ALL_PROJECTS = [
     id: 301, status: 'active', division: 'Automatización',
     client: 'Chevron Global Technology Service Company',
     title: 'Sistema SCADA Planta Termoeléctrica Bajo Grande',
-    img: IMG(251),
+    img: IMG(252),
     desc: 'Implementación y mantenimiento de sistema SCADA para supervisión y control de turbogeneradores, sistemas eléctricos y utilidades de la planta.',
     detail: 'Integración de PLCs Allen-Bradley con HMI FactoryTalk. Comunicación Ethernet/IP y ControlNet. Monitoreo en tiempo real de 1,200+ variables de proceso.',
   },
@@ -1392,7 +1392,7 @@ function PageInicio({ setPage, navigateToServicios }) {
   }, [])
   const featured = [
     ALL_PROJECTS.find(p => p.id === 1),   // Termoeléctrica Bajo Grande (active)
-    ALL_PROJECTS.find(p => p.id === 101), // Subestación 155KV
+    ALL_PROJECTS.find(p => p.id === 301), // Sistema SCADA Bajo Grande
     ALL_PROJECTS.find(p => p.id === 104), // Metro Maracaibo
   ]
 

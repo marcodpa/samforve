@@ -392,6 +392,15 @@ const ALL_PROJECTS = [
     desc: 'Mantenimiento preventivo y correctivo de generadores de emergencia para garantizar continuidad operativa.',
     detail: 'Mantenimiento integral a generadores diésel de emergencia: cambio de aceite y filtros, prueba de carga, revisión de sistemas de control, baterías y transferencia automática.',
   },
+  // ── AUTOMATIZACIÓN Y CONTROL ──
+  {
+    id: 305, status: 'completed', division: 'Automatización',
+    client: 'PDVSA',
+    title: 'Modernización Sistema de Control Planta Desmineralizadora de Agua',
+    img: IMG(250),
+    desc: 'Reemplazo de PLC Allen-Bradley SLC 500 por CompactLogix 5370, con nueva HMI PanelView Plus 7 y pruebas funcionales integrales.',
+    detail: 'Modernización del sistema de control de la Planta Desmineralizadora de Agua, mediante el reemplazo del PLC existente Allen-Bradley SLC 500 por un nuevo controlador Allen-Bradley CompactLogix 5370, modelo 1769-L36ERM. Esta actualización permitió sustituir una plataforma de control obsoleta por una arquitectura más moderna, confiable y con mejores capacidades de comunicación, diagnóstico y mantenimiento.\n\nComo parte del alcance del trabajo, se reemplazó el tablero de control principal de la planta, realizando la adecuación del cableado de campo, revisión de borneras, verificación de alimentaciones eléctricas, protecciones, canalización interna y conexión de las señales correspondientes a los equipos e instrumentos del proceso. También se integró la nueva interfaz HMI Allen-Bradley PanelView Plus 7 Performance de 15 pulgadas, modelo 2711P-T15C22D9P, desarrollada en FactoryTalk View ME.\n\nDurante la ejecución se realizaron actividades de precomisionamiento, incluyendo inspección del tablero, pruebas de continuidad, verificación de entradas y salidas digitales y analógicas, pruebas de comunicación entre el PLC, la HMI y los equipos de red industrial, así como pruebas de lazo para validar la correspondencia entre los instrumentos de campo y las señales configuradas en el sistema de control.\n\nFinalmente, se efectuaron pruebas funcionales y pruebas de aceptación en sitio, verificando la correcta operación de bombas, válvulas, señales de nivel, presión, alarmas, permisivos, enclavamientos y comandos principales de la Planta Desmineralizadora de Agua. Con estos trabajos, la planta quedó operativa bajo una plataforma de control actualizada, mejorando la confiabilidad, mantenibilidad, supervisión y continuidad operacional del sistema.',
+  },
 ]
 
 const TIMELINE = [

@@ -247,7 +247,7 @@ const ALL_PROJECTS = [
     id: 1, status: 'active', division: 'Eléctricos',
     client: 'Chevron Global Technology Service Company',
     title: 'Mantenimiento Integral Planta Termoeléctrica Bajo Grande',
-    img: IMG(28),
+    img: IMG(253),
     desc: 'Operación y mantenimiento integral: sistemas de agua, contra incendios, combustible, electricidad, turbogeneradores, SCADA y comunicaciones.',
     detail: 'Mantenimiento predictivo, preventivo y correctivo con operación 24/7. Objetivo: mejorar eficiencia operativa y garantizar la continuidad del suministro eléctrico a Campo Boscán.',
   },

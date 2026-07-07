@@ -650,8 +650,6 @@ function ProjectDetailPage({ project, onClose }) {
         {/* Dark overlay for readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-dark/50 via-transparent to-dark/50 pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent pointer-events-none" />
-          <ArrowRight size={12} className="rotate-180" /> Proyectos
-        </button>
 
         {/* Status badge — top right */}
         {project.status === 'active' && (

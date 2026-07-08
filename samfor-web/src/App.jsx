@@ -642,9 +642,9 @@ function ProjectDetailPage({ project, onClose }) {
   return (
     <div className="bg-dark min-h-screen">
 
-      {/* Back button — fixed, stays visible while scrolling */}
+      {/* Back button — below the navbar, on top of the hero image */}
       <button onClick={onClose}
-        className="fixed top-6 left-6 md:left-10 flex items-center gap-2 bg-dark/60 backdrop-blur-sm border border-white/15 text-white/80 hover:text-white hover:border-white/40 transition-all px-3.5 py-2 rounded text-xs font-sub font-semibold uppercase tracking-widest z-50"
+        className="fixed top-24 left-6 md:left-10 flex items-center gap-2 bg-dark/60 backdrop-blur-sm border border-white/15 text-white/80 hover:text-white hover:border-white/40 transition-all px-3.5 py-2 rounded text-xs font-sub font-semibold uppercase tracking-widest z-50"
       >
         <ArrowRight size={12} className="rotate-180" /> Proyectos
       </button>

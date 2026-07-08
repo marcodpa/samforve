@@ -12,4 +12,14 @@ export default defineConfig({
       'Cross-Origin-Opener-Policy': 'unsafe-none',
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          gsap: ['gsap'],
+        },
+      },
+    },
+  },
 })

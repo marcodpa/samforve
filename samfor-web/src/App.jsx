@@ -1509,16 +1509,6 @@ function PageInicio({ setPage, navigateToServicios }) {
             background: 'linear-gradient(to top, #0D1117 0%, rgba(13,17,23,0.85) 20%, rgba(13,17,23,0.5) 35%, transparent 50%)',
           }} />
 
-          {/* Before / After badges */}
-          <div className="absolute top-4 md:top-6 left-4 md:right-6 z-10 flex gap-2">
-            <div className="bg-dark/70 backdrop-blur-sm border border-white/10 rounded px-2 py-0.5 md:px-2.5 md:py-1">
-              <span className="font-sub font-bold text-[0.5rem] md:text-[0.55rem] uppercase tracking-[0.2em] text-white/40">Antes</span>
-            </div>
-            <div className="bg-dark/70 backdrop-blur-sm border border-white/10 rounded px-2 py-0.5 md:px-2.5 md:py-1">
-              <span className="font-sub font-bold text-[0.5rem] md:text-[0.55rem] uppercase tracking-[0.2em] text-samred">Después</span>
-            </div>
-          </div>
-
           {/* Corner accents */}
           <div className="absolute top-6 left-6 md:top-10 md:left-10 w-16 h-16 z-10 pointer-events-none">
             <div className="absolute top-0 left-0 w-10 h-[1px] bg-samred/30" />

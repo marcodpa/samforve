@@ -1047,7 +1047,7 @@ function ServicioDetalle({ title, onBack, onProjectClick }) {
           </div>
           <div className="overflow-hidden">
             <div className="flex gap-5 px-5 md:px-16 lg:px-24"
-              style={{ width:'max-content', animation: relatedProjects.length > 3 ? `marquee ${Math.round(relatedProjects.length*300/SPEED)}s linear infinite` : 'none', willChange:'transform' }}>
+              style={{ width:'max-content', animation: relatedProjects.length > 3 ? `marquee ${Math.round(relatedProjects.length*300/SPEED)}s linear infinite` : 'none' }}>
               {(relatedProjects.length > 3 ? [...relatedProjects,...relatedProjects] : relatedProjects).map((p, i) => (
                 <div key={`${p.id}-${i}`}
                   className="flex-shrink-0 group rounded overflow-hidden bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300 cursor-pointer"
@@ -1942,10 +1942,10 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
 
         {/* ── CARRUSEL — full width, fuera del contenedor con padding ── */}
         {filtered.length > 0 && !listView && (<>
-          {/* MÓVIL — animación automática */}
+          {/* MÓVIL — animación automática más lenta (sin willChange para evitar bugs en Android) */}
           <div className="md:hidden overflow-hidden relative">
             <div className="flex gap-4"
-              style={{ width: 'max-content', animation: `marquee ${Math.round(filtered.length * 280 / SPEED)}s linear infinite`, willChange: 'transform', backfaceVisibility: 'hidden' }}
+              style={{ width: 'max-content', animation: `marquee ${Math.round(filtered.length * 360 / SPEED)}s linear infinite` }}
             >
               {[...filtered, ...filtered].map((p, i) => (
                 <div key={`m-${p.id}-${i}`}

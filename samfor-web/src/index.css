@@ -45,12 +45,12 @@ body {
   50%       { opacity: 0.4; transform: scale(1.5); }
 }
 @keyframes marquee {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0%   { transform: translate3d(0,0,0); }
+  100% { transform: translate3d(-50%,0,0); }
 }
 @keyframes marquee-reverse {
-  0%   { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
+  0%   { transform: translate3d(-50%,0,0); }
+  100% { transform: translate3d(0,0,0); }
 }
 @keyframes scrollBounce {
   0%, 100% { transform: translateY(0); }
@@ -184,9 +184,9 @@ body {
 }
 .marquee-track:hover { animation-play-state: paused; }
 
-/* Marquees en móvil: corren más despacio para no verse locos */
+/* Marquees en móvil: corren más despacio y sin will-change para evitar bugs en Android */
 @media (max-width: 1023px) {
-  .marquee-auto { animation-duration: calc(var(--marquee-dur, 60s) * 1.6) !important; }
+  .marquee-auto { animation-duration: calc(var(--marquee-dur, 60s) * 2.5); will-change: auto; }
 }
 
 /* ── NAV LINK ── */

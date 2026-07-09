@@ -554,7 +554,7 @@ function Navbar({ page, setPage, scrolled, forceDark, logoProgress = 1 }) {
         {/* Mobile: real logo button in navbar flow. Desktop: invisible placeholder for layout space */}
         {isMobile ? (
           <button onClick={() => { setPage('inicio'); setOpen(false) }} className="flex items-center">
-            <img src="/logo.png" alt="SAMFOR" style={{ height: '140px' }} className={`w-auto ${dark ? 'brightness-0 invert' : ''}`} />
+            <img src="/logo.png" alt="SAMFOR" style={{ height: 'clamp(70px, 12vw, 140px)' }} className={`w-auto ${dark ? 'brightness-0 invert' : ''}`} />
           </button>
         ) : (
           <div aria-hidden="true" style={{ height: '210px', width: 'clamp(210px,22vw,320px)', flexShrink: 0 }} />

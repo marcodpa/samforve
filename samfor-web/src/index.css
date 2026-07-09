@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;600&display=swap');
+/* Las fuentes de Google se cargan desde index.html con <link> para no encadenar
+   la descarga detrás del CSS compilado */
 
 @tailwind base;
 @tailwind components;
@@ -17,8 +18,15 @@
 
 * { box-sizing: border-box; }
 html {
-  font-size: clamp(16px, 2vw, 22px);
+  /* Base fija de 16px: todo el diseño usa rem (texto, spacing y contenedores
+     max-w-*), así que un font-size base que escale con vw agrandaba todo en
+     laptops. Se mantiene 16px en el rango normal y solo crece muy sutilmente
+     en pantallas grandes (>1600px) para aprovechar el espacio sin deformar. */
+  font-size: 16px;
   scroll-behavior: smooth;
+}
+@media (min-width: 1600px) {
+  html { font-size: clamp(16px, 0.95vw, 18px); }
 }
 
 body {
@@ -173,6 +181,10 @@ body {
 .btn-outline-red:active { transform: scale(0.97); }
 .btn-outline-red:hover  { background: var(--red); color: #fff; }
 
+/* Carrusel deslizable en móvil: sin barra de scroll visible */
+.hide-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+
 /* ── MARQUEE ── */
 .marquee-track {
   display: flex;
@@ -184,9 +196,11 @@ body {
 }
 .marquee-track:hover { animation-play-state: paused; }
 
-/* Marquees en móvil: corren más despacio y sin will-change para evitar bugs en Android */
+/* En móvil la velocidad de los marquees se calcula desde JS (MOBILE_SPEED) según
+   el ancho real del track. Aquí solo forzamos compositing normal (sin capa GPU
+   dedicada) para evitar el movimiento errático en Android con tracks muy anchos. */
 @media (max-width: 1023px) {
-  .marquee-auto { animation-duration: calc(var(--marquee-dur, 60s) * 2.5); will-change: auto; }
+  .marquee-auto { will-change: auto !important; backface-visibility: visible !important; }
 }
 
 /* ── NAV LINK ── */
@@ -316,11 +330,17 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  /* Los marquees/carruseles quedan excluidos: si se les fuerza 0.01ms su bucle
+     infinito se repite miles de veces por segundo y se ven acelerados/parpadeando
+     (pasa en Android con "eliminar animaciones" o escala de animación en 0) */
+  *:not(.marquee-track):not(.marquee-auto):not(.carousel-track),
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  }
+}
 
 /* ─── Rectangular framed image — pan animation ───────────────────────────── */
 .frame-image-wrapper {

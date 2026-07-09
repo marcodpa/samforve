@@ -11,8 +11,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
+    <!-- Fuentes via <link>: cargan en paralelo con el CSS (un @import en CSS las encadena y retrasa el primer render) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;600&display=swap" />
+
     <!-- Preload only the most critical hero image -->
-    <link rel="preload" as="image" href="/hero.webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="/hero.webp" fetchpriority="high" media="(min-width: 1024px)" />
+    <link rel="preload" as="image" href="/hero-mobile1-v2.webp" fetchpriority="high" media="(max-width: 1023px)" />
   </head>
   <body>
     <div id="root"></div>

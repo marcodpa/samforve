@@ -506,11 +506,16 @@ function Navbar({ page, setPage, scrolled, forceDark, logoProgress = 1 }) {
   const HERO_H = 520
   const NAV_H  = 210
 
-  const containerPad = vpw >= 768 ? 32 : 16
-  const centerOffset = Math.max(0, (vpw - 1280) / 2)
+  // El navbar está definido en rem (h-24, px-8, max-w-7xl). Leemos el font-size
+  // real del root para que el logo flotante siga al navbar en cualquier tamaño
+  // de pantalla (16px en laptop, hasta 18px en pantallas grandes).
+  const rem = typeof window !== 'undefined'
+    ? parseFloat(getComputedStyle(document.documentElement).fontSize) || 16
+    : 16
+  const containerPad = vpw >= 768 ? 2 * rem : rem       // px-8 / px-4
+  const centerOffset = Math.max(0, (vpw - 80 * rem) / 2) // max-w-7xl = 80rem
 
-  const baseFont = Math.min(Math.max(16, vpw * 0.02), 22)
-  const navCY  = baseFont * 3  // h-24 = 6rem, center = 3rem
+  const navCY  = rem * 3  // h-24 = 6rem, centro = 3rem
   const navTop = navCY - NAV_H / 2
 
   // Absolute top-left in hero (higher up), animates into navbar spot
@@ -554,7 +559,8 @@ function Navbar({ page, setPage, scrolled, forceDark, logoProgress = 1 }) {
         {/* Mobile: real logo button in navbar flow. Desktop: invisible placeholder for layout space */}
         {isMobile ? (
           <button onClick={() => { setPage('inicio'); setOpen(false) }} className="flex items-center">
-            <img src="/logo.png" alt="SAMFOR" style={{ height: 'clamp(70px, 12vw, 140px)' }} className={`w-auto ${dark ? 'brightness-0 invert' : ''}`} />
+            {/* logo-nav.png es el logo sin márgenes transparentes: se ve más grande sin agrandar el botón */}
+            <img src="/logo-nav.png" alt="SAMFOR" style={{ height: 'clamp(38px, 10vw, 48px)' }} className={`w-auto ${dark ? 'brightness-0 invert' : ''}`} />
           </button>
         ) : (
           <div aria-hidden="true" style={{ height: '210px', width: 'clamp(210px,22vw,320px)', flexShrink: 0 }} />
@@ -643,33 +649,34 @@ function ProjectDetailPage({ project, onClose }) {
     <div className="bg-dark min-h-screen">
 
       {/* Back button — below the navbar, on top of the hero image */}
+      {/* z-40: por debajo del navbar/menú móvil (z-50) para que el menú lo tape al abrirse */}
       <button onClick={onClose}
-        className="fixed top-24 left-6 md:left-10 flex items-center gap-2 bg-dark/60 backdrop-blur-sm border border-white/15 text-white/80 hover:text-white hover:border-white/40 transition-all px-3.5 py-2 rounded text-xs font-sub font-semibold uppercase tracking-widest z-50"
+        className="fixed top-24 left-6 md:left-10 flex items-center gap-2 bg-dark/60 backdrop-blur-sm border border-white/15 text-white/80 hover:text-white hover:border-white/40 transition-all px-3.5 py-2 rounded text-xs font-sub font-semibold uppercase tracking-widest z-40"
       >
         <ArrowRight size={12} className="rotate-180" /> Proyectos
       </button>
 
-      {/* ── HERO — full screen cover ── */}
-      <div className="relative w-full bg-[#060809]" style={{ height: '100dvh' }}>
+      {/* ── HERO — móvil: foto completa y título justo debajo (sin espacios); desktop: pantalla completa con recorte ── */}
+      <div className="relative w-full bg-[#060809] overflow-hidden pt-24 md:pt-0 md:h-[100dvh]">
         <img
           src={project.img}
           alt={project.title}
-          className="absolute inset-0 w-full h-full object-cover"
+          className="w-full h-auto md:absolute md:inset-0 md:h-full md:object-cover"
         />
-        {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-dark/50 via-transparent to-dark/50 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent pointer-events-none" />
+        {/* Dark overlay for readability — solo desktop (en móvil el título no va sobre la foto) */}
+        <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-dark/50 via-transparent to-dark/50 pointer-events-none" />
+        <div className="hidden md:block absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/20 to-transparent pointer-events-none" />
 
-        {/* Status badge — top right */}
+        {/* Status badge — top right (en móvil, sobre la esquina de la foto) */}
         {project.status === 'active' && (
-          <div className="absolute top-6 right-6 md:right-10 flex items-center gap-1.5 bg-dark/60 backdrop-blur-sm px-3 py-1.5 rounded-full border border-green-500/30 z-10">
+          <div className="absolute top-28 right-4 md:top-6 md:right-10 flex items-center gap-1.5 bg-dark/60 backdrop-blur-sm px-3 py-1.5 rounded-full border border-green-500/30 z-10">
             <span className="w-1.5 h-1.5 rounded-full bg-green-400 dot-pulse" />
             <span className="text-green-400 text-[0.82rem] font-mono uppercase tracking-widest">En Ejecución</span>
           </div>
         )}
 
-        {/* ── TITLE OVERLAY — bottom of hero ── */}
-        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 lg:p-14 z-10">
+        {/* ── TITLE — móvil: debajo de la foto; desktop: superpuesto abajo ── */}
+        <div className="md:absolute md:bottom-0 md:left-0 md:right-0 p-6 pt-5 md:p-10 lg:p-14 z-10">
           <div className="max-w-5xl">
             <div className="mb-3"><DivisionBadge division={project.division} /></div>
             <h1 className="font-display text-[clamp(2rem,5vw,4rem)] text-white leading-none tracking-wide">{project.title}</h1>
@@ -830,27 +837,35 @@ function ClientLogo({ c }) {
 
 function ClientCard({ c }) {
   return (
-    <div className="flex-shrink-0 flex items-center gap-4 bg-white/5 border border-white/10 rounded px-7 py-4 hover:border-samred/50 hover:bg-white/8 transition-all duration-200 group">
+    <div className="flex-shrink-0 flex items-center gap-2.5 md:gap-4 bg-white/5 border border-white/10 rounded px-3 py-3 md:px-7 md:py-4 hover:border-samred/50 hover:bg-white/8 transition-all duration-200 group">
       <ClientLogo c={c} />
-      <div>
-        <p className="font-sub font-bold text-base uppercase tracking-wide text-white/80 group-hover:text-white transition-colors">{c.name}</p>
-        <p className="text-white/35 text-[0.8rem] font-mono uppercase tracking-widest">{c.sector}</p>
+      <div className="min-w-0">
+        <p className="font-sub font-bold text-[0.78rem] leading-tight md:text-base uppercase tracking-wide text-white/80 group-hover:text-white transition-colors">{c.name}</p>
+        <p className="text-white/35 text-[0.6rem] md:text-[0.8rem] font-mono uppercase tracking-wide md:tracking-widest mt-0.5">{c.sector}</p>
       </div>
     </div>
   )
 }
 
 const CARD_PX = 240   // ancho aprox de cada card en px
-const SPEED   = 55    // px por segundo — velocidad constante en cualquier pantalla
+const SPEED   = 55    // px/s en desktop
+const MOBILE_SPEED = 28  // px/s en móvil — más lento para que los carruseles no se vean acelerados en teléfonos
+const isMobileVP = () => typeof window !== 'undefined' && window.innerWidth < 768
 
 function ClientsSection({ setPage }) {
   const third = Math.ceil(CLIENT_GRID.length / 3)
   const row1 = CLIENT_GRID.slice(0, third)
   const row2 = CLIENT_GRID.slice(third, third * 2)
   const row3 = CLIENT_GRID.slice(third * 2)
-  const dur1 = Math.round(row1.length * CARD_PX / SPEED)
-  const dur2 = Math.round(row2.length * CARD_PX / SPEED)
-  const dur3 = Math.round(row3.length * CARD_PX / SPEED)
+  // En móvil: velocidad más baja y sin will-change/backface. En teléfonos
+  // (sobre todo Android) los tracks muy anchos con capa GPU dedicada se vuelven
+  // erráticos; menos velocidad + compositing normal = movimiento suave.
+  const mobile = isMobileVP()
+  const spd = mobile ? MOBILE_SPEED : SPEED
+  const gpu = mobile ? {} : { willChange: 'transform', backfaceVisibility: 'hidden' }
+  const dur1 = Math.round(row1.length * CARD_PX / spd)
+  const dur2 = Math.round(row2.length * CARD_PX / spd)
+  const dur3 = Math.round(row3.length * CARD_PX / spd)
 
   return (
     <section className="bg-dark overflow-hidden" style={{ minHeight: 'min(100dvh,auto)' }} data-clients>
@@ -875,21 +890,21 @@ function ClientsSection({ setPage }) {
 
           {/* Marquee row 1 — left to right */}
           <div className="relative mb-4 overflow-hidden">
-            <div className="marquee-auto flex gap-4" style={{ width: 'max-content', willChange: 'transform', backfaceVisibility: 'hidden', animation: `marquee ${dur1}s linear infinite` }}>
+            <div className="marquee-auto flex gap-4" style={{ width: 'max-content', ...gpu, animation: `marquee ${dur1}s linear infinite` }}>
               {[...row1, ...row1].map((c, i) => <ClientCard key={i} c={c} />)}
             </div>
           </div>
 
           {/* Marquee row 2 — right to left */}
           <div className="relative mb-4 overflow-hidden">
-            <div className="marquee-auto flex gap-4" style={{ width: 'max-content', willChange: 'transform', backfaceVisibility: 'hidden', animation: `marquee-reverse ${dur2}s linear infinite` }}>
+            <div className="marquee-auto flex gap-4" style={{ width: 'max-content', ...gpu, animation: `marquee-reverse ${dur2}s linear infinite` }}>
               {[...row2, ...row2].map((c, i) => <ClientCard key={i} c={c} />)}
             </div>
           </div>
 
           {/* Marquee row 3 — left to right */}
           <div className="relative overflow-hidden">
-            <div className="marquee-auto flex gap-4" style={{ width: 'max-content', willChange: 'transform', backfaceVisibility: 'hidden', animation: `marquee ${dur3}s linear infinite` }}>
+            <div className="marquee-auto flex gap-4" style={{ width: 'max-content', ...gpu, animation: `marquee ${dur3}s linear infinite` }}>
               {[...row3, ...row3].map((c, i) => <ClientCard key={i} c={c} />)}
             </div>
           </div>
@@ -1046,8 +1061,8 @@ function ServicioDetalle({ title, onBack, onProjectClick }) {
             </div>
           </div>
           <div className="overflow-hidden">
-            <div className="flex gap-5 px-5 md:px-16 lg:px-24"
-              style={{ width:'max-content', animation: relatedProjects.length > 3 ? `marquee ${Math.round(relatedProjects.length*300/SPEED)}s linear infinite` : 'none' }}>
+            <div className="carousel-track flex gap-5 px-5 md:px-16 lg:px-24"
+              style={{ width:'max-content', animation: relatedProjects.length > 3 ? `marquee ${Math.round(relatedProjects.length*300/(isMobileVP()?MOBILE_SPEED:SPEED))}s linear infinite` : 'none' }}>
               {(relatedProjects.length > 3 ? [...relatedProjects,...relatedProjects] : relatedProjects).map((p, i) => (
                 <div key={`${p.id}-${i}`}
                   className="flex-shrink-0 group rounded overflow-hidden bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300 cursor-pointer"
@@ -1932,35 +1947,42 @@ function PageProyectos({ onProjectOpen, initialDivision }) {
 
         {/* ── CARRUSEL — full width, fuera del contenedor con padding ── */}
         {filtered.length > 0 && !listView && (<>
-          {/* MÓVIL — animación automática más lenta (sin willChange para evitar bugs en Android) */}
-          <div className="md:hidden overflow-hidden relative">
-            <div className="flex gap-4"
-              style={{ width: 'max-content', animation: `marquee ${Math.round(filtered.length * 360 / SPEED)}s linear infinite` }}
-            >
-              {[...filtered, ...filtered].map((p, i) => (
-                <div key={`m-${p.id}-${i}`}
-                  className="group flex-shrink-0 cursor-pointer rounded overflow-hidden bg-white/5 border border-white/10 active:border-white/40 transition-all duration-300 flex flex-col"
-                  style={{ width: '72vw', maxWidth: '300px' }}
-                  onClick={() => openProject(p)}
-                >
-                  <div className="relative overflow-hidden" style={{ height: '160px' }}>
-                    <img src={p.img} alt={p.title} className="w-full h-full object-cover" loading="eager" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-dark/85 via-dark/20 to-transparent" />
-                    <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot||'#C8102E' }} />
-                    {p.status === 'active' && (
-                      <div className="absolute top-2 right-2 flex items-center gap-1 bg-dark/70 px-2 py-0.5 rounded-full">
-                        <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
-                        <span className="text-green-400 text-[0.72rem] font-mono uppercase tracking-widest">Activo</span>
+          {/* MÓVIL — deslizable con el dedo: cada tarjeta encaja al soltar (scroll-snap) */}
+          <div className="md:hidden">
+            <div className="hide-scrollbar overflow-x-auto px-5" style={{ scrollSnapType: 'x mandatory', WebkitOverflowScrolling: 'touch' }}>
+              <div className="flex gap-4" style={{ width: 'max-content' }}>
+                {filtered.map(p => (
+                  <div key={`m-${p.id}`}
+                    className="group flex-shrink-0 cursor-pointer rounded-xl overflow-hidden bg-white/5 border border-white/10 active:border-white/40 transition-all duration-300 flex flex-col"
+                    style={{ width: '80vw', maxWidth: '330px', scrollSnapAlign: 'center' }}
+                    onClick={() => openProject(p)}
+                  >
+                    <div className="relative overflow-hidden" style={{ height: '200px' }}>
+                      <img src={p.img} alt={p.title} className="w-full h-full object-cover" loading="lazy" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-dark/85 via-dark/20 to-transparent" />
+                      <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: DIVISION_META[p.division]?.dot||'#C8102E' }} />
+                      {p.status === 'active' && (
+                        <div className="absolute top-2 right-2 flex items-center gap-1 bg-dark/70 px-2 py-0.5 rounded-full">
+                          <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
+                          <span className="text-green-400 text-[0.72rem] font-mono uppercase tracking-widest">Activo</span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-4 flex flex-col flex-1">
+                      <div className="mb-1.5"><DivisionBadge division={p.division} size="xs" /></div>
+                      <h3 className="font-sub font-bold text-[0.95rem] uppercase tracking-wide text-white/85 leading-snug mb-1 line-clamp-2">{p.title}</h3>
+                      <p className="text-white/35 text-[0.85rem]">{p.client}</p>
+                      {p.desc && <p className="text-white/25 text-xs leading-relaxed line-clamp-2 mt-1.5">{p.desc}</p>}
+                      <div className="flex items-center gap-1.5 text-samred text-[0.72rem] font-sub font-semibold uppercase tracking-widest mt-3 pt-3 border-t border-white/8">
+                        Ver detalle <ArrowRight size={11} />
                       </div>
-                    )}
+                    </div>
                   </div>
-                  <div className="p-4 flex flex-col flex-1">
-                    <div className="mb-1.5"><DivisionBadge division={p.division} size="xs" /></div>
-                    <h3 className="font-sub font-bold text-[0.85rem] uppercase tracking-wide text-white/85 leading-snug mb-1 flex-1 line-clamp-2">{p.title}</h3>
-                    <p className="text-white/35 text-[0.85rem]">{p.client}</p>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
+            </div>
+            <div className="flex items-center justify-center gap-2 mt-4 text-white/30 text-[0.7rem] font-mono uppercase tracking-widest">
+              Desliza para ver más <ArrowRight size={12} />
             </div>
           </div>
 
@@ -2145,19 +2167,15 @@ function PageQuienesSomos({ setPage }) {
       <section className="relative overflow-hidden bg-dark">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-samred/30 to-transparent" />
 
-        {/* Mobile: stacked */}
+        {/* Mobile: stacked — título, texto y la foto al final */}
         <div className="md:hidden">
-          <div className="relative" style={{ minHeight: '300px' }}>
-            <img src="/qs-team-img2.jpg" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
-            <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(13,17,23,0.10) 0%, rgba(13,17,23,0.60) 50%, #0D1117 100%)' }} />
-            <div className="relative px-5 pt-14 pb-8 flex flex-col justify-end h-full">
-              <div className="flex items-center gap-3 mb-3">
-                <span className="h-[2px] w-6 bg-samred" />
-                <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.25em] text-samred">Quiénes Somos</span>
-              </div>
-              <h2 className="font-display text-[2.6rem] text-white leading-none mb-1">SAMFOR</h2>
-              <span className="text-samred font-display text-[1.5rem] leading-none">S.A.</span>
+          <div className="px-5 pt-14 pb-8">
+            <div className="flex items-center gap-3 mb-3">
+              <span className="h-[2px] w-6 bg-samred" />
+              <span className="font-sub font-semibold text-[0.7rem] uppercase tracking-[0.25em] text-samred">Quiénes Somos</span>
             </div>
+            <h2 className="font-display text-[2.6rem] text-white leading-none mb-1">SAMFOR</h2>
+            <span className="text-samred font-display text-[1.5rem] leading-none">S.A.</span>
           </div>
           <div className="bg-white px-5 py-10">
             <p className="text-dark/70 text-[1.05rem] leading-relaxed mb-5">
@@ -2181,6 +2199,15 @@ function PageQuienesSomos({ setPage }) {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+          {/* Foto del equipo al final del texto */}
+          <div className="relative overflow-hidden" style={{ height: 'clamp(240px,60vw,360px)' }}>
+            <img src="/qs-team-img2.jpg" alt="Equipo SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+            <div className="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 h-[4px] bg-samred" />
+            <div className="absolute bottom-5 right-5 bg-dark/60 backdrop-blur-md border border-white/10 rounded-full px-4 py-1.5">
+              <span className="font-sub font-bold text-[0.7rem] uppercase tracking-widest text-samred">Fundada 1966</span>
             </div>
           </div>
         </div>
@@ -2290,7 +2317,7 @@ function PageQuienesSomos({ setPage }) {
       <section className="bg-surface">
         {/* Mobile */}
         <div className="md:hidden">
-          <div className="relative overflow-hidden" style={{ height: 'clamp(110px,18vw,260px)' }}>
+          <div className="relative overflow-hidden" style={{ height: 'clamp(220px,55vw,320px)' }}>
             <img src="/qs-electrical.webp" alt="Técnicos eléctricos SAMFOR" className="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
             <div className="absolute inset-0 bg-gradient-to-t from-dark/80 to-dark/20" />
             <div className="absolute bottom-0 left-0 right-0 h-1 bg-samred" />
@@ -2299,7 +2326,7 @@ function PageQuienesSomos({ setPage }) {
               <div className="text-white text-sm font-medium">Manejadora de Desechos Peligrosos &middot; 1999</div>
             </div>
           </div>
-          <div ref={ventajasRef} className="px-5 py-10">
+          <div className="px-5 py-10">
             <div className="flex items-center gap-3 mb-5">
               <span className="h-[3px] w-8 bg-samred" />
               <span className="font-sub font-semibold text-[0.78rem] uppercase tracking-[0.2em] text-samred">Por qué elegirnos</span>
@@ -2312,7 +2339,7 @@ function PageQuienesSomos({ setPage }) {
                 { icon: Users, title: 'Capital Humano', desc: 'Ingenieros en eléctrica, civil, mec\u00e1nica, instrumentación y ambiental.' },
                 { icon: Shield, title: 'HSE / Seguridad', desc: 'Cultura HSE arraigada. Normativas COVENIN en entornos de riesgo.' },
               ].map((a, i) => (
-                <div key={i} className="ventaja-item flex items-start gap-4 py-5 border-b border-border last:border-0" style={{ opacity: 0 }}>
+                <div key={i} className="flex items-start gap-4 py-5 border-b border-border last:border-0">
                   <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-samred/10 flex items-center justify-center text-samred"><a.icon size={22} /></div>
                   <div>
                     <h3 className="font-sub font-bold text-[0.92rem] uppercase tracking-wide text-dark mb-1">{a.title}</h3>
@@ -2390,9 +2417,9 @@ function PageQuienesSomos({ setPage }) {
                 </div>
               </div>
             </div>
-            <div ref={timelineRef} className="flex flex-col gap-5">
+            <div className="flex flex-col gap-5">
               {TIMELINE.map((item, i) => (
-                <div key={i} className="timeline-item relative group" style={{ opacity: 0 }}>
+                <div key={i} className="relative group">
                   {i < TIMELINE.length - 1 && (
                     <div className="absolute left-[1.1rem] top-10 bottom-0 w-[2px] bg-gradient-to-b from-samred via-samred/30 to-transparent" />
                   )}
